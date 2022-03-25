@@ -21,7 +21,7 @@ Instead, what if we iterate the array one number at a time, and if the current n
 
 ![](./images/cyclicsort.png)
 
-````
+````js
 function cyclicSort (nums) {
   let i = 0;
   
@@ -61,7 +61,7 @@ However, there are two differences with Cyclic Sort:
    - Since the array will have `‘n’` numbers, which means array indices will range from `0` to `‘n-1’`. Therefore, we will ignore the number `‘n’` as we can’t place it in the array, so => `nums[i] < nums.length`
 2. Say we are at index `i`. If we swap the number at index `i` to place it at the correct index, we can still have the wrong number at index `i`. This was true in <b>Cyclic Sort</b> too. It didn’t cause any problems in <b>Cyclic Sort</b> as over there, we made sure to place one number at its correct place in each step, but that wouldn’t be enough in this problem as we have one extra number due to the larger range. Therefore, we will not move to the next number after the swap until we have a correct number at the index `i`.
 
-````
+````js
 function findMissingNumber(nums) {
   let i = 0
   const n = nums.length
@@ -102,7 +102,7 @@ This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with
 
 However, we will follow a similar approach though as discussed in <b>Find the Missing Number</b> to place the numbers on their correct indices. Once we are done with the cyclic sort we will iterate the array to find all indices that are missing the correct numbers.
 
-````
+````js
 function findMissingNumbers(nums) {
   let i = 0
   
@@ -142,7 +142,7 @@ https://leetcode.com/problems/find-the-duplicate-number/
 
 This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with <b>Find the Missing Number</b>. Following a similar approach, we will try to place each number on its correct index. Since there is only one duplicate, if while swapping the number with its index both the numbers being swapped are same, we have found our duplicate!
 
-````
+````js
 function findDuplicate(nums) {
   let i = 0
   
@@ -173,7 +173,7 @@ findDuplicate([2, 4, 1, 4, 4])//4
 > Can we solve the above problem in `O(1)` space and without modifying the input array?
 
 While doing the cyclic sort, we realized that the array will have a cycle due to the duplicate number and that the start of the cycle will always point to the duplicate number. This means that we can use the <b>fast & the slow</b> pointer method to find the duplicate number or the start of the cycle similar to Start of LinkedList Cycle.
-````
+````js
 function findDuplicate(nums) {
   //using fast & slow pointer method
   let slow = nums[0]
@@ -224,7 +224,7 @@ https://leetcode.com/problems/find-all-duplicates-in-an-array/
 
 This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with <b>Find the Duplicate Number</b>. Following a similar approach, we will place each number at its correct index. After that, we will iterate through the array to find all numbers that are not at the correct indices. All these numbers are duplicates.
 
-````
+````js
 function findAllDuplicates(nums) {
   let i = 0
   
@@ -261,7 +261,7 @@ findAllDuplicates([5, 4, 7, 2, 3, 5, 3])//[3, 5]
 ## 🌟 Find the Corrupt Pair (easy)
 > We are given an unsorted array containing `‘n’` numbers taken from the range `1` to `‘n’`. The array originally contained all the numbers from `1` to `‘n’`, but due to a data error, one of the numbers got duplicated which also resulted in one number going missing. Find both these numbers.
 
-````
+````js
 function findCorruptNumbers(nums) {
   let i = 0
   
@@ -300,7 +300,7 @@ This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with
 
 However, we will follow a similar approach though as discussed in <b>Find the Missing Number</b> to place the numbers on their correct indices and ignore all numbers that are out of the range of the array (i.e., all negative numbers and all numbers greater than or equal to the length of the array). Once we are done with the cyclic sort we will iterate the array and the first index that does not have the correct number will be the smallest missing positive number!
 
-````
+````js
 function findFirstSmallestMissingPositive(nums) {
   //try to sort the array
   let i = 0
@@ -350,7 +350,7 @@ nums: [1, 2, 3, 6, 5]
 ````
 From the sorted array we can see that the first missing number is `‘4’` (as we have `‘6’` on the fourth index) but to find the second missing number we need to remember that the array does contain `‘6’`. Hence, the next missing number is `‘7’`.
 
-````
+````js
 function findFirstKMissingPositive(nums, k) {
   //sort? the input array
   let i = 0

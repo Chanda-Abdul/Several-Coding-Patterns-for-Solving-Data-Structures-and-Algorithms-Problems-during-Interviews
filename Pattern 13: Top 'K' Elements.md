@@ -1,4 +1,6 @@
 # Pattern 13: Top 'K' Elements
+* It has taken longer than planned for me to work through this pattern in JavaScript. I don't believe that heaps are the most effecient way to tackle these problems during an interview.  It seems like it would be easier to implement some kind of sorting algorithm like quicksort.  Please let me know your thoughts and opinions on this.
+#
 
 Any problem that asks us to find the <b>top/smallest/frequent K</b> elements among a given set falls under this pattern.
 

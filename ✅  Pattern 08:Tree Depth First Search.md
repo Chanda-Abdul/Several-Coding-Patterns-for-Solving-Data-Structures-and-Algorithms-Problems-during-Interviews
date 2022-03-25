@@ -20,7 +20,7 @@ Here are the steps for our Binary Tree Path Sum problem:
 3. At every step, see if the current node being visited is a leaf node and if its value is equal to the given number `‘S’`. If both these conditions are true, we have found the required root-to-leaf path, therefore return `true`.
 4. If the current node is a leaf but its value is not equal to the given number `‘S’`, return `false`.
 
-````
+````js
 class TreeNode {
   constructor(value) {
     this.value = value
@@ -66,7 +66,7 @@ This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the 
 1. Every time we find a root-to-leaf path, we will store it in a list.
 2. We will traverse all paths and will not stop processing after finding the first path.
 
-````
+````js
 class TreeNode {
   constructor(value, left = null, right = null) {
     this.value = value;
@@ -126,7 +126,7 @@ findPaths(root, 23);
 https://leetcode.com/problems/binary-tree-paths/
 
 We can follow a similar approach. We just need to remove the “check for the path sum.”
-````
+````js
 class TreeNode {
   constructor(value, left = null, right = null) {
     this.value = value;
@@ -180,7 +180,7 @@ findPaths(root);
 > 🌟 Given a binary tree, find the root-to-leaf path with the maximum sum.
 
 We need to find the path with the maximum sum. As we traverse all paths, we can keep track of the path with the maximum sum.
-````
+````js
 class TreeNode {
   constructor(value, left = null, right = null) {
     this.value = value;
@@ -243,7 +243,7 @@ This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the 
 
 How do we calculate the path number for a node? Taking the first example mentioned above, say we are at node ‘7’. As we know, the path number for this node is ‘17’, which was calculated by: `1 * 10 + 7 => 17`. We will follow the same approach to calculate the path number of each node.
 
-````
+````js
 class TreeNode {
   constructor(value) {
     this.value = value
@@ -287,7 +287,7 @@ console.log(`Total Sum of Path Numbers: ${findSumOfPathNumbers(root)}`)
 > Given a binary tree and a number sequence, find if the sequence is present as a root-to-leaf path in the given tree.
 
 This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the same <b>DFS</b> approach and additionally, track the element of the given sequence that we should match with the current node. Also, we can return false as soon as we find a mismatch between the sequence and the node value.
-````
+````js
 class TreeNode {
   constructor(value) {
     this.value = value
@@ -344,7 +344,7 @@ This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the 
     - As we added a new node to the current path, we should find the sums of all sub-paths ending at the current node. If the sum of any sub-path is equal to ‘S’ we will increment our path count.
 3. We will traverse all paths and will not stop processing after finding the first path.
 4. Remove the current node from the current path before returning from the function. This is needed to Backtrack while we are going up the recursive call stack to process other paths.
-````
+````js
 class TreeNode {
   constructor(value, right = null, left = null) {
     this.value = value
@@ -410,7 +410,7 @@ This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the 
 2. The height of the current node will be equal to the maximum of the heights of its left or right children, plus `1` for the `currentNode`.
 3. The tree diameter at the `currentNode` will be equal to the height of the left child plus the height of the right child plus `1` for the current node: `diameter = leftTreeHeight + rightTreeHeight + 1`. To find the overall tree diameter, we will use a class level variable. This variable will store the maximum `diameter` of all the nodes visited so far, hence, eventually, it will have the final tree diameter.
 
-````
+````js
 class TreeNode {
   constructor(value, left = null, right = null) {
     this.value = value;
@@ -484,7 +484,7 @@ https://leetcode.com/problems/binary-tree-maximum-path-sum/
 
 This problem follows the <b>Binary Tree Path Sum</b> pattern and shares the algorithmic logic with <b>Tree Diameter</b>. We can follow the same <b>DFS</b> approach. The only difference will be to ignore the paths with negative sums. Since we need to find the overall maximum sum, we should ignore any path which has an overall negative sum.
 
-````
+````js
 class TreeNode {
   constructor(value, left = null, right = null) {
     this.value = value;

@@ -16,7 +16,7 @@ It is surprising to know the approaches that the XOR operator enables us to solv
 A straight forward approach to solve this problem can be:
 1. Find the sum of all integers from `1` to `n`; let’s call it `s1`.
 2. Subtract all the numbers in the input array from `s1`; this will give us the missing number.
-````
+````js
 function findMissingNumber(arr) {
   const n = arr.length + 1
   
@@ -47,7 +47,7 @@ Remember the important property of XOR that it returns 0 if both the bits in com
 1. XOR all the numbers from `1` to `n`, let’s call it `x1`.
 2. XOR all the numbers in the input array, let’s call it `x2`.
 3. The missing number can be found by `x1` XOR `x2`.
-````
+````js
 function findMissingNumber(arr) {
   const n = arr.length + 1
   
@@ -92,7 +92,7 @@ One straight forward solution can be to use a <b>HashMap</b> kind of data struct
 - If number is not present in <b>HashMap</b>, add it.
 - In the end, only number left in the <b>HashMap</b> is our required single number.
 ### using Map class
-````
+````js
 function findSingleNumber(arr) {
   const numberMap = new Map()
   
@@ -112,7 +112,7 @@ findSingleNumber([1, 4, 2, 1, 3, 2, 3])//4
 findSingleNumber([7, 9, 7])//9
 ````
 ### using Map object
-````
+````js
 function singleNumber(arr) {
   //HashMap
   let numberMap = {}
@@ -137,7 +137,7 @@ Recall the following two properties of XOR:
 - It returns the same number if we XOR with zero.
 So we can XOR all the numbers in the input; duplicate numbers will zero out each other and we will be left with the single number.
 
-````
+````js
 function singleNumber(arr) {
   //So we can XOR all the numbers in the input 
   //duplicate numbers will zero out each other and we will be left with the single number.
@@ -174,7 +174,7 @@ We can take any bit which is ‘1’ in `n1xn2` and partition all numbers in the
 2. Find any bit which is set in `n1xn2`. We can take the rightmost bit which is ‘1’. Let’s call this `rightmostSetBit`.
 3. Iterate through all numbers of the input array to partition them into two groups based on `rightmostSetBit`. Take XOR of all numbers in both the groups separately. Both these XORs are our required numbers.
 
-````
+````js
 function findSingleNumbers(nums) {
   //get the XOR of all the numbers
   
@@ -251,7 +251,7 @@ We can use the above fact to find the complement of any number.
 
 <b>How do we calculate `all_bits_set`?</b> One way to calculate `all_bits_set` will be to first count the bits required to store the given number. We can then use the fact that for a number which is a complete power of ‘2’ i.e., it can be written as pow(2, n), if we subtract ‘1’ from such a number, we get a number which has ‘n’ least significant bits set to ‘1’. For example, ‘4’ which is a complete power of ‘2’, and ‘3’ (which is one less than 4) has a binary representation of ‘11’ i.e., it has ‘2’ least significant bits set to ‘1’.
 
-````
+````js
 function calculateBitwiseComplement(n) {
   // count number of total bits in 'num'
   let bitCount = 0
@@ -289,7 +289,7 @@ https://leetcode.com/problems/flipping-an-image/
 - <b>Flip:</b> We can flip the image in place by replacing <i>ith</i> element from left with the <i>ith</i> element from the right.
 - <b>Invert:</b> We can take XOR of each element with `1`. If it is `1` then it will become `0` and if it is `0` then it will become `1`.
 
-````
+````js
 function flipAndInvertImage(matrix) {
   let c = matrix.length
   

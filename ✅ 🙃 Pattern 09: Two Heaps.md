@@ -119,7 +119,7 @@ Heap.minComparator = (a, b) => { return a - b; }
 Heap.maxComparator = (a, b) => { return b - a; }
 ````
 ### Solution 
-````
+````js
 class MedianOfAStream {
   constructor(){
      this.maxHeap = new Heap(Heap.maxComparator);
@@ -539,7 +539,7 @@ Heap.minComparator = (a, b) => { return a - b; }
  */
 Heap.maxComparator = (a, b) => { return b - a; }
 ````
-````
+````js
 function findMaximumCapital(capital, profits, numberOfProjects, initialCapital) {
   const minCapitalHeap = new Heap(Heap.minComparator);
   const maxProfitHeap = new Heap(Heap.maxComparator);
@@ -606,7 +606,7 @@ Add the index of topStart in the result array as the next interval of topEnd. If
 Put the topStart back in the maxStartHeap, as it could be the next interval of other intervals.
 Repeat steps 1-4 until we have no intervals left in maxEndHeap.
 😴(needs review)
-````
+````js
 class Interval {
   constructor(start, end) {
     this.start = start;

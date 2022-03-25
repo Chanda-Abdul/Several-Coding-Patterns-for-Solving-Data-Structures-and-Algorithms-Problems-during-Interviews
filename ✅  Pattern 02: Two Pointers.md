@@ -22,7 +22,7 @@ We can follow the <b>Two Pointers</b> approach. We will start with one pointer p
 1. If the sum of the two numbers pointed by the two pointers is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
 2. If the sum of the two numbers pointed by the two pointers is smaller than the target sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
 ### Brute Force Solution
-````
+````js
 function pair_with_targetsum(nums, target) {
   for (let i = 0; i < nums.length; i++) {
     for(let j = 1; j < nums.length; j++) {
@@ -38,7 +38,7 @@ function pair_with_targetsum(nums, target) {
 ````
 ### Two pointer Solution
 * Assume the input is sorted
-````
+````js
 function pairWithTargetSum(arr, target) {
   let start = 0
   let end = arr.length-1
@@ -70,7 +70,7 @@ pairWithTargetSum([2, 5, 9, 11], 11)//[0,2]
 Instead of using a two-pointer or a binary search approach, we can utilize a <b>HashTable</b> to search for the required pair. We can iterate through the array one number at a time. Let’s say during our iteration we are at number `‘X’`, so we need to find `‘Y’` such that `“X + Y == Target”`. We will do two things here:
 1. Search for `‘Y’` (which is equivalent to `“Target - X”`) in the HashTable. If it is there, we have found the required pair.
 2. Otherwise, insert `“X”` in the HashTable, so that we can search it for the later numbers.
-````
+````js
 function pair_with_targetsum(nums, target) {
   //Instead of using a two-pointer or a binary search approach, 
   //we can utilize a HashTable to search for the required pair. 
@@ -111,7 +111,7 @@ https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 In this problem, we need to remove the duplicates in-place such that the resultant length of the array remains sorted. As the input array is sorted, therefore, one way to do this is to shift the elements left whenever we encounter duplicates. In other words, we will keep one pointer for iterating the array and one pointer for placing the next non-duplicate number. So our algorithm will be to iterate the array and whenever we see a non-duplicate number we move it next to the last non-duplicate number we’ve seen.
 
 * Assume the input is sorted
-````
+````js
 function removeDuplicates(arr) {
 
   //shift the elements left when we encounter duplicates
@@ -143,7 +143,7 @@ https://leetcode.com/problems/remove-element/
 
 > Given an unsorted array of numbers and a target ‘key’, remove all instances of ‘key’ in-place and return the new length of the array.
 
-````
+````js
 function removeElement(arr, key) {
   //pointed for index of the next element which is not the key
   let nextElement = 0
@@ -172,7 +172,7 @@ An easier approach could be to first find the index of the first non-negative nu
 
 Since the numbers at both ends can give us the largest square, an alternate approach could be to use two pointers starting at both ends of the input array. At any step, whichever pointer gives us the bigger square, we add it to the result array and move to the next/previous number according to the pointer. 
 
-````
+````js
 function makeSquares(arr) {
   //The only trick is that we can have negative numbers in the input array, which will make it a bit difficult to generate the output array with squares in sorted order.
   //An easier approach could be to first find the index of the first non-negative number in the array. 
@@ -219,7 +219,7 @@ To follow a similar approach, first, we will sort the array and then iterate thr
 
 Another difference from Pair with Target Sum is that we need to find all the unique triplets. To handle this, we have to skip any duplicate number. Since we will be sorting the array, so all the duplicate numbers will be next to each other and are easier to skip.
 
-````
+````js
 function searchTriplets(arr) {
   arr.sort((a, b) => a-b)
   const triplets = [];
@@ -291,7 +291,7 @@ This problem follows the <b>Two Pointers</b> pattern and is quite similar to <b>
 
 We can follow a similar approach to iterate through the array, taking one number at a time. At every step, we will save the difference between the triplet and the target number, so that in the end, we can return the triplet with the closest sum.
 
-````
+````js
 function tripletSumCloseToTarget(arr, targetSum){
   arr.sort((a, b) => a - b)
   
@@ -349,7 +349,7 @@ This problem follows the <b>Two Pointers pattern</b> and shares similarities wit
 
 Following a similar approach, first, we can sort the array and then iterate through it, taking one number at a time. Let’s say during our iteration we are at number `‘X’`, so we need to find `‘Y’` and `‘Z’` such that `X + Y + Z < target`. At this stage, our problem translates into finding a pair whose sum is less than `“target - X”` (as from the above equation `Y + Z == target - X`). We can use a similar approach as discussed in <b>Triplet Sum to Zero</b>.
 
-````
+````js
 function tripletWithSmallerSum (arr, target) {
   arr.sort((a, b) => a -b)
   let count = 0;
@@ -392,7 +392,7 @@ tripletWithSmallerSum ([0], 0)//0
 
 > Write a function to return the list of all such triplets instead of the count. How will the time complexity change in this case?
 
-````
+````js
 function tripletWithSmallerSum (arr, target) {
   arr.sort((a, b) => a -b)
   const triplets = []
@@ -436,7 +436,7 @@ This problem follows the <b>Sliding Window</b> and the <b>Two Pointers</b> patte
 2. Instead of finding triplets with sum less than a target, we need to find all subarrays having a product less than the target.
 The implementation will be quite similar to <b>Triplets with Smaller Sum</b>.
 
-````
+````js
 function findSubarrays(arr, target) {
   let result = []
   let product = 1
@@ -479,7 +479,7 @@ The brute force solution will be to use an in-place sorting algorithm like *Heap
 
 We can use a <b>Two Pointers</b> approach while iterating through the array. Let’s say the two pointers are called `low` and `high` which are pointing to the first and the last element of the array respectively. So while iterating, we will move all `0`s before `low` and all `2s` after `high` so that in the end, all `1s` will be between `low` and `high`.
 
-````
+````js
 function dutchFlagSort(arr) {
   //all elements < low are 0, and all elements > high are 2
   //all elements >= low < i are 1
@@ -528,7 +528,7 @@ https://leetcode.com/problems/4sum/
 This problem follows the <b>Two Pointers</b> pattern and shares similarities with <b>Triplet Sum to Zero</b>.
 
 We can follow a similar approach to iterate through the array, taking one number at a time. At every step during the iteration, we will search for the quadruplets similar to <b>Triplet Sum to Zero</b> whose sum is equal to the given target.
-````
+````js
 function searchQuads (arr, target) {
   //sort the array
   arr.sort((a,b) => a -b)
@@ -591,7 +591,7 @@ https://leetcode.com/problems/backspace-string-compare/
 
 To compare the given strings, first, we need to apply the backspaces. An efficient way to do this would be from the end of both the strings. We can have separate pointers, pointing to the last element of the given strings. We can start comparing the characters pointed out by both the pointers to see if the strings are equal. If, at any stage, the character pointed out by any of the pointers is a backspace (`’#’`), we will skip and apply the backspace until we have a valid character available for comparison.
 
-````
+````js
 function backspaceCompare(str1, str2) {
   //use two pointer approach to compare the strings
   let pointerOne = str1.length -1
@@ -671,7 +671,7 @@ The problem here is that the smallest number of our subarray is `‘-1’` which
 3. Extend the subarray from beginning to include any number which is bigger than the minimum of the subarray.
 4. Similarly, extend the subarray from the end to include any number which is smaller than the maximum of the subarray.
 
-````
+````js
 function shortestWindowSort(arr) {
   let low = 0
   let high = arr.length - 1

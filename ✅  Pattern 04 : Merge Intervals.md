@@ -28,7 +28,7 @@ The diagram above clearly shows a merging approach. Our algorithm will look like
 ````
 We will keep repeating the above two steps to merge `c` with the next interval if it overlaps with `c`.
 
-````
+````js
 class Interval {
   constructor(start, end) {
     this.start = start;
@@ -99,7 +99,7 @@ console.log(`Merged intervals: ${result}`)
 //Explanation: Since all the given intervals overlap, we merged them into one.
 ````
 #### OR 
-````
+````js
 function merge(intervals) {
   if(intervals.length < 2) return intervals
   
@@ -188,7 +188,7 @@ Our overall algorithm will look like this:
 ````
 3. We will repeat the above two steps to merge `c` with the next overlapping interval.
 
-````
+````js
 class Interval {
   constructor(start, end) {
     this.start = start;
@@ -269,7 +269,7 @@ for (i = 0; i < result.length; i++) {
 console.log();
 ````
 #### OR 
-````
+````js
 function insert(intervals, newInterval) {
   let merged = []
   
@@ -326,7 +326,7 @@ Again from the above diagram, the overlapping interval will be equal to:
 That is, the highest start time and the lowest end time will be the overlapping interval.
 
 So our algorithm will be to iterate through both the lists together to see if any two intervals overlap. If two intervals overlap, we will insert the overlapped part into a result list and move on to the next interval which is finishing early.
-````
+````js
 function findIntersection(firstIntervals, secondIntervals) {
   let result = []
   
@@ -370,7 +370,7 @@ https://leetcode.com/problems/meeting-rooms/
 > Given an array of intervals representing ‘N’ appointments, find out if a person can <b>attend all the appointments</b>.
 
 The problem follows the <b>Merge Intervals</b> pattern. We can sort all the intervals by start time and then check if any two intervals overlap. A person will not be able to attend all appointments if any two appointments overlap.
-````
+````js
 function canAttendAllAppointments(appointmentTimes) {
   //sort intervals by start time
   appointmentTimes.sort((a,b) => a[0] -b[0])
@@ -404,7 +404,7 @@ Output:
 [3,6] and [5,7] conflict.
 ````
 ### REVIEW
-````
+````js
 function whatAreTheConflicts(appointmentTimes)  {
   
   // appointmentTimes.sort((a,b) => a[0]-b[0])
@@ -471,7 +471,7 @@ So our algorithm will look like this:
 5. Now add `m1` to the heap.
 6. The heap will always have all the overlapping meetings, so we will need rooms for all of them. Keep a counter to remember the maximum size of the heap at any time which will be the minimum number of rooms needed.
 
-````
+````js
 function minMeetingRooms(meetings) {
   //JavaScript does not come with built in Heap, so I used an array to keep track of rooms and sorted by end time at each call
   if(meetings == null) return 0
@@ -550,7 +550,7 @@ Explanation: Maximum CPU load will be 8 as all jobs overlap during the time inte
 The problem follows the <b>Merge Intervals</b> pattern and can easily be converted to <b>Minimum Meeting Rooms</b>. Similar to ‘Minimum Meeting Rooms’ where we were trying to find the maximum number of meetings happening at any time, for ‘Maximum CPU Load’ we need to find the maximum number of jobs running at any time. We will need to keep a running count of the maximum CPU load at any time to find the overall maximum load.
 
 
-````
+````js
 function findMaxCPULoad(jobs) {
   //sort the jobs by start time
   jobs.sort((a, b) => a[0]-b[0])
@@ -598,7 +598,7 @@ One simple solution can be to put all employees’ working hours in a list and s
 [1,3], [2,4], [6,8], [9,12]
 ````
 We can now iterate through these intervals, and whenever we find non-overlapping intervals (e.g., `[2,4]` and `[6,8]`), we can calculate a free interval (e.g., `[4,6]`). 
-````
+````js
 function findEmployeeFreeTime (schedules) {
   let freeTime = [];
   

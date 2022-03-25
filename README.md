@@ -1,6 +1,10 @@
 # Several Coding Patterns for Solving Data Structures and Algorithms Problems during Interviews
 
-These are my notes from a course categorizes coding interview problems into a set of <b>16 patterns</b>. 
+
+
+These are my JavaScript notes from a course that categorizes coding interview problems into a set of <b>16 patterns</b>. 
+
+
 
 |   |   |
 |---|---|

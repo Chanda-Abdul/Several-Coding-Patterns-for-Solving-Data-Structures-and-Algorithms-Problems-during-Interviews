@@ -28,7 +28,7 @@ If the array is sorted in the descending order, we have to update the step 4 abo
 - If `key > arr[middle]`, then we can conclude that the `key` will be greater than all numbers after index `middle` as the array is sorted in the descending order. Hence, we can reduce our search to `end = mid - 1`.
 - If `key < arr[middle]`, then we can conclude that the `key` will be smaller than all the numbers before index `middle` as the array is sorted in the descending order. Hence, we can reduce our search to `start = mid + 1`.
 Finally, how can we figure out the sort order of the input array? We can compare the numbers pointed out by `start` and `end` index to find the sort order. If `arr[start] < arr[end]`, it means that the numbers are sorted in ascending order otherwise they are sorted in the descending order.
-````
+````js
 function binarySearch (arr, key) {
   let start = 0
   let end = arr.length -1
@@ -94,7 +94,7 @@ Since we are always adjusting our range to find the `key`, when we exit the loop
 
 We can add a check in the beginning to see if the `key` is bigger than the biggest number in the input array. If so, we can return `-1`.
 
-````
+````js
 function searchCeilingOfNumber(arr, key) {
   const n = arr.length 
   let start = 0;
@@ -143,7 +143,7 @@ https://leetcode.com/problems/search-insert-position/
 >
 > Write a function to return the index of the floor of the ‘key’. If there isn’t a floor, return -1.
 
-````
+````js
 function searchFloorOfNumber(arr, key) {
   let start = 0;
   let end = arr.length - 1;
@@ -203,7 +203,7 @@ We can use a similar approach as discussed in <b>Ceiling of a Number</b>. There 
 
 In the end, instead of returning the element pointed out by start, we have to return the letter pointed out by `start % array.length`. This is needed because of point 2 discussed above. Imagine that the last letter of the array is equal to the `key`. In that case, we have to return the first letter of the input array.
 
-````
+````js
 function searchNextLetter(letters, key) {
   let n = letters.length;
   let start = 0;
@@ -249,7 +249,7 @@ We can use a similar approach as discussed in <b>Order-agnostic Binary Search</b
 1. When trying to find the first position of the `key`, we can update `end = middle - 1` to see if the `key` is present before `middle`.
 2. When trying to find the last position of the `key`, we can update `start = middle + 1` to see if the `key` is present after `middle`.
 In both cases, we will keep track of the last position where we found the `key`. These positions will be the required range.
-````
+````js
 function findRange(arr, key) {
   let result = [-1, -1]
   result[0] = binarySearch(arr, key, false)
@@ -308,7 +308,7 @@ The problem follows the <b>Binary Search</b> pattern. Since <b>Binary Search</b>
 The only issue with applying binary search in this problem is that we don’t know the bounds of the array. To handle this situation, we will first find the proper bounds of the array where we can perform a binary search.
 
 An efficient way to find the proper bounds is to start at the beginning of the array with the bound’s size as `1` and exponentially increase the bound’s size (i.e., double it) until we find the bounds that can have the key.
-````
+````js
 class ArrayReader {
   constructor(arr) {
     this.arr = arr;
@@ -370,7 +370,7 @@ https://leetcode.com/problems/minimum-absolute-difference/
 The problem follows the <b>Binary Search</b> pattern. Since <b>Binary Search</b> helps us find a number in a sorted array efficiently, we can use a modified version of the <b>Binary Search</b> to find the number that has the minimum difference with the given `key`.
 
 We can use a similar approach as discussed in <b>Order-agnostic Binary Search</b>. We will try to search for the `key` in the given array. If we find the `key` we will return it as the minimum difference number. If we can’t find the `key`, (at the end of the loop) we can find the differences between the `key` and the numbers pointed out by indices `start` and `end`, as these two numbers will be closest to the `key`. The number that gives minimum difference will be our required number.
-````
+````js
 function searchMinDiffElement(arr, key) {
   let start = 0;
   let end = arr.length - 1;
@@ -421,7 +421,7 @@ A <b>bitonic array</b> is a sorted array; the only difference is that its first 
 
 We can break when `start == end`. Due to the two points mentioned above, both `start` and `end` will be pointing at the maximum number of the bitonic array.
 
-````
+````js
 function findMaxInBitonicArray(arr) {
   let start = 0;
   let end = arr.length - 1;
@@ -467,7 +467,7 @@ Here is how we can search in a <b>bitonic array</b>:
     - Array from index `0` to `maxIndex`, sorted in ascending order.
     - Array from index `maxIndex+1` to `array_length-1`, sorted in descending order.
 3. We can then call <b>Binary Search</b> separately in these two arrays to search the `key`. We can use the same <b>Order-agnostic Binary Search</b> for searching.
-````
+````js
 function searchBitonicArray(arr, key) {
   const maxIndex = findMax(arr);
   const keyIndex = binarySearch(arr, key, 0, maxIndex);
@@ -566,7 +566,7 @@ Once we know which part of the array is sorted, it is easy to adjust our ranges.
 
 Since there are no duplicates in the given array, it is always easy to skip one part of the array in each iteration. However, if there are duplicates, it is not always possible to know which part is sorted. We will look into this case in the <b>Similar Problems</b> section.
 
-````
+````js
 function searchRotatedArray(arr, key) {
   let start = 0;
   let end = arr.length - 1;
@@ -616,7 +616,7 @@ https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
 > The code above will fail in the following example!
 
 The only problematic scenario is when the numbers at indices `start`, `middle`, and `end` are the same, as in this case, we can’t decide which part of the array is sorted. In such a case, the best we can do is to skip one number from both ends: `start = start + 1` & `end = end - 1`.
-````
+````js
 function searchRotatedArrayWithDuplicates(arr, key) {
   let start = 0;
   let end = arr.length - 1;
@@ -685,7 +685,7 @@ After calculating the `middle`, we can compare the number at index `middle` with
 To adjust the ranges we can follow the same approach as discussed in <b>Search in Rotated Array</b>. Comparing the numbers at indices `start` and `middle` will give us two options:
 1. If `arr[start] < arr[middle]`, the numbers from `start` to `middle` are sorted.
 2. Else, the numbers from `middle + 1` to `end` are sorted.
-````
+````js
 function countRotations(arr) {
   let start = 0;
   let end = arr.length - 1;
@@ -736,7 +736,7 @@ https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
 > The above code will fail on the following example!
 
 We can follow the same approach as discussed in <b>Search in Rotated Array</b>. The only difference is that before incrementing `start` or decrementing `end`, we will check if either of them is the smallest number.
-````
+````js
 function countRotationsWithDuplicates(arr) {
   let start = 0;
   let end = arr.length - 1;

@@ -12,7 +12,7 @@ Let’s understand this problem with a real input:
 
 A <b>brute-force</b> algorithm will calculate the sum of every 5-element contiguous subarray of the given array and divide the sum by ‘5’ to find the average.
 
-````
+````js
 function findAvgOfSubarrays(arr, K) {
   const results = []
   
@@ -40,7 +40,7 @@ The inefficiency is that for any two consecutive subarrays of size `‘5’`, th
 The efficient way to solve this problem would be to visualize each contiguous subarray as a sliding window of `‘5’` elements. This means that we will slide the window by one element when we move on to the next subarray. To reuse the sum from the previous subarray, we will subtract the element going out of the window and add the element now being included in the sliding window. This will save us from going through the whole subarray to find the sum and, as a result, the algorithm complexity will reduce to `O(N)`.
 
 Here is the algorithm for the <b>Sliding Window</b> approach:
-````
+````js
 function findAveragesOfSubarrays(arr, k) {
   //sliding window approach
   
@@ -81,7 +81,7 @@ https://leetcode.com/problems/largest-subarray-length-k/
 ### Brute Force
 
 A basic brute force solution will be to calculate the sum of all `‘k’` sized subarrays of the given array to find the subarray with the highest sum. We can start from every index of the given array and add the next `‘k’` elements to find the subarray’s sum.
-````
+````js
 function maxSubarrayOfSizeK(arr, k) {
   //brute force
   let maxSum = 0
@@ -114,7 +114,7 @@ If you observe closely, you will realize that to calculate the sum of a contiguo
 2. Add the new element getting included in the sliding window, i.e., the element coming right after the end of the window.
 
 This approach will save us from re-calculating the sum of the overlapping part of the sliding window. 
-````
+````js
 function maxSubarrayOfSizeK(arr, k) {
   //sliding window
   let maxSum = 0
@@ -163,7 +163,7 @@ This problem follows the Sliding Window pattern, and we can use a similar strate
   - Subtract the first element of the window from the running sum to shrink the sliding window.
 
 
-````
+````js
 function smallestSubarrayWithGivenSum(arr, s) {
   //sliding window, BUT the window size is not fixed
   let windowSum = 0
@@ -222,7 +222,7 @@ This problem follows the Sliding Window pattern, and we can use a similar dynami
 5. While shrinking, we’ll decrement the character’s frequency going out of the window and remove it from the HashMap if its frequency becomes zero.
 6. At the end of each step, we’ll check if the current window length is the longest so far, and if so, remember its length.
 
-````
+````js
 function longestSubstringWithKdistinct(str, k) {
    // Given a string, find the length of the longest substring in it with no more than K distinct characters.
   let windowStart = 0
@@ -280,7 +280,7 @@ In this problem, we need to find the length of the longest subarray with no more
 
 This transforms the current problem into Longest Substring with <b>K Distinct Characters</b> where `K=2`.
 ### Map Class Solution
-````
+````js
 function totalFruit (fruits) {
   let windowStart = 0
   let windowMax = 0
@@ -319,7 +319,7 @@ totalFruit ([0,1,2,2])//3,We can pick from trees [1,2,2].If we had started at th
 totalFruit ([1,2,3,2,2])//4,We can pick from trees [2,3,2,2]. If we had started at the first tree, we would only pick from trees [1,2].
 ````
 ### Map Object Solution
-````
+````js
 function fruitsInBaskets(fruits) {
   let windowStart = 0; 
   let maxLength = 0; 
@@ -356,7 +356,7 @@ fruitsInBaskets(['A', 'B', 'C', 'B', 'B', 'C'])//5 , We can put 3 'B' in one bas
 https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
 > Given a string, find the length of the longest substring in it with at most two distinct characters.
 
-````
+````js
 function lengthOfLongestSubstringTwoDistinct(s) {
     let windowStart = 0
     let maxLength = 0
@@ -402,7 +402,7 @@ https://leetcode.com/problems/longest-substring-without-repeating-characters/
 
 This problem follows the <b>Sliding Window pattern</b>, and we can use a similar dynamic sliding window strategy as discussed in <b>Longest Substring with K Distinct Characters</b>. We can use a HashMap to remember the last index of each character we have processed. Whenever we get a repeating character, we will shrink our sliding window to ensure that we always have distinct characters in the sliding window.
 
-````
+````js
 function nonRepeatSubstring(str) {
   // sliding window with hashmap
   
@@ -457,7 +457,7 @@ This problem follows the <b>Sliding Window pattern</b>, and we can use a similar
   - If we have more than `‘k’` remaining letters, we should shrink the window as we cannot replace more than `‘k’` letters.
 
 While shrinking the window, we don’t need to update `maxRepeatLetterCount` (hence, it represents the maximum repeating count of ANY letter for ANY window). Why don’t we need to update this count when we shrink the window? Since we have to replace all the remaining letters to get the longest substring having the same letter in any window, we can’t get a better answer from any other window even though all occurrences of the letter with frequency `maxRepeatLetterCount` is not in the current window.
-````
+````js
 function lengthOfLongestSubstring(str, k) {
   let windowStart = 0
   let maxLength = 0
@@ -507,7 +507,7 @@ This problem follows the <b>Sliding Window</b> pattern and is quite similar to <
 
 Following a similar approach, we’ll iterate through the array to add one number at a time in the window. We’ll also keep track of the maximum number of repeating 1s in the current window (let’s call it `maxOnesCount`). So at any time, we know that we can have a window with 1s repeating `maxOnesCount` time, so we should try to replace the remaining 0s. If we have more than `‘k’` remaining 0s, we should shrink the window as we are not allowed to replace more than `‘k’` 0s.
 
-````
+````js
 function lengthOfLongestSubstring (arr, k) {
   let windowStart = 0
   let maxLength = 0
@@ -565,7 +565,7 @@ This problem follows the <b>Sliding Window</b> pattern, and we can use a similar
 - If at any time, the number of characters matched is equal to the number of distinct characters in the pattern (i.e., total characters in the HashMap), we have gotten our required permutation.
 - If the window size is greater than the length of the pattern, shrink the window to make it equal to the pattern’s size. At the same time, if the character going out was part of the pattern, put it back in the frequency HashMap.
 
-````
+````js
 function findPermutation(str, pattern) {
   //sliding window
   let windowStart = 0
@@ -637,7 +637,7 @@ As we know, when we are not allowed to repeat characters while finding permutati
 > Write a function to return a list of starting indices of the anagrams of the pattern in the given string.
 
 This problem follows the <b>Sliding Window</b> pattern and is very similar to <b>Permutation in a String</b>. In this problem, we need to find every occurrence of any permutation of the pattern in the string. We will use a list to store the starting indices of the anagrams of the pattern in the string.
-````
+````js
 function findStringAnagrams(str, pattern){
   let windowStart = 0, matched = 0, charFreq = {}
   
@@ -704,7 +704,7 @@ This problem follows the <b>Sliding Window</b> pattern and has a lot of similari
 2. Whenever we have matched all the characters, we will try to shrink the window from the beginning, keeping track of the smallest substring that has all the matching characters.
 3. We will stop the shrinking process as soon as we remove a matched character from the sliding window. One thing to note here is that we could have redundant matching characters, e.g., we might have two ‘a’ in the sliding window when we only need one ‘a’. In that case, when we encounter the first ‘a’, we will simply shrink the window without decrementing the matched count. We will decrement the matched count when the second ‘a’ goes out of the window.
 
-````
+````js
 function findSubstring(str, pattern) {
   let windowStart = 0
   let matched = 0
@@ -775,7 +775,7 @@ This problem follows the <b>Sliding Window</b> pattern and has a lot of similari
 4. If a word is not found or has a higher frequency than required, we can move on to the next character in the string.
 5. Store the index if we have found all the words.
 
-````
+````js
 function findWordConcatenation(str, words) {
   if(words.length === 0 || words[0].length === 0) {
     return []

@@ -12,7 +12,7 @@ To reverse a <b>LinkedList</b>, we need to reverse one node at a time. We will s
 
 In a stepwise manner, we will reverse the `current` node by pointing it to the `previous` before moving on to the next node. Also, we will update the `previous` to always point to the previous node that we have processed. 
 
-````
+````js
 class Node {
   constructor(value, next=null) {
     this.value = value;
@@ -75,7 +75,7 @@ The problem follows the <b>In-place Reversal</b> of a LinkedList pattern. We can
 3. Next, reverse the nodes from `p` to `q` using the same approach discussed in <b>Reverse a LinkedList</b>.
 4. Connect the `p-1` and `q+1` nodes to the reversed sub-list.
 
-````
+````js
 class Node {
   constructor(value, next = null) {
     this.value = value
@@ -189,7 +189,7 @@ https://leetcode.com/problems/reverse-nodes-in-k-group/
 
 The problem follows the <b>In-place Reversal of a LinkedList</b> pattern and is quite similar to <b>Reverse a Sub-list</b>. The only difference is that we have to reverse all the sub-lists. We can use the same approach, starting with the first sub-list (i.e. `p=1, q=k`) and keep reversing all the sublists of size ‘k’.
 
-````
+````js
 class Node {
   constructor(value, next=null) {
     this.value = value
@@ -372,7 +372,7 @@ Another way of defining the rotation is to take the sub-list of `‘k’` ending
 2. The new head of the LinkedList will be the node at the beginning of the sublist.
 3. The node right before the start of sub-list will be the new tail of the rotated LinkedList.
 
-````
+````js
 class Node {
   constructor(value, next=null){
     this.value = value;

@@ -18,7 +18,7 @@ Given set: `[1, 5, 3]`
 4. Add the third number `3` to all the existing subsets: `[[], [1], [5], [1,5], `<b>`[3], [1,3], [5,3], [1,5,3]`</b>`]`.
 
 Since the input set has distinct elements, the above steps will ensure that we will not have any duplicate subsets.
-````
+````js
 function findSubsets(nums) {
   const subsets = [];
   
@@ -85,7 +85,7 @@ To handle this instead of adding `3` to all the existing subsets, we only add it
 ````
 5. Finally, add the forth number `5` to all the existing subsets: `[[], [1], [3], [1,3], [3,3], [1,3,3], [5], [1,5], [3,5], [1,3,5], [3,3,5], [1,3,3,5]]`
 
-````
+````js
 function subsetsWithDupe(nums) {
   //sort the numbers to handle duplicates
   nums.sort((a,b) => a-b)
@@ -155,7 +155,7 @@ If we look closely, we will realize that when we add a new number `5`, we take e
 2. Inserting `5` between `3` and `1`: `[3,5,1]`
 3. Inserting `5` after `1`: `[3,1,5]`
 
-````
+````js
 function findPermutations(nums) {
   const result = [];
   let permutations = [[]]
@@ -199,7 +199,7 @@ findPermutations([1, 3, 5])
 - All the additional space used by our algorithm is for the `result` list and the `queue` to store the intermediate permutations. If you see closely, at any time, we don’t have more than `N!` permutations between the result list and the queue. Therefore the overall space complexity to store `N!` permutations each containing `N` elements will be `O(N*N!)`.
 
 ### Recursive Solution
-````
+````js
 function permute(nums) {
   //recursion
   let subsets = []
@@ -241,7 +241,7 @@ Let’s take Example-2 mentioned above to generate all the permutations. Followi
 Let’s analyze the permutations in the 3rd and the 5th step. How can we generate the permutations in the 5th step from the permutations in the 3rd step?
 
 If we look closely, we will realize that in the 5th step, when we processed the new character `c`, we took all the permutations of the previous step (3rd) and changed the case of the letter `c` in them to create four new permutations.
-````
+````js
 function findLetterCaseStringPermutations(str) {
   const permutations = [];
   permutations.push(str)
@@ -302,7 +302,7 @@ Following this guideline, let’s generate parentheses for `N=3`:
 8. Finally, we will have the following combinations of balanced parentheses: `“((()))”, “(()())”, “(())()”, “()(())”, “()()()”`
 9. We can’t add more parentheses to any of the combinations, so we stop here.
 
-````
+````js
 class ParenthesesString {
   constructor(str, openCount, closeCount) {
     this.str = str;
@@ -349,7 +349,7 @@ generateValidParentheses(3)
 - All the additional space used by our algorithm is for the output list. Since we can’t have more than `O(2ᴺ)` combinations, the space complexity of our algorithm is `O(N*2ᴺ)`.
 
 ### Recursive Solution 
-````
+````js
 function generateValidParentheses(num) {
   const result = [];
   const parenthesesString = Array(2 * num);
@@ -400,7 +400,7 @@ Following these two rules, let’s abbreviate `BAT`:
 5. The next iteration will give us: `_ _ _, 2T, 1A_, 1AT, B _ _, B1T, BA_, BAT`
 6. The final iteration will give us:`3, 2T, 1A1, 1AT, B2, B1T, BA1, BAT`
 
-````
+````js
 class AbbreviatedWord {
   constructor(str, start, count) {
     this.str = str;
@@ -444,7 +444,7 @@ generateGeneralizedAbbreviation("code")// "code", "cod1", "co1e", "co2", "c1de",
 - Since we had two options for each character, we will have a maximum of `2ᴺ` combinations. If you see the visual representation of Example-1 closely, you will realize that it is equivalent to a binary tree, where each node has two children. This means that we will have `2ᴺ` leaf nodes and `2ᴺ-1` intermediate nodes, so the total number of elements pushed to the queue will be `2ᴺ + 2ᴺ-1`, which is asymptotically equivalent to `O(2ᴺ)`. While processing each element, we do need to concatenate the current string with a character. This operation will take `O(N)`, so the overall time complexity of our algorithm will be `O(N*2ᴺ)`.
  - All the additional space used by our algorithm is for the output list. Since we can’t have more than `O(2ᴺ)` combinations, the space complexity of our algorithm is `O(N*2ᴺ)`.
 ### Recursive Solution 
-````
+````js
 function generate_generalized_abbreviation(word) {
   const result = [];
   generate_abbreviation_recursive(word, '', 0, 0, result);
@@ -488,7 +488,7 @@ Let’s take the first example to generate different ways to evaluate the expres
 3. The two parts can be calculated by recursively calling the function.
 4. Once we have the evaluation results from the left and right halves, we can combine them to produce all results.
 
-````
+````js
 function diffWaysToEvaluateExpression(input) {
   const result = [];
   
@@ -534,7 +534,7 @@ console.log(`Expression evaluations: ${diffWaysToEvaluateExpression("2*3-4-5")}`
 
 ### Memoized Solution
 The problem has overlapping subproblems, as our recursive calls can be evaluating the same sub-expression multiple times. To resolve this, we can use <b>memoization</b> and store the intermediate results in a <b>HashMap</b>. In each function call, we can check our map to see if we have already evaluated this sub-expression before
-````
+````js
 function diffWaysToEvaluateExpression(input) {
   diffWaysToEvaluateExpressionRecursive({}, input)
 }
@@ -596,7 +596,7 @@ https://leetcode.com/problems/unique-binary-search-trees-ii/
 
 This problem follows the <b>Subsets</b> pattern and is quite similar to <b>Evaluate Expression</b>. Following a similar approach, we can iterate from `1` to `n` and consider each number as the root of a tree. All smaller numbers will make up the left sub-tree and bigger numbers will make up the right sub-tree. We will make recursive calls for the left and right sub-trees
 
-````
+````js
 class TreeNode {
   constructor(val, left = null, right = null) {
     this.val = val;
@@ -657,7 +657,7 @@ https://leetcode.com/problems/unique-binary-search-trees/
 
 > Given a number `n`, write a function to return the count of structurally unique <b>Binary Search Trees (BST)</b> that can store values `1` to `n`.
 
-````
+````js
 class TreeNode {
   constructor(value) {
     this.value = value;
@@ -690,7 +690,7 @@ countTrees(3)//5, There will be 5 unique BSTs that can store numbers from 1 to 3
 
 ### Memoized version
 Our algorithm has overlapping subproblems as our recursive call will be evaluating the same sub-expression multiple times. To resolve this, we can use memoization and store the intermediate results in a <b>HashMap</b>. In each function call, we can check our map to see if we have already evaluated this sub-expression before.
-````
+````js
 class TreeNode {
   constructor(value) {
     this.value = value;

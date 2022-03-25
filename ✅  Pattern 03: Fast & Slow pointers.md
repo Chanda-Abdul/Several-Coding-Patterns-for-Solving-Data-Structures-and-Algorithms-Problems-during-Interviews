@@ -27,7 +27,7 @@ All other distances between the fast and slow pointers will reduce to one of the
 
 This concludes that the two pointers will definitely meet if the LinkedList has a cycle. 
 
-````
+````js
 class Node {
   constructor(value, next = null) {
     this.value = value;
@@ -72,7 +72,7 @@ console.log(`LinkedList has cycle: ${hasCycle(head)}`)
 
 Once the fast and slow pointers meet, we can save the slow pointer and iterate the whole cycle with another pointer until we see the slow pointer again to find the length of the cycle.
 
-````
+````js
 class Node {
   constructor(value, next = null) {
     this.value = value;
@@ -139,7 +139,7 @@ If we know the length of the <b>LinkedList</b> cycle, we can find the start of t
 4. Move `pointer2` ahead by ‘K’ nodes.
 5. Now, keep incrementing `pointer1` and `pointer2` until they both meet.
 6. As `pointer2` is ‘K’ nodes ahead of `pointer1`, which means, `pointer2` must have completed one loop in the cycle when both pointers meet. Their meeting point will be the start of the cycle.
-````
+````js
 class Node {
   constructor(value, next = null) {
     this.value = value;
@@ -227,7 +227,7 @@ The process, defined above, to find out if a number is a happy number or not, al
 
 We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a cycle among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same fast & slow pointer strategy to find the cycle and once the cycle is found, we will see if the cycle is stuck on number ‘1’ to find out if the number is happy or not.
 
-````
+````js
 function findHappyNumber(num) {
   let slow = num
   let fast = num
@@ -318,7 +318,7 @@ One brute force strategy could be to first count the number of nodes in the Link
 
 We can use the <b>Fast & Slow</b> pointers method such that the fast pointer is always twice the nodes ahead of the slow pointer. This way, when the fast pointer reaches the end of the LinkedList, the slow pointer will be pointing at the middle node.
 
-````
+````js
 class Node {
   constructor(value, next = null) {
     this.value = value
@@ -378,7 +378,7 @@ As we know, a palindrome LinkedList will have nodes values that read the same ba
 3. Then, we will compare the first half with the reversed second half to see if the LinkedList represents a palindrome.
 4. Finally, we will reverse the second half of the LinkedList again to revert and bring the LinkedList back to its original form.
 
-````
+````js
 class Node {
   constructor(value, next = null) {
     this.value = value
@@ -478,7 +478,7 @@ This problem shares similarities with <b>Palindrome LinkedList</b>. To rearrange
 2. Once we have the middle of the LinkedList, we will reverse the second half of the LinkedList.
 3. Finally, we’ll iterate through the first half and the reversed second half to produce a LinkedList in the required order.
 
-````
+````js
 class Node {
   constructor (val, next = null) {
     this.val = val
@@ -591,7 +591,7 @@ This problem involves finding a cycle in the array and, as we know, the <b>Fast 
 
 2. The other requirement mentioned in the problem is that the cycle should not contain both forward and backward movements. We will handle this by remembering the direction of each element while searching for the cycle. If the number is positive, the direction will be forward and if the number is negative, the direction will be backward. So whenever we move a pointer forward, if there is a change in the direction, we will finish our cycle search right there for the current element.
 
-````
+````js
 function circularArrayLoopExists(arr) {
   for(let i = 0; i < arr.length; i++) {
     //if we are moving forward or not
