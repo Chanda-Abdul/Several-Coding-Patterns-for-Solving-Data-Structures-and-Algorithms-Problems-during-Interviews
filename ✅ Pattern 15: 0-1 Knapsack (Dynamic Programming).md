@@ -1228,12 +1228,40 @@ console.log(`Count of Target sum is: ---> ${findTargetSubsets([1, 1, 2, 3], 1)}`
 console.log(`Count of Target sum is: ---> ${findTargetSubsets([1, 2, 7, 1], 9)}`);
 //2
 // The given set has '2' ways to make a sum of '9': {+1+2+7-1} & {-1+2+7+1}
-
 ````
 
 # Pattern 2: Unbounded Knapsack
+## Unbounded Knapsack
+## Rod Cutting
+## Coin Change
+## Minimum Coin Change
+## Maximum Ribbon Cut
 # Pattern 3: Fibonacci Numbers
+## Fibonacci numbers
+## Staircase
+## Number factors
+## Minimum jumps to reach the end
+## Minimum jumps with fee
+## House thief
 # Pattern 4: Palindromic Subsequence
+## Longest Palindromic Subsequence
+## Longest Palindromic Substring
+## Count of Palindromic Substrings
+## Minimum Deletions in a String to make it a Palindrome
+## Palindromic Partitioning
 # Pattern 5: Longest Common Substring
+## Longest Common Substring
+## Longest Common Subsequence
+## Minimum Deletions & Insertions to Transform a String into another
+## Longest Increasing Subsequence
+## Maximum Sum Increasing Subsequence
+## Shortest Common Super-sequence
+## Minimum Deletions to Make a Sequence Sorted
+## Longest Repeating Subsequence
+## Subsequence Pattern Matching
+## Longest Bitonic Subsequence
+## Longest Alternating Subsequence
+## Edit Distance
+## Strings Interleaving
 
 

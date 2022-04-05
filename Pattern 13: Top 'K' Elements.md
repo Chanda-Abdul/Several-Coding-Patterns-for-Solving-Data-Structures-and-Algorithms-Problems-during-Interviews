@@ -1,5 +1,5 @@
 # Pattern 13: Top 'K' Elements
-* It has taken longer than planned for me to work through this pattern in JavaScript. I don't believe that heaps are the most effecient way to tackle these problems during an interview.  It seems like it would be easier to implement some kind of sorting algorithm like quicksort.  Please let me know your thoughts and opinions on this.
+<!-- * It has taken longer than planned for me to work through this pattern in JavaScript. I don't believe that heaps are the most effecient way to tackle these problems during an interview.  I'm reviewing the leetcode discussions for each problem as I go along, and it seems like it would be easier to implement some kind of sorting algorithm like quicksort.  Please let me know your thoughts/opinions on this. -->
 #
 
 Any problem that asks us to find the <b>top/smallest/frequent K</b> elements among a given set falls under this pattern.
@@ -17,7 +17,7 @@ The best data structure that comes to mind to keep track of <b>K</b> elements is
 
 A <b>brute force solution</b> could be to sort the array and return the <b>largest K numbers</b>. The time complexity of such an algorithm will be `O(N*logN)` as we need to use a sorting algorithm like <b>[Quicksort](https://github.com/Chanda-Abdul/leetcode/blob/master/%E2%9D%97Sort%20Algorithms.md#-quick-sort)</b>. Can we do better than that?
 
-<s>The best data structure that comes to mind to keep track of top ‘K’ elements is Heap. Let’s see if we can use a heap to find a better algorithm.
+<!-- <s>The best data structure that comes to mind to keep track of top ‘K’ elements is Heap. Let’s see if we can use a heap to find a better algorithm.
 
 If we iterate through the array one element at a time and keep ‘K’ largest numbers in a heap such that each time we find a larger number than the smallest number in the heap, we do two things:
 1. Take out the smallest number from the heap, and
@@ -37,7 +37,7 @@ Given array: `[3, 1, 5, 12, 2, 11]`, and `K=3`
 5. The 5th number is ‘2’ which is not bigger than the root of the heap (‘3’), so we can skip this as we already have top three numbers in the heap.
 6. The last number is ‘11’ which is bigger than the root (which is ‘3’), so let’s take out ‘3’ and insert ‘11’. Finally, the heap has the largest three numbers: [5, 12, 11]
   
-As discussed above, it will take us `O(logK)` to extract the minimum number from the min-heap. So the overall time complexity of our algorithm will be `O(K*logK+(N-K)*logK)` since, first, we insert ‘K’ numbers in the heap and then iterate through the remaining numbers and at every step, in the worst case, we need to extract the minimum number and insert a new number in the heap. This algorithm is better than `O(N*logN)`.</s>
+As discussed above, it will take us `O(logK)` to extract the minimum number from the min-heap. So the overall time complexity of our algorithm will be `O(K*logK+(N-K)*logK)` since, first, we insert `K` numbers in the heap and then iterate through the remaining numbers and at every step, in the worst case, we need to extract the minimum number and insert a new number in the heap. This algorithm is better than `O(N*logN)`.</s> -->
 
 ````js
 function findKLargestNumbers(nums, k) {
@@ -137,6 +137,7 @@ https://leetcode.com/problems/k-closest-points-to-origin/
 > Given an array of points in a 2D plane, find `K` closest points to the origin.
 
 <b>Note:</b> For a detailed discussion about different approaches to solve this problem, take a look at [Kth Smallest Number](#kth-smallest-number-easy).
+
 ````js
 function findClosestPoints(points, k) {
   let result = [];
@@ -155,11 +156,55 @@ console.log(`"Here are the k points closest the origin: " ${findClosestPoints ([
 
 console.log(`"Here are the k points closest the origin: " ${findClosestPoints ([[1, 3], [3, 4], [2, -1]], 2)}`);
 //[[1, 3], [2, -1]]
-
 ````
 ## Connect Ropes (easy)
 https://leetcode.com/problems/minimum-cost-to-connect-sticks/
-> Given ‘N’ ropes with different lengths, we need to connect these ropes into one big rope with minimum cost. The cost of connecting two ropes is equal to the sum of their lengths.
+> Given `N` ropes with different lengths, we need to connect these ropes into one big rope with minimum cost. The cost of connecting two ropes is equal to the sum of their lengths.
+
+````js
+function minimumCostToConnectRopes(ropeLengths) {
+  if (ropeLengths.length === 1) return 0;
+
+  ropeLengths.sort((a, b) => a - b);
+
+  let totalCost = 0;
+
+  while (ropeLengths.length) {
+    let firstRope = ropeLengths.shift();
+    let secondRope = ropeLengths.shift();
+    let currentCost = firstRope + secondRope;
+    totalCost += currentCost;
+
+    if (ropeLengths.length === 0) return totalCost;
+
+    //Binary Search
+    let start = 0;
+    let end = ropeLengths.length;
+
+    while (start < end) {
+      let mid = start + Math.floor((end - start) / 2);
+
+      if (currentCost < ropeLengths[mid]) end = mid;
+      else start = mid + 1;
+    }
+    ropeLengths.splice(start, 0, currentCost);
+  }
+}
+
+console.log(`Minimum cost to connect ropes: ${minimumCostToConnectRopes([1, 3, 11, 5])}`)
+//33
+//First connect 1+3(=4), then 4+5(=9), and then 9+11(=20). So the total cost is 33 (4+9+20)
+
+console.log(`Minimum cost to connect ropes: ${minimumCostToConnectRopes([3, 4, 5, 6])}`);
+//36
+//First connect 3+4(=7), then 5+6(=11), 7+11(=18). Total cost is 36 (7+11+18)
+
+console.log(`Minimum cost to connect ropes: ${minimumCostToConnectRopes([1, 3, 11, 5, 2])}`)
+//42
+//First connect 1+2(=3), then 3+3(=6), 6+5(=11), 11+11(=22). Total cost is 42 (3+6+11+22)
+````
+- Given `N` ropes, we need `O(N^2)` for the <b>Binary Search</b>.
+- The space complexity will be `O(1)` .
 ## 👩‍🦯 Top 'K' Frequent Numbers (medium)
 https://leetcode.com/problems/top-k-frequent-elements/
 > Given an unsorted array of numbers, find the top ‘K’ frequently occurring numbers in it.
