@@ -207,18 +207,138 @@ console.log(`Minimum cost to connect ropes: ${minimumCostToConnectRopes([1, 3, 1
 - The space complexity will be `O(1)` .
 ## 👩‍🦯 Top 'K' Frequent Numbers (medium)
 https://leetcode.com/problems/top-k-frequent-elements/
-> Given an unsorted array of numbers, find the top ‘K’ frequently occurring numbers in it.
+> Given an unsorted array of numbers, find the top `K` frequently occurring numbers in it.
+````js
+function findKFrequentNumbers(nums, k) {
+  const numMap = new Map();
+  for (number of nums) {
+    numMap.set(number, (numMap.get(number) || 0) + 1);
+  }
+
+  const mapKeys = [...numMap.keys()];
+  const finalIndex = mapKeys.length - k;
+
+  let start = 0;
+  let end = mapKeys.length - 1;
+
+  //Quicksort
+  while (start <= end) {
+    const pivotPoint = Math.floor(Math.random() * (end - start + 1) + start);
+    const pivotIndex = pivotHelper(pivotPoint, start, end);
+
+    if (pivotIndex === finalIndex) {
+      return mapKeys.slice(finalIndex);
+    }
+    if (pivotIndex < finalIndex) {
+      start = pivotIndex + 1;
+    } else {
+      end = pivotIndex - 1;
+    }
+    function pivotHelper(pivotPoint, start, end) {
+      //move the pivotPoint to the end
+      [mapKeys[pivotPoint], mapKeys[end]] = [mapKeys[end], mapKeys[pivotPoint]];
+      let swapIndex = start;
+
+      for (let i = start; i < end; i++) {
+        if (numMap.get(mapKeys[i]) < numMap.get(mapKeys[end])) {
+          [mapKeys[i], mapKeys[swapIndex]] = [mapKeys[swapIndex], mapKeys[i]];
+          swapIndex++;
+        }
+      }
+      [mapKeys[end], mapKeys[swapIndex]] = [mapKeys[swapIndex], mapKeys[end]];
+      return swapIndex;
+    }
+  }
+}
+
+console.log(`Here are the K frequent numbers: ${findKFrequentNumbers([1, 3, 5, 12, 11, 12, 11], 2)}`)
+
+console.log(`Here are the K frequent numbers: ${findKFrequentNumbers([5, 12, 11, 3, 11], 2)}`)
+````
 ## Frequency Sort (medium)
 https://leetcode.com/problems/sort-characters-by-frequency/
 > Given a string, sort it based on the decreasing frequency of its characters.
+````js
+function sortCharacterByFrequency(str) {
+  let counts = {}
+  for(let char of str){
+    counts[char] ? counts[char]++ : counts[char] = 1
+  }
+  
+  let sortedCharactersArray = Object.keys(counts).sort((a,b) => counts[b] -counts[a])
+  
+  let sortedString = ""
+  
+  for(let char of sortedCharactersArray){
+    sortedString += char.repeat(counts[char])
+  }
+  
+  return sortedString
+};
+
+
+console.log(`String after sorting characters by frequency: ${sortCharacterByFrequency("Programming")}`)
+//"rrggmmPiano"
+//'r', 'g', and 'm' appeared twice, so they need to appear before any other character.
+
+console.log(`String after sorting characters by frequency: ${sortCharacterByFrequency("abcbab")}`)
+//"bbbaac"
+//'b' appeared three times, 'a' appeared twice, and 'c' appeared only once.
+````
 ## Kth Largest Number in a Stream (medium)
 https://leetcode.com/problems/kth-largest-element-in-a-stream/
-> Design a class to efficiently find the Kth largest element in a stream of numbers.
+> Design a class to efficiently find the `Kth` largest element in a stream of numbers.
 > 
 > The class should have the following two things:
 > 
-> 1. The constructor of the class should accept an integer array containing initial numbers from the stream and an integer ‘K’.
-> 2. The class should expose a function add(int num) which will store the given number and return the Kth largest number.
+> 1. The constructor of the class should accept an integer array containing initial numbers from the stream and an integer `K`.
+> 2. The class should expose a function `add(int num)` which will store the given number and return the Kth largest number.
+````js
+class KthLargest {
+  constructor(k, nums) {
+    this.k = k;
+    this.nums = nums;
+  }
+
+  add(val) {
+    this.nums = this.nums.sort((a, b) => a - b).splice(-this.k);
+    if (val > this.nums[0] || this.nums.length < this.k) {
+      //sort and return kth largest with Binary Search
+      const insertNewNum = () => {
+        let start = 0;
+        let end = this.k;
+
+        while (start < end) {
+          const mid = Math.floor((start + end) / 2);
+          if (this.nums[mid] === val) return mid;
+          if (this.nums[mid] < val) {
+            start = mid + 1;
+          } else {
+            end = mid;
+          }
+        }
+        return start;
+      };
+      while (this.nums.length > this.k) this.nums.shift();
+      this.nums.splice(insertNewNum(), 0, val);
+    }
+
+    if (this.nums.length >= this.k) return this.nums[this.nums.length - this.k];
+    else return null;
+  }
+}
+
+
+// Input: [3, 1, 5, 12, 2, 11], K = 4
+// 1. Calling add(6) should return '5'.
+// 2. Calling add(13) should return '6'.
+// 2. Calling add(4) should still return '6'.
+
+let kthLargest = new KthLargest(4, [3, 1, 5, 12, 2, 11],);
+kthLargest.add(6); // return 5
+kthLargest.add(13); // return 6
+kthLargest.add(4); // return 6
+````
 ## 'K' Closest Numbers (medium)
 https://leetcode.com/problems/find-k-closest-elements/
 > Given a sorted number array and two integers ‘K’ and ‘X’, find ‘K’ closest numbers to ‘X’ in the array. Return the numbers in the sorted order. ‘X’ is not necessarily present in the array.
