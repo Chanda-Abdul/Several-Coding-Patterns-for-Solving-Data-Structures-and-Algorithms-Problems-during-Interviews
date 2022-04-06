@@ -1,6 +1,6 @@
 # Pattern 13: Top 'K' Elements
 <!-- * It has taken longer than planned for me to work through this pattern in JavaScript. I don't believe that heaps are the most effecient way to tackle these problems during an interview.  I'm reviewing the leetcode discussions for each problem as I go along, and it seems like it would be easier to implement some kind of sorting algorithm like quicksort.  Please let me know your thoughts/opinions on this. -->
-#
+<!-- # -->
 
 Any problem that asks us to find the <b>top/smallest/frequent K</b> elements among a given set falls under this pattern.
 
@@ -11,31 +11,31 @@ The best data structure that comes to mind to keep track of <b>K</b> elements is
 <b>JavaScript</b> does not have a built in method for <b>heaps</b>. It could be an ineffecient use of time during an actual interview to create a <b>Heap class</b> from scratch.  If you want to learn how to implement a <b>Heap Class</b> in <b>JavaScript</b> take a look at this [article](https://blog.bitsrc.io/implementing-heaps-in-javascript-c3fbf1cb2e65).
 
 ## 😕 Top 'K' Numbers (easy)
-> Given an unsorted array of numbers, find the ‘K’ largest numbers in it.
+> Given an unsorted array of numbers, find the `K` largest numbers in it.
 
 <b>Note:</b> For a detailed discussion about different approaches to solve this problem, take a look at [Kth Smallest Number](#kth-smallest-number-easy).
 
 A <b>brute force solution</b> could be to sort the array and return the <b>largest K numbers</b>. The time complexity of such an algorithm will be `O(N*logN)` as we need to use a sorting algorithm like <b>[Quicksort](https://github.com/Chanda-Abdul/leetcode/blob/master/%E2%9D%97Sort%20Algorithms.md#-quick-sort)</b>. Can we do better than that?
 
-<!-- <s>The best data structure that comes to mind to keep track of top ‘K’ elements is Heap. Let’s see if we can use a heap to find a better algorithm.
+<!-- <s>The best data structure that comes to mind to keep track of top `K` elements is Heap. Let's see if we can use a heap to find a better algorithm.
 
-If we iterate through the array one element at a time and keep ‘K’ largest numbers in a heap such that each time we find a larger number than the smallest number in the heap, we do two things:
+If we iterate through the array one element at a time and keep `K` largest numbers in a heap such that each time we find a larger number than the smallest number in the heap, we do two things:
 1. Take out the smallest number from the heap, and
 2. Insert the larger number into the heap.
   
-This will ensure that we always have ‘K’ largest numbers in the heap. The most efficient way to repeatedly find the smallest number among a set of numbers will be to use a min-heap. As we know, we can find the smallest number in a min-heap in constant time `O(1)`, since the smallest number is always at the root of the heap. Extracting the smallest number from a min-heap will take `O(logN)` (if the heap has ‘N’ elements) as the heap needs to readjust after the removal of an element.</s>
+This will ensure that we always have `K` largest numbers in the heap. The most efficient way to repeatedly find the smallest number among a set of numbers will be to use a min-heap. As we know, we can find the smallest number in a min-heap in constant time `O(1)`, since the smallest number is always at the root of the heap. Extracting the smallest number from a min-heap will take `O(logN)` (if the heap has `N` elements) as the heap needs to readjust after the removal of an element.</s>
 
-Let’s take <b>Example 1</b> to go through each step of our algorithm:
+Let's take <b>Example 1</b> to go through each step of our algorithm:
 
 Given array: `[3, 1, 5, 12, 2, 11]`, and `K=3`
 <s>
 
-1. First, let’s insert ‘K’ elements in the min-heap.
-2. After the insertion, the heap will have three numbers `[3, 1, 5]` with ‘1’ being the root as it is the smallest element.
-3. We’ll iterate through the remaining numbers and perform the above-mentioned two steps if we find a number larger than the root of the heap.
-4. The 4th number is ‘12’ which is larger than the root (which is ‘1’), so let’s take out ‘1’ and insert ‘12’. Now the heap will have `[3, 5, 12]` with ‘3’ being the root as it is the smallest element.
-5. The 5th number is ‘2’ which is not bigger than the root of the heap (‘3’), so we can skip this as we already have top three numbers in the heap.
-6. The last number is ‘11’ which is bigger than the root (which is ‘3’), so let’s take out ‘3’ and insert ‘11’. Finally, the heap has the largest three numbers: [5, 12, 11]
+1. First, let's insert `K` elements in the min-heap.
+2. After the insertion, the heap will have three numbers `[3, 1, 5]` with `1` being the root as it is the smallest element.
+3. We`ll iterate through the remaining numbers and perform the above-mentioned two steps if we find a number larger than the root of the heap.
+4. The 4th number is `12` which is larger than the root (which is `1`), so let's take out `1` and insert `12`. Now the heap will have `[3, 5, 12]` with `3` being the root as it is the smallest element.
+5. The 5th number is `2` which is not bigger than the root of the heap (`3`), so we can skip this as we already have top three numbers in the heap.
+6. The last number is `11` which is bigger than the root (which is `3`), so let's take out `3` and insert `11`. Finally, the heap has the largest three numbers: [5, 12, 11]
   
 As discussed above, it will take us `O(logK)` to extract the minimum number from the min-heap. So the overall time complexity of our algorithm will be `O(K*logK+(N-K)*logK)` since, first, we insert `K` numbers in the heap and then iterate through the remaining numbers and at every step, in the worst case, we need to extract the minimum number and insert a new number in the heap. This algorithm is better than `O(N*logN)`.</s> -->
 
@@ -277,11 +277,11 @@ function sortCharacterByFrequency(str) {
 };
 
 
-console.log(`String after sorting characters by frequency: ${sortCharacterByFrequency("Programming")}`)
+console.log('string after sorting characters by frequency: ${sortCharacterByFrequency("Programming")}`)
 //"rrggmmPiano"
 //'r', 'g', and 'm' appeared twice, so they need to appear before any other character.
 
-console.log(`String after sorting characters by frequency: ${sortCharacterByFrequency("abcbab")}`)
+console.log('string after sorting characters by frequency: ${sortCharacterByFrequency("abcbab")}`)
 //"bbbaac"
 //'b' appeared three times, 'a' appeared twice, and 'c' appeared only once.
 ````
@@ -328,7 +328,6 @@ class KthLargest {
   }
 }
 
-
 // Input: [3, 1, 5, 12, 2, 11], K = 4
 // 1. Calling add(6) should return '5'.
 // 2. Calling add(13) should return '6'.
@@ -339,30 +338,114 @@ kthLargest.add(6); // return 5
 kthLargest.add(13); // return 6
 kthLargest.add(4); // return 6
 ````
+- The time complexity of the above algorithm is `O(NlogN)`.
+- The space complexity of the above algorithm is `O(1)`
 ## 'K' Closest Numbers (medium)
 https://leetcode.com/problems/find-k-closest-elements/
-> Given a sorted number array and two integers ‘K’ and ‘X’, find ‘K’ closest numbers to ‘X’ in the array. Return the numbers in the sorted order. ‘X’ is not necessarily present in the array.
+> Given a sorted number array and two integers `K` and `X`, find `K` closest numbers to `X` in the array. Return the numbers in the sorted order. `X` is not necessarily present in the array.
+
+This problem follows the Top `K` Numbers pattern. The biggest difference in this problem is that we need to find the closest (to `X`) numbers compared to finding the overall largest numbers. Another difference is that the given array is sorted.
+
+Utilizing a similar approach, we can find the numbers closest to `X` through the following algorithm:
+
+1. Since the array is sorted, we can first find the number closest to `X` through Binary Search. Let's say that number is `Y`.
+2. The `K` closest numbers to `Y` will be adjacent to `Y` in the array. We can search in both directions of `Y` to find the closest numbers.
+3. We can use a heap to efficiently search for the closest numbers. We will take `K` numbers in both directions of `Y` and push them in a Min Heap sorted by their absolute difference from `X`. This will ensure that the numbers with the smallest difference from `X` (i.e., closest to `X`) can be extracted easily from the Min Heap.
+4. Finally, we will extract the top `K` numbers from the Min Heap to find the required numbers.
+
+````js
+function findClosestElements(arr, K, X) {
+  let windowOfKClosest = [];
+  let idx = binarySearch(arr, X);
+  let windowStart = idx;
+  let windowEnd = idx + 1;
+  const n = arr.length;
+
+  for (let i = 0; i < K; i++) {
+    if (windowStart >= 0 && windowEnd < n) {
+      let diffFromStart = Math.abs(X - arr[windowStart]);
+      let diffFromEnd = Math.abs(X - arr[windowEnd]);
+
+      if (diffFromStart <= diffFromEnd) {
+        windowOfKClosest.unshift(arr[windowStart]);
+        windowStart--;
+      } else {
+        windowOfKClosest.push(arr[windowEnd]);
+        windowEnd++;
+      }
+    } else if (windowStart >= 0) {
+      windowOfKClosest.unshift(arr[windowStart]);
+      windowStart--;
+    } else if (windowEnd < n) {
+      windowOfKClosest.push(arr[windowEnd]);
+      windowEnd++;
+    }
+  }
+
+  return windowOfKClosest;
+
+  function binarySearch(arr, X) {
+    let lo = 0;
+    let hi = arr.length - 1;
+
+    while (lo <= hi) {
+      const mid = Math.floor(lo + (hi - lo) / 2);
+
+      if (arr[mid] === X) {
+        return mid;
+      }
+      if (arr[mid] < X) {
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+    if (lo > 0) {
+      return lo - 1;
+    }
+    return lo;
+  }
+}
+
+console.log(`'K' closest numbers to 'X' are: ${findClosestElements([5, 6, 7, 8, 9], 3, 7)}`)
+//Output: [6, 7, 8]
+console.log(`'K' closest numbers to 'X' are: ${findClosestElements([2, 4, 5, 6, 9], 3, 6)}`)
+//Output: [4, 5, 6]
+
+console.log(`'K' closest numbers to 'X' are: ${findClosestElements([2, 4, 5, 6, 9], 3, 10)}`)
+//Output: [5, 6, 9]
+
+console.log(`'K' closest numbers to 'X' are: ${findClosestElements([1,2,3,4,5], 4, 3)}`)
+//Output: [1,2,3,4]
+
+console.log(`'K' closest numbers to 'X' are: ${findClosestElements([1,2,3,4,5], 4, -1)}`)
+//Output: [1,2,3,4]
+````
+- The time complexity of the above algorithm is `O(logN + K)`. We need `O(logN)` for Binary Search and `O(K)`for finding the `K` closest numbers using the two pointers.
+- If we ignoring the space required for the output list, the algorithm runs in constant space `O(1)`.
+
+
 ## Maximum Distinct Elements (medium)
 https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
-> Given an array of numbers and a number ‘K’, we need to remove ‘K’ numbers from the array such that we are left with maximum distinct numbers.
+> Given an array of numbers and a number `K`, we need to remove `K` numbers from the array such that we are left with maximum distinct numbers.
 ## Sum of Elements (medium)
 https://www.geeksforgeeks.org/sum-elements-k1th-k2th-smallest-elements/
-> Given an array, find the sum of all numbers between the K1’th and K2’th smallest elements of that array.
+> Given an array, find the sum of all numbers between the K1`th and K2`th smallest elements of that array.
 ## Rearrange String (hard)
 https://leetcode.com/problems/reorganize-string/
 > Given a string, find if its letters can be rearranged in such a way that no two same characters come next to each other.
 ## 🌟 Rearrange String K Distance Apart (hard)
 https://leetcode.com/problems/rearrange-string-k-distance-apart/
-> Given a string and a number ‘K’, find if the string can be rearranged such that the same characters are at least ‘K’ distance apart from each other.
+> Given a string and a number `K`, find if the string can be rearranged such that the same characters are at least `K` distance apart from each other.
 ## 🌟 🔍 Scheduling Tasks (hard)
 https://leetcode.com/problems/task-scheduler/
-> You are given a list of tasks that need to be run, in any order, on a server. Each task will take one CPU interval to execute but once a task has finished, it has a cooling period during which it can’t be run again. If the cooling period for all tasks is ‘K’ intervals, find the minimum number of CPU intervals that the server needs to finish all tasks.
+> You are given a list of tasks that need to be run, in any order, on a server. Each task will take one CPU interval to execute but once a task has finished, it has a cooling period during which it can`t be run again. If the cooling period for all tasks is `K` intervals, find the minimum number of CPU intervals that the server needs to finish all tasks.
 > 
-> If at any time the server can’t execute any task then it must stay idle.
+> If at any time the server can`t execute any task then it must stay idle.
 ## 🌟Frequency Stack (hard)
 https://leetcode.com/problems/maximum-frequency-stack/
 > Design a class that simulates a Stack data structure, implementing the following two operations:
 > 
-> - push(int num): Pushes the number ‘num’ on the stack.
+> - push(int num): Pushes the number `num` on the stack.
 > - pop(): Returns the most frequent number in the stack. If there is a tie, return the number which was pushed later.
 
