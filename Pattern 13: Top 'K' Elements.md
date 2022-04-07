@@ -353,6 +353,12 @@ Utilizing a similar approach, we can find the numbers closest to `X` through the
 3. We can use a heap to efficiently search for the closest numbers. We will take `K` numbers in both directions of `Y` and push them in a Min Heap sorted by their absolute difference from `X`. This will ensure that the numbers with the smallest difference from `X` (i.e., closest to `X`) can be extracted easily from the Min Heap.
 4. Finally, we will extract the top `K` numbers from the Min Heap to find the required numbers.
 
+After finding the number closest to `X` through Binary Search, we can use the Two Pointers approach to find the `K` closest numbers. Let’s say the closest number is `Y`. We can have a left pointer to move back from `Y` and a right pointer to move forward from `Y`. At any stage, whichever number pointed out by the left or the right pointer gives the smaller difference from `X` will be added to our result list.
+
+To keep the resultant list sorted we can use a <b>Queue</b>. So whenever we take the number pointed out by the left pointer, we will append it at the beginning of the list and whenever we take the number pointed out by the right pointer we will append it at the end of the list.
+
+Here is what our algorithm will look like:
+
 ````js
 function findClosestElements(arr, K, X) {
   let windowOfKClosest = [];
@@ -409,6 +415,7 @@ function findClosestElements(arr, K, X) {
 
 console.log(`'K' closest numbers to 'X' are: ${findClosestElements([5, 6, 7, 8, 9], 3, 7)}`)
 //Output: [6, 7, 8]
+
 console.log(`'K' closest numbers to 'X' are: ${findClosestElements([2, 4, 5, 6, 9], 3, 6)}`)
 //Output: [4, 5, 6]
 
@@ -424,10 +431,50 @@ console.log(`'K' closest numbers to 'X' are: ${findClosestElements([1,2,3,4,5], 
 - The time complexity of the above algorithm is `O(logN + K)`. We need `O(logN)` for Binary Search and `O(K)`for finding the `K` closest numbers using the two pointers.
 - If we ignoring the space required for the output list, the algorithm runs in constant space `O(1)`.
 
-
 ## Maximum Distinct Elements (medium)
 https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
 > Given an array of numbers and a number `K`, we need to remove `K` numbers from the array such that we are left with maximum distinct numbers.
+````js
+function findMaximumDistinctElements(nums, k) {
+  let freqMap = new Map();
+
+  nums.forEach((number) => {
+    freqMap.set(number, freqMap.get(number) + 1 || 1);
+  });
+
+  let freq = Array.from(freqMap.values());
+  freq.sort((a, b) => a - b);
+
+  let results = freq.length;
+  for (let n of freq) {
+    if (k >= n) {
+      k -= n;
+      results--;
+    } else return results;
+  }
+  
+  return results;
+}
+
+console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([5,5,4], 1)}`)
+//1, Remove the single 4, only 5 is left.
+
+console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([4,3,1,1,3,3,2], 3)}`)
+//2, Remove 4, 2 and either one of the two 1s or three 3s. 1 and 3 will be left.
+
+console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([7, 3, 5, 8, 5, 3, 3], 2)}`)
+//3, We can remove two occurrences of 3 to be left with 3 distinct numbers [7, 3, 8], we have to skip 5 because it is not distinct and appeared twice.
+// Another solution could be to remove one instance of '5' and '3' each to be left with three distinct numbers [7, 5, 8], in this case, we have to skip 3 because it appeared twice.
+
+console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([3, 5, 12, 11, 12], 3)}`)
+//2, We can remove one occurrence of 12, after which all numbers will become distinct. Then we can delete any two numbers which will leave us 2 distinct numbers in the result.
+
+console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5], 2)}`)//3, We can remove one occurrence of '4' to get three distinct numbers.
+````
+- Since we will insert all numbers in a <b>HashMap</b>, this will take `O(N*logN)` where `N` is the total input numbers. While extracting numbers from the map, in the worst case, we will need to take out `K` numbers. This will happen when we have at least `K` numbers with a frequency of two. Since the heap can have a maximum of ‘N/2’ numbers, therefore, extracting an element from the heap will take `O(logN)` and extracting `K` numbers will take `O(KlogN)`. So overall, the time complexity of our algorithm will be `O(N*logN + KlogN)`. We can optimize the above algorithm and only push `K` elements in the heap, as in the worst case we will be extracting `K` elements from the heap. This optimization will reduce the overall time complexity to `O(N*logK + KlogK)`.
+- The space complexity will be `O(N)` as, in the worst case, we need to store all the `N` characters in the <b>HashMap</b>.
+
+
 ## Sum of Elements (medium)
 https://www.geeksforgeeks.org/sum-elements-k1th-k2th-smallest-elements/
 > Given an array, find the sum of all numbers between the K1`th and K2`th smallest elements of that array.
