@@ -552,6 +552,62 @@ console.log(`Rearranged string: ${rearrangeString('aapa')}`);
 ## 🌟 Rearrange String K Distance Apart (hard)
 https://leetcode.com/problems/rearrange-string-k-distance-apart/
 > Given a string and a number `K`, find if the string can be rearranged such that the same characters are at least `K` distance apart from each other.
+````js
+function rearrangeString(str, k) {
+  if (str.length < 2 || !k) return str;
+  const buckets = [];
+  let a = 'a'.charCodeAt(0);
+  for (let i = 0; i < str.length; i++) {
+    let key = str.charCodeAt(i) - a;
+    buckets[key] = (buckets[key] || 0) + 1;
+  }
+  let res = '';
+  let added = { length: 0 };
+  while (res.length < str.length) {
+    let maxIndex = -1;
+    for (let i = 0; i < buckets.length; i++) {
+      if (
+        buckets[i] &&
+        !added[i] &&
+        (maxIndex === -1 || buckets[i] > buckets[maxIndex])
+      ) {
+        maxIndex = i;
+      }
+    }
+    if (maxIndex === -1) return '';
+    res += String.fromCharCode(a + maxIndex);
+    buckets[maxIndex]--;
+    added[maxIndex] = 1;
+    if (++added.length === k) added = { length: 0 };
+  }
+  return res;
+}
+
+console.log(`Reorganized string: ${rearrangeString('aabbcc', 3)}`);
+//"abcabc"
+//The same letters are at least a distance of 3 from each other.
+
+console.log(`Reorganized string: ${rearrangeString('aaabc', 3)}`);
+//""
+//It is not possible to rearrange the string.
+
+console.log(`Reorganized string: ${rearrangeString('aaadbbcc', 2)}`);
+//"abacabcd"
+//The same letters are at least a distance of 2 from each other.
+
+console.log(`Reorganized string: ${rearrangeString('Programming', 3)}`);
+//"rgmPrgmiano" or "gmringmrPoa" or "gmrPagimnor" and a few more
+//All same characters are 3 distance apart.
+console.log(`Reorganized string: ${rearrangeString('mmpp', 2)}`);
+//"mpmp" or "pmpm"
+//All same characters are 2 distance apart.
+console.log(`Reorganized string: ${rearrangeString('aab', 2)}`);
+//"aba"
+//All same characters are 2 distance apart.
+console.log(`Reorganized string: ${rearrangeString('aapa', 3)}`);
+//""
+//We cannot find an arrangement of the string where any two 'a' are 3 distance apart.
+````
 ## 🌟 🔍 Scheduling Tasks (hard)
 https://leetcode.com/problems/task-scheduler/
 > You are given a list of tasks that need to be run, in any order, on a server. Each task will take one CPU interval to execute but once a task has finished, it has a cooling period during which it can`t be run again. If the cooling period for all tasks is `K` intervals, find the minimum number of CPU intervals that the server needs to finish all tasks.
