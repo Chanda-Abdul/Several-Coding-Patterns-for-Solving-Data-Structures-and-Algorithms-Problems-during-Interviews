@@ -456,28 +456,59 @@ function findMaximumDistinctElements(nums, k) {
   return results;
 }
 
-console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([5,5,4], 1)}`)
+console.log(`Maximum distinct numbers after removing K numbers: 
+${findMaximumDistinctElements([5,5,4], 1)}`)
 //1, Remove the single 4, only 5 is left.
 
-console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([4,3,1,1,3,3,2], 3)}`)
+console.log(`Maximum distinct numbers after removing K numbers: 
+${findMaximumDistinctElements([4,3,1,1,3,3,2], 3)}`)
 //2, Remove 4, 2 and either one of the two 1s or three 3s. 1 and 3 will be left.
 
-console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([7, 3, 5, 8, 5, 3, 3], 2)}`)
-//3, We can remove two occurrences of 3 to be left with 3 distinct numbers [7, 3, 8], we have to skip 5 because it is not distinct and appeared twice.
-// Another solution could be to remove one instance of '5' and '3' each to be left with three distinct numbers [7, 5, 8], in this case, we have to skip 3 because it appeared twice.
+console.log(`Maximum distinct numbers after removing K numbers: 
+${findMaximumDistinctElements([7, 3, 5, 8, 5, 3, 3], 2)}`)
+//3, We can remove two occurrences of 3 to be left with 3 distinct numbers [7, 3, 8], 
+//we have to skip 5 because it is not distinct and appeared twice.
+// Another solution could be to remove one instance of '5' and '3' each to be left with 
+//three distinct numbers [7, 5, 8], in this case, we have to skip 3 because it appeared twice.
 
-console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([3, 5, 12, 11, 12], 3)}`)
-//2, We can remove one occurrence of 12, after which all numbers will become distinct. Then we can delete any two numbers which will leave us 2 distinct numbers in the result.
+console.log(`Maximum distinct numbers after removing K numbers: 
+${findMaximumDistinctElements([3, 5, 12, 11, 12], 3)}`)
+//2, We can remove one occurrence of 12, after which all numbers will become distinct. 
+//Then we can delete any two numbers which will leave us 2 distinct numbers in the result.
 
-console.log(`Maximum distinct numbers after removing K numbers: ${findMaximumDistinctElements([1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5], 2)}`)//3, We can remove one occurrence of '4' to get three distinct numbers.
+console.log(`Maximum distinct numbers after removing K numbers: 
+${findMaximumDistinctElements([1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5], 2)}`)//3, We can remove one occurrence of '4' to get three distinct numbers.
 ````
-- Since we will insert all numbers in a <b>HashMap</b>, this will take `O(N*logN)` where `N` is the total input numbers. While extracting numbers from the map, in the worst case, we will need to take out `K` numbers. This will happen when we have at least `K` numbers with a frequency of two. Since the heap can have a maximum of ‘N/2’ numbers, therefore, extracting an element from the heap will take `O(logN)` and extracting `K` numbers will take `O(KlogN)`. So overall, the time complexity of our algorithm will be `O(N*logN + KlogN)`. We can optimize the above algorithm and only push `K` elements in the heap, as in the worst case we will be extracting `K` elements from the heap. This optimization will reduce the overall time complexity to `O(N*logK + KlogK)`.
+- Since we will insert all numbers in a <b>HashMap</b>, this will take `O(N*logN)` where `N` is the total input numbers. While extracting numbers from the map, in the worst case, we will need to take out `K` numbers. This will happen when we have at least `K` numbers with a frequency of two. Since the heap can have a maximum of `N/2` numbers, therefore, extracting an element from the heap will take `O(logN)` and extracting `K` numbers will take `O(KlogN)`. So overall, the time complexity of our algorithm will be `O(N*logN + KlogN)`. We can optimize the above algorithm and only push `K` elements in the heap, as in the worst case we will be extracting `K` elements from the heap. This optimization will reduce the overall time complexity to `O(N*logK + KlogK)`.
 - The space complexity will be `O(N)` as, in the worst case, we need to store all the `N` characters in the <b>HashMap</b>.
 
 
 ## Sum of Elements (medium)
 https://www.geeksforgeeks.org/sum-elements-k1th-k2th-smallest-elements/
-> Given an array, find the sum of all numbers between the K1`th and K2`th smallest elements of that array.
+> Given an array, find the sum of all numbers between the `K1th` and `K2th` smallest elements of that array.
+
+````js
+function findSumOfElements(nums, k1, k2) {
+  nums.sort((a, b) => a - b);
+
+  let kSlice = nums.slice(k1, k2 - 1);
+  let kSumBetween = 0;
+
+  kSlice.forEach((n) => (kSumBetween += n));
+
+  return kSumBetween;
+}
+
+console.log(`Sum of all numbers between k1 and k2 smallest numbers: ${findSumOfElements([1, 3, 12, 5, 15, 11], 3, 6)}`)
+//23
+//The 3rd smallest number is 5 and 6th smallest number 15.
+// The sum of numbers coming between 5 and 15 is 23 (11+12).
+
+console.log(`Sum of all numbers between k1 and k2 smallest numbers: ${findSumOfElements([3, 5, 8, 7], 1, 4)}`)
+//12
+//The sum of the numbers between the 1st smallest number (3)
+//and the 4th smallest number (8) is 12 (5+7).
+````
 ## Rearrange String (hard)
 https://leetcode.com/problems/reorganize-string/
 > Given a string, find if its letters can be rearranged in such a way that no two same characters come next to each other.
