@@ -512,6 +512,43 @@ console.log(`Sum of all numbers between k1 and k2 smallest numbers: ${findSumOfE
 ## Rearrange String (hard)
 https://leetcode.com/problems/reorganize-string/
 > Given a string, find if its letters can be rearranged in such a way that no two same characters come next to each other.
+````js
+function rearrangeString(str) {
+  //Build a hashMap based on char count
+  const strMap = new Map();
+
+  for (const char of str) {
+    strMap.set(char, strMap.get(char) + 1 || 1);
+  }
+
+  //sort based on char frequency in descending order
+  const sortedMap = new Map([...strMap.entries()].sort((a, b) => b[1] - a[1]));
+
+  //is first value of sortedMap > half of str.length,
+  //because a character count that is larger than half of the string length is considered invalid
+  if (sortedMap.values().next().value > (str.length + 1) / 2) return '';
+
+  let result = [];
+  let index = 0;
+
+  for (let [key, value] of sortedMap) {
+    while (value--) {
+      //Start filling characters to all the even indexs, i.e. 0, 2, 4,...,
+      result[index] = key;
+      index += 2;
+      // when we got to the end, start filling odd indexes i.e. 1,3,5,...
+      //By filling the characters this way, we can make sure that no same characters will be adjacent to each other
+      if (index >= str.length) index = 1;
+    }
+  }
+
+  return result.join('');
+}
+
+console.log(`Rearranged string: ${rearrangeString('aappp')}`);
+console.log(`Rearranged string: ${rearrangeString('Programming')}`);
+console.log(`Rearranged string: ${rearrangeString('aapa')}`);
+````
 ## 🌟 Rearrange String K Distance Apart (hard)
 https://leetcode.com/problems/rearrange-string-k-distance-apart/
 > Given a string and a number `K`, find if the string can be rearranged such that the same characters are at least `K` distance apart from each other.
