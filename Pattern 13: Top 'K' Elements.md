@@ -1,6 +1,5 @@
 # Pattern 13: Top 'K' Elements
-<!-- * It has taken longer than planned for me to work through this pattern in JavaScript. I don't believe that heaps are the most effecient way to tackle these problems during an interview.  I'm reviewing the leetcode discussions for each problem as I go along, and it seems like it would be easier to implement some kind of sorting algorithm like quicksort.  Please let me know your thoughts/opinions on this. -->
-<!-- # -->
+
 
 Any problem that asks us to find the <b>top/smallest/frequent K</b> elements among a given set falls under this pattern.
 
@@ -8,7 +7,13 @@ The best data structure that comes to mind to keep track of <b>K</b> elements is
 
 ### ❗ NOTE 
 
-<b>JavaScript</b> does not have a built in method for <b>heaps</b>. It could be an ineffecient use of time during an actual interview to create a <b>Heap class</b> from scratch.  If you want to learn how to implement a <b>Heap Class</b> in <b>JavaScript</b> take a look at this [article](https://blog.bitsrc.io/implementing-heaps-in-javascript-c3fbf1cb2e65).
+Although this course uses <b>Heaps</b> to solve <b>Top 'K' Elements</b> problems, <b>JavaScript</b> does not have a built in method for <b>Heaps/Priority Queues</b>. It can be very time consuming to implement a <b>Heap class</b>from scratch, especially during an interview. After reviewing the JavaScript solutions on Leetcode the most effecient way to solve the <b>Top 'K' Elements</b> problems below is usually with <b>[QuickSort](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#-quick-sort)</b>, <b>[BinarySearch](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#binary-search)</b>, <b>[BucketSort](https://initjs.org/bucket-sort-in-javascript-dc040b8f0058)</b>, <b>Greedy Algorithms</b>, and <b>[HashMaps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)</b>.  For more information take a look at these 
+
+- [js-heap-implementation](https://dandkim.com/js-heap-implementation/)
+- [implementing-heaps-in-javascript](https://blog.bitsrc.io/implementing-heaps-in-javascript-c3fbf1cb2e65)
+- [heap-data-structure-in-javascript](https://learnersbucket.com/tutorials/array/heap-data-structure-in-javascript/)
+
+
 
 ## 😕 Top 'K' Numbers (easy)
 > Given an unsorted array of numbers, find the `K` largest numbers in it.
@@ -598,21 +603,265 @@ console.log(`Reorganized string: ${rearrangeString('aaadbbcc', 2)}`);
 console.log(`Reorganized string: ${rearrangeString('Programming', 3)}`);
 //"rgmPrgmiano" or "gmringmrPoa" or "gmrPagimnor" and a few more
 //All same characters are 3 distance apart.
+
 console.log(`Reorganized string: ${rearrangeString('mmpp', 2)}`);
 //"mpmp" or "pmpm"
 //All same characters are 2 distance apart.
+
 console.log(`Reorganized string: ${rearrangeString('aab', 2)}`);
 //"aba"
 //All same characters are 2 distance apart.
-console.log(`Reorganized string: ${rearrangeString('aapa', 3)}`);
+
+`console.log(`Reorganized string: ${rearrangeString('aapa', 3)}`);
 //""
 //We cannot find an arrangement of the string where any two 'a' are 3 distance apart.
 ````
 ## 🌟 🔍 Scheduling Tasks (hard)
 https://leetcode.com/problems/task-scheduler/
-> You are given a list of tasks that need to be run, in any order, on a server. Each task will take one CPU interval to execute but once a task has finished, it has a cooling period during which it can`t be run again. If the cooling period for all tasks is `K` intervals, find the minimum number of CPU intervals that the server needs to finish all tasks.
+> You are given a list of tasks that need to be run, in any order, on a server. Each task will take one CPU interval to execute but once a task has finished, it has a cooling period during which it cant be run again. If the cooling period for all tasks is `K` intervals, find the minimum number of CPU intervals that the server needs to finish all tasks.
 > 
 > If at any time the server can`t execute any task then it must stay idle.
+
+This problem follows the Top `K` Elements pattern and is quite similar to Rearrange [String K Distance Apart](#-rearrange-string-k-distance-apart-hard). We need to rearrange tasks such that same tasks are `K` distance apart.
+
+Explaination referenced from [here](https://leetcode.com/problems/task-scheduler/discuss/1874475/Easy-Solution-with-Writeup)
+#### A mental model for solving this problem
+Consider the following input:
+````
+tasks = ["A", "A", "A", "B", "B", "B", "C", "C", "C", "D", "D", "E"]
+n = 2
+````
+
+First let's find the most frequently occuring task and lay it out like so (an underscore represents a cooldown period):
+````
+A _ _ A _ _ A
+````
+Our goal is to insert all the other tasks into this sequence by filling the cooldown periods first.
+
+We know any other task can be scheduled into this sequence without creating additional cooldown slots because:
+
+1. The number of occurrences of any task `x` is less than or equal to the number occurences of the most frequrntly occuring task `A`; and
+2. We can always find a sequence of `k` different tasks to schedule between any pair of tasks `x`.
+
+Let's insert in the second most frequently occuring task `B` (we fill the two cooldown slots first and append the third task to the end):
+````
+A B _ A B _ A B
+````
+Next let's insert in the third most frequently occuring task `C` (we fill in the two cooldown slots first and append the third task to the end):
+````
+A B C A B C A B C
+````
+Next let's insert the fourth most frequently occuring task `D`. At this point we've used up all our cooldown slots so we can insert these tasks pretty much anywhere we like as long as there are at least `k` tasks between every pair of `D` tasks.
+````
+D A B D C A B C A B C
+````
+Lastly, the least frequently occuring task `E` can be inserted literally anywhere we like. Because it only occurs once there is no cooldown period we need to respect.
+````
+D A B D C A B C A E B C
+````
+The sequence above is the shortest possible sequence these tasks can be scheduled in. <b>Note</b> that there are multiple possible sequences of this length.
+
+The answer to the problem is the number of `tasks` + the number of cooldown periods.
+
+### 😕 Heap Solution
+Following a similar approach, we will use a <b>Max Heap</b> to execute the highest frequency task first. After executing a task we decrease its frequency and put it in a waiting list. In each iteration, we will try to execute as many as `k+1` tasks. For the next iteration, we will put all the waiting tasks back in the <b>Max Heap</b> . If, for any iteration, we are not able to execute `k+1` tasks, the CPU has to remain idle for the remaining time in the next iteration.
+
+````js
+class Heap {
+  constructor(data = []) {
+    this.data = data;
+    this.comparator = (a, b) => a - b;
+    this.heapify();
+  }
+
+  heapify() {
+    //O(nlog(n))
+    if (this.size() < 2) return;
+    for (let i = 1; i < this.size(); i++) {
+      this.bubbleUp(i);
+    }
+  }
+
+  peek() {
+    // O(1)
+    if (this.size() === 0) return null;
+    return this.data[0];
+  }
+
+  offer(value) {
+    // O(log(n))
+    this.data.push(value);
+    this.bubbleUp(this.size() - 1);
+  }
+
+  poll() {
+    // O(log(n))
+    if (this.size() === 0) return null;
+    const result = this.data[0];
+    const last = this.data.pop();
+    if (this.size() !== 0) {
+      this.data[0] = last;
+      this.bubbleDown(0);
+    }
+    return result;
+  }
+
+  bubbleUp(index) {
+    // O(log(n))
+    while (index > 0) {
+      const parentIndex = (index - 1) >> 1;
+      if (this.comparator(this.data[index], this.data[parentIndex]) < 0) {
+        this.swap(index, parentIndex);
+        index = parentIndex;
+      } else {
+        break;
+      }
+    }
+  }
+
+  bubbleDown(index) {
+    // O(log(n))
+    const lastIndex = this.size() - 1;
+
+    while (true) {
+      const startIndex = index * 2 + 1;
+      const endIndex = index * 2 + 2;
+      let findIndex = ind;
+      if (
+        startIndex <= lastIndex &&
+        this.comparator(this.data[startIndex], this.data[findIndex]) < 0
+      ) {
+        findIndex = starttIndex;
+      }
+      if (
+        endIndex <= lastIndex &&
+        this.comparator(this.data[endIndex], this.data[findIndex]) < 0
+      ) {
+        findIndex = endIndex;
+      }
+      if (index !== findIndex) {
+        this.swap(index, findIndex);
+        index = findIndex;
+      } else {
+        break;
+      }
+    }
+  }
+
+  swap(index1, index2) {
+    // O(1)
+    [this.data[index1], this.data[index2]] = [
+      this.data[index2],
+      this.data[index1],
+    ];
+  }
+
+  size() {
+    // O(1)
+    return this.data.length;
+  }
+}
+
+function scheduleTasks(tasks, k) {
+  let intervalCount = 0;
+  
+  let taskFreqMap = new Map()
+  
+  tasks.forEach(char => {
+    taskFreqMap.set(char, taskFreqMap.get(char)+1 ||1)
+  })
+  
+  
+  const maxHeap = new Heap()
+  
+  //add all taks to the heap
+  Object.keys(taskFreqMap).forEach(char => {
+    // 😕
+    maxHeap.offer([taskFrequencyMap[char], char]);
+    
+  })
+  
+    while (maxHeap.length > 0) {
+    const waitList = [];
+    let n = k + 1; // try to execute as many as 'k+1' tasks from the max-heap
+    while (n > 0 && maxHeap.length > 0) {
+      intervalCount++;
+      const [frequency, char] = maxHeap.pop();
+      if (frequency > 1) {
+        // decrement the frequency and add to the waitList
+        waitList.push([frequency - 1, char]);
+      }
+      n -= 1;
+    }
+
+    // put all the waiting list back on the heap
+    waitList.forEach(task => maxHeap.offer(task));
+
+
+    if (maxHeap.length > 0) {
+      intervalCount += n; // we'll be having 'n' idle intervals for the next iteration
+    }
+  }
+
+  return intervalCount;
+}
+
+
+console.log(`Minimum intervals needed to execute all tasks: ${scheduleTasks(['a', 'a', 'a', 'b', 'c', 'c'], 2)}`)
+//7
+//a -> c -> b -> a -> c -> idle -> a
+console.log(`Minimum intervals needed to execute all tasks: ${scheduleTasks(['a', 'b', 'a'], 3)}`)
+//5
+//a -> b -> idle -> idle -> a
+````
+- The time complexity of the above algorithm is `O(N∗logN)`
+ where `N` is the number of tasks. Our while loop will iterate once for each occurrence of the task in the input (i.e. `N`) and in each iteration we will remove a task from the <b>heap</b> which will take `O(logN)`time. Hence the overall time complexity of our algorithm is `O(N*logN)`.
+- The space complexity will be `O(N)`, as in the worst case, we need to store all the `N` tasks in the <b>HashMap</b>.
+### Greedy HashMap Solution 
+````js
+function scheduleTasks(tasks, k) {
+  let taskFreqMap = new Map()
+  
+  let intervalMax = 0;
+  
+  let taskCountMax = 0
+  
+  tasks.forEach(char => {
+    taskFreqMap.set(char, taskFreqMap.get(char)+1 ||1)
+    
+    //set intervalMax and taskCountMax only if we have a new max
+    if(taskFreqMap.get(char) > intervalMax){
+      intervalMax = taskFreqMap.get(char)
+      taskCountMax = 1
+    } else if (taskFreqMap.get(char)  === intervalMax){
+      //otherwise, increment taskCountMax
+      taskCountMax++
+    }
+  })
+  
+  return Math.max(tasks.length, (intervalMax-1) * (k +1) + taskCountMax)
+}
+
+console.log(`Minimum intervals needed to execute all tasks: ${scheduleTasks(["A","A","A","B","B","B"], 2)}`)
+// 8
+// A -> B -> idle -> A -> B -> idle -> A -> B
+// There is at least 2 units of time between any two same tasks.
+
+console.log(`Minimum intervals needed to execute all tasks: ${scheduleTasks(["A","A","A","B","B","B"], 0)}`)
+// 6
+// On this case any permutation of size 6 would work since n = 0.
+// ["A","A","A","B","B","B"]
+// ["A","B","A","B","A","B"]
+// ["B","B","B","A","A","A"]
+
+console.log(`Minimum intervals needed to execute all tasks: ${scheduleTasks(["A","A","A","A","A","A","B","C","D","E","F","G"], 2)}`)
+// 16
+// One possible solution is
+// A -> B -> C -> A -> D -> E -> A -> F -> G -> A
+// -> idle -> idle -> A -> idle -> idle -> A
+````
+
+
 ## 🌟Frequency Stack (hard)
 https://leetcode.com/problems/maximum-frequency-stack/
 > Design a class that simulates a Stack data structure, implementing the following two operations:
