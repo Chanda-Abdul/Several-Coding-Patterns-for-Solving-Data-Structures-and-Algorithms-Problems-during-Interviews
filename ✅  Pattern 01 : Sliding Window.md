@@ -4,13 +4,13 @@ In many problems dealing with an array (or a LinkedList), we are asked to find o
 ### Find Averages of Sub Arrays
 https://leetcode.com/problems/maximum-average-subarray-i/
 
-> Given an array, find the average of all contiguous subarrays of size ‘K’ in it.
+> Given an array, find the average of all contiguous subarrays of size `K` in it.
 
 Let’s understand this problem with a real input:
 
 `Array: [1, 3, 2, 6, -1, 4, 1, 8, 2], K=5`
 
-A <b>brute-force</b> algorithm will calculate the sum of every 5-element contiguous subarray of the given array and divide the sum by ‘5’ to find the average.
+A <b><b>brute-force</b></b> algorithm will calculate the sum of every 5-element contiguous subarray of the given array and divide the sum by ‘5’ to find the average.
 
 ````js
 function findAvgOfSubarrays(arr, K) {

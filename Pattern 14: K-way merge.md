@@ -115,11 +115,60 @@ function mergeLists(lists) {
 }
 ```
 
-## Kth Smallest Number in M Sorted Lists (Medium)
-
+## 🔍 Kth Smallest Number in M Sorted Lists (Medium)
 > Given `M` sorted arrays, find the `Kth` smallest number among all the arrays.
+````js
+function findKthSmallest(lists, k) {
+  let minHeap = new Heap();
 
-## 🌴 Kth Smallest Number in a Sorted Matrix (Hard)
+  // put the 1st element of each list in the min heap
+  for (let i = 0; i < lists.length; i++) {
+    minHeap.insert(lists[i][0]);
+  }
+console.log(minHeap)
+  // take the smallest(i.e., top) element form the min heap, if the running count is equal to k return the number
+  let numberCount = 0,
+    number = 0;
+  while (minHeap.size > 0) {
+    [number, i, list] = minHeap.remove();
+    numberCount += 1;
+    if (numberCount === k) {
+      break;
+    }
+    // if the array of the top element has more elements, add the next element to the heap
+    if (list.length > i + 1) {
+      minHeap.insert([list[i + 1], i + 1, list]);
+    }
+  }
+  return number;
+}
+
+console.log(
+  `Kth smallest number is: ${findKthSmallest(
+    [
+      [2, 6, 8],
+      [3, 6, 7],
+      [1, 3, 4],
+    ],
+    5
+  )}`
+);
+````
+
+### Similar Problems
+#### 🔎 Median of Two Sorted Arrays
+https://leetcode.com/problems/median-of-two-sorted-arrays/
+> Given `M` sorted arrays, find the median number among all arrays.
+
+<b>Solution:</b> This problem is similar to our parent problem with K=Median. So if there are `N` total numbers in all the arrays we need to find the `Kth` minimum number where `K=N/2`.
+
+#### 👩‍🦯 🌴 Merge K Sorted Arrays
+https://leetcode.com/problems/merge-k-sorted-lists/
+> Given a list of `K` sorted arrays, merge them into one sorted list.
+
+<b>Solution:</b> This problem is similar to [Merge K Sorted Lists](#🔎-median-of-two-sorted-arrays) except that the input is a list of arrays compared to LinkedLists. To handle this, we can use a similar approach as discussed in our parent problem by keeping a track of the array and the element indices.
+
+## 🔍 🌴 Kth Smallest Number in a Sorted Matrix (Hard)
 
 https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
 
