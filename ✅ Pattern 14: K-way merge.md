@@ -706,12 +706,13 @@ Also discussed in `Kth` Smallest Number, we can use a Min Heap to find the `Kth`
 
 ### 5. Using Partition Scheme of <b>Quicksort</b>
 
-[Quicksort](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#-quick-sort) picks a number called pivot and partition the input array around it. After partitioning, all numbers smaller than the pivot are to the left of the pivot, and all numbers greater than or equal to the pivot are to the right of the pivot. This ensures that the pivot has reached its correct sorted position.
+[Quicksort](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#-quick-sort) picks a number called <b>pivot</b> and partition the input array around it. After partitioning, all numbers smaller than the <b>pivot</b> are to the left of the <b>pivot</b>, and all numbers greater than or equal to the <b>pivot</b> are to the right of the <b>pivot</b>. This ensures that the <b>pivot</b> has reached its correct sorted position.
 
-We can use this partitioning scheme to find the `Kth` smallest number. We will recursively partition the input array and if, after partitioning, our pivot is at the K-1 index we have found our required number; if not, we will choose one the following option:
+We can use this partitioning scheme to find the `Kth` smallest number. We will recursively partition the input array and if, after partitioning, our <b>pivot</b> is at the `K-1` index we have found our required number; if not, we will choose one the following option:
 
-If pivot’s position is larger than K-1, we will recursively partition the array on numbers lower than the pivot.
-If pivot’s position is smaller than K-1, we will recursively partition the array on numbers greater than the pivot.
+1. If <b>pivot</b>’s position is larger than `K-1`, we will recursively partition the array on numbers lower than the <b>pivot</b>.
+2. If <b>pivot</b>’s position is smaller than `K-1`, we will recursively partition the array on numbers greater than the <b>pivot</b>.
+
 Here is what our algorithm will look like:
 
 ```js
@@ -774,7 +775,7 @@ O(N
 )
 . The best and average case is O(N)
 O(N)
-, which is better than the best and average case of <b>Quicksort</b>. Overall, QuickSelect uses the same approach as <b>Quicksort</b> i.e., partitioning the data into two parts based on a pivot. However, contrary to <b>Quicksort</b>, instead of recursing into both sides QuickSelect only recurses into one side – the side with the element it is searching for. This reduces the average and best case time complexity from O(N\*logN)
+, which is better than the best and average case of <b>Quicksort</b>. Overall, QuickSelect uses the same approach as <b>Quicksort</b> i.e., partitioning the data into two parts based on a <b>pivot</b>. However, contrary to <b>Quicksort</b>, instead of recursing into both sides QuickSelect only recurses into one side – the side with the element it is searching for. This reduces the average and best case time complexity from O(N\*logN)
 O(N∗logN)
 to `O(N)`.
 
@@ -782,7 +783,7 @@ The worst-case occurs when, at every step, the partition procedure splits the N-
 1
 ’ and ‘N−1
 N−1
-’. This can only happen when the input array is sorted or if all of its elements are the same. This “unlucky” selection of pivot elements requires `O(N)`recursive calls, leading to an O(N^2)
+’. This can only happen when the input array is sorted or if all of its elements are the same. This “unlucky” selection of <b>pivot</b> elements requires `O(N)`recursive calls, leading to an O(N^2)
 O(N
 2
 )
@@ -796,7 +797,7 @@ As mentioned above, the worst case for <b>Quicksort</b> occurs when the partitio
 1
 ’ and ‘N−1
 N−1
-’. To mitigate this, instead of always picking a fixed index for pivot (e.g., in the above algorithm we always pick nums[high] as the pivot), we can randomly select an element as pivot. After randomly choosing the pivot element, we expect the split of the input array to be reasonably well balanced on average.
+’. To mitigate this, instead of always picking a fixed index for <b>pivot</b> (e.g., in the above algorithm we always pick nums[high] as the <b>pivot</b>), we can randomly select an element as <b>pivot</b>. After randomly choosing the <b>pivot</b> element, we expect the split of the input array to be reasonably well balanced on average.
 
 Here is what our algorithm will look like (only the highlighted lines have changed):
 
@@ -855,7 +856,7 @@ console.log(
 );
 ```
 
-- The above algorithm has the same worst and average case time complexities as mentioned for the previous algorithm. But choosing the pivot randomly has the effect of rendering the worst-case very unlikely, particularly for large arrays. Therefore, the expected time complexity of the above algorithm will be O(N)
+- The above algorithm has the same worst and average case time complexities as mentioned for the previous algorithm. But choosing the <b>pivot</b> randomly has the effect of rendering the worst-case very unlikely, particularly for large arrays. Therefore, the expected time complexity of the above algorithm will be O(N)
   O(N)
   , but the absolute worst case is still O(N^2)
   O(N
@@ -865,16 +866,16 @@ console.log(
 
 ### 7. Using the Median of Medians
 
-We can use the Median of Medians algorithm to choose a good pivot for the partitioning algorithm of the [Quicksort](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#-quick-sort). This algorithm finds an approximate median of an array in linear time `O(N)`. When this approximate median is used as the pivot, the worst-case complexity of the partitioning procedure reduces to linear O(N)
+We can use the Median of Medians algorithm to choose a good <b>pivot</b> for the partitioning algorithm of the [Quicksort](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#-quick-sort). This algorithm finds an approximate median of an array in linear time `O(N)`. When this approximate median is used as the <b>pivot</b>, the worst-case complexity of the partitioning procedure reduces to linear O(N)
 O(N)
 , which is also the asymptotically optimal worst-case complexity of any sorting/selection algorithm. This algorithm was originally developed by Blum, Floyd, Pratt, Rivest, and Tarjan and was describe in their 1973 paper.
 
 This is how the partitioning algorithm works:
 
-If we have 5 or less than 5 elements in the input array, we simply take its first element as the pivot. If not then we divide the input array into subarrays of five elements (for simplicity we can ignore any subarray having less than five elements).
+If we have 5 or less than 5 elements in the input array, we simply take its first element as the <b>pivot</b>. If not then we divide the input array into subarrays of five elements (for simplicity we can ignore any subarray having less than five elements).
 Sort each subarray to determine its median. Sorting a small and fixed numbered array takes constant time. At the end of this step, we have an array containing medians of all the subarray.
-Recursively call the partitioning algorithm on the array containing medians until we get our pivot.
-Every time the partition procedure needs to find a pivot, it will follow the above three steps.
+Recursively call the partitioning algorithm on the array containing medians until we get our <b>pivot</b>.
+Every time the partition procedure needs to find a <b>pivot</b>, it will follow the above three steps.
 Here is what this algorithm will look like:
 
 ```js
@@ -912,7 +913,7 @@ function partition(nums, low, high) {
     }
   }
 
-  const pivot = nums[high];
+  const pivo = nums[high];
   for (i = low; i < high; i++) {
     // all elements less than 'pivot' will be before the index 'low'
     if (nums[i] < pivot) {
@@ -969,10 +970,10 @@ console.log(
 );
 ```
 
-- The above algorithm has a guaranteed `O(N)`worst-case time. Please see the proof of its running time here and under “Selection-based pivoting”. The worst-case space complexity is `O(N)`.
+- The above algorithm has a guaranteed `O(N)`worst-case time. Please see the proof of its running time here and under “Selection-based <b>pivot</b>ing”. The worst-case space complexity is `O(N)`.
 
 ### Conclusion
 
 Theoretically, the Median of Medians algorithm gives the best time complexity of `O(N)`but practically both the Median of Medians and the Randomized Partitioning algorithms nearly perform equally.
 
-In the context of <b>Quicksort</b>, given an `O(N)`selection algorithm using the Median of Medians, one can use it to find the ideal pivot (the median) at every step of <b>Quicksort</b> and thus produce a sorting algorithm with `O(NlogN)`running time in the worst-case. Though practical implementations of this variant are considerably slower on average, they are of theoretical interest because they show that an optimal selection algorithm can yield an optimal sorting algorithm.
+In the context of <b>Quicksort</b>, given an `O(N)`selection algorithm using the Median of Medians, one can use it to find the ideal <b>pivot</b> (the median) at every step of <b>Quicksort</b> and thus produce a sorting algorithm with `O(NlogN)`running time in the worst-case. Though practical implementations of this variant are considerably slower on average, they are of theoretical interest because they show that an optimal selection algorithm can yield an optimal sorting algorithm.
