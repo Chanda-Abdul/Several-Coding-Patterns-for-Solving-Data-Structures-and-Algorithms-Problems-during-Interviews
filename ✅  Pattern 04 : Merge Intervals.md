@@ -519,7 +519,7 @@ minMeetingRooms([[4,5], [2,3], [2,4], [3,5]])//2, We will need one room for [2,3
 
 > Given a list of intervals representing the arrival and departure times of trains to a train station, our goal is to find the minimum number of platforms required for the train station so that no train has to wait.
 
-Both of these problems can be solved using the approach discussed above.
+Both of these problems can be solved using the `approach` discussed above.
 
 
 ## 🌟 Maximum CPU Load (hard)
