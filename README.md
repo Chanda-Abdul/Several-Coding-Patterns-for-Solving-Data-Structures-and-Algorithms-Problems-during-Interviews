@@ -26,16 +26,16 @@ for your desktop
 - [Pramp](https://www.pramp.com/) - for mock interviews
 - [FreeCodeCamp's Algorithms](https://www.freecodecamp.org/learn/coding-interview-prep/#algorithms) - Extra practice, esp. the <b>Sort Algorithms</b> section.
 - [Build 15 JavaScript Projects - Vanilla JavaScript Course](https://www.youtube.com/watch?v=3PHXvlpOkf4) - for extra <b>Vanilla JavaScript/DOM Manipulation</b> practice.
+# 
+🌟 - Challenge Questions
 
-🌟 => Challenge Questions
+👩🏽‍🦯 - Questions from <b>[Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) - For additional practice, the [Blind75 list](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)</b>
 
-👩🏽‍🦯 => Questions from <b>Blind75</b>
+😐📖 - Questions tagged <b>FaceBook/Meta</b>
 
-😐📖 => Questions taggged <b>FaceBook/Meta</b>
+🌴 - Questions tagged <b>Amazon</b>
 
-🌴 => Questions from <b>Amazon</b>
-
-🔎 => Questions from <b>Google</b>
+🔎 - Questions tagged <b>Google</b>
 ## [Pattern 1: Sliding Window](./✅%20%20Pattern%2001%20:%20Sliding%20Window.md)
 
 In many problems dealing with an array (or a <b>LinkedList</b>), we are asked to find or calculate something among all the contiguous subarrays (or sublists) of a given size. For example, take a look at this problem:
@@ -52,23 +52,23 @@ The efficient way to solve this problem would be to visualize each contiguous su
 
 ## [Pattern 2: Two Pointer](./✅%20%20Pattern%2002:%20Two%20Pointers.md)
 
-In problems where we deal with sorted arrays (or <b>LinkedList</b>s) and need to find a set of elements that fulfill certain constraints, the Two Pointers approach becomes quite useful. The set of elements could be a pair, a triplet or even a subarray. For example, take a look at the following problem:
+In problems where we deal with sorted arrays (or <b>LinkedList</b>s) and need to find a set of elements that fulfill certain constraints, the [Two Pointers](./✅%20%20Pattern%2002:%20Two%20Pointers.md) approach becomes quite useful. The set of elements could be a pair, a triplet or even a subarray. For example, take a look at the following problem:
 
-> Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.
+> Given an array of sorted `numbers` and a `target` sum, find a pair in the array whose sum is equal to the given `target`.
 
 To solve this problem, we can consider each element one by one (pointed out by the first pointer) and iterate through the remaining elements (pointed out by the second pointer) to find a pair with the given sum. The time complexity of this algorithm will be `O(N^2)` where `‘N’` is the number of elements in the input array.
 
-Given that the input array is sorted, an efficient way would be to start with one pointer in the beginning and another pointer at the end. At every step, we will see if the numbers pointed by the two pointers add up to the target sum. If they do not, we will do one of two things:
-1. If the sum of the two numbers pointed by the two pointers is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
-2. If the sum of the two numbers pointed by the two pointers is smaller than the target sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
+Given that the input array is sorted, an efficient way would be to start with one pointer in the beginning and another pointer at the end. At every step, we will see if the numbers pointed by the <b> two pointers</b> add up to the target sum. If they do not, we will do one of two things:
+1. If the sum of the two numbers pointed by the <b> two pointers</b> is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
+2. If the sum of the two numbers pointed by the <b> two pointers</b> is smaller than the target sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
 
 ## [Pattern 3: Fast & Slow pointers](./✅%20%20Pattern%2003:%20Fast%20%26%20Slow%20pointers.md)
 
-The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses two pointers which move through the array (or sequence/<b>LinkedList</b>) at different speeds. This approach is quite useful when dealing with cyclic <b>LinkedList</b>s or arrays.
+The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses <b> two pointers</b> which move through the array (or sequence/<b>LinkedList</b>) at different speeds. This approach is quite useful when dealing with cyclic <b>LinkedList</b>s or arrays.
 
-By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the two pointers are bound to meet. The fast pointer should catch the slow pointer once both the pointers are in a cyclic loop.
+By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the <b> two pointers</b> are bound to meet. The <i>fast pointer</i> should catch the <i>slow pointer</i> once both the pointers are in a cyclic loop.
 
-One of the famous problems solved using this technique was <b>Finding a cycle in a <b>LinkedList</b></b>. Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
+One of the famous problems solved using this technique was [Finding a cycle in a <b>LinkedList</b>](https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2003:%20Fast%20%26%20Slow%20pointers.md#linkedlist-cycle-easy). Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
 
 ## [Pattern 4: Merge Intervals](./✅%20%20Pattern%2004%20:%20Merge%20Intervals.md)
 

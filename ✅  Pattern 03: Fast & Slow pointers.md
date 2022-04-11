@@ -2,7 +2,7 @@
 
 The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses two pointers which move through the array (or sequence/<b>LinkedList</b>) at different speeds. This approach is quite useful when dealing with cyclic <b>LinkedLists</b> or arrays.
 
-By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the two pointers are bound to meet. The fast pointer should catch the slow pointer once both the pointers are in a cyclic loop.
+By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the two pointers are bound to meet. The <i>fast pointer</i> should catch the <i>slow pointer</i> once both the pointers are in a cyclic loop.
 
 One of the famous problems solved using this technique was <b>Finding a cycle in a LinkedList</b>. Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
 
@@ -13,17 +13,17 @@ https://leetcode.com/problems/linked-list-cycle/
 
 Imagine two racers running in a circular racing track. If one racer is faster than the other, the faster racer is bound to catch up and cross the slower racer from behind. We can use this fact to devise an algorithm to determine if a <b>LinkedList</b> has a cycle in it or not.
 
-Imagine we have a slow and a fast pointer to traverse the <b>LinkedList</b>. In each iteration, the slow pointer moves one step and the fast pointer moves two steps. This gives us two conclusions:
-1. If the <b>LinkedList</b> doesn’t have a cycle in it, the fast pointer will reach the end of the <b>LinkedList</b> before the slow pointer to reveal that there is no cycle in the <b>LinkedList</b>.
-2. The slow pointer will never be able to catch up to the fast pointer if there is no cycle in the <b>LinkedList</b>.
+Imagine we have a slow and a <i>fast pointer</i> to traverse the <b>LinkedList</b>. In each iteration, the <i>slow pointer</i> moves one step and the <i>fast pointer</i> moves two steps. This gives us two conclusions:
+1. If the <b>LinkedList</b> doesn’t have a cycle in it, the <i>fast pointer</i> will reach the end of the <b>LinkedList</b> before the <i>slow pointer</i> to reveal that there is no cycle in the <b>LinkedList</b>.
+2. The <i>slow pointer</i> will never be able to catch up to the <i>fast pointer</i> if there is no cycle in the <b>LinkedList</b>.
 
-If the <b>LinkedList</b> has a cycle, the fast pointer enters the cycle first, followed by the slow pointer. After this, both pointers will keep moving in the cycle infinitely. If at any stage both of these pointers meet, we can conclude that the <b>LinkedList</b> has a cycle in it. Let’s analyze if it is possible for the two pointers to meet. When the fast pointer is approaching the slow pointer from behind we have two possibilities:
-1. The fast pointer is one step behind the slow pointer.
-2. The fast pointer is two steps behind the slow pointer.
+If the <b>LinkedList</b> has a cycle, the <i>fast pointer</i> enters the cycle first, followed by the <i>slow pointer</i>. After this, both pointers will keep moving in the cycle infinitely. If at any stage both of these pointers meet, we can conclude that the <b>LinkedList</b> has a cycle in it. Let’s analyze if it is possible for the two pointers to meet. When the <i>fast pointer</i> is approaching the <i>slow pointer</i> from behind we have two possibilities:
+1. The <i>fast pointer</i> is one step behind the <i>slow pointer</i>.
+2. The <i>fast pointer</i> is two steps behind the <i>slow pointer</i>.
 
-All other distances between the fast and slow pointers will reduce to one of these two possibilities. Let’s analyze these scenarios, considering the fast pointer always moves first:
-1. If the fast pointer is one step behind the slow pointer: The fast pointer moves two steps and the slow pointer moves one step, and they both meet.
-2. If the fast pointer is two steps behind the slow pointer: The fast pointer moves two steps and the slow pointer moves one step. After the moves, the fast pointer will be one step behind the slow pointer, which reduces this scenario to the first scenario. This means that the two pointers will meet in the next iteration.
+All other distances between the fast and <i>slow pointers</i> will reduce to one of these two possibilities. Let’s analyze these scenarios, considering the <i>fast pointer</i> always moves first:
+1. If the <i>fast pointer</i> is one step behind the <i>slow pointer</i>: The <i>fast pointer</i> moves two steps and the <i>slow pointer</i> moves one step, and they both meet.
+2. If the <i>fast pointer</i> is two steps behind the <i>slow pointer</i>: The <i>fast pointer</i> moves two steps and the <i>slow pointer</i> moves one step. After the moves, the <i>fast pointer</i> will be one step behind the <i>slow pointer</i>, which reduces this scenario to the first scenario. This means that the two pointers will meet in the next iteration.
 
 This concludes that the two pointers will definitely meet if the <b>LinkedList</b> has a cycle. 
 
@@ -65,12 +65,12 @@ head.next.next.next.next.next.next = head.next.next.next
 console.log(`LinkedList has cycle: ${hasCycle(head)}`)
 ````
 
-- Once the slow pointer enters the cycle, the fast pointer will meet the slow pointer in the same loop. Therefore, the time complexity of our algorithm will be `O(N)` where `‘N’` is the total number of nodes in the <b>LinkedList</b>.
+- Once the <i>slow pointer</i> enters the cycle, the <i>fast pointer</i> will meet the <i><i>slow pointer</i></i> in the same loop. Therefore, the time complexity of our algorithm will be `O(N)` where `‘N’` is the total number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 
 > Given the head of a LinkedList with a cycle, find the length of the cycle.
 
-Once the fast and slow pointers meet, we can save the slow pointer and iterate the whole cycle with another pointer until we see the slow pointer again to find the length of the cycle.
+Once the fast and <i>slow pointers</i> meet, we can save the <i>slow pointer</i> and iterate the whole cycle with another pointer until we see the <i>slow pointer</i> again to find the length of the cycle.
 
 ````js
 class Node {
@@ -225,7 +225,7 @@ Any number will be called a happy number if, after repeatedly replacing it with 
 
 The process, defined above, to find out if a number is a happy number or not, always ends in a cycle. If the number is a happy number, the process will be stuck in a cycle on number ‘1,’ and if the number is not a happy number then the process will be stuck in a cycle with a set of numbers. As we saw in Example-2 while determining if ‘12’ is a happy number or not, our process will get stuck in a cycle with the following numbers: 89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89
 
-We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a cycle among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same fast & slow pointer strategy to find the cycle and once the cycle is found, we will see if the cycle is stuck on number ‘1’ to find out if the number is happy or not.
+We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a cycle among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same fast & <i>slow pointer</i> strategy to find the cycle and once the cycle is found, we will see if the cycle is stuck on number ‘1’ to find out if the number is happy or not.
 
 ````js
 function findHappyNumber(num) {
@@ -316,7 +316,7 @@ https://leetcode.com/problems/middle-of-the-linked-list/
 
 One brute force strategy could be to first count the number of nodes in the <b>LinkedList</b> and then find the middle node in the second iteration. Can we do this in one iteration?
 
-We can use the <b>Fast & Slow</b> pointers method such that the fast pointer is always twice the nodes ahead of the slow pointer. This way, when the fast pointer reaches the end of the <b>LinkedList</b>, the slow pointer will be pointing at the middle node.
+We can use the <b>Fast & Slow</b> pointers method such that the <i>fast pointer</i> is always twice the nodes ahead of the <i>slow pointer</i>. This way, when the <i>fast pointer</i> reaches the end of the <b>LinkedList</b>, the <i>slow pointer</i> will be pointing at the middle node.
 
 ````js
 class Node {
