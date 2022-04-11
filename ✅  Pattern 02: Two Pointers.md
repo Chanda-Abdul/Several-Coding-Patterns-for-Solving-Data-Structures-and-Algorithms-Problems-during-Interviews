@@ -10,17 +10,17 @@ Given that the input array is sorted, an efficient way would be to start with on
 1. If the sum of the two numbers pointed by the <b>two pointers</b> is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
 2. If the sum of the two numbers pointed by the <b>two pointers</b> is smaller than the target sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
 
-## Pair with Target Sum  aka "Two Sum" (easy) 🌴 
+## 🌴 Pair with Target Sum  aka "Two Sum" (easy) 
 https://leetcode.com/problems/two-sum/
-> Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.
+> Given an array of sorted numbers and a `target` sum, find a pair in the array whose sum is equal to the given `target`.
 
-Write a function to return the indices of the two numbers (i.e. the pair) such that they add up to the given target.
+Write a function to return the indices of the two numbers (i.e. the pair) such that they add up to the given `target`.
 
 Since the given array is sorted, a brute-force solution could be to iterate through the array, taking one number at a time and searching for the second number through <b>Binary Search</b>. The time complexity of this algorithm will be `O(N*logN)`. Can we do better than this?
 
-We can follow the <b>Two Pointers</b> approach. We will start with one pointer pointing to the beginning of the array and another pointing at the end. At every step, we will see if the numbers pointed by the <b>two pointers</b> add up to the target sum. If they do, we have found our pair; otherwise, we will do one of two things:
-1. If the sum of the two numbers pointed by the <b>two pointers</b> is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
-2. If the sum of the two numbers pointed by the <b>two pointers</b> is smaller than the target sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
+We can follow the <b>Two Pointers</b> approach. We will start with one pointer pointing to the beginning of the array and another pointing at the end. At every step, we will see if the numbers pointed by the <b>two pointers</b> add up to the `target` sum. If they do, we have found our pair; otherwise, we will do one of two things:
+1. If the sum of the two numbers pointed by the <b>two pointers</b> is greater than the `target` sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
+2. If the sum of the two numbers pointed by the <b>two pointers</b> is smaller than the `target` sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
 ### Brute Force Solution
 ````js
 function pair_with_targetsum(nums, target) {
@@ -141,7 +141,7 @@ removeDuplicates([2, 2, 2, 11])//2, The first two elements after removing the du
 ### Remove Element
 https://leetcode.com/problems/remove-element/
 
-> Given an unsorted array of numbers and a target ‘key’, remove all instances of ‘key’ in-place and return the new length of the array.
+> Given an unsorted array of numbers and a target `key`, remove all instances of `key` in-place and return the new length of the array.
 
 ````js
 function removeElement(arr, key) {
@@ -213,11 +213,11 @@ https://leetcode.com/problems/3sum/
 
 > Given an array of unsorted numbers, find all unique triplets in it that add up to zero.
 
-This problem follows the <b>Two Pointers</b> pattern and shares similarities with <b>Pair with Target Sum</b>. A couple of differences are that the input array is not sorted and instead of a pair we need to find triplets with a target sum of zero.
+This problem follows the <b>Two Pointers</b> pattern and shares similarities with [Pair with Target Sum](#🌴-pair-with-target-sum-aka-"two-sum"-easy). A couple of differences are that the input array is not sorted and instead of a pair we need to find triplets with a target sum of zero.
 
-To follow a similar approach, first, we will sort the array and then iterate through it taking one number at a time. Let’s say during our iteration we are at number `‘X’`, so we need to find `‘Y’` and `‘Z’` such that `X + Y + Z == 0`. At this stage, our problem translates into finding a pair whose sum is equal to `“-X”` (as from the above equation `Y + Z == -X`).
+To follow a similar approach, first, we will sort the array and then iterate through it taking one number at a time. Let’s say during our iteration we are at number `‘X’`, so we need to find `‘Y’` and `‘Z’` such that `X + Y + Z == 0`. At this stage, our problem translates into finding a pair whose sum is equal to `-X` (as from the above equation `Y + Z == -X`).
 
-Another difference from Pair with Target Sum is that we need to find all the unique triplets. To handle this, we have to skip any duplicate number. Since we will be sorting the array, so all the duplicate numbers will be next to each other and are easier to skip.
+Another difference from [Pair with Target Sum](#🌴-pair-with-target-sum-aka-"two-sum"-easy) is that we need to find all the unique triplets. To handle this, we have to skip any duplicate number. Since we will be sorting the array, so all the duplicate numbers will be next to each other and are easier to skip.
 
 ````js
 function searchTriplets(arr) {
@@ -285,11 +285,11 @@ searchTriplets([-5, 2, -1, -2, 3]) //[[-5, 2, 3], [-2, -1, 3]]
 ## Triplet Sum Close to Target (medium)
 https://leetcode.com/problems/3sum-closest/
 
-> Given an array of unsorted numbers and a target number, find a <b>triplet in the array whose sum is as close to the target number as possible</b>, return the sum of the triplet. If there are more than one such triplet, return the sum of the triplet with the smallest sum.
+> Given an array of unsorted numbers and a `targetSum`, find a <b>triplet in the array whose sum is as close to the `targetSum` as possible</b>, return the sum of the triplet. If there are more than one such triplet, return the sum of the triplet with the smallest sum.
 
-This problem follows the <b>Two Pointers</b> pattern and is quite similar to <b>Triplet Sum to Zero</b>.
+This problem follows the <b>Two Pointers</b> pattern and is quite similar to <b>[Triplet Sum to Zero](#🌟-triplet-sum-to-zero-medium)</b>.
 
-We can follow a similar approach to iterate through the array, taking one number at a time. At every step, we will save the difference between the triplet and the target number, so that in the end, we can return the triplet with the closest sum.
+We can follow a similar approach to iterate through the array, taking one number at a time. At every step, we will save the difference between the triplet and the `targetSum`, so that in the end, we can return the triplet with the closest sum.
 
 ````js
 function tripletSumCloseToTarget(arr, targetSum){
@@ -429,7 +429,7 @@ function searchPair(arr, targetSum, first, triplets){
 ## 🌟 Subarrays with Product Less than a Target (medium)
 https://leetcode.com/problems/subarray-product-less-than-k/
 
-> Given an array with positive numbers and a target number, find all of its contiguous subarrays whose <b>product is less than the target number</b>.
+> Given an array with positive numbers and a `targetSum`, find all of its contiguous subarrays whose <b>product is less than the `targetSum`</b>.
 
 This problem follows the <b>Sliding Window</b> and the <b>Two Pointers</b> pattern and shares similarities with <b>Triplets with Smaller Sum</b> with two differences:
 1. In this problem, the input array is not sorted.
@@ -523,9 +523,9 @@ console.log(dutchFlagSort([2, 2, 0, 1, 2, 0]))//[0 0 1 2 2 2 ]
 ## 🌟 Quadruple Sum to Target (medium)
 https://leetcode.com/problems/4sum/
 
-> Given an array of unsorted numbers and a target number, find all <b>unique quadruplets</b> in it, whose <b>sum is equal to the target number</b>.
+> Given an array of unsorted numbers and a `targetSum`, find all <b>unique quadruplets</b> in it, whose <b>sum is equal to the `targetSum`</b>.
 
-This problem follows the <b>Two Pointers</b> pattern and shares similarities with <b>Triplet Sum to Zero</b>.
+This problem follows the <b>Two Pointers</b> pattern and shares similarities with <b>[Triplet Sum to Zero](#🌟-triplet-sum-to-zero-medium)</b>.
 
 We can follow a similar approach to iterate through the array, taking one number at a time. At every step during the iteration, we will search for the quadruplets similar to <b>Triplet Sum to Zero</b> whose sum is equal to the given target.
 ````js
@@ -587,9 +587,9 @@ searchQuads([2,0,-1,1,-2,2], 2)//[-2, 0, 2, 2], [-1, 0, 1, 2]
 - The space complexity of the above algorithm will be `O(N)` which is required for sorting.
 ## 🌟 Comparing Strings containing Backspaces (medium)
 https://leetcode.com/problems/backspace-string-compare/
->Given two strings containing backspaces (identified by the character `‘#’`), check if the two strings are equal.
+>Given two strings containing backspaces (identified by the character `#`), check if the two strings are equal.
 
-To compare the given strings, first, we need to apply the backspaces. An efficient way to do this would be from the end of both the strings. We can have separate pointers, pointing to the last element of the given strings. We can start comparing the characters pointed out by both the pointers to see if the strings are equal. If, at any stage, the character pointed out by any of the pointers is a backspace (`’#’`), we will skip and apply the backspace until we have a valid character available for comparison.
+To compare the given strings, first, we need to apply the backspaces. An efficient way to do this would be from the end of both the strings. We can have separate pointers, pointing to the last element of the given strings. We can start comparing the characters pointed out by both the pointers to see if the strings are equal. If, at any stage, the character pointed out by any of the pointers is a backspace (`#`), we will skip and apply the backspace until we have a valid character available for comparison.
 
 ````js
 function backspaceCompare(str1, str2) {
@@ -659,13 +659,13 @@ Let’s try to understand this with Example-2 mentioned above. In the following 
 [1, 3, 2, 0, -1, 7, 10]
 ````
 Starting from the beginning of the array the first number out of the sorting order is `‘2’` as it is smaller than its previous element which is `‘3’`.
-Starting from the end of the array the first number out of the sorting order is `‘0’` as it is bigger than its previous element which is `‘-1’`
+Starting from the end of the array the first number out of the sorting order is `‘0’` as it is bigger than its previous element which is `-1’`
 
-As you can see, sorting the numbers between `‘3’` and `‘-1’` will not sort the whole array. To see this, the following will be our original array after the sorted subarray:
+As you can see, sorting the numbers between `‘3’` and `-1’` will not sort the whole array. To see this, the following will be our original array after the sorted subarray:
 ````
 [1, -1, 0, 2, 3, 7, 10]
 ````
-The problem here is that the smallest number of our subarray is `‘-1’` which dictates that we need to include more numbers from the beginning of the array to make the whole array sorted. We will have a similar problem if the maximum of the subarray is bigger than some elements at the end of the array. To sort the whole array we need to include all such elements that are smaller than the biggest element of the subarray. So our final algorithm will look like:
+The problem here is that the smallest number of our subarray is `-1’` which dictates that we need to include more numbers from the beginning of the array to make the whole array sorted. We will have a similar problem if the maximum of the subarray is bigger than some elements at the end of the array. To sort the whole array we need to include all such elements that are smaller than the biggest element of the subarray. So our final algorithm will look like:
 1. From the beginning and end of the array, find the first elements that are out of the sorting order. The two elements will be our candidate subarray.
 2. Find the maximum and minimum of this subarray.
 3. Extend the subarray from beginning to include any number which is bigger than the minimum of the subarray.
