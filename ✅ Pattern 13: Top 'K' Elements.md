@@ -747,7 +747,7 @@ console.log(`Reorganized string: ${rearrangeString('aab', 2)}`);
 //We cannot find an arrangement of the string where any two 'a' are 3 distance apart.
 ```
 
-## 🌟 🔍 Scheduling Tasks (hard)
+## 🌟 🔎 Scheduling Tasks (hard)
 
 https://leetcode.com/problems/task-scheduler/
 

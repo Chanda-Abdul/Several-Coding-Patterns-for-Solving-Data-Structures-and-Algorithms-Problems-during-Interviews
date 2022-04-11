@@ -1,23 +1,23 @@
 # Pattern 3: Fast & Slow pointers
 
-The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses two pointers which move through the array (or sequence/LinkedList) at different speeds. This approach is quite useful when dealing with cyclic LinkedLists or arrays.
+The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses two pointers which move through the array (or sequence/<b>LinkedList</b>) at different speeds. This approach is quite useful when dealing with cyclic <b>LinkedLists</b> or arrays.
 
-By moving at different speeds (say, in a cyclic LinkedList), the algorithm proves that the two pointers are bound to meet. The fast pointer should catch the slow pointer once both the pointers are in a cyclic loop.
+By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the two pointers are bound to meet. The fast pointer should catch the slow pointer once both the pointers are in a cyclic loop.
 
 One of the famous problems solved using this technique was <b>Finding a cycle in a LinkedList</b>. Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
 
 ## LinkedList Cycle (easy)
 https://leetcode.com/problems/linked-list-cycle/
 
-> Given the head of a <b>Singly LinkedList</b>, write a function to determine if the LinkedList has a </b>cycle</b> in it or not.
+> Given the head of a <b>Singly LinkedList</b>, write a function to determine if the <b>LinkedList</b> has a </b>cycle</b> in it or not.
 
-Imagine two racers running in a circular racing track. If one racer is faster than the other, the faster racer is bound to catch up and cross the slower racer from behind. We can use this fact to devise an algorithm to determine if a LinkedList has a cycle in it or not.
+Imagine two racers running in a circular racing track. If one racer is faster than the other, the faster racer is bound to catch up and cross the slower racer from behind. We can use this fact to devise an algorithm to determine if a <b>LinkedList</b> has a cycle in it or not.
 
-Imagine we have a slow and a fast pointer to traverse the LinkedList. In each iteration, the slow pointer moves one step and the fast pointer moves two steps. This gives us two conclusions:
-1. If the LinkedList doesn’t have a cycle in it, the fast pointer will reach the end of the LinkedList before the slow pointer to reveal that there is no cycle in the LinkedList.
-2. The slow pointer will never be able to catch up to the fast pointer if there is no cycle in the LinkedList.
+Imagine we have a slow and a fast pointer to traverse the <b>LinkedList</b>. In each iteration, the slow pointer moves one step and the fast pointer moves two steps. This gives us two conclusions:
+1. If the <b>LinkedList</b> doesn’t have a cycle in it, the fast pointer will reach the end of the <b>LinkedList</b> before the slow pointer to reveal that there is no cycle in the <b>LinkedList</b>.
+2. The slow pointer will never be able to catch up to the fast pointer if there is no cycle in the <b>LinkedList</b>.
 
-If the LinkedList has a cycle, the fast pointer enters the cycle first, followed by the slow pointer. After this, both pointers will keep moving in the cycle infinitely. If at any stage both of these pointers meet, we can conclude that the LinkedList has a cycle in it. Let’s analyze if it is possible for the two pointers to meet. When the fast pointer is approaching the slow pointer from behind we have two possibilities:
+If the <b>LinkedList</b> has a cycle, the fast pointer enters the cycle first, followed by the slow pointer. After this, both pointers will keep moving in the cycle infinitely. If at any stage both of these pointers meet, we can conclude that the <b>LinkedList</b> has a cycle in it. Let’s analyze if it is possible for the two pointers to meet. When the fast pointer is approaching the slow pointer from behind we have two possibilities:
 1. The fast pointer is one step behind the slow pointer.
 2. The fast pointer is two steps behind the slow pointer.
 
@@ -25,7 +25,7 @@ All other distances between the fast and slow pointers will reduce to one of the
 1. If the fast pointer is one step behind the slow pointer: The fast pointer moves two steps and the slow pointer moves one step, and they both meet.
 2. If the fast pointer is two steps behind the slow pointer: The fast pointer moves two steps and the slow pointer moves one step. After the moves, the fast pointer will be one step behind the slow pointer, which reduces this scenario to the first scenario. This means that the two pointers will meet in the next iteration.
 
-This concludes that the two pointers will definitely meet if the LinkedList has a cycle. 
+This concludes that the two pointers will definitely meet if the <b>LinkedList</b> has a cycle. 
 
 ````js
 class Node {
@@ -65,7 +65,7 @@ head.next.next.next.next.next.next = head.next.next.next
 console.log(`LinkedList has cycle: ${hasCycle(head)}`)
 ````
 
-- Once the slow pointer enters the cycle, the fast pointer will meet the slow pointer in the same loop. Therefore, the time complexity of our algorithm will be `O(N)` where `‘N’` is the total number of nodes in the LinkedList.
+- Once the slow pointer enters the cycle, the fast pointer will meet the slow pointer in the same loop. Therefore, the time complexity of our algorithm will be `O(N)` where `‘N’` is the total number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 
 > Given the head of a LinkedList with a cycle, find the length of the cycle.
@@ -134,11 +134,11 @@ https://leetcode.com/problems/linked-list-cycle-ii/
 
 If we know the length of the <b>LinkedList</b> cycle, we can find the start of the cycle through the following steps:
 1. Take two pointers. Let’s call them `pointer1` and `pointer2`.
-2. Initialize both pointers to point to the start of the LinkedList.
-3. We can find the length of the LinkedList cycle using the approach discussed in <b>LinkedList Cycle</b>. Let’s assume that the length of the cycle is ‘K’ nodes.
-4. Move `pointer2` ahead by ‘K’ nodes.
+2. Initialize both pointers to point to the start of the <b>LinkedList</b>.
+3. We can find the length of the <b>LinkedList</b> cycle using the approach discussed in <b>LinkedList Cycle</b>. Let’s assume that the length of the cycle is `K` nodes.
+4. Move `pointer2` ahead by `K` nodes.
 5. Now, keep incrementing `pointer1` and `pointer2` until they both meet.
-6. As `pointer2` is ‘K’ nodes ahead of `pointer1`, which means, `pointer2` must have completed one loop in the cycle when both pointers meet. Their meeting point will be the start of the cycle.
+6. As `pointer2` is `K` nodes ahead of `pointer1`, which means, `pointer2` must have completed one loop in the cycle when both pointers meet. Their meeting point will be the start of the cycle.
 ````js
 class Node {
   constructor(value, next = null) {
@@ -215,7 +215,7 @@ head.next.next.next.next.next.next = head
 console.log(`LinkedList cycle start: ${findCycleStart(head).value}`)
 ````
 
-- As we know, finding the cycle in a LinkedList with `‘N’` nodes and also finding the length of the cycle requires `O(N)`. Also, as we saw in the above algorithm, we will need `O(N)` to find the start of the cycle. Therefore, the overall time complexity of our algorithm will be `O(N)`.
+- As we know, finding the cycle in a <b>LinkedList</b> with `‘N’` nodes and also finding the length of the cycle requires `O(N)`. Also, as we saw in the above algorithm, we will need `O(N)` to find the start of the cycle. Therefore, the overall time complexity of our algorithm will be `O(N)`.
 - The algorithm runs in constant space `O(1)`.
 
 ## Happy Number (medium)
@@ -310,13 +310,13 @@ This means:
 
 ## Middle of the LinkedList (easy)
 https://leetcode.com/problems/middle-of-the-linked-list/
-> Given the head of a <b>Singly LinkedList</b>, write a method to return the <b>middle node</b> of the LinkedList.
+> Given the head of a <b>Singly LinkedList</b>, write a method to return the <b>middle node</b> of the <b>LinkedList</b>.
 >
-> If the total number of nodes in the LinkedList is even, return the second middle node.
+> If the total number of nodes in the <b>LinkedList</b> is even, return the second middle node.
 
-One brute force strategy could be to first count the number of nodes in the LinkedList and then find the middle node in the second iteration. Can we do this in one iteration?
+One brute force strategy could be to first count the number of nodes in the <b>LinkedList</b> and then find the middle node in the second iteration. Can we do this in one iteration?
 
-We can use the <b>Fast & Slow</b> pointers method such that the fast pointer is always twice the nodes ahead of the slow pointer. This way, when the fast pointer reaches the end of the LinkedList, the slow pointer will be pointing at the middle node.
+We can use the <b>Fast & Slow</b> pointers method such that the fast pointer is always twice the nodes ahead of the slow pointer. This way, when the fast pointer reaches the end of the <b>LinkedList</b>, the slow pointer will be pointing at the middle node.
 
 ````js
 class Node {
@@ -350,8 +350,8 @@ console.log(`Middle Node: ${findMiddleOfLinkedList(head).value}`)
 
 head.next.next.next.next.next.next = new Node(7)
 console.log(`Middle Node: ${findMiddleOfLinkedList(head).value}`)
-`````
-- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the LinkedList.
+````
+- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 
 ## 🌟 Palindrome LinkedList (medium)
@@ -359,7 +359,7 @@ https://leetcode.com/problems/palindrome-linked-list/
 
 > Given the head of a <b>Singly LinkedList</b>, write a method to check if the <b>LinkedList is a palindrome</b> or not.
 > 
->Your algorithm should use <b>constant space</b> and the input LinkedList should be in the original form once the algorithm is finished. The algorithm should have `O(N)` time complexity where `‘N’` is the number of nodes in the LinkedList.
+>Your algorithm should use <b>constant space</b> and the input <b>LinkedList</b> should be in the original form once the algorithm is finished. The algorithm should have `O(N)` time complexity where `‘N’` is the number of nodes in the <b>LinkedList</b>.
 ### Example 1:
 ````
 Input: 2 -> 4 -> 6 -> 4 -> 2 -> null
@@ -371,12 +371,12 @@ Input: 2 -> 4 -> 6 -> 4 -> 2 -> 2 -> null
 Output: false
 ````
 
-As we know, a palindrome LinkedList will have nodes values that read the same backward or forward. This means that if we divide the LinkedList into two halves, the node values of the first half in the forward direction should be similar to the node values of the second half in the backward direction. As we have been given a Singly LinkedList, we can’t move in the backward direction. To handle this, we will perform the following steps:
+As we know, a palindrome <b>LinkedList</b> will have nodes values that read the same backward or forward. This means that if we divide the <b>LinkedList</b> into two halves, the node values of the first half in the forward direction should be similar to the node values of the second half in the backward direction. As we have been given a Singly <b>LinkedList</b>, we can’t move in the backward direction. To handle this, we will perform the following steps:
 
-1. We can use the <b>Fast & Slow pointers</b> method similar to <b>Middle of the LinkedList</b> to find the middle node of the LinkedList.
-2. Once we have the middle of the LinkedList, we will reverse the second half.
-3. Then, we will compare the first half with the reversed second half to see if the LinkedList represents a palindrome.
-4. Finally, we will reverse the second half of the LinkedList again to revert and bring the LinkedList back to its original form.
+1. We can use the <b>Fast & Slow pointers</b> method similar to <b>Middle of the LinkedList</b> to find the middle node of the <b>LinkedList</b>.
+2. Once we have the middle of the <b>LinkedList</b>, we will reverse the second half.
+3. Then, we will compare the first half with the reversed second half to see if the <b>LinkedList</b> represents a palindrome.
+4. Finally, we will reverse the second half of the <b>LinkedList</b> again to revert and bring the <b>LinkedList</b> back to its original form.
 
 ````js
 class Node {
@@ -452,15 +452,15 @@ head.next.next.next.next.next = new Node(2)
 console.log(`Is palindrome: ${isPalindromicLinkedList(head)}`)
 ````
 
-- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the LinkedList.
+- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 ## 🌟 Rearrange a LinkedList (medium)
 https://leetcode.com/problems/reorder-list/
 
 
-> Given the head of a Singly LinkedList, write a method to modify the LinkedList such that the <b>nodes from the second half of the LinkedList are inserted alternately to the nodes from the first half in reverse order</b>. So if the LinkedList has nodes 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null, your method should return 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> null.
+> Given the head of a Singly <b>LinkedList</b>, write a method to modify the <b>LinkedList</b> such that the <b>nodes from the second half of the <b>LinkedList</b> are inserted alternately to the nodes from the first half in reverse order</b>. So if the <b>LinkedList</b> has nodes 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null, your method should return 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> null.
 >
-> Your algorithm should not use any extra space and the input LinkedList should be modified in-place.
+> Your algorithm should not use any extra space and the input <b>LinkedList</b> should be modified in-place.
 
 ### Example 1:
 ````
@@ -473,10 +473,10 @@ Input: 2 -> 4 -> 6 -> 8 -> 10 -> null
 Output: 2 -> 10 -> 4 -> 8 -> 6 -> null
 ````
 
-This problem shares similarities with <b>Palindrome LinkedList</b>. To rearrange the given LinkedList we will follow the following steps:
-1. We can use the <b>Fast & Slow pointers</b> method similar to <b>Middle of the LinkedList</b> to find the middle node of the LinkedList.
-2. Once we have the middle of the LinkedList, we will reverse the second half of the LinkedList.
-3. Finally, we’ll iterate through the first half and the reversed second half to produce a LinkedList in the required order.
+This problem shares similarities with <b>Palindrome LinkedList</b>. To rearrange the given <b>LinkedList</b> we will follow the following steps:
+1. We can use the <b>Fast & Slow pointers</b> method similar to <b>Middle of the <b>LinkedList</b></b> to find the middle node of the <b>LinkedList</b>.
+2. Once we have the middle of the <b>LinkedList</b>, we will reverse the second half of the <b>LinkedList</b>.
+3. Finally, we’ll iterate through the first half and the reversed second half to produce a <b>LinkedList</b> in the required order.
 
 ````js
 class Node {
@@ -556,7 +556,7 @@ head.next.next.next.next.next = new Node(12)
 reorder(head)
 head.printList()
 ````
-- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the LinkedList.
+- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 ## 🌟 Cycle in a Circular Array (hard)
 https://leetcode.com/problems/circular-array-loop/

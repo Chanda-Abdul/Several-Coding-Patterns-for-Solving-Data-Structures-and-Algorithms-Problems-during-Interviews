@@ -586,7 +586,7 @@ function findMaxCPULoad(jobs) {
 - The space complexity of the above algorithm will be `O(N)`, which is required for sorting. Also, in the worst case, we have to insert all the jobs into the priority queue (when all jobs overlap) which will also take `O(N)` space. The overall space complexity of our algorithm is `O(N)`.
 ## 🌟 Employee Free Time (hard)
 https://leetcode.com/problems/employee-free-time/ 
-> For ‘K’ employees, we are given a list of intervals representing the working hours of each employee. Our goal is to find out if there is a <b>free interval that is common to all employees</b>. You can assume that each list of employee working hours is sorted on the start time.
+> For `K` employees, we are given a list of intervals representing the working hours of each employee. Our goal is to find out if there is a <b>free interval that is common to all employees</b>. You can assume that each list of employee working hours is sorted on the start time.
 
 This problem follows the Merge Intervals pattern. Let’s take the an example:
 ````
@@ -644,6 +644,6 @@ One fact that we are not utilizing is that each employee list is individually so
 How about we take the first interval of each employee and insert it in a `Min Heap`. This `Min Heap` can always give us the interval with the smallest start time. Once we have the smallest start-time interval, we can then compare it with the next smallest start-time interval (again from the `Heap`) to find the gap. This interval comparison is similar to what we suggested in the previous approach.
 
 Whenever we take an interval out of the `Min Heap`, we can insert the same employee’s next interval. This also means that we need to know which interval belongs to which employee.
-- The above algorithm’s time complexity is `O(N*logK)`, where `‘N’` is the total number of intervals, and `‘K’` is the total number of employees. This is because we are iterating through the intervals only once (which will take `O(N)`), and every time we process an interval, we remove (and can insert) one interval in the` Min Heap`, (which will take `O(logK)`. At any time, the heap will not have more than `‘K’` elements.
-- The space complexity of the above algorithm will be `O(K)` as at any time, the heap will not have more than `‘K’` elements.
+- The above algorithm’s time complexity is `O(N*logK)`, where `‘N’` is the total number of intervals, and `K` is the total number of employees. This is because we are iterating through the intervals only once (which will take `O(N)`), and every time we process an interval, we remove (and can insert) one interval in the` Min Heap`, (which will take `O(logK)`. At any time, the heap will not have more than `K` elements.
+- The space complexity of the above algorithm will be `O(K)` as at any time, the heap will not have more than `K` elements.
 

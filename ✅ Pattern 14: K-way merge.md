@@ -115,7 +115,7 @@ function mergeLists(lists) {
 }
 ```
 
-## 🔍 Kth Smallest Number in M Sorted Lists (Medium)
+## 🔎 Kth Smallest Number in M Sorted Lists (Medium)
 
 > Given `M` sorted arrays, find the `Kth` smallest number among all the arrays.
 
@@ -175,13 +175,13 @@ https://leetcode.com/problems/merge-k-sorted-lists/
 
 <b>Solution:</b> This problem is similar to [Merge K Sorted Lists](#🔎-median-of-two-sorted-arrays) except that the input is a list of arrays compared to LinkedLists. To handle this, we can use a similar approach as discussed in our parent problem by keeping a track of the array and the element indices.
 
-## 🔍 🌴 Kth Smallest Number in a Sorted Matrix (Hard)
+## 🔎 🌴 Kth Smallest Number in a Sorted Matrix (Hard)
 
 https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
 
 > Given an `N * N` matrix where each row and column is sorted in ascending order, find the `Kth` smallest element in the matrix.
 
-This problem follows the [K-way merge pattern](#pattern-14-k-way-merge) and can be easily converted to [Kth Smallest Number in M Sorted Lists](#🔍-kth-smallest-number-in-m-sorted-lists-medium). As each row (or column) of the given matrix can be seen as a sorted list, we essentially need to find the `Kth` smallest number in `N` sorted lists.
+This problem follows the [K-way merge pattern](#pattern-14-k-way-merge) and can be easily converted to [Kth Smallest Number in M Sorted Lists](#🔎-kth-smallest-number-in-m-sorted-lists-medium). As each row (or column) of the given matrix can be seen as a sorted list, we essentially need to find the `Kth` smallest number in `N` sorted lists.
 
 Since each row and column of the matrix is sorted, is it possible to use <b>Binary Search</b> to find the `Kth`smallest number?
 
@@ -410,8 +410,8 @@ We can optimize our algorithms in two ways:
 
 1. Instead of iterating over all the numbers of both arrays, we can iterate only the first `K` numbers from both arrays. Since the arrays are sorted in descending order, the pairs with the maximum sum will be constituted by the first `K` numbers from both the arrays.
 2. As soon as we encounter a pair with a sum that is smaller than the smallest (top) element of the <b>heap</b>, we don’t need to process the next elements of the array. Since the arrays are sorted in descending order, we won’t be able to find a pair with a higher sum moving forward.
-   😕
 
+😕
 ```js
 class Heap {
   constructor() {
@@ -531,8 +531,7 @@ console.log(
 //[5, 2], [5, -1], [2, 2]
 ```
 
-- Since, at most, we’ll be going through all the elements of both arrays and we will add/remove one element in the heap in each step, the time complexity of the above algorithm will be `O(N∗M∗logK)` where `N` and `M` are the total number of elements in both arrays, respectively.
-- If we assume that both arrays have at least `K` elements then the time complexity can be simplified to `O(K^2logK)`, because we are not iterating more than `K` elements in both arrays.
+- Since, at most, we’ll be going through all the elements of both arrays and we will add/remove one element in the heap in each step, the time complexity of the above algorithm will be `O(N∗M∗logK)` where `N` and `M` are the total number of elements in both arrays, respectively.  If we assume that both arrays have at least `K` elements then the time complexity can be simplified to `O(K^2logK)`, because we are not iterating more than `K` elements in both arrays.
 - The space complexity will be `O(K)` because, at any time, our <b>Min Heap</b> will be storing `K` largest pairs.
 
 ## 💫 Kth Smallest Number (hard)

@@ -13,11 +13,29 @@ These are my JavaScript notes from a course that categorizes coding interview pr
 |<b>[Pattern 7: Tree Breadth First Search](./✅%20%20Pattern%2007:%20Tree%20Breadth%20First%20Search.md)</b>|<b>[Pattern 15: 0/1 Knapsack (Dynamic Programming)](./%E2%9C%85%20Pattern%2015:%200-1%20Knapsack%20(Dynamic%20Programming).md)</b>|
 |<b>[Pattern 8: Depth First Search (DFS)](./✅%20%20Pattern%2008:Tree%20Depth%20First%20Search.md)</b>|<b>[Pattern 16: Topological Sort (Graph)](./%E2%9C%85%20Pattern%2016:%20%F0%9F%94%8D%20Topological%20Sort%20(Graph).md)</b>|
 
+## Additional Resources
+Here are a few other resources that I found helpful when learning <b>Data Structures and Algorithms</b> using <b>JavaScript</b>
+
+- [Run JS](https://runjs.app/) - A JavaScript playground
+for your desktop
+- [Big O CheatSheet](https://www.bigocheatsheet.com/) - Reference for Big-O complexities of common algorithms
+- [Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) - For additional practice, the [Blind75 list](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) of interview questions is 🔥.  I would approach the questions in [this order](https://www.techinterviewhandbook.org/best-practice-questions)
+- [Edabit](https://edabit.com/) is a great resource if you need additional <b>Javascript<b> practice before you start using <b>leetcode</b>.
+- [LeetCode](https://leetcode.com/problemset/all/) of course
+😋
+- [Pramp](https://www.pramp.com/) - for mock interviews
+- [FreeCodeCamp's Algorithms](https://www.freecodecamp.org/learn/coding-interview-prep/#algorithms) - Extra practice, esp. the <b>Sort Algorithms</b> section.
+- [Build 15 JavaScript Projects - Vanilla JavaScript Course](https://www.youtube.com/watch?v=3PHXvlpOkf4) - for extra <b>Vanilla JavaScript/DOM Manipulation</b> practice.
+🌟 => Challenge Questions
+👩🏽‍🦯 => Questions from <b>Blind75</b>
+😐📖 => Questions taggged <b>FaceBook/Meta</b>
+🌴 => Questions from <b>Amazon</b>
+🔎 => Questions from <b>Google</b>
 ## [Pattern 1: Sliding Window](./✅%20%20Pattern%2001%20:%20Sliding%20Window.md)
 
-In many problems dealing with an array (or a LinkedList), we are asked to find or calculate something among all the contiguous subarrays (or sublists) of a given size. For example, take a look at this problem:
+In many problems dealing with an array (or a <b>LinkedList</b>), we are asked to find or calculate something among all the contiguous subarrays (or sublists) of a given size. For example, take a look at this problem:
 
-> Given an array, find the average of all contiguous subarrays of size ‘K’ in it.
+> Given an array, find the average of all contiguous subarrays of size `K` in it.
 
 Let’s understand this problem with a real input:
 
@@ -29,7 +47,7 @@ The efficient way to solve this problem would be to visualize each contiguous su
 
 ## [Pattern 2: Two Pointer](./✅%20%20Pattern%2002:%20Two%20Pointers.md)
 
-In problems where we deal with sorted arrays (or LinkedLists) and need to find a set of elements that fulfill certain constraints, the Two Pointers approach becomes quite useful. The set of elements could be a pair, a triplet or even a subarray. For example, take a look at the following problem:
+In problems where we deal with sorted arrays (or <b>LinkedList</b>s) and need to find a set of elements that fulfill certain constraints, the Two Pointers approach becomes quite useful. The set of elements could be a pair, a triplet or even a subarray. For example, take a look at the following problem:
 
 > Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.
 
@@ -41,11 +59,11 @@ Given that the input array is sorted, an efficient way would be to start with on
 
 ## [Pattern 3: Fast & Slow pointers](./✅%20%20Pattern%2003:%20Fast%20%26%20Slow%20pointers.md)
 
-The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses two pointers which move through the array (or sequence/LinkedList) at different speeds. This approach is quite useful when dealing with cyclic LinkedLists or arrays.
+The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise algorithm</b>, is a pointer algorithm that uses two pointers which move through the array (or sequence/<b>LinkedList</b>) at different speeds. This approach is quite useful when dealing with cyclic <b>LinkedList</b>s or arrays.
 
-By moving at different speeds (say, in a cyclic LinkedList), the algorithm proves that the two pointers are bound to meet. The fast pointer should catch the slow pointer once both the pointers are in a cyclic loop.
+By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the two pointers are bound to meet. The fast pointer should catch the slow pointer once both the pointers are in a cyclic loop.
 
-One of the famous problems solved using this technique was <b>Finding a cycle in a LinkedList</b>. Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
+One of the famous problems solved using this technique was <b>Finding a cycle in a <b>LinkedList</b></b>. Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
 
 ## [Pattern 4: Merge Intervals](./✅%20%20Pattern%2004%20:%20Merge%20Intervals.md)
 
@@ -75,7 +93,7 @@ For example, to efficiently sort the array, we can try placing each number in it
 
 In a lot of problems, we are asked to reverse the links between a set of nodes of a <b>LinkedList</b>. Often, the constraint is that we need to do this in-place, i.e., using the existing node objects and without using extra memory.
 
-<b>In-place Reversal of a LinkedList pattern</b> describes an efficient way to solve the above problem.
+<b>In-place Reversal of a <b>LinkedList</b> pattern</b> describes an efficient way to solve the above problem.
 
 ## [Pattern 7: Tree Breadth First Search](./✅%20%20Pattern%2007:%20Tree%20Breadth%20First%20Search.md)
 This pattern is based on the <b>Breadth First Search (BFS)</b> technique to traverse a tree.
@@ -107,7 +125,7 @@ As we know, whenever we are given a sorted <b>Array</b> or <b>LinkedList</b> or 
 
 ## [Pattern 13: Top 'K' Elements](./✅%20Pattern%2013:%20Top%20'K'%20Elements.md)
 
-Any problem that asks us to find the <b>top/smallest/frequent ‘K’ elements</b> among a given set falls under this pattern.
+Any problem that asks us to find the <b>top/smallest/frequent `K` elements</b> among a given set falls under this pattern.
 
 
 ### ❗ NOTE
@@ -126,7 +144,7 @@ In this pattern, we will go through a set of problems to develop an understandin
 
 After the recursive solution, we will modify our algorithm to apply advanced techniques of <b>Memoization</b> and <b>Bottom-Up Dynamic Programming</b> to develop a complete understanding of this pattern.
 
-## [Pattern 16: 🔍 Topological Sort (Graph)](./%E2%9C%85%20Pattern%2016:%20%F0%9F%94%8D%20Topological%20Sort%20(Graph).md)
+## [Pattern 16: 🔎 Topological Sort (Graph)](./%E2%9C%85%20Pattern%2016:%20%F0%9F%94%8D%20Topological%20Sort%20(Graph).md)
 <b>Topological Sort</b> is used to find a linear ordering of elements that have dependencies on each other. For example, if event `B` is dependent on event `A`, `A` comes before `B` in topological ordering.
 
 

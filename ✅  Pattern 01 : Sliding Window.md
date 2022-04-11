@@ -1,5 +1,5 @@
 # Pattern 1: Sliding Window
-In many problems dealing with an array (or a LinkedList), we are asked to find or calculate something among all the contiguous subarrays (or sublists) of a given size. For example, take a look at this problem:
+In many problems dealing with an array (or a <b>LinkedList</b>), we are asked to find or calculate something among all the contiguous subarrays (or sublists) of a given size. For example, take a look at this problem:
 
 ### Find Averages of Sub Arrays
 https://leetcode.com/problems/maximum-average-subarray-i/
@@ -31,7 +31,7 @@ function findAvgOfSubarrays(arr, K) {
 findAvgOfSubarrays([1, 3, 2, 6, -1, 4, 1, 8, 2], 5)
 ````
 
-<b>Time complexity: </b> Since for every element of the input array, we are calculating the sum of its next `‘K’` elements, the time complexity of the above algorithm will be `O(N*K)` where `‘N’` is the number of elements in the input array.
+<b>Time complexity: </b> Since for every element of the input array, we are calculating the sum of its next `K` elements, the time complexity of the above algorithm will be `O(N*K)` where `‘N’` is the number of elements in the input array.
 
 Can we find a better solution? Do you see any inefficiency in the above approach?
 
@@ -77,10 +77,10 @@ findAveragesOfSubarrays([1, 3, 2, 6, -1, 4, 1, 8, 2], 5)//[2.2, 2.8, 2.4, 3.6, 2
 ````
 ## Maximum Sum Subarray of Size K (easy)
 https://leetcode.com/problems/largest-subarray-length-k/
-> Given an array of positive numbers and a positive number `‘k’`, find the maximum sum of any contiguous subarray of size `‘k’`.
+> Given an array of positive numbers and a positive number `K`, find the maximum sum of any contiguous subarray of size `K`.
 ### Brute Force
 
-A basic brute force solution will be to calculate the sum of all `‘k’` sized subarrays of the given array to find the subarray with the highest sum. We can start from every index of the given array and add the next `‘k’` elements to find the subarray’s sum.
+A basic brute force solution will be to calculate the sum of all `K` sized subarrays of the given array to find the subarray with the highest sum. We can start from every index of the given array and add the next `K` elements to find the subarray’s sum.
 ````js
 function maxSubarrayOfSizeK(arr, k) {
   //brute force
@@ -109,7 +109,7 @@ max_sub_array_of_size_k(2, [2, 3, 4, 1, 5])//7
 - Time complexity will be `O(N*K)`, where `N` is the total number of elements in the given array
 
 ### Sliding Window Approach
-If you observe closely, you will realize that to calculate the sum of a contiguous subarray, we can utilize the sum of the previous subarray. For this, consider each subarray as a <b>Sliding Window</b> of size `‘k’`. To calculate the sum of the next subarray, we need to slide the window ahead by one element. So to slide the window forward and calculate the sum of the new position of the sliding window, we need to do two things:
+If you observe closely, you will realize that to calculate the sum of a contiguous subarray, we can utilize the sum of the previous subarray. For this, consider each subarray as a <b>Sliding Window</b> of size `K`. To calculate the sum of the next subarray, we need to slide the window ahead by one element. So to slide the window forward and calculate the sum of the new position of the sliding window, we need to do two things:
 1. Subtract the element going out of the sliding window, i.e., subtract the first element of the window.
 2. Add the new element getting included in the sliding window, i.e., the element coming right after the end of the window.
 
@@ -446,15 +446,15 @@ nonRepeatSubstring("abccde")//3
 ## Longest Substring with Same Letters after Replacement (hard)
 https://leetcode.com/problems/longest-repeating-character-replacement/
 
-> Given a string with lowercase letters only, if you are allowed to <b>replace no more than ‘k’ letters</b> with any letter, find the <b>length of the longest substring having the same letters</b> after replacement.
+> Given a string with lowercase letters only, if you are allowed to <b>replace no more than `K` letters</b> with any letter, find the <b>length of the longest substring having the same letters</b> after replacement.
 
 This problem follows the <b>Sliding Window pattern</b>, and we can use a similar dynamic sliding window strategy as discussed in <b>No-repeat Substring</b>. We can use a HashMap to count the frequency of each letter.
 
 - We will iterate through the string to add one letter at a time in the window.
 - We will also keep track of the count of the maximum repeating letter in any window (let’s call it `maxRepeatLetterCount`).
 - So, at any time, we know that we do have a window with one letter repeating `maxRepeatLetterCount` times; this means we should try to replace the remaining letters.
-  - If the remaining letters are less than or equal to `‘k’`, we can replace them all.
-  - If we have more than `‘k’` remaining letters, we should shrink the window as we cannot replace more than `‘k’` letters.
+  - If the remaining letters are less than or equal to `K`, we can replace them all.
+  - If we have more than `K` remaining letters, we should shrink the window as we cannot replace more than `K` letters.
 
 While shrinking the window, we don’t need to update `maxRepeatLetterCount` (hence, it represents the maximum repeating count of ANY letter for ANY window). Why don’t we need to update this count when we shrink the window? Since we have to replace all the remaining letters to get the longest substring having the same letter in any window, we can’t get a better answer from any other window even though all occurrences of the letter with frequency `maxRepeatLetterCount` is not in the current window.
 ````js
@@ -500,12 +500,12 @@ lengthOfLongestSubstring("abccde", 1)//3, Replace the 'b' or 'd' with 'c' to hav
 ## Longest Subarray with Ones after Replacement (hard)
 https://leetcode.com/problems/max-consecutive-ones-iii/
 
-> Given an array containing 0s and 1s, if you are allowed to <b>replace no more than ‘k’ 0s with 1s</b>, 
+> Given an array containing 0s and 1s, if you are allowed to <b>replace no more than `K` 0s with 1s</b>, 
 > find the length of the <b>longest contiguous subarray having all 1s</b>.
 
 This problem follows the <b>Sliding Window</b> pattern and is quite similar to <b>Longest Substring with same Letters after Replacement</b>. The only difference is that, in the problem, we only have two characters (1s and 0s) in the input arrays.
 
-Following a similar approach, we’ll iterate through the array to add one number at a time in the window. We’ll also keep track of the maximum number of repeating 1s in the current window (let’s call it `maxOnesCount`). So at any time, we know that we can have a window with 1s repeating `maxOnesCount` time, so we should try to replace the remaining 0s. If we have more than `‘k’` remaining 0s, we should shrink the window as we are not allowed to replace more than `‘k’` 0s.
+Following a similar approach, we’ll iterate through the array to add one number at a time in the window. We’ll also keep track of the maximum number of repeating 1s in the current window (let’s call it `maxOnesCount`). So at any time, we know that we can have a window with 1s repeating `maxOnesCount` time, so we should try to replace the remaining 0s. If we have more than `K` remaining 0s, we should shrink the window as we are not allowed to replace more than `K` 0s.
 
 ````js
 function lengthOfLongestSubstring (arr, k) {

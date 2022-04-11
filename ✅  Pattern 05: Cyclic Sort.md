@@ -172,7 +172,7 @@ findDuplicate([2, 4, 1, 4, 4])//4
 
 > Can we solve the above problem in `O(1)` space and without modifying the input array?
 
-While doing the cyclic sort, we realized that the array will have a cycle due to the duplicate number and that the start of the cycle will always point to the duplicate number. This means that we can use the <b>fast & the slow</b> pointer method to find the duplicate number or the start of the cycle similar to Start of LinkedList Cycle.
+While doing the cyclic sort, we realized that the array will have a cycle due to the duplicate number and that the start of the cycle will always point to the duplicate number. This means that we can use the <b>fast & the slow</b> pointer method to find the duplicate number or the start of the cycle similar to Start of <b>LinkedList</b> Cycle.
 ````js
 function findDuplicate(nums) {
   //using fast & slow pointer method
@@ -334,13 +334,13 @@ findFirstSmallestMissingPositive([3, 2, 5, 1])//4
 - The algorithm runs in constant space `O(1)`.
 ## 🌟 Find the First K Missing Positive Numbers (hard)
 https://leetcode.com/problems/kth-missing-positive-number/
-> Given an unsorted array containing numbers and a number `‘k’`, find the first `‘k’` missing positive numbers in the array.
+> Given an unsorted array containing numbers and a number `K`, find the first `K` missing positive numbers in the array.
 
-This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with <b>Find the Smallest Missing Positive Number</b>. The only difference is that, in this problem, we need to find the first `‘k’` missing numbers compared to only the first missing number.
+This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with <b>Find the Smallest Missing Positive Number</b>. The only difference is that, in this problem, we need to find the first `K` missing numbers compared to only the first missing number.
 
 We will follow a similar approach as discussed in <b>Find the Smallest Missing Positive Number</b> to place the numbers on their correct indices and ignore all numbers that are out of the range of the array. Once we are done with the cyclic sort we will iterate through the array to find indices that do not have the correct numbers.
 
-If we are not able to find `‘k’` missing numbers from the array, we need to add additional numbers to the output array. To find these additional numbers we will use the length of the array. For example, if the length of the array is `4`, the next missing numbers will be `4, 5, 6` and so on. One tricky aspect is that any of these additional numbers could be part of the array. Remember, while sorting, we ignored all numbers that are greater than or equal to the length of the array. So all indices that have the missing numbers could possibly have these additional numbers. To handle this, we must keep track of all numbers from those indices that have missing numbers. Let’s understand this with an example:
+If we are not able to find `K` missing numbers from the array, we need to add additional numbers to the output array. To find these additional numbers we will use the length of the array. For example, if the length of the array is `4`, the next missing numbers will be `4, 5, 6` and so on. One tricky aspect is that any of these additional numbers could be part of the array. Remember, while sorting, we ignored all numbers that are greater than or equal to the length of the array. So all indices that have the missing numbers could possibly have these additional numbers. To handle this, we must keep track of all numbers from those indices that have missing numbers. Let’s understand this with an example:
 ````
 nums: [2, 1, 3, 6, 5], k =2
 ````

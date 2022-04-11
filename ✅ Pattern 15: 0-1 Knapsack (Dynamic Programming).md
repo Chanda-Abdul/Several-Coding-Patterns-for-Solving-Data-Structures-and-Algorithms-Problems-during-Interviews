@@ -583,7 +583,7 @@ console.log(`Can partition: ${canPartition ([2, 3, 4, 6])}`)//False
 ````
 - The above solution the has time and space complexity of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
 
-## 🔍 Subset Sum (medium)
+## 🔎 Subset Sum (medium)
 https://www.techiedelight.com/subset-sum-problem/
 > Given a set of positive numbers, determine if a subset exists whose sum is equal to a given number `S`.
 
