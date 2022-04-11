@@ -4,7 +4,7 @@ In problems where we deal with sorted arrays (or <b>LinkedList</b>s) and need to
 
 > Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.
 
-To solve this problem, we can consider each element one by one (pointed out by the first pointer) and iterate through the remaining elements (pointed out by the second pointer) to find a pair with the given sum. The time complexity of this algorithm will be `O(N^2)` where `‘N’` is the number of elements in the input array.
+To solve this problem, we can consider each element one by one (pointed out by the first pointer) and iterate through the remaining elements (pointed out by the second pointer) to find a pair with the given sum. The time complexity of this algorithm will be `O(N^2)` where `N` is the number of elements in the input array.
 
 Given that the input array is sorted, an efficient way would be to start with one pointer in the beginning and another pointer at the end. At every step, we will see if the numbers pointed by the <b>two pointers</b> add up to the target sum. If they do not, we will do one of two things:
 1. If the sum of the two numbers pointed by the <b>two pointers</b> is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
@@ -62,13 +62,13 @@ function pairWithTargetSum(arr, target) {
 pairWithTargetSum([1, 2, 3, 4, 6], 6)//[1,3]
 pairWithTargetSum([2, 5, 9, 11], 11)//[0,2]
 ````
-- The time complexity of the above algorithm will be `O(N)`, where `‘N’` is the total number of elements in the given array.
+- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
 - The algorithm runs in constant space `O(1)`.
 
 ### ❗ Hash Table Solution 
 
-Instead of using a two-pointer or a binary search approach, we can utilize a <b>HashTable</b> to search for the required pair. We can iterate through the array one number at a time. Let’s say during our iteration we are at number `‘X’`, so we need to find `‘Y’` such that `“X + Y == Target”`. We will do two things here:
-1. Search for `‘Y’` (which is equivalent to `“Target - X”`) in the HashTable. If it is there, we have found the required pair.
+Instead of using a two-pointer or a binary search approach, we can utilize a <b>HashTable</b> to search for the required pair. We can iterate through the array one number at a time. Let’s say during our iteration we are at number `X`, so we need to find `Y` such that `“X + Y == Target”`. We will do two things here:
+1. Search for `Y` (which is equivalent to `“Target - X”`) in the HashTable. If it is there, we have found the required pair.
 2. Otherwise, insert `“X”` in the HashTable, so that we can search it for the later numbers.
 ````js
 function pair_with_targetsum(nums, target) {
@@ -101,8 +101,8 @@ pair_with_targetsum([3, 2, 4], 6)//[1, 2]
 pair_with_targetsum([3, 3], 6)//[0, 1]
 ````
 
-- The time complexity of the above algorithm will be `O(N)`, where `‘N’` is the total number of elements in the given array.
-- The space complexity will also be `O(N)`, as, in the worst case, we will be pushing `‘N’` numbers in the HashTable.
+- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
+- The space complexity will also be `O(N)`, as, in the worst case, we will be pushing `N` numbers in the HashTable.
 ## Remove Duplicates (easy)
 https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 
@@ -135,7 +135,7 @@ function removeDuplicates(arr) {
 removeDuplicates([2, 3, 3, 3, 6, 9, 9])//4, The first four elements after removing the duplicates will be [2, 3, 6, 9].
 removeDuplicates([2, 2, 2, 11])//2, The first two elements after removing the duplicates will be [2, 11].
 ````
-- The time complexity of the above algorithm will be `O(N)`, where `‘N’` is the total number of elements in the given array.
+- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
 - The algorithm runs in constant space `O(1)`.
 
 ### Remove Element
@@ -160,7 +160,7 @@ function removeElement(arr, key) {
 removeElement([3, 2, 3, 6, 3, 10, 9, 3], 3)//4, The first four elements after removing every 'Key' will be [2, 6, 10, 9].
 removeElement([2, 11, 2, 2, 1], 2)//2, The first four elements after removing every 'Key' will be [2, 6, 10, 9].
 ````
-- The time complexity of the above algorithm will be `O(N)`, where `‘N’` is the total number of elements in the given array.
+- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
 - The algorithm runs in constant space `O(1)`.
 
 ## Squaring a Sorted Array (easy)
@@ -215,7 +215,7 @@ https://leetcode.com/problems/3sum/
 
 This problem follows the <b>Two Pointers</b> pattern and shares similarities with [Pair with Target Sum](#🌴-pair-with-target-sum-aka-"two-sum"-easy). A couple of differences are that the input array is not sorted and instead of a pair we need to find triplets with a target sum of zero.
 
-To follow a similar approach, first, we will sort the array and then iterate through it taking one number at a time. Let’s say during our iteration we are at number `‘X’`, so we need to find `‘Y’` and `‘Z’` such that `X + Y + Z == 0`. At this stage, our problem translates into finding a pair whose sum is equal to `-X` (as from the above equation `Y + Z == -X`).
+To follow a similar approach, first, we will sort the array and then iterate through it taking one number at a time. Let’s say during our iteration we are at number `X`, so we need to find `Y` and `Z` such that `X + Y + Z == 0`. At this stage, our problem translates into finding a pair whose sum is equal to `-X` (as from the above equation `Y + Z == -X`).
 
 Another difference from [Pair with Target Sum](#🌴-pair-with-target-sum-aka-"two-sum"-easy) is that we need to find all the unique triplets. To handle this, we have to skip any duplicate number. Since we will be sorting the array, so all the duplicate numbers will be next to each other and are easier to skip.
 
@@ -347,7 +347,7 @@ https://leetcode.com/problems/3sum-smaller/
 
 This problem follows the <b>Two Pointers pattern</b> and shares similarities with <b>Triplet Sum to Zero</b>. The only difference is that, in this problem, we need to find the triplets whose sum is less than the given target. To meet the condition `i != j != k` we need to make sure that each number is not used more than once.
 
-Following a similar approach, first, we can sort the array and then iterate through it, taking one number at a time. Let’s say during our iteration we are at number `‘X’`, so we need to find `‘Y’` and `‘Z’` such that `X + Y + Z < target`. At this stage, our problem translates into finding a pair whose sum is less than `“target - X”` (as from the above equation `Y + Z == target - X`). We can use a similar approach as discussed in <b>Triplet Sum to Zero</b>.
+Following a similar approach, first, we can sort the array and then iterate through it, taking one number at a time. Let’s say during our iteration we are at number `X`, so we need to find `Y` and `Z` such that `X + Y + Z < target`. At this stage, our problem translates into finding a pair whose sum is less than `“target - X”` (as from the above equation `Y + Z == target - X`). We can use a similar approach as discussed in <b>Triplet Sum to Zero</b>.
 
 ````js
 function tripletWithSmallerSum (arr, target) {
@@ -431,10 +431,10 @@ https://leetcode.com/problems/subarray-product-less-than-k/
 
 > Given an array with positive numbers and a `targetSum`, find all of its contiguous subarrays whose <b>product is less than the `targetSum`</b>.
 
-This problem follows the <b>Sliding Window</b> and the <b>Two Pointers</b> pattern and shares similarities with <b>Triplets with Smaller Sum</b> with two differences:
+This problem follows the <b>Sliding Window</b> and the <b>Two Pointers</b> pattern and shares similarities with <b>[Triplets with Smaller Sum](#triplets-with-smaller-sum-medium)</b> with two differences:
 1. In this problem, the input array is not sorted.
 2. Instead of finding triplets with sum less than a target, we need to find all subarrays having a product less than the target.
-The implementation will be quite similar to <b>Triplets with Smaller Sum</b>.
+The implementation will be quite similar to <b>[Triplets with Smaller Sum](#triplets-with-smaller-sum-medium)</b>.
 
 ````js
 function findSubarrays(arr, target) {
@@ -471,13 +471,13 @@ findSubarrays([10, 5, 2, 6], 100)//The 8 subarrays that have product less than 1
 ## Dutch National Flag Problem (medium)
 https://leetcode.com/problems/sort-colors/
 
-> Given an array containing 0s, 1s and 2s, sort the array in-place. You should treat numbers of the array as objects, hence, we can’t count 0s, 1s, and 2s to recreate the array.
+> Given an array containing `0`s, `1`s and `2`s, sort the array in-place. You should treat numbers of the array as objects, hence, we can’t count `0`s, `1`s, and `2`s to recreate the array.
 
 The flag of the Netherlands consists of three colors: red, white and blue; and since our input array also consists of three different numbers that is why it is called <b>Dutch National Flag problem</b>.
 
-The brute force solution will be to use an in-place sorting algorithm like *Heapsort* which will take `O(N*logN)`. Can we do better than this? Is it possible to sort the array in one iteration?
+The brute force solution will be to use an <i>in-place</i> sorting algorithm like <i>Heapsort</i> which will take `O(N*logN)`. Can we do better than this? Is it possible to sort the array in one iteration?
 
-We can use a <b>Two Pointers</b> approach while iterating through the array. Let’s say the <b>two pointers</b> are called `low` and `high` which are pointing to the first and the last element of the array respectively. So while iterating, we will move all `0`s before `low` and all `2s` after `high` so that in the end, all `1s` will be between `low` and `high`.
+We can use a <b>Two Pointers</b> approach while iterating through the array. Let’s say the <b>two pointers</b> are called `low` and `high` which are pointing to the first and the last element of the array respectively. So while iterating, we will move all `0`s before `low` and all `2`s after `high` so that in the end, all `1`s will be between `low` and `high`.
 
 ````js
 function dutchFlagSort(arr) {
@@ -527,7 +527,7 @@ https://leetcode.com/problems/4sum/
 
 This problem follows the <b>Two Pointers</b> pattern and shares similarities with <b>[Triplet Sum to Zero](#🌟-triplet-sum-to-zero-medium)</b>.
 
-We can follow a similar approach to iterate through the array, taking one number at a time. At every step during the iteration, we will search for the quadruplets similar to <b>Triplet Sum to Zero</b> whose sum is equal to the given target.
+We can follow a similar approach to iterate through the array, taking one number at a time. At every step during the iteration, we will search for the quadruplets similar to <b>Triplet Sum to Zero</b> whose sum is equal to the given `target`.
 ````js
 function searchQuads (arr, target) {
   //sort the array
@@ -643,7 +643,7 @@ backspaceCompare("xy#z", "xyz#")//false, After applying backspaces the strings b
 backspaceCompare("xp#", "xyz##")//true, After applying backspaces the strings become "x" and "x" respectively.  In "xyz##", the first '#' removes the character 'z' and the second '#' removes the character 'y'.
 backspaceCompare("xywrrmp", "xywrrmu#p")//true, After applying backspaces the strings become "xywrrmp" and "xywrrmp" respectively.
 ````
-- The time complexity of the above algorithm will be `O(M+N)` where `‘M’` and `‘N’` are the lengths of the two input strings respectively.
+- The time complexity of the above algorithm will be `O(M+N)` where `M` and `N` are the lengths of the two input strings respectively.
 - The algorithm runs in constant space `O(1)`.
 
 ## 🌟 Minimum Window Sort (medium)
@@ -653,19 +653,19 @@ https://leetcode.com/problems/shortest-subarray-to-be-removed-to-make-array-sort
 
 As we know, once an array is sorted (in ascending order), the smallest number is at the beginning and the largest number is at the end of the array. So if we start from the beginning of the array to find the first element which is out of sorting order i.e., which is smaller than its previous element, and similarly from the end of array to find the first element which is bigger than its previous element, will sorting the subarray between these two numbers result in the whole array being sorted?
 
-Let’s try to understand this with Example-2 mentioned above. In the following array, what are the first numbers out of sorting order from the beginning and the end of the array:
+Let’s try to understand this with the Example mentioned above. In the following array, what are the first numbers out of sorting order from the beginning and the end of the array:
 
 ````
 [1, 3, 2, 0, -1, 7, 10]
 ````
-Starting from the beginning of the array the first number out of the sorting order is `‘2’` as it is smaller than its previous element which is `‘3’`.
-Starting from the end of the array the first number out of the sorting order is `‘0’` as it is bigger than its previous element which is `-1’`
+Starting from the beginning of the array the first number out of the sorting order is `2` as it is smaller than its previous element which is `3`.
+Starting from the end of the array the first number out of the sorting order is `0` as it is bigger than its previous element which is `-1`
 
-As you can see, sorting the numbers between `‘3’` and `-1’` will not sort the whole array. To see this, the following will be our original array after the sorted subarray:
+As you can see, sorting the numbers between `3` and `-1` will not sort the whole array. To see this, the following will be our original array after the sorted subarray:
 ````
 [1, -1, 0, 2, 3, 7, 10]
 ````
-The problem here is that the smallest number of our subarray is `-1’` which dictates that we need to include more numbers from the beginning of the array to make the whole array sorted. We will have a similar problem if the maximum of the subarray is bigger than some elements at the end of the array. To sort the whole array we need to include all such elements that are smaller than the biggest element of the subarray. So our final algorithm will look like:
+The problem here is that the smallest number of our subarray is `-1` which dictates that we need to include more numbers from the beginning of the array to make the whole array sorted. We will have a similar problem if the maximum of the subarray is bigger than some elements at the end of the array. To sort the whole array we need to include all such elements that are smaller than the biggest element of the subarray. So our final algorithm will look like:
 1. From the beginning and end of the array, find the first elements that are out of the sorting order. The two elements will be our candidate subarray.
 2. Find the maximum and minimum of this subarray.
 3. Extend the subarray from beginning to include any number which is bigger than the minimum of the subarray.
