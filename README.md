@@ -1,6 +1,6 @@
 # Several Coding Patterns for Solving Data Structures and Algorithms Problems during Interviews
 
-These are my JavaScript notes from a course that categorizes coding interview problems into a set of <b>16 patterns</b>. 
+These are my notes in <b>Javascript</b> from a course that categorizes coding interview problems into a set of <b>16 patterns</b>. 
 
 |   |   |
 |---|---|
@@ -27,15 +27,15 @@ for your desktop
 - [FreeCodeCamp's Algorithms](https://www.freecodecamp.org/learn/coding-interview-prep/#algorithms) - Extra practice, esp. the <b>Sort Algorithms</b> section.
 - [Build 15 JavaScript Projects - Vanilla JavaScript Course](https://www.youtube.com/watch?v=3PHXvlpOkf4) - for extra <b>Vanilla JavaScript/DOM Manipulation</b> practice.
 # 
-### 🌟 Challenge Questions
+#### 🌟 Challenge Questions
 
-### 👩🏽‍🦯 Questions from <b>[Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)</b>
+#### 👩🏽‍🦯 Questions from <b>[Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)</b>
 
-### 😐📖 Questions tagged <b>FaceBook/Meta</b>
+#### 😐📖 Questions tagged <b>FaceBook/Meta</b>
 
-### 🌴 Questions tagged <b>Amazon</b>
+#### 🌴 Questions tagged <b>Amazon</b>
 
-### 🔎 Questions tagged <b>Google</b>
+#### 🔎 Questions tagged <b>Google</b>
 ## [Pattern 1: Sliding Window](./✅%20%20Pattern%2001%20:%20Sliding%20Window.md)
 
 In many problems dealing with an array (or a <b>LinkedList</b>), we are asked to find or calculate something among all the contiguous subarrays (or sublists) of a given size. For example, take a look at this problem:
