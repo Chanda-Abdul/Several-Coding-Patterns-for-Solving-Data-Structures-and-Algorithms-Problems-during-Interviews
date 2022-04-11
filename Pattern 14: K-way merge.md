@@ -2,9 +2,9 @@
 
 This pattern helps us solve problems that involve a list of sorted arrays.
 
-Whenever we are given `K` sorted arrays, we can use a <b>Heap</b> to efficiently perform a sorted traversal of all the elements of all arrays. We can push the smallest (first) element of each sorted array in a <b>Min Heap</b> to get the overall minimum. While inserting elements to the <b>Min Heap</b> we keep track of which array the element came from. We can, then, remove the top element from the heap to get the smallest element and push the next element from the same array, to which this smallest element belonged, to the heap. We can repeat this process to make a sorted traversal of all elements.
+Whenever we are given `K` sorted arrays, we can use a <b>Heap</b> to efficiently perform a sorted traversal of all the elements of all arrays. We can push the smallest (first) element of each sorted array in a <b>Min Heap</b> to get the overall minimum. While inserting elements to the <b>Min Heap</b> we keep track of which array the element came from. We can, then, remove the top element from the <b>heap</b> to get the smallest element and push the next element from the same array, to which this smallest element belonged, to the <b>heap</b>. We can repeat this process to make a sorted traversal of all elements.
 
-## 👩‍🦯 🌴 Merge K Sorted Lists (medium)
+## 👩🏽‍🦯 🌴 😐📖 Merge K Sorted Lists (medium)
 
 https://leetcode.com/problems/merge-k-sorted-lists/
 
@@ -156,13 +156,13 @@ console.log(
 ````
 
 ### Similar Problems
-### 🔎 Median of Two Sorted Arrays
+### 🔎 🌴 Median of Two Sorted Arrays
 https://leetcode.com/problems/median-of-two-sorted-arrays/
 > Given `M` sorted arrays, find the median number among all arrays.
 
 <b>Solution:</b> This problem is similar to our parent problem with K=Median. So if there are `N` total numbers in all the arrays we need to find the `Kth` minimum number where `K=N/2`.
 
-### 👩‍🦯 🌴 Merge K Sorted Arrays
+### 👩🏽‍🦯 🌴 Merge K Sorted Arrays
 https://leetcode.com/problems/merge-k-sorted-lists/
 > Given a list of `K` sorted arrays, merge them into one sorted list.
 
@@ -282,9 +282,91 @@ console.log(
 
 
 ## Smallest Number Range (Hard)
-
 https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
-Given `M` sorted arrays, find the smallest range that includes at least one number from each of the `M` lists.
+
+> Given `M` sorted arrays, find the smallest range that includes at least one number from each of the `M` lists.
+
+This problem follows the [K-way merge pattern](#pattern-14-k-way-merge) and we can follow a similar approach as discussed in [Merge K Sorted Lists](#👩🏽‍🦯-🌴-merge-k-sorted-arrays).
+
+We can start by inserting the first number from all the arrays in a `min-heap()`. We will keep track of the largest number that we have inserted in the heap (let’s call it `currentMax`).
+
+In a loop, we’ll take the smallest (top) element from the `min-heap()` and `currentMax` has the largest element that we inserted in the heap. If these two numbers give us a smaller range, we’ll update our range. Finally, if the array of the top element has more elements, we’ll insert the next element to the heap.
+
+We can finish searching the minimum range as soon as an array is completed or, in other terms, the <b>heap</b> has less than `M` elements.
+
+````js
+class Heap {
+  constructor() {
+    this.arr = [];
+  }
+
+  size() {
+    return this.arr.length;
+  }
+
+  push(val) {
+    this.arr.push(val);
+    this.arr.sort((a, b) => a[0] - b[0]);
+  }
+
+  pop() {
+    return this.arr.shift();
+  }
+}
+
+function findSmallestRange(lists) {
+  let minHeap = new Heap();
+  let rangeStart = 0;
+  let rangeEnd = Infinity;
+  let maxNumber = -Infinity;
+
+   // put the first element of each array into the heap
+  for (let num of lists) {
+    minHeap.push([num[0], 0, num]);
+    maxNumber = Math.max(maxNumber, num[0]);
+  }
+
+  // take the smallest(top) element from the heap, if it gives us smaller range, update the ranges
+  // if the array of the top element has more elements, insert the next element in the heap
+  while (minHeap.size() == lists.length) {
+    let [num, i, list] = minHeap.pop();
+
+    if (rangeEnd - rangeStart > maxNumber - num) {
+      rangeStart = num;
+      rangeEnd = maxNumber;
+    }
+
+    if (list.length > i + 1) {
+       // insert the next element into the heap
+      minHeap.push([list[i + 1], i + 1, list]);
+      maxNumber = Math.max(maxNumber, list[i + 1]);
+    }
+  }
+  
+return [rangeStart, rangeEnd]
+};
+
+console.log(`Smallest range is: 
+${findSmallestRange([[1, 5, 8], [4, 12], [7, 8, 10]])}`)
+// The range [4, 7] includes 5 from L1, 4 from L2 and 7 from L3.
+
+console.log(`Smallest range is: 
+${findSmallestRange([[1, 9],[4, 12],[7, 10, 16]])}`)
+// The range [9, 12] includes 9 from L1, 12 from L2 and 10 from L3.
+
+console.log(`Smallest range is: 
+${findSmallestRange([[4,10,15,24,26],[0,9,12,20],[5,18,22,30]])}`)
+// [20,24]
+// List 1: [4, 10, 15, 24,26], 24 is in range [20,24].
+// List 2: [0, 9, 12, 20], 20 is in range [20,24].
+// List 3: [5, 18, 22, 30], 22 is in range [20,24].
+
+console.log(`Smallest range is: 
+${findSmallestRange(nums = [[1,2,3],[1,2,3],[1,2,3]])}`)
+// [1,1]
+````
+- Since, at most, we’ll be going through all the elements of all the arrays and will remove/add one element in the heap in each step, the time complexity of the above algorithm will be `O(N*logM)` where `N` is the total number of elements in all the `M` input arrays.
+- The space complexity will be `O(M)` because, at any time, our `min-heap()` will be store one number from all the `M` input arrays.
 
 ## 🌟 K Pairs with Largest Sums (Hard)
 

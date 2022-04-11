@@ -259,7 +259,7 @@ console.log(
 - Given `N` ropes, we need `O(N^2)` for the <b>Binary Search</b>.
 - The space complexity will be `O(1)` .
 
-## 👩‍🦯 Top 'K' Frequent Numbers (medium)
+## 👩🏽‍🦯 Top 'K' Frequent Numbers (medium)
 
 https://leetcode.com/problems/top-k-frequent-elements/
 

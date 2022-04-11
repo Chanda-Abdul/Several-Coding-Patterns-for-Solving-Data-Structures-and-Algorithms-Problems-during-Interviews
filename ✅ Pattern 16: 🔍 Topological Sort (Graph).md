@@ -164,7 +164,7 @@ if (sortedOrder.size() != vertices) // topological sort is not possible as the g
       return new ArrayList<>();
 ````
 
-## 👩‍🦯 Tasks Scheduling (medium)
+## 👩🏽‍🦯 Tasks Scheduling (medium)
 https://leetcode.com/problems/course-schedule/
 
 > There are `N` `tasks`, labeled from `0` to `N-1`. Each task can have some `prerequisite` tasks which need to be completed before it can be scheduled. Given the number of `tasks` and a list of `prerequisite` pairs, find out if it is possible to schedule all the `tasks`.
@@ -431,7 +431,7 @@ printOrders(6, [[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]])
 // 13) [1, 3, 2, 0, 4, 5]
 ````
 - If we don’t have any `prerequisites`, all combinations of the tasks can represent a <i>topological ordering</i>. As we know, that there can be `N` combinations for `N` numbers, therefore the <b>time and space complexity</b> of our algorithm will be `O(V! * E)` where `V` is the total number of `tasks` and `E` is the total `prerequisites`. We need the `E` part because in each recursive call, at max, we remove (and add back) all the edges.
-## 👩‍🦯 Alien Dictionary (hard)
+## 👩🏽‍🦯 Alien Dictionary (hard)
 https://leetcode.com/problems/alien-dictionary/
 > There is a dictionary containing `words` from an alien language for which we don’t know the ordering of the alphabets. Write a method to find the correct order of the alphabets in the alien language. It is given that the input is a valid dictionary and there exists an ordering among its alphabets.
 
