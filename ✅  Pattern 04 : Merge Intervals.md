@@ -441,7 +441,7 @@ Output: 2
 Explanation: We will need one room for [2,3] and [3,5], and another room for [2,4] and [4,5].
 ````
 
-Let’s take the above-mentioned example (4) and try to follow our <b>Merge Intervals</b> approach:
+Let’s take the example mentioned  above and try to follow our <b>Merge Intervals approach</b>:
 
 1. Sorting these meetings on their `startTime` will give us: `[[2,3], [2,4], [3,5], [4,5]]`
 2. Merging overlapping meetings:
@@ -460,7 +460,7 @@ Here is what our strategy will look like:
 4. If the next meeting `m3` is overlapping with `m2` we can’t use `r1`, so we will schedule it in another room (let’s call it `r2`).
 5. Now if the next meeting `m4` is overlapping with `m3`, we need to see if the room `r1` has become free. For this, we need to keep track of the `endTime` of the meeting happening in it. If the `endTime` of `m2` is before the `startTime` of `m4`, we can use that room `r1`, otherwise, we need to schedule `m4` in another room `r3`.
 
-We can conclude that we need to <b>keep track of the ending time of all the meetings currently happening</b> so that when we try to schedule a new meeting, we can see what meetings have already ended. We need to put this information in a data structure that can easily give us the smallest ending time. A <b>Min Heap</b> would fit our requirements best.
+We can conclude that we need to <b>keep track of the ending time of all the meetings currently happening</b> so that when we try to schedule a new meeting, we can see what meetings have already ended. We need to put this information in a data structure that can easily give us the smallest ending time. A <i>Min-Heap</i> would fit our requirements best.
 
 So our algorithm will look like this:
 
@@ -643,6 +643,6 @@ One fact that we are not utilizing is that each employee list is individually so
 How about we take the first interval of each employee and insert it in a <i>Min-Heap</i>. This <i>Min-Heap</i> can always give us the interval with the smallest `startTime`. Once we have the smallest start-time interval, we can then compare it with the next smallest start-time interval (again from the <i>Heap</i> to find the gap. This interval comparison is similar to what we suggested in the previous approach.
 
 Whenever we take an interval out of the <i>Min-Heap</i>, we can insert the same employee’s next interval. This also means that we need to know which interval belongs to which employee.
-- The above algorithm’s time complexity is `O(N*logK)`, where `N` is the total number of intervals, and `K` is the total number of employees. This is because we are iterating through the intervals only once (which will take `O(N)`), and every time we process an interval, we remove (and can insert) one interval in the` Min Heap`, (which will take `O(logK)`. At any time, the heap will not have more than `K` elements.
+- The above algorithm’s time complexity is `O(N*logK)`, where `N` is the total number of intervals, and `K` is the total number of employees. This is because we are iterating through the intervals only once (which will take `O(N)`), and every time we process an interval, we remove (and can insert) one interval in the <i>Min-Heap</i>, (which will take `O(logK)`. At any time, the heap will not have more than `K` elements.
 - The space complexity of the above algorithm will be `O(K)` as at any time, the heap will not have more than `K` elements.
 
