@@ -213,7 +213,7 @@ https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characte
 >
 >You can assume that `K` is less than or equal to the length of the given string.
 
-This problem follows the <b>Sliding Window pattern</b>, and we can use a similar dynamic <i>sliding window</i> strategy as discussed in <b>Smallest Subarray with a given sum</b>. We can use a <b>HashMap</b> to remember the frequency of each character we have processed. Here is how we will solve this problem:
+This problem follows the <b>Sliding Window pattern</b>, and we can use a similar dynamic <i>sliding window</i> strategy as discussed in <b>[Smallest Subarray with a given sum](#smallest-subarray-with-a-given-sum-easy)</b>. We can use a <b>HashMap</b> to remember the frequency of each character we have processed. Here is how we will solve this problem:
 
 1. First, we will insert characters from the beginning of the string until we have `K` distinct characters in the <b>HashMap</b>.
 2. These characters will constitute our <i>sliding window</i>. We are asked to find the longest such window having no more than `K` distinct characters. We will remember the length of this window as the longest window so far.
@@ -500,12 +500,12 @@ lengthOfLongestSubstring("abccde", 1)//3, Replace the 'b' or 'd' with 'c' to hav
 ## Longest Subarray with Ones after Replacement (hard)
 https://leetcode.com/problems/max-consecutive-ones-iii/
 
-> Given an array containing 0s and 1s, if you are allowed to <b>replace no more than `K` 0s with 1s</b>, 
-> find the length of the <b>longest contiguous subarray having all 1s</b>.
+> Given an array containing `0`'s and `1`'s, if you are allowed to <b>replace no more than `K` `0`'s with `1`'s</b>, 
+> find the length of the <b>longest contiguous subarray having all `1`'s</b>.
 
-This problem follows the <b>Sliding Window pattern</b> and is quite similar to <b>Longest Substring with same Letters after Replacement</b>. The only difference is that, in the problem, we only have two characters (1s and 0s) in the input arrays.
+This problem follows the <b>Sliding Window pattern</b> and is quite similar to <b>Longest Substring with same Letters after Replacement</b>. The only difference is that, in the problem, we only have two characters (`1`'s and `0`'s) in the input arrays.
 
-Following a similar approach, well iterate through the array to add one number at a time in the window. Well also keep track of the maximum number of repeating 1s in the current window (lets call it `maxOnesCount`). So at any time, we know that we can have a window with 1s repeating `maxOnesCount` time, so we should try to replace the remaining 0s. If we have more than `K` remaining 0s, we should shrink the window as we are not allowed to replace more than `K` 0s.
+Following a similar approach, well iterate through the array to add one number at a time in the window. Well also keep track of the maximum number of repeating `1`'s in the current window (lets call it `maxOnesCount`). So at any time, we know that we can have a window with `1`'s repeating `maxOnesCount` time, so we should try to replace the remaining `0`'s. If we have more than `K` remaining `0`'s, we should shrink the window as we are not allowed to replace more than `K` `0`'s.
 
 ````js
 function lengthOfLongestSubstring (arr, k) {
@@ -520,10 +520,10 @@ function lengthOfLongestSubstring (arr, k) {
     }
     
     //current window size is from windowStart to windowEnd, overall we have a 
-    //maximum of 1s repeating maxOnesCount times, this means we can have a window 
-    //with maxOnesCount 1s and the remaining are 0s which should replace with 1s
-    //now, if the remaining 0s are more that k, it is the time to shrink the 
-    //window as we are not allowed to replace more than k 0s
+    //maximum of `1`'s repeating maxOnesCount times, this means we can have a window 
+    //with maxOnesCount `1`'s and the remaining are `0`'s which should replace with `1`'s
+    //now, if the remaining `0`'s are more that k, it is the time to shrink the 
+    //window as we are not allowed to replace more than k `0`'s
     if((windowEnd - windowStart + 1 - maxOnesCount) > k) {
       if(arr[windowStart] === 1) {
         maxOnesCount--
@@ -537,8 +537,8 @@ function lengthOfLongestSubstring (arr, k) {
   return maxLength  
 }
 
-lengthOfLongestSubstring ([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2)//6, Replace the '0' at index 5 and 8 to have the longest contiguous subarray of 1s having length 6.
-lengthOfLongestSubstring ([0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], 3)//9, Replace the '0' at index 6, 9, and 10 to have the longest contiguous subarray of 1s having length 9.
+lengthOfLongestSubstring ([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2)//6, Replace the '0' at index 5 and 8 to have the longest contiguous subarray of `1`'s having length 6.
+lengthOfLongestSubstring ([0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], 3)//9, Replace the '0' at index 6, 9, and 10 to have the longest contiguous subarray of `1`'s having length 9.
 ````
 - The above algorithms time complexity will be `O(N)`, where `N` is the count of numbers in the input array.
 - The algorithm runs in constant space `O(1)`.
@@ -558,7 +558,7 @@ https://leetcode.com/problems/permutation-in-string/
 
 If a string has `n` distinct characters, it will have `n!` permutations.
 
-This problem follows the <b>Sliding Window pattern</b>, and we can use a similar <i>sliding window</i> strategy as discussed in <b>[Longest Substring with K Distinct Characters](#longest-substring-with-k-distinct-characters-medium)</b>. We can use a <b>HashMap</b> to remember the frequencies of all characters in the given pattern. Our goal will be to match all the characters from this <b>HashMap</b> with a sliding window in the given string. Here are the steps of our algorithm:
+This problem follows the <b>Sliding Window pattern</b>, and we can use a similar <i>sliding window</i> strategy as discussed in <b>[Longest Substring with K Distinct Characters](#longest-substring-with-k-distinct-characters-medium)</b>. We can use a <b>HashMap</b> to remember the frequencies of all characters in the given pattern. Our goal will be to match all the characters from this <b>HashMap</b> with a<i>sliding window</i>in the given string. Here are the steps of our algorithm:
 - Create a <b>HashMap</b> to calculate the frequencies of all characters in the pattern.
 - Iterate through the string, adding one character at a time in the <i>sliding window</i>.
 - If the character being added matches a character in the <b>HashMap</b>, decrement its frequency in the map. If the character frequency becomes zero, we got a complete match.
@@ -766,14 +766,14 @@ findSubstring("adcad", "abc")//"", No substring in the given string has all char
 ## 🌟 Words Concatenation (hard)
 https://leetcode.com/problems/substring-with-concatenation-of-all-words/
 
-Given a string and a list of words, find all the starting indices of substrings in the given string that are a <b>concatenation of all the given words</b> exactly once without any <b>overlapping of words</b>. It is given that all words are of the same length.
+Given a string and a list of `words`, find all the starting indices of substrings in the given string that are a <b>concatenation of all the given `words`</b> exactly once without any <b>overlapping of `words`</b>. It is given that all `words` are of the same length.
 
-This problem follows the <b>Sliding Window pattern</b> and has a lot of similarities with <b>[Maximum Sum Subarray of Size K](#maximum-sum-subarray-of-size-k-easy)</b>. We will keep track of all the words in a <b>HashMap</b> and try to match them in the given string. Here are the set of steps for our algorithm:
+This problem follows the <b>Sliding Window pattern</b> and has a lot of similarities with <b>[Maximum Sum Subarray of Size K](#maximum-sum-subarray-of-size-k-easy)</b>. We will keep track of all the `words` in a <b>HashMap</b> and try to match them in the given string. Here are the set of steps for our algorithm:
 1. Keep the frequency of every word in a <b>HashMap</b>.
-2. Starting from every index in the string, try to match all the words.
-3. In each iteration, keep track of all the words that we have already seen in another <b>HashMap</b>.
+2. Starting from every index in the string, try to match all the `words`.
+3. In each iteration, keep track of all the `words` that we have already seen in another <b>HashMap</b>.
 4. If a word is not found or has a higher frequency than required, we can move on to the next character in the string.
-5. Store the index if we have found all the words.
+5. Store the index if we have found all the `words`.
 
 ````js
 function findWordConcatenation(str, words) {
@@ -829,6 +829,6 @@ function findWordConcatenation(str, words) {
 findWordConcatenation("catfoxcat", ["cat", "fox"])//[0, 3], The two substring containing both the words are "catfox" & "foxcat".
 findWordConcatenation("catcatfoxfox", ["cat", "fox"])//[3], The only substring containing both the words is "catfox".
 ````
-- The time complexity of the above algorithm will be `O(N * M * Len)` where `N` is the number of characters in the given string, `M` is the total number of words, and `Len` is the length of a word.
-- The space complexity of the algorithm is `O(M)` since at most, we will be storing all the words in the two <b>HashMaps</b>. In the worst case, we also need `O(N)` space for the resulting list. So, the overall space complexity of the algorithm will be `O(M+N)`.
+- The time complexity of the above algorithm will be `O(N * M * Len)` where `N` is the number of characters in the given string, `M` is the total number of `words`, and `Len` is the length of a word.
+- The space complexity of the algorithm is `O(M)` since at most, we will be storing all the `words` in the two <b>HashMaps</b>. In the worst case, we also need `O(N)` space for the resulting list. So, the overall space complexity of the algorithm will be `O(M+N)`.
 
