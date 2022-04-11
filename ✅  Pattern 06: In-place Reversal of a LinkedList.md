@@ -1,8 +1,8 @@
 # Pattern 6: In-place Reversal of a LinkedList
 
-In a lot of problems, we are asked to reverse the links between a set of nodes of a <b>LinkedList</b>. Often, the constraint is that we need to do this in-place, i.e., using the existing node objects and without using extra memory.
+In a lot of problems, we are asked to reverse the links between a set of nodes of a <b>LinkedList</b>. Often, the constraint is that we need to do this </i>in-place</i>, i.e., using the existing node objects and without using extra memory.
 
-<b>In-place Reversal of a LinkedList pattern</b> describes an efficient way to solve the above problem.
+<b></i>in-place</i> Reversal of a LinkedList pattern</b> describes an efficient way to solve the above problem.
 
 ## Reverse a LinkedList (easy)
 https://leetcode.com/problems/reverse-linked-list/
@@ -62,14 +62,14 @@ console.log(`Nodes of original LinkedList are: ${head.printList()}`)
 console.log(`Nodes of reversed LinkedList are: ${reverse(head).printList()}`)
 ````
 
-- The time complexity of our algorithm will be `O(N)` where `N` is the total number of nodes in the <b>LinkedList</b>.
+- The time complexity of our algorithm will be `O(N)` where `N’` is the total number of nodes in the <b>LinkedList</b>.
 - We only used constant space, therefore, the space complexity of our algorithm is `O(1)`.
 
 ## Reverse a Sub-list (medium)
 https://leetcode.com/problems/reverse-linked-list-ii/
 > Given the head of a <b>LinkedList</b> and two positions `p` and `q`, reverse the <b>LinkedList</b> from position `p` to `q`.
 
-The problem follows the <b>In-place Reversal</b> of a <b>LinkedList</b> pattern. We can use a similar approach as discussed in <b>Reverse a LinkedList</b>. Here are the steps we need to follow:
+The problem follows the <b></i>in-place</i> Reversal</b> of a <b>LinkedList</b> pattern. We can use a similar approach as discussed in <b>Reverse a LinkedList</b>. Here are the steps we need to follow:
 1. Skip the first `p-1` nodes, to reach the node at position `p`.
 2. Remember the node at position `p-1` to be used later to connect with the reversed sub-list.
 3. Next, reverse the nodes from `p` to `q` using the same approach discussed in <b>Reverse a LinkedList</b>.
@@ -187,7 +187,7 @@ https://leetcode.com/problems/reverse-nodes-in-k-group/
 > Given the head of a <b>LinkedList</b> and a number ‘k’, <b>reverse every ‘k’ sized sub-list</b> starting from the head.
 > If, in the end, you are left with a sub-list with less than ‘k’ elements, reverse it too.
 
-The problem follows the <b>In-place Reversal of a LinkedList</b> pattern and is quite similar to <b>Reverse a Sub-list</b>. The only difference is that we have to reverse all the sub-lists. We can use the same approach, starting with the first sub-list (i.e. `p=1, q=k`) and keep reversing all the sublists of size ‘k’.
+The problem follows the <b></i>in-place</i> Reversal of a LinkedList</b> pattern and is quite similar to <b>Reverse a Sub-list</b>. The only difference is that we have to reverse all the sub-lists. We can use the same approach, starting with the first sub-list (i.e. `p=1, q=k`) and keep reversing all the sublists of size ‘k’.
 
 ````js
 class Node {
@@ -275,7 +275,7 @@ console.log(`Nodes of reversed LinkedList are: ${reverseEveryKElements(head, 3).
 > 
 > If, in the end, you are left with a sub-list with less than `K` elements, reverse it too.
 
-The problem follows the <b>In-place Reversal of a LinkedList</b> pattern and is quite similar to <b>Reverse every K-element Sub-list</b>. The only difference is that we have to skip `K` alternating elements. We can follow a similar approach, and in each iteration after reversing `K` elements, we will skip the next `K` elements.
+The problem follows the <b></i>in-place</i> Reversal of a LinkedList</b> pattern and is quite similar to <b>Reverse every K-element Sub-list</b>. The only difference is that we have to skip `K` alternating elements. We can follow a similar approach, and in each iteration after reversing `K` elements, we will skip the next `K` elements.
 
 ````class Node {
   constructor(value, next = null) {
@@ -359,7 +359,7 @@ process.stdout.write('Nodes of reversed LinkedList are: ');
 result.printList();
 ````
 
-- The time complexity of our algorithm will be `O(N)`where  `N` is the total number of nodes in the <b>LinkedList</b>.
+- The time complexity of our algorithm will be `O(N)`where  `N’` is the total number of nodes in the <b>LinkedList</b>.
 - We only used constant space, therefore, the space complexity of our algorithm is `O(1)`.
 ## 🌟 Rotate a LinkedList (medium)
 https://leetcode.com/problems/rotate-list/
@@ -433,5 +433,5 @@ head.next.next.next.next.next = new Node(6)
 console.log(`Nodes of original LinkedList are: ${head.getList()}`)
 console.log(`Nodes of rotated LinkedList are: ${rotate(head, 3).getList()}`)
 ````
-- The time complexity of our algorithm will be `O(N)` where `N` is the total number of nodes in the <b>LinkedList</b>.
+- The time complexity of our algorithm will be `O(N)` where `N’` is the total number of nodes in the <b>LinkedList</b>.
 - We only used constant space, therefore, the space complexity of our algorithm is `O(1)`.

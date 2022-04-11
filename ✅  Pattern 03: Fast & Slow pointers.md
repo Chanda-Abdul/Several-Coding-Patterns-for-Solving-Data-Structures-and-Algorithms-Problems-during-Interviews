@@ -223,7 +223,7 @@ https://leetcode.com/problems/happy-number/
 
 Any number will be called a <b>happy number</b> if, after repeatedly replacing it with a number equal to the <b>sum of the square of all of its digits, leads us to number `1`</b>. All other <b>(not-happy)</b> numbers will never reach `1`. Instead, they will be stuck in a cycle of numbers which does not include `1`.
 
-The process, defined above, to find out if a number is a <b>happy number</b> or not, always ends in a cycle. If the number is a <b>happy number</b>, the process will be stuck in a cycle on number ‘1,’ and if the number is not a <b>happy number</b> then the process will be stuck in a cycle with a set of numbers. As we saw in Example-2 while determining if ‘12’ is a <b>happy number</b> or not, our process will get stuck in a cycle with the following numbers: `89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89`
+The process, defined above, to find out if a number is a <b>happy number</b> or not, always ends in a cycle. If the number is a <b>happy number</b>, the process will be stuck in a cycle on number `1`, and if the number is not a <b>happy number</b> then the process will be stuck in a cycle with a set of numbers. As we saw in Example-2 while determining if `12` is a <b>happy number</b> or not, our process will get stuck in a cycle with the following numbers: `89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89`
 
 We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a cycle among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same <i>fast</i> & <i>slow pointer</i> strategy to find the cycle and once the cycle is found, we will see if the cycle is stuck on number `1` to find out if the number is happy or not.
 
@@ -281,7 +281,7 @@ function findSquareSum(num) {
 11. 1² + 6² = 1 + 36 = 37
 12. 3² + 7² = 9 + 49 = 58
 13. 5² + 8²= 25 + 64 = 89
-Step ‘13’ leads us back to step ‘5’ as the number becomes equal to ‘89’, this means that we can never reach `1`, therefore, ‘12’ is not a <b>happy number</b>.
+Step `13` leads us back to step `5` as the number becomes equal to `89’, this means that we can never reach `1`, therefore, `12` is not a <b>happy number</b>.
 
 `findHappyNumber(19)//true`
 
@@ -298,8 +298,8 @@ Step ‘13’ leads us back to step ‘5’ as the number becomes equal to ‘89
 - The time complexity of the algorithm is difficult to determine. However we know the fact that all <b>unhappy number</b>s eventually get stuck in the cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4
 
 This sequence behavior tells us two things:
-1. If the number `N` is less than or equal to 1000, then we reach the cycle or `1` in at most 1001 steps.
-2. For `N > 1000`, suppose the number has `M` digits and the next number is `N1`. From the above Wikipedia link, we know that the sum of the squares of the digits of `N` is at most 9²M, or `81M`(this will happen when all digits of `N` are `9`).
+1. If the number `N` is less than or equal to `1000`, then we reach the cycle or `1` in at most `1001` steps.
+2. For `N > 1000`, suppose the number has `M` digits and the next number is `N1`. From the above Wikipedia link, we know that the sum of the squares of the digits of `N` is at most `9²M`, or `81M`(this will happen when all digits of `N` are `9`).
 
 This means:
 1. `N1 < 81M`
@@ -458,9 +458,9 @@ console.log(`Is palindrome: ${isPalindromicLinkedList(head)}`)
 https://leetcode.com/problems/reorder-list/
 
 
-> Given the head of a Singly <b>LinkedList</b>, write a method to modify the <b>LinkedList</b> such that the <b>nodes from the second half of the <b>LinkedList</b> are inserted alternately to the nodes from the first half in reverse order</b>. So if the <b>LinkedList</b> has nodes 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null, your method should return 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> null.
+> Given the head of a Singly <b>LinkedList</b>, write a method to modify the <b>LinkedList</b> such that the <b>nodes from the second half of the <b>LinkedList</b> are inserted alternately to the nodes from the first half in reverse order</b>. So if the <b>LinkedList</b> has nodes `1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null`, your method should return `1 -> 6 -> 2 -> 5 -> 3 -> 4 -> null`.
 >
-> Your algorithm should not use any extra space and the input <b>LinkedList</b> should be modified in-place.
+> Your algorithm should not use any extra space and the input <b>LinkedList</b> should be modified </i>in-place</i>.
 
 ### Example 1:
 ````
@@ -561,7 +561,7 @@ head.printList()
 ## 🌟 Cycle in a Circular Array (hard)
 https://leetcode.com/problems/circular-array-loop/
 
-We are given an array containing positive and negative numbers. Suppose the array contains a number ‘M’ at a particular index. Now, if ‘M’ is positive we will move forward ‘M’ indices and if ‘M’ is negative move backwards ‘M’ indices. You should assume that the <b>array is circular</b> which means two things:
+We are given an array containing positive and negative numbers. Suppose the array contains a number `M` at a particular index. Now, if `M` is positive we will move forward `M` indices and if `M` is negative move backwards `M` indices. You should assume that the <b>array is circular</b> which means two things:
 1. If, while moving forward, we reach the end of the array, we will jump to the first element to continue the movement.
 2. If, while moving backward, we reach the beginning of the array, we will jump to the last element to continue the movement.
 Write a method to determine <b>if the array has a cycle</b>. The cycle should have more than one element and should follow one direction which means the cycle should not contain both forward and backward movements.

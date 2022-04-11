@@ -106,9 +106,9 @@ pair_with_targetsum([3, 3], 6)//[0, 1]
 ## Remove Duplicates (easy)
 https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 
-> Given an array of sorted numbers, <b>remove all duplicates</b> from it. You should <b>not use any extra space</b>; after removing the duplicates in-place return the length of the subarray that has no duplicate in it.
+> Given an array of sorted numbers, <b>remove all duplicates</b> from it. You should <b>not use any extra space</b>; after removing the duplicates </i>in-place</i> return the length of the subarray that has no duplicate in it.
 
-In this problem, we need to remove the duplicates in-place such that the resultant length of the array remains sorted. As the input array is sorted, therefore, one way to do this is to shift the elements left whenever we encounter duplicates. In other words, we will keep one pointer for iterating the array and one pointer for placing the next non-duplicate number. So our algorithm will be to iterate the array and whenever we see a non-duplicate number we move it next to the last non-duplicate number we’ve seen.
+In this problem, we need to remove the duplicates </i>in-place</i> such that the resultant length of the array remains sorted. As the input array is sorted, therefore, one way to do this is to shift the elements left whenever we encounter duplicates. In other words, we will keep one pointer for iterating the array and one pointer for placing the next non-duplicate number. So our algorithm will be to iterate the array and whenever we see a non-duplicate number we move it next to the last non-duplicate number we’ve seen.
 
 * Assume the input is sorted
 ````js
@@ -141,7 +141,7 @@ removeDuplicates([2, 2, 2, 11])//2, The first two elements after removing the du
 ### Remove Element
 https://leetcode.com/problems/remove-element/
 
-> Given an unsorted array of numbers and a target `key`, remove all instances of `key` in-place and return the new length of the array.
+> Given an unsorted array of numbers and a target `key`, remove all instances of `key` </i>in-place</i> and return the new length of the array.
 
 ````js
 function removeElement(arr, key) {
@@ -388,7 +388,7 @@ tripletWithSmallerSum ([], 0)//0
 tripletWithSmallerSum ([0], 0)//0
 ````
 - Sorting the array will take `O(N * logN)`. The `searchPair()` will take `O(N)`. So, overall `searchTriplets()` will take `O(N * logN + N^2)`, which is asymptotically equivalent to `O(N^2)`.
-- The space complexity of the above algorithm will be `O(N)` which is required for sorting if we are not using an in-place sorting algorithm.
+- The space complexity of the above algorithm will be `O(N)` which is required for sorting if we are not using an </i>in-place</i> sorting algorithm.
 
 > Write a function to return the list of all such triplets instead of the count. How will the time complexity change in this case?
 
@@ -471,7 +471,7 @@ findSubarrays([10, 5, 2, 6], 100)//The 8 subarrays that have product less than 1
 ## Dutch National Flag Problem (medium)
 https://leetcode.com/problems/sort-colors/
 
-> Given an array containing `0`s, `1`s and `2`s, sort the array in-place. You should treat numbers of the array as objects, hence, we can’t count `0`s, `1`s, and `2`s to recreate the array.
+> Given an array containing `0`s, `1`s and `2`s, sort the array </i>in-place</i>. You should treat numbers of the array as objects, hence, we can’t count `0`s, `1`s, and `2`s to recreate the array.
 
 The flag of the Netherlands consists of three colors: red, white and blue; and since our input array also consists of three different numbers that is why it is called <b>Dutch National Flag problem</b>.
 
