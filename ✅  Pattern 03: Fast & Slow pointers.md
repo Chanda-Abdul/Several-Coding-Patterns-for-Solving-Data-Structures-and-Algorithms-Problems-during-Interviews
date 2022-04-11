@@ -4,20 +4,20 @@ The <b>Fast & Slow</b> pointer approach, also known as the <b>Hare & Tortoise al
 
 By moving at different speeds (say, in a cyclic <b>LinkedList</b>), the algorithm proves that the two pointers are bound to meet. The <i>fast pointer</i> should catch the <i>slow pointer</i> once both the pointers are in a cyclic loop.
 
-One of the famous problems solved using this technique was <b>Finding a</i>cycle</i>in a LinkedList</b>. Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
+One of the famous problems solved using this technique was <b>Finding a <i>cycle</i> in a LinkedList</b>. Let’s jump onto this problem to understand the <b>Fast & Slow</b> pattern.
 
 ## LinkedList Cycle (easy)
 https://leetcode.com/problems/linked-list-cycle/
 
 > Given the head of a <b>Singly LinkedList</b>, write a function to determine if the <b>LinkedList</b> has a </b>cycle</b> in it or not.
 
-Imagine two racers running in a circular racing track. If one racer is faster than the other, the faster racer is bound to catch up and cross the slower racer from behind. We can use this fact to devise an algorithm to determine if a <b>LinkedList</b> has a </i>cycle</i> in it or not.
+Imagine two racers running in a circular racing track. If one racer is faster than the other, the faster racer is bound to catch up and cross the slower racer from behind. We can use this fact to devise an algorithm to determine if a <b>LinkedList</b> has a  <i>cycle</i>  in it or not.
 
 Imagine we have a slow and a <i>fast pointer</i> to traverse the <b>LinkedList</b>. In each iteration, the <i>slow pointer</i> moves one step and the <i>fast pointer</i> moves two steps. This gives us two conclusions:
-1. If the <b>LinkedList</b> doesn’t have a </i>cycle</i> in it, the <i>fast pointer</i> will reach the end of the <b>LinkedList</b> before the <i>slow pointer</i> to reveal that there is no </i>cycle</i> in the <b>LinkedList</b>.
-2. The <i>slow pointer</i> will never be able to catch up to the <i>fast pointer</i> if there is no </i>cycle</i> in the <b>LinkedList</b>.
+1. If the <b>LinkedList</b> doesn’t have a  <i>cycle</i>  in it, the <i>fast pointer</i> will reach the end of the <b>LinkedList</b> before the <i>slow pointer</i> to reveal that there is no  <i>cycle</i>  in the <b>LinkedList</b>.
+2. The <i>slow pointer</i> will never be able to catch up to the <i>fast pointer</i> if there is no  <i>cycle</i>  in the <b>LinkedList</b>.
 
-If the <b>LinkedList</b> has a cycle, the <i>fast pointer</i> enters the </i>cycle</i> first, followed by the <i>slow pointer</i>. After this, both pointers will keep moving in the </i>cycle</i> infinitely. If at any stage both of these pointers meet, we can conclude that the <b>LinkedList</b> has a </i>cycle</i> in it. Let’s analyze if it is possible for the two pointers to meet. When the <i>fast pointer</i> is approaching the <i>slow pointer</i> from behind we have two possibilities:
+If the <b>LinkedList</b> has a cycle, the <i>fast pointer</i> enters the  <i>cycle</i>  first, followed by the <i>slow pointer</i>. After this, both pointers will keep moving in the  <i>cycle</i>  infinitely. If at any stage both of these pointers meet, we can conclude that the <b>LinkedList</b> has a  <i>cycle</i>  in it. Let’s analyze if it is possible for the two pointers to meet. When the <i>fast pointer</i> is approaching the <i>slow pointer</i> from behind we have two possibilities:
 1. The <i>fast pointer</i> is one step behind the <i>slow pointer</i>.
 2. The <i>fast pointer</i> is two steps behind the <i>slow pointer</i>.
 
@@ -70,7 +70,7 @@ console.log(`LinkedList has cycle: ${hasCycle(head)}`)
 
 > Given the head of a LinkedList with a cycle, find the length of the cycle.
 
-Once the fast and <i>slow pointers</i> meet, we can save the <i>slow pointer</i> and iterate the whole </i>cycle</i> with another pointer until we see the <i>slow pointer</i> again to find the length of the cycle.
+Once the fast and <i>slow pointers</i> meet, we can save the <i>slow pointer</i> and iterate the whole  <i>cycle</i>  with another pointer until we see the <i>slow pointer</i> again to find the length of the cycle.
 
 ````js
 class Node {
@@ -132,13 +132,13 @@ https://leetcode.com/problems/linked-list-cycle-ii/
 
 > Given the head of a <b>Singly LinkedList</b> that contains a cycle, write a function to find the <b>starting node of the cycle</b>.
 
-If we know the length of the <b>LinkedList</b> cycle, we can find the start of the </i>cycle</i> through the following steps:
+If we know the length of the <b>LinkedList</b> cycle, we can find the start of the  <i>cycle</i>  through the following steps:
 1. Take two pointers. Let’s call them `pointer1` and `pointer2`.
 2. Initialize both pointers to point to the start of the <b>LinkedList</b>.
-3. We can find the length of the <b>LinkedList</b> </i>cycle</i> using the approach discussed in <b>LinkedList Cycle</b>. Let’s assume that the length of the </i>cycle</i> is `K` nodes.
+3. We can find the length of the <b>LinkedList</b>  <i>cycle</i>  using the approach discussed in <b>LinkedList Cycle</b>. Let’s assume that the length of the  <i>cycle</i>  is `K` nodes.
 4. Move `pointer2` ahead by `K` nodes.
 5. Now, keep incrementing `pointer1` and `pointer2` until they both meet.
-6. As `pointer2` is `K` nodes ahead of `pointer1`, which means, `pointer2` must have completed one loop in the </i>cycle</i> when both pointers meet. Their meeting point will be the start of the cycle.
+6. As `pointer2` is `K` nodes ahead of `pointer1`, which means, `pointer2` must have completed one loop in the  <i>cycle</i>  when both pointers meet. Their meeting point will be the start of the cycle.
 ````js
 class Node {
   constructor(value, next = null) {
@@ -215,17 +215,17 @@ head.next.next.next.next.next.next = head
 console.log(`LinkedList cycle start: ${findCycleStart(head).value}`)
 ````
 
-- As we know, finding the </i>cycle</i> in a <b>LinkedList</b> with `N` nodes and also finding the length of the </i>cycle</i> requires `O(N)`. Also, as we saw in the above algorithm, we will need `O(N)` to find the start of the cycle. Therefore, the overall time complexity of our algorithm will be `O(N)`.
+- As we know, finding the  <i>cycle</i>  in a <b>LinkedList</b> with `N` nodes and also finding the length of the  <i>cycle</i>  requires `O(N)`. Also, as we saw in the above algorithm, we will need `O(N)` to find the start of the cycle. Therefore, the overall time complexity of our algorithm will be `O(N)`.
 - The algorithm runs in constant space `O(1)`.
 
 ## Happy Number (medium)
 https://leetcode.com/problems/happy-number/
 
-Any number will be called a <b>happy number</b> if, after repeatedly replacing it with a number equal to the <b>sum of the square of all of its digits, leads us to number `1`</b>. All other <b>(not-happy)</b> numbers will never reach `1`. Instead, they will be stuck in a </i>cycle</i> of numbers which does not include `1`.
+Any number will be called a <b>happy number</b> if, after repeatedly replacing it with a number equal to the <b>sum of the square of all of its digits, leads us to number `1`</b>. All other <b>(not-happy)</b> numbers will never reach `1`. Instead, they will be stuck in a  <i>cycle</i>  of numbers which does not include `1`.
 
-The process, defined above, to find out if a number is a <b>happy number</b> or not, always ends in a cycle. If the number is a <b>happy number</b>, the process will be stuck in a </i>cycle</i> on number `1`, and if the number is not a <b>happy number</b> then the process will be stuck in a </i>cycle</i> with a set of numbers. As we saw in Example-2 while determining if `12` is a <b>happy number</b> or not, our process will get stuck in a </i>cycle</i> with the following numbers: `89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89`
+The process, defined above, to find out if a number is a <b>happy number</b> or not, always ends in a cycle. If the number is a <b>happy number</b>, the process will be stuck in a  <i>cycle</i>  on number `1`, and if the number is not a <b>happy number</b> then the process will be stuck in a  <i>cycle</i>  with a set of numbers. As we saw in Example-2 while determining if `12` is a <b>happy number</b> or not, our process will get stuck in a  <i>cycle</i>  with the following numbers: `89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89`
 
-We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a </i>cycle</i> among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same <i>fast</i> & <i>slow pointer</i> strategy to find the </i>cycle</i> and once the </i>cycle</i> is found, we will see if the </i>cycle</i> is stuck on number `1` to find out if the number is happy or not.
+We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a  <i>cycle</i>  among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same <i>fast</i> & <i>slow pointer</i> strategy to find the  <i>cycle</i>  and once the  <i>cycle</i>  is found, we will see if the  <i>cycle</i>  is stuck on number `1` to find out if the number is happy or not.
 
 ````js
 function findHappyNumber(num) {
@@ -298,7 +298,7 @@ Step `13` leads us back to step `5` as the number becomes equal to `89’, this 
 - The time complexity of the algorithm is difficult to determine. However we know the fact that all <b>unhappy number</b>s eventually get stuck in the cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4
 
 This sequence behavior tells us two things:
-1. If the number `N` is less than or equal to `1000`, then we reach the </i>cycle</i> or `1` in at most `1001` steps.
+1. If the number `N` is less than or equal to `1000`, then we reach the  <i>cycle</i>  or `1` in at most `1001` steps.
 2. For `N > 1000`, suppose the number has `M` digits and the next number is `N1`. From the above Wikipedia link, we know that the sum of the squares of the digits of `N` is at most `9²M`, or `81M`(this will happen when all digits of `N` are `9`).
 
 This means:
@@ -564,7 +564,7 @@ https://leetcode.com/problems/circular-array-loop/
 We are given an array containing positive and negative numbers. Suppose the array contains a number `M` at a particular index. Now, if `M` is positive we will move forward `M` indices and if `M` is negative move backwards `M` indices. You should assume that the <b>array is circular</b> which means two things:
 1. If, while moving forward, we reach the end of the array, we will jump to the first element to continue the movement.
 2. If, while moving backward, we reach the beginning of the array, we will jump to the last element to continue the movement.
-Write a method to determine <b>if the array has a cycle</b>. The </i>cycle</i> should have more than one element and should follow one direction which means the </i>cycle</i> should not contain both forward and backward movements.
+Write a method to determine <b>if the array has a cycle</b>. The  <i>cycle</i>  should have more than one element and should follow one direction which means the  <i>cycle</i>  should not contain both forward and backward movements.
 
 ### Example 1:
 ````
@@ -585,11 +585,11 @@ Output: false
 Explanation: The array does not have any cycle.
 ````
 
-This problem involves finding a </i>cycle</i> in the array and, as we know, the <b>Fast & Slow pointer</b> method is an efficient way to do that. We can start from each index of the array to find the cycle. If a number does not have a </i>cycle</i> we will move forward to the next element. There are a couple of additional things we need to take care of:
+This problem involves finding a  <i>cycle</i>  in the array and, as we know, the <b>Fast & Slow pointer</b> method is an efficient way to do that. We can start from each index of the array to find the cycle. If a number does not have a  <i>cycle</i>  we will move forward to the next element. There are a couple of additional things we need to take care of:
 
-1. As mentioned in the problem, the </i>cycle</i> should have more than one element. This means that when we move a pointer forward, if the pointer points to the same element after the move, we have a one-element cycle. Therefore, we can finish our </i>cycle</i> search for the current element.
+1. As mentioned in the problem, the  <i>cycle</i>  should have more than one element. This means that when we move a pointer forward, if the pointer points to the same element after the move, we have a one-element cycle. Therefore, we can finish our  <i>cycle</i>  search for the current element.
 
-2. The other requirement mentioned in the problem is that the </i>cycle</i> should not contain both forward and backward movements. We will handle this by remembering the direction of each element while searching for the cycle. If the number is positive, the direction will be forward and if the number is negative, the direction will be backward. So whenever we move a pointer forward, if there is a change in the direction, we will finish our </i>cycle</i> search right there for the current element.
+2. The other requirement mentioned in the problem is that the  <i>cycle</i>  should not contain both forward and backward movements. We will handle this by remembering the direction of each element while searching for the cycle. If the number is positive, the direction will be forward and if the number is negative, the direction will be backward. So whenever we move a pointer forward, if there is a change in the direction, we will finish our  <i>cycle</i>  search right there for the current element.
 
 ````js
 function circularArrayLoopExists(arr) {
@@ -648,7 +648,7 @@ circularArrayLoopExists([2, 2, -1, 2])
 circularArrayLoopExists([2, 1, -1, -2])
 ````
 
-- The above algorithm will have a time complexity of `O(N²)` where `N` is the number of elements in the array. This complexity is due to the fact that we are iterating all elements of the array and trying to find a </i>cycle</i> for each element.
+- The above algorithm will have a time complexity of `O(N²)` where `N` is the number of elements in the array. This complexity is due to the fact that we are iterating all elements of the array and trying to find a  <i>cycle</i>  for each element.
 - The algorithm runs in constant space `O(1)`.
 #### An Alternate Approach
-In our algorithm, we don’t keep a record of all the numbers that have been evaluated for </i>cycles</i>. We know that all such numbers will not produce a </i>cycle</i> for any other instance as well. If we can remember all the numbers that have been visited, our algorithm will improve to `O(N)` as, then, each number will be evaluated for </i>cycles</i> only once. We can keep track of this by creating a separate array, however, in this case, the space complexity of our algorithm will increase to `O(N)`.
+In our algorithm, we don’t keep a record of all the numbers that have been evaluated for  <i>cycle</i> . We know that all such numbers will not produce a  <i>cycle</i>  for any other instance as well. If we can remember all the numbers that have been visited, our algorithm will improve to `O(N)` as, then, each number will be evaluated for  <i>cycle</i>  only once. We can keep track of this by creating a separate array, however, in this case, the space complexity of our algorithm will increase to `O(N)`.
