@@ -4,16 +4,16 @@ This pattern describes an interesting approach to deal with problems involving a
 
 >You are given an unsorted array containing numbers taken from the range 1 to ‘n’. The array can have duplicates, which means that some numbers will be missing. Find all the missing numbers.
 
-To efficiently solve this problem, we can use the fact that the input array contains numbers in the range of `1` to `‘n’`. 
-For example, to efficiently sort the array, we can try placing each number in its correct place, i.e., placing `‘1’` at index `‘0’`, placing `‘2’` at index `‘1’`, and so on. Once we are done with the sorting, we can iterate the array to find all indices that are missing the correct numbers. These will be our required numbers.
+To efficiently solve this problem, we can use the fact that the input array contains numbers in the range of `1` to `n`. 
+For example, to efficiently sort the array, we can try placing each number in its correct place, i.e., placing `1` at index `0`, placing `2` at index `1`, and so on. Once we are done with the sorting, we can iterate the array to find all indices that are missing the correct numbers. These will be our required numbers.
 
 ## Cyclic Sort (easy)
-We are given an array containing `‘n’` objects. Each object, when created, was assigned a unique number from `1` to `‘n’` based on their creation sequence. This means that the object with sequence number `‘3’` was created just before the object with sequence number `‘4’`.
+We are given an array containing `n` objects. Each object, when created, was assigned a unique number from `1` to `n` based on their creation sequence. This means that the object with sequence number `3` was created just before the object with sequence number `4`.
 
 > Write a function to sort the objects <i>in-place</i> on their creation sequence number in `O(n)` and without any extra space. 
 
 For simplicity, let’s assume we are passed an integer array containing only the sequence numbers, though each number is actually an object.
-As we know, the input array contains numbers in the range of `1` to `‘n’`. We can use this fact to devise an efficient way to sort the numbers. Since all numbers are unique, we can try placing each number at its correct place, i.e., placing `‘1’` at index `‘0’`, placing `‘2’` at index `‘1’`, and so on.
+As we know, the input array contains numbers in the range of `1` to `n`. We can use this fact to devise an efficient way to sort the numbers. Since all numbers are unique, we can try placing each number at its correct place, i.e., placing `1` at index `0`, placing `2` at index `1`, and so on.
 
 To place a number (or an object in general) at its correct index, we first need to find that number. If we first find a number and then place it at its correct place, it will take us `O(N²)`, which is not acceptable.
 
@@ -45,20 +45,20 @@ cyclicSort ([3, 1, 5, 4, 2])
 cyclicSort ([2, 6, 4, 3, 1, 5])
 cyclicSort ([1, 5, 6, 4, 3, 2])
 ````
-- The time complexity of the above algorithm is `O(n)`. Although we are not incrementing the index `i` when swapping the numbers, this will result in more than `‘n’` iterations of the loop, but in the worst-case scenario, the while loop will swap a total of `‘n-1’` numbers and once a number is at its correct index, we will move on to the next number by incrementing `i`. So overall, our algorithm will take `O(n) + O(n-1)` which is asymptotically equivalent to `O(n)`.
+- The time complexity of the above algorithm is `O(n)`. Although we are not incrementing the index `i` when swapping the numbers, this will result in more than `n` iterations of the loop, but in the worst-case scenario, the while loop will swap a total of `n-1` numbers and once a number is at its correct index, we will move on to the next number by incrementing `i`. So overall, our algorithm will take `O(n) + O(n-1)` which is asymptotically equivalent to `O(n)`.
 -The algorithm runs in constant space `O(1)`.
 
 ## Find the Missing Number (easy)
 https://leetcode.com/problems/missing-number/
 
-> We are given an array containing `‘n’` distinct numbers taken from the range `0` to `‘n’`. Since the array has only `‘n’` numbers out of the total `‘n+1’` numbers, find the missing number.
+> We are given an array containing `n` distinct numbers taken from the range `0` to `n`. Since the array has only `n` numbers out of the total `n+1` numbers, find the missing number.
 
-This problem follows the <b>Cyclic Sort</b> pattern. Since the input array contains unique numbers from the range `0` to `‘n’`, we can use a similar strategy as discussed in <b>Cyclic Sort</b> to place the numbers on their correct index. Once we have every number in its correct place, we can iterate the array to find the index which does not have the correct number, and that index will be our missing number.
+This problem follows the <b>Cyclic Sort</b> pattern. Since the input array contains unique numbers from the range `0` to `n`, we can use a similar strategy as discussed in <b>Cyclic Sort</b> to place the numbers on their correct index. Once we have every number in its correct place, we can iterate the array to find the index which does not have the correct number, and that index will be our missing number.
 
 However, there are two differences with Cyclic Sort:
-1. In this problem, the numbers are ranged from `‘0’` to `‘n’`, compared to `‘1’` to `‘n’` in the Cyclic Sort. This will make two changes in our algorithm:
+1. In this problem, the numbers are ranged from `0` to `n`, compared to `1` to `n` in the Cyclic Sort. This will make two changes in our algorithm:
     - In this problem, each number should be equal to its index, compared to `index - 1` in the <b>Cyclic Sort</b>. Therefore => `nums[i] == nums[nums[i]]`
-   - Since the array will have `‘n’` numbers, which means array indices will range from `0` to `‘n-1’`. Therefore, we will ignore the number `‘n’` as we can’t place it in the array, so => `nums[i] < nums.length`
+   - Since the array will have `n` numbers, which means array indices will range from `0` to `n-1`. Therefore, we will ignore the number `n` as we can’t place it in the array, so => `nums[i] < nums.length`
 2. Say we are at index `i`. If we swap the number at index `i` to place it at the correct index, we can still have the wrong number at index `i`. This was true in <b>Cyclic Sort</b> too. It didn’t cause any problems in <b>Cyclic Sort</b> as over there, we made sure to place one number at its correct place in each step, but that wouldn’t be enough in this problem as we have one extra number due to the larger range. Therefore, we will not move to the next number after the swap until we have a correct number at the index `i`.
 
 ````js
@@ -96,7 +96,7 @@ findMissingNumber([8, 3, 5, 2, 4, 6, 0, 1])//7
 ## Find all Missing Numbers (easy)
 https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
 
-> We are given an unsorted array containing numbers taken from the range `1 to ‘n’`. The array can have duplicates, which means some numbers will be missing. Find all those missing numbers.
+> We are given an unsorted array containing numbers taken from the range `1 to ‘n`. The array can have duplicates, which means some numbers will be missing. Find all those missing numbers.
 
 This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with <b>Find the Missing Number</b> with one difference. In this problem, there can be many duplicates whereas in <b>Find the Missing Number</b> there were no duplicates and the range was greater than the length of the array.
 
@@ -220,7 +220,7 @@ findDuplicate([2, 4, 1, 4, 4])//4
 ## Find all Duplicate Numbers (easy)
 https://leetcode.com/problems/find-all-duplicates-in-an-array/
 
-> We are given an unsorted array containing `‘n’` numbers taken from the range `1` to `‘n’`. The array has some numbers appearing twice, <b>find all these duplicate numbers without using any extra space</b>.
+> We are given an unsorted array containing `n` numbers taken from the range `1` to `n`. The array has some numbers appearing twice, <b>find all these duplicate numbers without using any extra space</b>.
 
 This problem follows the <b>Cyclic Sort</b> pattern and shares similarities with <b>Find the Duplicate Number</b>. Following a similar approach, we will place each number at its correct index. After that, we will iterate through the array to find all numbers that are not at the correct indices. All these numbers are duplicates.
 
@@ -259,7 +259,7 @@ findAllDuplicates([5, 4, 7, 2, 3, 5, 3])//[3, 5]
 - Ignoring the space required for storing the duplicates, the algorithm runs in constant space `O(1)`.
 
 ## 🌟 Find the Corrupt Pair (easy)
-> We are given an unsorted array containing `‘n’` numbers taken from the range `1` to `‘n’`. The array originally contained all the numbers from `1` to `‘n’`, but due to a data error, one of the numbers got duplicated which also resulted in one number going missing. Find both these numbers.
+> We are given an unsorted array containing `n` numbers taken from the range `1` to `n`. The array originally contained all the numbers from `1` to `n`, but due to a data error, one of the numbers got duplicated which also resulted in one number going missing. Find both these numbers.
 
 ````js
 function findCorruptNumbers(nums) {
@@ -348,7 +348,7 @@ After the cyclic sort our array will look like:
 ````
 nums: [1, 2, 3, 6, 5]
 ````
-From the sorted array we can see that the first missing number is `‘4’` (as we have `‘6’` on the fourth index) but to find the second missing number we need to remember that the array does contain `‘6’`. Hence, the next missing number is `‘7’`.
+From the sorted array we can see that the first missing number is `4` (as we have `6` on the fourth index) but to find the second missing number we need to remember that the array does contain `6`. Hence, the next missing number is `7`.
 
 ````js
 function findFirstKMissingPositive(nums, k) {

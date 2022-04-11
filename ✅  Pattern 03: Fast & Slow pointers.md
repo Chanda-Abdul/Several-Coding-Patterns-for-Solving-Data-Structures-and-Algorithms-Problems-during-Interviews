@@ -65,7 +65,7 @@ head.next.next.next.next.next.next = head.next.next.next
 console.log(`LinkedList has cycle: ${hasCycle(head)}`)
 ````
 
-- Once the <i>slow pointer</i> enters the cycle, the <i>fast pointer</i> will meet the <i><i>slow pointer</i></i> in the same loop. Therefore, the time complexity of our algorithm will be `O(N)` where `‘N’` is the total number of nodes in the <b>LinkedList</b>.
+- Once the <i>slow pointer</i> enters the cycle, the <i>fast pointer</i> will meet the <i><i>slow pointer</i></i> in the same loop. Therefore, the time complexity of our algorithm will be `O(N)` where `N` is the total number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 
 > Given the head of a LinkedList with a cycle, find the length of the cycle.
@@ -215,17 +215,17 @@ head.next.next.next.next.next.next = head
 console.log(`LinkedList cycle start: ${findCycleStart(head).value}`)
 ````
 
-- As we know, finding the cycle in a <b>LinkedList</b> with `‘N’` nodes and also finding the length of the cycle requires `O(N)`. Also, as we saw in the above algorithm, we will need `O(N)` to find the start of the cycle. Therefore, the overall time complexity of our algorithm will be `O(N)`.
+- As we know, finding the cycle in a <b>LinkedList</b> with `N` nodes and also finding the length of the cycle requires `O(N)`. Also, as we saw in the above algorithm, we will need `O(N)` to find the start of the cycle. Therefore, the overall time complexity of our algorithm will be `O(N)`.
 - The algorithm runs in constant space `O(1)`.
 
 ## Happy Number (medium)
 https://leetcode.com/problems/happy-number/
 
-Any number will be called a happy number if, after repeatedly replacing it with a number equal to the <b>sum of the square of all of its digits, leads us to number ‘1’</b>. All other (not-happy) numbers will never reach ‘1’. Instead, they will be stuck in a cycle of numbers which does not include ‘1’.
+Any number will be called a <b>happy number</b> if, after repeatedly replacing it with a number equal to the <b>sum of the square of all of its digits, leads us to number `1`</b>. All other <b>(not-happy)</b> numbers will never reach `1`. Instead, they will be stuck in a cycle of numbers which does not include `1`.
 
-The process, defined above, to find out if a number is a happy number or not, always ends in a cycle. If the number is a happy number, the process will be stuck in a cycle on number ‘1,’ and if the number is not a happy number then the process will be stuck in a cycle with a set of numbers. As we saw in Example-2 while determining if ‘12’ is a happy number or not, our process will get stuck in a cycle with the following numbers: 89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89
+The process, defined above, to find out if a number is a <b>happy number</b> or not, always ends in a cycle. If the number is a <b>happy number</b>, the process will be stuck in a cycle on number ‘1,’ and if the number is not a <b>happy number</b> then the process will be stuck in a cycle with a set of numbers. As we saw in Example-2 while determining if ‘12’ is a <b>happy number</b> or not, our process will get stuck in a cycle with the following numbers: `89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89`
 
-We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a cycle among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same <i>fast</i> & <i>slow pointer</i> strategy to find the cycle and once the cycle is found, we will see if the cycle is stuck on number ‘1’ to find out if the number is happy or not.
+We saw in the <b>LinkedList Cycle</b> problem that we can use the <b>Fast & Slow</b> pointers method to find a cycle among a set of elements. As we have described above, each number will definitely have a cycle. Therefore, we will use the same <i>fast</i> & <i>slow pointer</i> strategy to find the cycle and once the cycle is found, we will see if the cycle is stuck on number `1` to find out if the number is happy or not.
 
 ````js
 function findHappyNumber(num) {
@@ -260,14 +260,14 @@ function findSquareSum(num) {
 ````
 `findHappyNumber(23)//true`
 
-`23` is a happy number, Here are the steps to find out that `23` is a happy number:
+`23` is a <b>happy number</b>, Here are the steps to find out that `23` is a <b>happy number</b>:
 1. 2² + 3² = 4 + 9 = 13
 2. 1² + 3² = 1 + 9 = 10
 3. 1² + 0² = 1 + 0 = 1
 
 `findHappyNumber(12)//false`
 
-`12` is not a happy number, Here are the steps to find out that `12` is not a happy number:
+`12` is not a <b>happy number</b>, Here are the steps to find out that `12` is not a <b>happy number</b>:
 1. 1²+2²= 1 + 4 = 5
 2. 5² = 25
 3. 2² + 5² = 4 + 25 = 29
@@ -281,11 +281,11 @@ function findSquareSum(num) {
 11. 1² + 6² = 1 + 36 = 37
 12. 3² + 7² = 9 + 49 = 58
 13. 5² + 8²= 25 + 64 = 89
-Step ‘13’ leads us back to step ‘5’ as the number becomes equal to ‘89’, this means that we can never reach ‘1’, therefore, ‘12’ is not a happy number.
+Step ‘13’ leads us back to step ‘5’ as the number becomes equal to ‘89’, this means that we can never reach `1`, therefore, ‘12’ is not a <b>happy number</b>.
 
 `findHappyNumber(19)//true`
 
-`19` is a happy number, Here are the steps to find out that 19 is a happy number:
+`19` is a <b>happy number</b>, Here are the steps to find out that 19 is a <b>happy number</b>:
 1. 1² + 9² = 82
 2. 8² + 2² = 68
 3. 6² + 8² = 100
@@ -293,13 +293,13 @@ Step ‘13’ leads us back to step ‘5’ as the number becomes equal to ‘89
 
 `findHappyNumber(2)//false`
 
-`2` is not a happy number
+`2` is not a <b>happy number</b>
 
-- The time complexity of the algorithm is difficult to determine. However we know the fact that all unhappy numbers eventually get stuck in the cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4
+- The time complexity of the algorithm is difficult to determine. However we know the fact that all <b>unhappy number</b>s eventually get stuck in the cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4
 
 This sequence behavior tells us two things:
-1. If the number `N` is less than or equal to 1000, then we reach the cycle or ‘1’ in at most 1001 steps.
-2. For `N > 1000`, suppose the number has `‘M’` digits and the next number is `‘N1’`. From the above Wikipedia link, we know that the sum of the squares of the digits of `‘N’` is at most 9²M, or `81M`(this will happen when all digits of `‘N’` are `‘9’`).
+1. If the number `N` is less than or equal to 1000, then we reach the cycle or `1` in at most 1001 steps.
+2. For `N > 1000`, suppose the number has `M` digits and the next number is `N1`. From the above Wikipedia link, we know that the sum of the squares of the digits of `N` is at most 9²M, or `81M`(this will happen when all digits of `N` are `9`).
 
 This means:
 1. `N1 < 81M`
@@ -351,7 +351,7 @@ console.log(`Middle Node: ${findMiddleOfLinkedList(head).value}`)
 head.next.next.next.next.next.next = new Node(7)
 console.log(`Middle Node: ${findMiddleOfLinkedList(head).value}`)
 ````
-- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the <b>LinkedList</b>.
+- The above algorithm will have a time complexity of `O(N)` where `N` is the number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 
 ## 🌟 Palindrome LinkedList (medium)
@@ -359,7 +359,7 @@ https://leetcode.com/problems/palindrome-linked-list/
 
 > Given the head of a <b>Singly LinkedList</b>, write a method to check if the <b>LinkedList is a palindrome</b> or not.
 > 
->Your algorithm should use <b>constant space</b> and the input <b>LinkedList</b> should be in the original form once the algorithm is finished. The algorithm should have `O(N)` time complexity where `‘N’` is the number of nodes in the <b>LinkedList</b>.
+>Your algorithm should use <b>constant space</b> and the input <b>LinkedList</b> should be in the original form once the algorithm is finished. The algorithm should have `O(N)` time complexity where `N` is the number of nodes in the <b>LinkedList</b>.
 ### Example 1:
 ````
 Input: 2 -> 4 -> 6 -> 4 -> 2 -> null
@@ -452,7 +452,7 @@ head.next.next.next.next.next = new Node(2)
 console.log(`Is palindrome: ${isPalindromicLinkedList(head)}`)
 ````
 
-- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the <b>LinkedList</b>.
+- The above algorithm will have a time complexity of `O(N)` where `N` is the number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 ## 🌟 Rearrange a LinkedList (medium)
 https://leetcode.com/problems/reorder-list/
@@ -556,7 +556,7 @@ head.next.next.next.next.next = new Node(12)
 reorder(head)
 head.printList()
 ````
-- The above algorithm will have a time complexity of `O(N)` where `‘N’` is the number of nodes in the <b>LinkedList</b>.
+- The above algorithm will have a time complexity of `O(N)` where `N` is the number of nodes in the <b>LinkedList</b>.
 - The algorithm runs in constant space `O(1)`.
 ## 🌟 Cycle in a Circular Array (hard)
 https://leetcode.com/problems/circular-array-loop/
@@ -648,7 +648,7 @@ circularArrayLoopExists([2, 2, -1, 2])
 circularArrayLoopExists([2, 1, -1, -2])
 ````
 
-- The above algorithm will have a time complexity of `O(N²)` where `‘N’` is the number of elements in the array. This complexity is due to the fact that we are iterating all elements of the array and trying to find a cycle for each element.
+- The above algorithm will have a time complexity of `O(N²)` where `N` is the number of elements in the array. This complexity is due to the fact that we are iterating all elements of the array and trying to find a cycle for each element.
 - The algorithm runs in constant space `O(1)`.
 #### An Alternate Approach
 In our algorithm, we don’t keep a record of all the numbers that have been evaluated for cycles. We know that all such numbers will not produce a cycle for any other instance as well. If we can remember all the numbers that have been visited, our algorithm will improve to `O(N)` as, then, each number will be evaluated for cycles only once. We can keep track of this by creating a separate array, however, in this case, the space complexity of our algorithm will increase to `O(N)`.

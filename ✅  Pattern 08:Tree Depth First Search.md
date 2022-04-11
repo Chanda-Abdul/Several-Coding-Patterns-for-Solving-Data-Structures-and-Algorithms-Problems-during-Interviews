@@ -2,11 +2,11 @@
 
 This pattern is based on the <b>Depth First Search (DFS)</b> technique to traverse a tree.
 
-We will be using recursion (or we can also use a stack for the iterative approach) to keep track of all the previous (parent) nodes while traversing. This also means that the space complexity of the algorithm will be `O(H)`, where `‘H’` is the maximum height of the tree.
+We will be using recursion (or we can also use a stack for the iterative approach) to keep track of all the previous (parent) nodes while traversing. This also means that the space complexity of the algorithm will be `O(H)`, where `H` is the maximum height of the tree.
 
 ## Binary Tree Path Sum (easy)
 https://leetcode.com/problems/path-sum/
-> Given a binary tree and a number `‘S’`, find if the tree has a path from root-to-leaf such that the sum of all the node values of that path equals `‘S’`.
+> Given a binary tree and a number `S`, find if the tree has a path from root-to-leaf such that the sum of all the node values of that path equals `S`.
 
 As we are trying to search for a root-to-leaf path, we can use the <b>Depth First Search (DFS)</b> technique to solve this problem.
 
@@ -17,8 +17,8 @@ Here are the steps for our Binary Tree Path Sum problem:
 2. If the current node is not a leaf node, do two things:
     - Subtract the value of the current node from the given number to get a new sum => `S = S - node.value`
     - Make two recursive calls for both the children of the current node with the new number calculated in the previous step.
-3. At every step, see if the current node being visited is a leaf node and if its value is equal to the given number `‘S’`. If both these conditions are true, we have found the required root-to-leaf path, therefore return `true`.
-4. If the current node is a leaf but its value is not equal to the given number `‘S’`, return `false`.
+3. At every step, see if the current node being visited is a leaf node and if its value is equal to the given number `S`. If both these conditions are true, we have found the required root-to-leaf path, therefore return `true`.
+4. If the current node is a leaf but its value is not equal to the given number `S`, return `false`.
 
 ````js
 class TreeNode {
@@ -55,12 +55,12 @@ root.right.right = new TreeNode(5)
 console.log(`Tree has path: ${has_path(root, 23)}`)
 console.log(`Tree has path: ${has_path(root, 16)}`)
 ````
-- The time complexity of the above algorithm is `O(N)`, where `‘N’` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
+- The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` in the worst case. This space will be used to store the recursion stack. The worst case will happen when the given tree is a linked list (i.e., every node has only one child).
 
 ## All Paths for a Sum (medium)
 https://leetcode.com/problems/path-sum-ii/
-> Given a binary tree and a number `‘S’`, find all paths from root-to-leaf such that the sum of all the node values of each path equals `‘S’`.
+> Given a binary tree and a number `S`, find all paths from root-to-leaf such that the sum of all the node values of each path equals `S`.
 
 This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the same <b>DFS</b> approach. There will be two differences:
 1. Every time we find a root-to-leaf path, we will store it in a list.
@@ -117,7 +117,7 @@ root.right.left = new TreeNode(10)
 root.right.right = new TreeNode(5)
 findPaths(root, 23);
 ````
-- The time complexity of the above algorithm is `O(N^2)`, where `‘N’` is the total number of nodes in the tree. This is due to the fact that we traverse each node once (which will take `O(N)`), and for every leaf node, we might have to store its path (by making a copy of the current path) which will take `O(N)`.
+- The time complexity of the above algorithm is `O(N^2)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once (which will take `O(N)`), and for every leaf node, we might have to store its path (by making a copy of the current path) which will take `O(N)`.
   - We can calculate a tighter time complexity of `O(NlogN)` from the space complexity discussion below.
 - If we ignore the space required for the `allPaths` list, the space complexity of the above algorithm will be `O(N)` in the worst case. This space will be used to store the recursion stack. The worst-case will happen when the given tree is a linked list (i.e., every node has only one child).
 
@@ -281,7 +281,7 @@ root.right.left = new TreeNode(6)
 root.right.right = new TreeNode(5)
 console.log(`Total Sum of Path Numbers: ${findSumOfPathNumbers(root)}`)
 ````
-- The time complexity of the above algorithm is `O(N)`, where `‘N’` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
+- The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` in the worst case. This space will be used to store the recursion stack. The worst case will happen when the given tree is a linked list (i.e., every node has only one child).
 ## Path With Given Sequence (medium)
 > Given a binary tree and a number sequence, find if the sequence is present as a root-to-leaf path in the given tree.
@@ -329,12 +329,12 @@ root.right.right = new TreeNode(5)
 console.log(`Tree has path sequence: ${findPath(root, [1, 0, 7])}`)
 console.log(`Tree has path sequence: ${findPath(root, [1, 1, 6])}`)
 ````
-- The time complexity of the above algorithm is `O(N)`, where `‘N’` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
+- The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` in the worst case. This space will be used to store the recursion stack. The worst case will happen when the given tree is a linked list (i.e., every node has only one child).
 ## Count Paths for a Sum (medium)
 https://leetcode.com/problems/path-sum-iii/
 
-> Given a binary tree and a number `‘S’`, find all paths in the tree such that the sum of all the node values of each path equals `‘S’`. Please note that the paths can start or end at any node but all paths must follow direction from parent to child (top to bottom).
+> Given a binary tree and a number `S`, find all paths in the tree such that the sum of all the node values of each path equals `S`. Please note that the paths can start or end at any node but all paths must follow direction from parent to child (top to bottom).
 
 This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the same <b>DFS</b> approach. But there will be four differences:
 1. We will keep track of the current path in a list which will be passed to every recursive call.
@@ -396,7 +396,7 @@ root.right.left = new TreeNode(10)
 root.right.right = new TreeNode(5)
 console.log(`Tree has ${countPaths(root, 11)} paths`)
 ````
-- The time complexity of the above algorithm is `O(N²)` in the worst case, where `‘N’` is the total number of nodes in the tree. This is due to the fact that we traverse each node once, but for every node, we iterate the current path. The current path, in the worst case, can be `O(N)` (in the case of a skewed tree). But, if the tree is balanced, then the current path will be equal to the height of the tree, i.e., `O(logN)`. So the best case of our algorithm will be `O(NlogN)`.
+- The time complexity of the above algorithm is `O(N²)` in the worst case, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once, but for every node, we iterate the current path. The current path, in the worst case, can be `O(N)` (in the case of a skewed tree). But, if the tree is balanced, then the current path will be equal to the height of the tree, i.e., `O(logN)`. So the best case of our algorithm will be `O(NlogN)`.
 - The space complexity of the above algorithm will be `O(N)`. This space will be used to store the recursion stack. The worst case will happen when the given tree is a linked list (i.e., every node has only one child). We also need `O(N)` space for storing the currentPath in the worst case.  Overall space complexity of our algorithm is `O(N)`.
 ## 🌟 Tree Diameter (medium)
 https://leetcode.com/problems/diameter-of-binary-tree/

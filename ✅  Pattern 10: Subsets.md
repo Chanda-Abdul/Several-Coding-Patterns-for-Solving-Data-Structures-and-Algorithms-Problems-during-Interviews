@@ -51,7 +51,7 @@ function findSubsets(nums) {
 findSubsets([1, 3])
 findSubsets([1, 5, 3])
 ````
-- Since, in each step, the number of subsets doubles as we add each element to all the existing subsets, therefore, we will have a total of `O(2ᴺ)` subsets, where `‘N’` is the total number of elements in the input set. And since we construct a new subset from an existing set, therefore, the time complexity of the above algorithm will be `O(N*2ᴺ)`.
+- Since, in each step, the number of subsets doubles as we add each element to all the existing subsets, therefore, we will have a total of `O(2ᴺ)` subsets, where `N` is the total number of elements in the input set. And since we construct a new subset from an existing set, therefore, the time complexity of the above algorithm will be `O(N*2ᴺ)`.
 - All the additional space used by our algorithm is for the output list. Since we will have a total of `O(2ᴺ)` subsets, and each subset can take up to `O(N)` space, therefore, the space complexity of our algorithm will be `O(N*2ᴺ)`.
 
 ## Subsets With Duplicates (medium)
@@ -123,7 +123,7 @@ function subsetsWithDupe(nums) {
 subsetsWithDupe([1, 3, 3])
 subsetsWithDupe([1, 5, 3, 3])
 ````
-- Since, in each step, the number of subsets doubles (if not duplicate) as we add each element to all the existing subsets, therefore, we will have a total of `O(2ᴺ)` subsets, where `‘N’` is the total number of elements in the input set. And since we construct a new subset from an existing set, therefore, the time complexity of the above algorithm will be `O(N*2ᴺ)`.
+- Since, in each step, the number of subsets doubles (if not duplicate) as we add each element to all the existing subsets, therefore, we will have a total of `O(2ᴺ)` subsets, where `N` is the total number of elements in the input set. And since we construct a new subset from an existing set, therefore, the time complexity of the above algorithm will be `O(N*2ᴺ)`.
 - All the additional space used by our algorithm is for the output list. Since, at most, we will have a total of `O(2ᴺ)` subsets, and each subset can take up to `O(N)` space, therefore, the space complexity of our algorithm will be `O(N*2ᴺ)`.
 ## Permutations (medium)
 https://leetcode.com/problems/permutations/
@@ -138,7 +138,7 @@ Permutation is defined as the re-arranging of the elements of the set. For examp
 5. `{3, 1, 2}`
 6. `{3, 2, 1}`
 
-If a set has `‘n’` distinct elements it will have `n!` permutations.
+If a set has `n` distinct elements it will have `n!` permutations.
 
 This problem follows the <b>Subsets</b> pattern and we can follow a similar <b>Breadth First Search (BFS)</b> approach. However, unlike <b>Subsets</b>, every permutation must contain all the numbers.
 
@@ -195,7 +195,7 @@ function findPermutations(nums) {
 findPermutations([1, 3, 5])
 ````
 
-- We know that there are a total of `N!` permutations of a set with `‘N’` numbers. In the algorithm above, we are iterating through all of these permutations with the help of the two ‘for’ loops. In each iteration, we go through all the current permutations to insert a new number in them. To insert a number into a permutation of size ‘`N’` will take `O(N)`, which makes the overall time complexity of our algorithm `O(N*N!)`.
+- We know that there are a total of `N!` permutations of a set with `N` numbers. In the algorithm above, we are iterating through all of these permutations with the help of the two ‘for’ loops. In each iteration, we go through all the current permutations to insert a new number in them. To insert a number into a permutation of size ‘`N` will take `O(N)`, which makes the overall time complexity of our algorithm `O(N*N!)`.
 - All the additional space used by our algorithm is for the `result` list and the `queue` to store the intermediate permutations. If you see closely, at any time, we don’t have more than `N!` permutations between the result list and the queue. Therefore the overall space complexity to store `N!` permutations each containing `N` elements will be `O(N*N!)`.
 
 ### Recursive Solution

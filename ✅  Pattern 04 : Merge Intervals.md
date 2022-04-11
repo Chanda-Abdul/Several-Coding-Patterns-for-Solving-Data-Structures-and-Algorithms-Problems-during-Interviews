@@ -362,7 +362,7 @@ function findIntersection(firstIntervals, secondIntervals) {
 findIntersection([[1, 3], [5, 6], [7, 9]], [[2, 3], [5, 7]])//[2, 3], [5, 6], [7, 7], The output list contains the common intervals between the two lists.
 findIntersection([[1, 3], [5, 7], [9, 12]], [[5, 10]])// [5, 7], [9, 10], The output list contains the common intervals between the two lists.
 ````
-- As we are iterating through both the lists once, the time complexity of the above algorithm is `O(N + M)`, where `‘N’` and `‘M’` are the total number of intervals in the input arrays respectively.
+- As we are iterating through both the lists once, the time complexity of the above algorithm is `O(N + M)`, where `N` and `M` are the total number of intervals in the input arrays respectively.
 - Ignoring the space needed for the result list, the algorithm runs in constant space `O(1)`.
 ## Conflicting Appointments (medium)
 https://leetcode.com/problems/meeting-rooms/
@@ -393,7 +393,7 @@ canAttendAllAppointments([[1,4], [2,5], [7,9]])//false, Since [1,4] and [2,5] ov
 canAttendAllAppointments([[6,7], [2,4], [8,12]])//true, None of the appointments overlap, therefore a person can attend all of them.
 canAttendAllAppointments([[4,5], [2,3], [3,6]])//false, Since [4,5] and [3,6] overlap, a person cannot attend both of these appointments.
 ````
-- The time complexity of the above algorithm is `O(N*logN)`, where `‘N’` is the total number of appointments. Though we are iterating the intervals only once, our algorithm will take `O(N * logN)` since we need to sort them in the beginning.
+- The time complexity of the above algorithm is `O(N*logN)`, where `N` is the total number of appointments. Though we are iterating the intervals only once, our algorithm will take `O(N * logN)` since we need to sort them in the beginning.
 - The space complexity of the above algorithm will be `O(N)`, which we need for sorting. 
 
 > 🌟 Given a list of appointments, find all the conflicting appointments.
@@ -511,7 +511,7 @@ minMeetingRooms([[6,7], [2,4], [8,12]])//1, None of the meetings overlap, theref
 minMeetingRooms([[1,4], [2,3], [3,6]])//2, Since [1,4] overlaps with the other two meetings [2,3] and [3,6], we need two rooms to hold all the meetings.
 minMeetingRooms([[4,5], [2,3], [2,4], [3,5]])//2, We will need one room for [2,3] and [3,5], and another room for [2,4] and [4,5].
 ````
-- The time complexity of the above algorithm is `O(N*logN)`, where `‘N’` is the total number of meetings. This is due to the sorting that we did in the beginning. Also, while iterating the meetings we might need to poll/offer meeting to the priority queue. Each of these operations can take `O(logN)`. Overall our algorithm will take `O(NlogN)`.
+- The time complexity of the above algorithm is `O(N*logN)`, where `N` is the total number of meetings. This is due to the sorting that we did in the beginning. Also, while iterating the meetings we might need to poll/offer meeting to the priority queue. Each of these operations can take `O(logN)`. Overall our algorithm will take `O(NlogN)`.
 - The space complexity of the above algorithm will be `O(N)` which is required for sorting. Also, in the worst case scenario, we’ll have to insert all the meetings into the Min Heap (when all meetings overlap) which will also take `O(N)` space. The overall space complexity of our algorithm is `O(N)`.
 
 ### Similar Problems
@@ -634,7 +634,7 @@ findEmployeeFreeTime ([[[1,3], [5,6]], [[2,3], [6,8]]])//[3,5], Both the employe
 findEmployeeFreeTime ([[[1,3], [9,12]], [[2,4]], [[6,8]]])//[4,6], [8,9], All employees are free between [4,6] and [8,9].
 findEmployeeFreeTime ([[[1,3]], [[2,4]], [[3,5], [7,9]]])//[5,7], ll employees are free between [5,7].
 ````
-- This algorithm will take `O(N * logN)` time, where `‘N’` is the total number of intervals. This time is needed because we need to sort all the intervals. 
+- This algorithm will take `O(N * logN)` time, where `N` is the total number of intervals. This time is needed because we need to sort all the intervals. 
 - The space complexity will be `O(N)`, which is needed for sorting. 
 
 #### Can we find a better solution?
@@ -644,6 +644,6 @@ One fact that we are not utilizing is that each employee list is individually so
 How about we take the first interval of each employee and insert it in a `Min Heap`. This `Min Heap` can always give us the interval with the smallest start time. Once we have the smallest start-time interval, we can then compare it with the next smallest start-time interval (again from the `Heap`) to find the gap. This interval comparison is similar to what we suggested in the previous approach.
 
 Whenever we take an interval out of the `Min Heap`, we can insert the same employee’s next interval. This also means that we need to know which interval belongs to which employee.
-- The above algorithm’s time complexity is `O(N*logK)`, where `‘N’` is the total number of intervals, and `K` is the total number of employees. This is because we are iterating through the intervals only once (which will take `O(N)`), and every time we process an interval, we remove (and can insert) one interval in the` Min Heap`, (which will take `O(logK)`. At any time, the heap will not have more than `K` elements.
+- The above algorithm’s time complexity is `O(N*logK)`, where `N` is the total number of intervals, and `K` is the total number of employees. This is because we are iterating through the intervals only once (which will take `O(N)`), and every time we process an interval, we remove (and can insert) one interval in the` Min Heap`, (which will take `O(logK)`. At any time, the heap will not have more than `K` elements.
 - The space complexity of the above algorithm will be `O(K)` as at any time, the heap will not have more than `K` elements.
 

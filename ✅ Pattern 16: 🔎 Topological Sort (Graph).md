@@ -438,8 +438,8 @@ https://leetcode.com/problems/alien-dictionary/
 
 Since the given words are sorted lexicographically by the rules of the alien language, we can always compare two adjacent words to determine the ordering of the characters. Take <b>Example 1</b> below: `[“ba”, “bc”, “ac”, “cab”]`
 
-Take the first two words `“ba”` and `“bc”`. Starting from the beginning of the words, find the first character that is different in both words: it would be `‘a’` from `“ba”` and `‘c’` from `“bc”`. Because of the sorted order of words (i.e. the <i>dictionary!</i>), we can conclude that `‘a’` comes before `‘c’` in the alien language.
-Similarly, from `“bc”` and `“ac”`, we can conclude that `‘b’` comes before `‘a’`.
+Take the first two words `“ba”` and `“bc”`. Starting from the beginning of the words, find the first character that is different in both words: it would be `a` from `“ba”` and `c` from `“bc”`. Because of the sorted order of words (i.e. the <i>dictionary!</i>), we can conclude that `a` comes before `c` in the alien language.
+Similarly, from `“bc”` and `“ac”`, we can conclude that `b` comes before `a`.
 These two points tell us that we are actually asked to find the <b>topological ordering</b> of the characters, and that the ordering rules should be inferred from adjacent words from the alien dictionary.
 
 This makes the current problem similar to <b>[Tasks Scheduling Order](#-tasks-scheduling-order-medium)</b>, the only difference being that we need to build the graph of the characters by comparing adjacent words first, and then perform the <i>topological sort</i> for the graph to determine the order of the characters.

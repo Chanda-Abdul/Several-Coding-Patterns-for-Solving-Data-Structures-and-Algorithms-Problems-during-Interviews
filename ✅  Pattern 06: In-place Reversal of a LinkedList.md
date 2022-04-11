@@ -62,7 +62,7 @@ console.log(`Nodes of original LinkedList are: ${head.printList()}`)
 console.log(`Nodes of reversed LinkedList are: ${reverse(head).printList()}`)
 ````
 
-- The time complexity of our algorithm will be `O(N)` where `‘N’` is the total number of nodes in the <b>LinkedList</b>.
+- The time complexity of our algorithm will be `O(N)` where `N` is the total number of nodes in the <b>LinkedList</b>.
 - We only used constant space, therefore, the space complexity of our algorithm is `O(1)`.
 
 ## Reverse a Sub-list (medium)
@@ -359,7 +359,7 @@ process.stdout.write('Nodes of reversed LinkedList are: ');
 result.printList();
 ````
 
-- The time complexity of our algorithm will be `O(N)`where  `‘N’` is the total number of nodes in the <b>LinkedList</b>.
+- The time complexity of our algorithm will be `O(N)`where  `N` is the total number of nodes in the <b>LinkedList</b>.
 - We only used constant space, therefore, the space complexity of our algorithm is `O(1)`.
 ## 🌟 Rotate a LinkedList (medium)
 https://leetcode.com/problems/rotate-list/
@@ -433,5 +433,5 @@ head.next.next.next.next.next = new Node(6)
 console.log(`Nodes of original LinkedList are: ${head.getList()}`)
 console.log(`Nodes of rotated LinkedList are: ${rotate(head, 3).getList()}`)
 ````
-- The time complexity of our algorithm will be `O(N)` where `‘N’` is the total number of nodes in the <b>LinkedList</b>.
+- The time complexity of our algorithm will be `O(N)` where `N` is the total number of nodes in the <b>LinkedList</b>.
 - We only used constant space, therefore, the space complexity of our algorithm is `O(1)`.
