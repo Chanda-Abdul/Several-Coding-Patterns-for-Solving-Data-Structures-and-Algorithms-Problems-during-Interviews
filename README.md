@@ -18,18 +18,23 @@ Here are a few other resources that I found helpful when learning <b>Data Struct
 
 - [Run JS](https://runjs.app/) - A JavaScript playground
 for your desktop
-- [Big O CheatSheet](https://www.bigocheatsheet.com/) - Reference for Big-O complexities of common algorithms
+- [Big O CheatSheet](https://www.bigocheatsheet.com/) - Reference for <b>Big-O</b> complexities of common algorithms
 - [Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) - For additional practice, the [Blind75 list](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU) of interview questions is 🔥.  I would approach the questions in [this order](https://www.techinterviewhandbook.org/best-practice-questions)
-- [Edabit](https://edabit.com/) is a great resource if you need additional <b>Javascript<b> practice before you start using <b>leetcode</b>.
+- [Edabit](https://edabit.com/) is a great resource if you need additional <b>Javascript</b> practice before you start using <b>leetcode</b>.
 - [LeetCode](https://leetcode.com/problemset/all/) of course
 😋
 - [Pramp](https://www.pramp.com/) - for mock interviews
 - [FreeCodeCamp's Algorithms](https://www.freecodecamp.org/learn/coding-interview-prep/#algorithms) - Extra practice, esp. the <b>Sort Algorithms</b> section.
 - [Build 15 JavaScript Projects - Vanilla JavaScript Course](https://www.youtube.com/watch?v=3PHXvlpOkf4) - for extra <b>Vanilla JavaScript/DOM Manipulation</b> practice.
+
 🌟 => Challenge Questions
+
 👩🏽‍🦯 => Questions from <b>Blind75</b>
+
 😐📖 => Questions taggged <b>FaceBook/Meta</b>
+
 🌴 => Questions from <b>Amazon</b>
+
 🔎 => Questions from <b>Google</b>
 ## [Pattern 1: Sliding Window](./✅%20%20Pattern%2001%20:%20Sliding%20Window.md)
 
