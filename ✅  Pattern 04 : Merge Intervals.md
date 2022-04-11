@@ -20,7 +20,7 @@ https://leetcode.com/problems/merge-intervals/
 Our goal is to merge the intervals whenever they overlap. 
 The diagram above clearly shows a merging approach. Our algorithm will look like this:
 
-1. Sort the intervals on the start time to ensure `a.start <= b.start`
+1. Sort the intervals on the `startTime` to ensure `a.start <= b.start`
 2. If `a` overlaps `b` (i.e. `b.start <= a.end`), we need to merge them into a new interval `c` such that:
 ````
     c.start = a.start
@@ -45,7 +45,7 @@ function merge (intervals) {
     return intervals
   }
   
-  //sort the intervals on the start time
+  //sort the intervals on the startTime
   intervals.sort((a,b) => a.start - b.start)
   const mergedIntervals = []
   
@@ -162,7 +162,7 @@ anyOverlap([[1,2]])
  ## Insert Interval (medium)
  https://leetcode.com/problems/insert-interval/
  
- > Given a list of non-overlapping intervals sorted by their start time, <b>insert a given interval at the correct position</b> and merge all necessary intervals to produce a list that has only mutually exclusive intervals.
+ > Given a list of non-overlapping intervals sorted by their `startTime`, <b>insert a given interval at the correct position</b> and merge all necessary intervals to produce a list that has only mutually exclusive intervals.
 
 If the given list was not sorted, we could have simply appended the new interval to it and used the `merge()` function from <b>Merge Intervals</b>. But since the given list is sorted, we should try to come up with a solution better than `O(N * logN)`
 
@@ -181,7 +181,7 @@ Our overall algorithm will look like this:
 ````
     intervals[i].end < newInterval.start
 ````
-2. Let’s call the last interval `b` that does not satisfy the above condition. If `b` overlaps with the new interval (a) (i.e. `b.start <= a.end`), we need to merge them into a new interval `c`:
+2. Let’s call the last interval `b` that does not satisfy the above condition. If `b` overlaps with the new interval `a` (i.e. `b.start <= a.end`), we need to merge them into a new interval `c`:
 ````
     c.start = min(a.start, b.start)
     c.end = max(a.end, b.end)
@@ -311,9 +311,9 @@ insert([[2,3],[5,7]], [1,4])//[[1,4], [5,7]], After insertion, since [1,4] overl
 ## Intervals Intersection (medium)
 https://leetcode.com/problems/interval-list-intersections/
 
-> Given two lists of intervals, find the <b>intersection of these two lists</b>. Each list consists of <b>disjoint intervals sorted on their start time</b>.
+> Given two lists of intervals, find the <b>intersection of these two lists</b>. Each list consists of <b>disjoint intervals sorted on their `startTime`</b>.
 
-This problem follows the <b>Merge Intervals</b> pattern. As we have discussed under <b>Insert Interval</b>, there are five overlapping possibilities between two intervals ‘a’ and ‘b’. A close observation will tell us that whenever the two intervals overlap, one of the interval’s start time lies within the other interval. This rule can help us identify if any two intervals overlap or not.
+This problem follows the <b>Merge Intervals</b> pattern. As we have discussed under <b>Insert Interval</b>, there are five overlapping possibilities between two intervals`a` and `b`. A close observation will tell us that whenever the two intervals overlap, one of the interval’s `startTime` lies within the other interval. This rule can help us identify if any two intervals overlap or not.
 
 ![](./images/mergeintervals.png)
 
@@ -323,7 +323,7 @@ Again from the above diagram, the overlapping interval will be equal to:
 
     start = max(a.start, b.start)
     end = min(a.end, b.end) 
-That is, the highest start time and the lowest end time will be the overlapping interval.
+That is, the highest `startTime` and the lowest `endTime` will be the overlapping interval.
 
 So our algorithm will be to iterate through both the lists together to see if any two intervals overlap. If two intervals overlap, we will insert the overlapped part into a result list and move on to the next interval which is finishing early.
 ````js
@@ -367,9 +367,9 @@ findIntersection([[1, 3], [5, 7], [9, 12]], [[5, 10]])// [5, 7], [9, 10], The ou
 ## Conflicting Appointments (medium)
 https://leetcode.com/problems/meeting-rooms/
 
-> Given an array of intervals representing ‘N’ appointments, find out if a person can <b>attend all the appointments</b>.
+> Given an array of intervals representing`N` appointments, find out if a person can <b>attend all the appointments</b>.
 
-The problem follows the <b>Merge Intervals</b> pattern. We can sort all the intervals by start time and then check if any two intervals overlap. A person will not be able to attend all appointments if any two appointments overlap.
+The problem follows the <b>Merge Intervals</b> pattern. We can sort all the intervals by `startTime` and then check if any two intervals overlap. A person will not be able to attend all appointments if any two appointments overlap.
 ````js
 function canAttendAllAppointments(appointmentTimes) {
   //sort intervals by start time
@@ -431,7 +431,7 @@ function whatAreTheConflicts(appointmentTimes)  {
 ## 🌟 Minimum Meeting Rooms (hard) 
 https://leetcode.com/problems/meeting-rooms-ii/
 
-> Given a list of intervals representing the start and end time of ‘N’ meetings, find the <b>minimum number of rooms</b> required to <b>hold all the meetings</b>.
+> Given a list of intervals representing the start and `endTime` of`N` meetings, find the <b>minimum number of rooms</b> required to <b>hold all the meetings</b>.
 
 
 #### Example :
@@ -443,7 +443,7 @@ Explanation: We will need one room for [2,3] and [3,5], and another room for [2,
 
 Let’s take the above-mentioned example (4) and try to follow our <b>Merge Intervals</b> approach:
 
-1. Sorting these meetings on their start time will give us: `[[2,3], [2,4], [3,5], [4,5]]`
+1. Sorting these meetings on their `startTime` will give us: `[[2,3], [2,4], [3,5], [4,5]]`
 2. Merging overlapping meetings:
 
 - `[2,3]` overlaps with `[2,4]`, so after merging we’ll have => `[[2,4], [3,5], [4,5]]`
@@ -454,20 +454,20 @@ Since all the given meetings have merged into one big meeting `([2,5])`, does th
 
 Here is what our strategy will look like:
 
-1. We will sort the meetings based on start time.
+1. We will sort the meetings based on `startTime`.
 2. We will schedule the first meeting (let’s call it `m1`) in one room (let’s call it `r1`).
 3. If the next meeting `m2` is not overlapping with `m1`, we can safely schedule it in the same room `r1`.
 4. If the next meeting `m3` is overlapping with `m2` we can’t use `r1`, so we will schedule it in another room (let’s call it `r2`).
-5. Now if the next meeting `m4` is overlapping with `m3`, we need to see if the room `r1` has become free. For this, we need to keep track of the end time of the meeting happening in it. If the end time of `m2` is before the start time of `m4`, we can use that room `r1`, otherwise, we need to schedule `m4` in another room `r3`.
+5. Now if the next meeting `m4` is overlapping with `m3`, we need to see if the room `r1` has become free. For this, we need to keep track of the `endTime` of the meeting happening in it. If the `endTime` of `m2` is before the `startTime` of `m4`, we can use that room `r1`, otherwise, we need to schedule `m4` in another room `r3`.
 
 We can conclude that we need to <b>keep track of the ending time of all the meetings currently happening</b> so that when we try to schedule a new meeting, we can see what meetings have already ended. We need to put this information in a data structure that can easily give us the smallest ending time. A <b>Min Heap</b> would fit our requirements best.
 
 So our algorithm will look like this:
 
-1. Sort all the meetings on their start time.
-2. Create a min-heap to store all the active meetings. This min-heap will also be used to find the active meeting with the smallest end time.
-3. Iterate through all the meetings one by one to add them in the min-heap. Let’s say we are trying to schedule the meeting `m1`.
-4. Since the min-heap contains all the active meetings, so before scheduling `m1` we can remove all meetings from the heap that have ended before `m1`, i.e., remove all meetings from the heap that have an end time smaller than or equal to the start time of `m1`.
+1. Sort all the meetings on their `startTime`.
+2. Create a <i>min-heap</i> to store all the active meetings. This <i>min-heap</i> will also be used to find the active meeting with the smallest `endTime`.
+3. Iterate through all the meetings one by one to add them in the <i>min-heap</i>. Let’s say we are trying to schedule the meeting `m1`.
+4. Since the <i>min-heap</i> contains all the active meetings, so before scheduling `m1` we can remove all meetings from the heap that have ended before `m1`, i.e., remove all meetings from the heap that have an `endTime` smaller than or equal to the `startTime` of `m1`.
 5. Now add `m1` to the heap.
 6. The heap will always have all the overlapping meetings, so we will need rooms for all of them. Keep a counter to remember the maximum size of the heap at any time which will be the minimum number of rooms needed.
 
@@ -525,7 +525,7 @@ Both of these problems can be solved using the approach discussed above.
 ## 🌟 Maximum CPU Load (hard)
 https://leetcode.com/problems/car-pooling/
 
-We are given a list of Jobs. Each job has a Start time, an End time, and a CPU load when it is running. Our goal is to find the <b>maximum CPU load</b> at any time if all the jobs are <b>running on the same machine</b>.
+We are given a list of `jobs`. Each job has a `startTime`, an `endTime`, and a `CPU load` when it is running. Our goal is to find the  <b>Maximum CPU Load</b> at any time if all the `jobs` are <b>running on the same machine</b>.
 
 ### Example 1:
 ````
@@ -547,12 +547,11 @@ Output: 8
 Explanation: Maximum CPU load will be 8 as all jobs overlap during the time interval [3,4]. 
 ````
 
-The problem follows the <b>Merge Intervals</b> pattern and can easily be converted to <b>Minimum Meeting Rooms</b>. Similar to ‘Minimum Meeting Rooms’ where we were trying to find the maximum number of meetings happening at any time, for ‘Maximum CPU Load’ we need to find the maximum number of jobs running at any time. We will need to keep a running count of the maximum CPU load at any time to find the overall maximum load.
-
+The problem follows the <b>Merge Intervals</b> pattern and can easily be converted to <b>[Minimum Meeting Rooms](#🌟-minimum-meeting-rooms-hard)</b>. Similar to [Minimum Meeting Rooms](#🌟-minimum-meeting-rooms-hard) where we were trying to find the maximum number of meetings happening at any time, for  <b>Maximum CPU Load</b> we need to find the maximum number of `jobs` running at any time. We will need to keep a running count of the maximum  <b>CPU Load</b> at any time to find the overall maximum load.
 
 ````js
 function findMaxCPULoad(jobs) {
-  //sort the jobs by start time
+  //sort the jobs by startTime
   jobs.sort((a, b) => a[0]-b[0])
   
   let maxCPULoad = 0
@@ -582,18 +581,18 @@ function findMaxCPULoad(jobs) {
  findMaxCPULoad([[1,4,2], [2,4,1], [3,6,5]])//8, Maximum CPU load will be 8 as all jobs overlap during the time interval [3,4]. 
  ````
  
-- The time complexity of the above algorithm is `O(N*logN)`, where `N` is the total number of jobs. This is due to the sorting that we did in the beginning. Also, while iterating the jobs, we might need to poll/offer jobs to the priority queue. Each of these operations can take `O(logN)`. Overall our algorithm will take `O(NlogN)`.
-- The space complexity of the above algorithm will be `O(N)`, which is required for sorting. Also, in the worst case, we have to insert all the jobs into the priority queue (when all jobs overlap) which will also take `O(N)` space. The overall space complexity of our algorithm is `O(N)`.
+- The time complexity of the above algorithm is `O(N*logN)`, where `N` is the total number of `jobs`. This is due to the sorting that we did in the beginning. Also, while iterating the `jobs`, we might need to poll/offer `jobs` to the priority queue. Each of these operations can take `O(logN)`. Overall our algorithm will take `O(NlogN)`.
+- The space complexity of the above algorithm will be `O(N)`, which is required for sorting. Also, in the worst case, we have to insert all the `jobs` into the priority queue (when all `jobs` overlap) which will also take `O(N)` space. The overall space complexity of our algorithm is `O(N)`.
 ## 🌟 Employee Free Time (hard)
 https://leetcode.com/problems/employee-free-time/ 
-> For `K` employees, we are given a list of intervals representing the working hours of each employee. Our goal is to find out if there is a <b>free interval that is common to all employees</b>. You can assume that each list of employee working hours is sorted on the start time.
+> For `K` employees, we are given a list of intervals representing the working hours of each employee. Our goal is to find out if there is a <b>free interval that is common to all employees</b>. You can assume that each list of employee working hours is sorted on the `startTime`.
 
-This problem follows the Merge Intervals pattern. Let’s take the an example:
+This problem follows the [Merge Intervals pattern](#pattern-4--merge-intervals). Let’s take the an example:
 ````
 Input: Employee Working Hours=[[[1,3], [9,12]], [[2,4]], [[6,8]]]
 Output: [4,6], [8,9]
 ````
-One simple solution can be to put all employees’ working hours in a list and sort them on the start time. Then we can iterate through the list to find the gaps. Let’s dig deeper. Sorting the intervals of the above example will give us:
+One simple solution can be to put all employees' working hours in a list and sort them on the `startTime`. Then we can iterate through the list to find the gaps. Let’s dig deeper. Sorting the intervals of the above example will give us:
 ````
 [1,3], [2,4], [6,8], [9,12]
 ````
@@ -641,9 +640,9 @@ findEmployeeFreeTime ([[[1,3]], [[2,4]], [[3,5], [7,9]]])//[5,7], ll employees a
 
 One fact that we are not utilizing is that each employee list is individually sorted!
 
-How about we take the first interval of each employee and insert it in a `Min Heap`. This `Min Heap` can always give us the interval with the smallest start time. Once we have the smallest start-time interval, we can then compare it with the next smallest start-time interval (again from the `Heap`) to find the gap. This interval comparison is similar to what we suggested in the previous approach.
+How about we take the first interval of each employee and insert it in a <i>Min-Heap</i>. This <i>Min-Heap</i> can always give us the interval with the smallest `startTime`. Once we have the smallest start-time interval, we can then compare it with the next smallest start-time interval (again from the <i>Heap</i> to find the gap. This interval comparison is similar to what we suggested in the previous approach.
 
-Whenever we take an interval out of the `Min Heap`, we can insert the same employee’s next interval. This also means that we need to know which interval belongs to which employee.
+Whenever we take an interval out of the <i>Min-Heap</i>, we can insert the same employee’s next interval. This also means that we need to know which interval belongs to which employee.
 - The above algorithm’s time complexity is `O(N*logK)`, where `N` is the total number of intervals, and `K` is the total number of employees. This is because we are iterating through the intervals only once (which will take `O(N)`), and every time we process an interval, we remove (and can insert) one interval in the` Min Heap`, (which will take `O(logK)`. At any time, the heap will not have more than `K` elements.
 - The space complexity of the above algorithm will be `O(K)` as at any time, the heap will not have more than `K` elements.
 
