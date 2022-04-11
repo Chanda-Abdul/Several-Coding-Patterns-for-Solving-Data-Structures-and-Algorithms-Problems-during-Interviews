@@ -9,7 +9,7 @@ These are my JavaScript notes from a course that categorizes coding interview pr
 |<b>[Pattern 3: Fast & Slow pointers](./✅%20%20Pattern%2003:%20Fast%20%26%20Slow%20pointers.md)</b>|<b>[Pattern 11: Modified Binary Search](./✅%20%20Pattern%2011:%20Modified%20Binary%20Search.md)</b>|
 |<b>[Pattern 4: Merge Intervals](./✅%20%20Pattern%2004%20:%20Merge%20Intervals.md)</b>|<b>[Pattern 12: Bitwise XOR](./✅%20Pattern%2012:%20%20Bitwise%20XOR.md)</b>|
 |<b>[Pattern 5: Cyclic Sort](./✅%20%20Pattern%2005:%20Cyclic%20Sort.md)</b>|<b>[Pattern 13: Top 'K' Elements](./✅%20Pattern%2013:%20Top%20'K'%20Elements.md)</b>|
-|<b>[Pattern 6: In-place Reversal of a LinkedList](./✅%20%20Pattern%2006:%20In-place%20Reversal%20of%20a%20LinkedList.md)</b>|<b>[Pattern 14: K-way merge](./Pattern%2014:%20K-way%20merge.md)</b>|
+|<b>[Pattern 6: In-place Reversal of a LinkedList](./✅%20%20Pattern%2006:%20In-place%20Reversal%20of%20a%20LinkedList.md)</b>|<b>[Pattern 14: K-way merge](./%E2%9C%85%20Pattern%2014%3A%20K-way%20merge.md)</b>|
 |<b>[Pattern 7: Tree Breadth First Search](./✅%20%20Pattern%2007:%20Tree%20Breadth%20First%20Search.md)</b>|<b>[Pattern 15: 0/1 Knapsack (Dynamic Programming)](./%E2%9C%85%20Pattern%2015:%200-1%20Knapsack%20(Dynamic%20Programming).md)</b>|
 |<b>[Pattern 8: Depth First Search (DFS)](./✅%20%20Pattern%2008:Tree%20Depth%20First%20Search.md)</b>|<b>[Pattern 16: Topological Sort (Graph)](./%E2%9C%85%20Pattern%2016:%20%F0%9F%94%8D%20Topological%20Sort%20(Graph).md)</b>|
 
@@ -114,7 +114,7 @@ Any problem that asks us to find the <b>top/smallest/frequent ‘K’ elements</
 
 Although this course uses <b>Heaps</b> to solve <b>Top 'K' Elements</b> problems, <b>JavaScript</b> does not have a built in method for <b>Heaps/Priority Queues</b>. It can be very time consuming to implement a <b>Heap class</b> from scratch, especially during an interview. After reviewing the <i>JavaScript</i> solutions on <i>Leetcode</i> the most effecient way to solve a <b>Top 'K' Elements</b> problem is usually with <b>[QuickSort](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#-quick-sort)</b>, <b>[BinarySearch](https://github.com/Chanda-Abdul/leetcode/blob/master/0%20%E2%9D%97Sort%20Algorithms.md#binary-search)</b>, <b>[BucketSort](https://initjs.org/bucket-sort-in-javascript-dc040b8f0058)</b>, <b>[Greedy Algorithms](https://github.com/Chanda-Abdul/Grokking-Algorithm-Book-Notes/blob/main/8.%20Greedy%20Algoritms.md)</b>, or <b>[HashMaps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)</b>. 
 
-## [Pattern 14: K-way merge](./Pattern%2014:%20K-way%20merge.md)
+## [Pattern 14: K-way merge](./%E2%9C%85%20Pattern%2014%3A%20K-way%20merge.md)
 This pattern helps us solve problems that involve a list of sorted arrays.
 
 Whenever we are given `K` sorted arrays, we can use a <b>Heap</b> to efficiently perform a sorted traversal of all the elements of all arrays. We can push the smallest (first) element of each sorted array in a <b>Min Heap</b> to get the overall minimum. While inserting elements to the <b>Min Heap</b> we keep track of which array the element came from. We can, then, remove the top element from the heap to get the smallest element and push the next element from the same array, to which this smallest element belonged, to the heap. We can repeat this process to make a sorted traversal of all elements.
