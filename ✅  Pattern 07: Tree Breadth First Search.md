@@ -12,13 +12,13 @@ https://leetcode.com/problems/binary-tree-level-order-traversal/
 
 Since we need to traverse all nodes of each level before moving onto the next level, we can use the <b>Breadth First Search (BFS)</b> technique to solve this problem.
 
-We can use a Queue to efficiently traverse in BFS fashion. Here are the steps of our algorithm:
+We can use a <b>Queue</b> to efficiently traverse in <b>BFS</b> fashion. Here are the steps of our algorithm:
 1. Start by pushing the `root` node to the queue.
-2. Keep iterating until the queue is empty.
-3. In each iteration, first count the elements in the queue (let’s call it `levelSize`). We will have these many nodes in the current level.
-4. Next, remove `levelSize` nodes from the queue and push their `value` in an array to represent the current level.
+2. Keep iterating until the <b>queue</b> is empty.
+3. In each iteration, first count the elements in the <b>queue</b> (let’s call it `levelSize`). We will have these many nodes in the current level.
+4. Next, remove `levelSize` nodes from the <b>queue</b> and push their `value` in an array to represent the current level.
 5. After removing each node from the queue, insert both of its children into the queue.
-6. If the queue is not empty, repeat from step 3 for the next level.
+6. If the <b>queue</b> is not empty, repeat from <i>step 3</i> for the next level.
 
 ````js
 class Deque {
@@ -115,44 +115,67 @@ console.log(`Level order traversal: ${traverse(root)}`);
 
 ### Easier to understand solution w/o `Deque()`
 ````js
-function TreeNode(val, left, right) {
-  this.val = (val===undefined ? 0 : val)
-  this.left = (left===undefined ? null : left)
-  this.right = (right===undefined ? null : right)
- }
- 
- const levelOrder = function  (root) {
+class TreeNode {
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+function levelOrder(root) {
   //If root is null return an empty array
-  if(!root) return []
-  
-  const queue = [root] //initialize the queue with root
-  const levels = [] //declare output array
-  
-  while(queue.length !== 0) {
-    const queueLength = queue.length//get the length prior to deque
-    const currLevel = []//declare this level
-    //loop through to exahuast all options and only to include nodes at currLevel
-    for(let i = 0; i < queueLength; i++) {
+  if (!root) return [];
+
+  //initialize the queue with root
+  const queue = [root];
+
+  //declare output array
+  const levels = [];
+
+  while (queue.length !== 0) {
+    //get the length prior to deque
+    const queueLength = queue.length;
+
+    //declare this level
+    const currLevel = [];
+
+    //loop through to exhuast all options and only to include nodes at currLevel
+    for (let i = 0; i < queueLength; i++) {
       //get next node
-      const current = queue.shift()
-      if(current.left) {
-        queue.push(current.left)
+      const currNode = queue.shift();
+
+      if (currNode.left) {
+        queue.push(currNode.left);
       }
-      if(current.right) {
-        queue.push(current.right)
+      if (currNode.right) {
+        queue.push(currNode.right);
       }
       //after we add left and right for current, we add to currLevel
-      currLevel.push(current.val)
+      currLevel.push(currNode.value);
     }
     //Level has been finished. Push into output array
-    levels.push(currLevel) 
+    levels.push(currLevel);
   }
-  return levels
-};
 
-levelOrder([3,9,20,null,null,15,7])//[[3],[9,20],[15,7]]
-levelOrder([1])//[[1]]
-levelOrder([])//[]
+  return levels;
+}
+
+let root = new TreeNode(3);
+root.left = new TreeNode(9);
+root.right = new TreeNode(20);
+root.right.left = new TreeNode(15);
+root.right.right = new TreeNode(7);
+levelOrder(root);
+//[[3],[9,20],[15,7]]
+
+root = new TreeNode(1);
+levelOrder(root);
+//[[1]]
+
+root = new TreeNode();
+levelOrder(root);
+//[]
 ````
 
 ## Reverse Level Order Traversal (easy)
@@ -161,38 +184,60 @@ https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
 
 This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We can follow the same <b>BFS</b> approach. The only difference will be that instead of appending the current level at the end, we will append the current level at the beginning of the result list.
 ````js
-function TreeNode(val, left, right) {
-  this.val = (val===undefined ? 0 : val)
-  this.left = (left===undefined ? null : left)
-  this.right = (right===undefined ? null : right)
- }
- 
- const traverse = function(root) {
-  if(!root) return []
-   const queue = [root]
-   
-   const levels = []
-   
-   while(queue.length !== 0) {
-     const queueLength = queue.length
-     const currLevel = []
-     for (let i = 0; i < queueLength; i++) {
-       const current = queue.push()
-       if(current.left) {
-         queue.push(current.left)
-       }
-       if(current.right) {
-         queue.push(current.right)
-       }
-       currLevel.push(current.val)
-     }
-     levels.unshift(currLevel)
-   }
-   
-   return levels
+class TreeNode {
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
 }
- 
- traverse([[12], [7,1], [9, 10, null, 5]])
+
+function reverseLevelOrder(root) {
+  //If root is null return an empty array
+  if (!root) return [];
+
+  //initialize the queue with root
+  const queue = [root];
+
+  //declare output array
+  const levels = [];
+
+  while (queue.length !== 0) {
+    //get the length prior to deque
+    const queueLength = queue.length;
+
+    //declare this level
+    const currLevel = [];
+
+    //loop through to exhuast all options and only to include nodes at currLevel
+    for (let i = 0; i < queueLength; i++) {
+      //get next node
+      const currNode = queue.shift();
+
+      if (currNode.left) {
+        queue.push(currNode.left);
+      }
+      if (currNode.right) {
+        queue.push(currNode.right);
+      }
+      //after we add left and right for current, we add to currLevel
+      currLevel.push(currNode.value);
+    }
+    //Level has been finished. Push into output array in reverse order
+    levels.unshift(currLevel);
+  }
+
+  return levels;
+}
+
+let root = new TreeNode(12);
+root.left = new TreeNode(7);
+root.right = new TreeNode(1);
+root.left.left = new TreeNode(9);
+root.left.right = new TreeNode(10);
+root.right.right = new TreeNode(5);
+reverseLevelOrder(root);
+// [[9, 10, 5], [7, 1], [12]];
 ````
 - The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` as we need to return a list containing the level order traversal. We will also need `O(N)` space for the queue. Since we can have a maximum of `N/2` nodes at any level (this could happen only at the lowest level), therefore we will need `O(N)` space to store them in the queue.
@@ -202,65 +247,91 @@ https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
 
 > Given a binary tree, populate an array to represent its zigzag level order traversal. You should populate the values of all <b>nodes of the first level from left to right</b>, then <b>right to left for the next level</b> and keep alternating in the same manner for the following levels.
 
-This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We can follow the same <b>BFS</b> approach. The only additional step we have to keep in mind is to alternate the level order traversal, which means that for every other level, we will traverse similar to <b>Reverse Level Order Traversal</b>.
+This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We can follow the same <b>BFS</b> approach. The only additional step we have to keep in mind is to alternate the level order traversal, which means that for every other level, we will traverse similar to <b>[Reverse Level Order Traversal](#reverse-level-order-traversal-easy)</b>.
 
 
 ````js
-function TreeNode(val, left, right) {
-  this.val = (val === undefined ? 0 : val)
-  this.left = (left === undefined ? null : left)
-  this.right = (right === undefined ? nill : right)
+class TreeNode {
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
 }
 
 function zigzagLevelOrder(root) {
-  //if root is null return an empty array
-  if(!root) return []
-  
+  //If root is null return an empty array
+  if (!root) return [];
+
   //initialize the queue with root
-  const queue = [root]
-  //declare the output array
-  const levels = []
-  let leftToRight = true
-  
-  while(queue.length !== 0) {
-    //get the length prior to deque?
-    const queueLength = queue.length
-    //declare the current level
-    const currentLevel = []
-    
-    //loop through to exhaust all aoption and only to include nodes at current Level
+  const queue = [root];
+
+  //declare output array
+  const levels = [];
+  let leftToRight = true;
+
+  while (queue.length !== 0) {
+    //get the length prior to deque
+    const queueLength = queue.length;
+
+    //declare this level
+    const currLevel = [];
+
+    //loop through to exhuast all options and only to include nodes at currLevel
     for (let i = 0; i < queueLength; i++) {
-      //get the next node
-      const currentNode = queue.shift()
-      
+      //get next node
+      const currNode = queue.shift();
+
       //add the node to the current level based on the traverse direction
-      if(leftToRight) {
-        currentLevel.push(currentNode.val)
+
+      if (leftToRight) {
+        currLevel.push(currNode.value);
       } else {
-        currentLevel.unshift(currentNode.val)
+        currLevel.unshift(currNode.value);
       }
-      
+
       //insert the children of current node in the queue
-      if(currentNode.left !== null) {
-        queue.push(currentNode.left) 
+      if (currNode.left !== null) {
+        queue.push(currNode.left);
       }
-      if(currentNode.right !== null) {
-        queue.push(currentNode.right)
+      if (currNode.right !== null) {
+        queue.push(currNode.right);
       }
     }
-    //Level has been finished. push to the out put arra
-    levels.push(currentLevel)
-    
-    //reverse the traversal direction 
-    leftToRight = !leftToRight
+    //Level has been finished. Push into output array
+    levels.push(currLevel);
+
+    //reverse the traversal direction
+    leftToRight = !leftToRight;
   }
-  return levels
+  return levels;
 }
 
-zigzagLevelOrder([1, 2, 3, 4, 5, 6, 7])
-zigzagLevelOrder([3,9,20,null,null,15,7])
-zigzagLevelOrder([1])
-zigzagLevelOrder([])
+let root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.right.left = new TreeNode(6);
+root.right.right = new TreeNode(7);
+zigzagLevelOrder(root);
+// [[1], [3, 2], [4, 5, 6, 7]];
+
+root = new TreeNode(3);
+root.left = new TreeNode(9);
+root.right = new TreeNode(20);
+root.right.left = new TreeNode(15);
+root.right.right = new TreeNode(7);
+zigzagLevelOrder(root);
+// [[3], [20, 9], [15, 7]];
+
+root = new TreeNode(1);
+zigzagLevelOrder(root);
+// [[1]];
+
+root = new TreeNode();
+zigzagLevelOrder(root);
+// [[]];
 ````
 - The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` as we need to return a list containing the level order traversal. We will also need `O(N)` space for the queue. Since we can have a maximum of `N/2` nodes at any level (this could happen only at the lowest level), therefore we will need `O(N)` space to store them in the queue.
@@ -274,58 +345,57 @@ This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We ca
 
 ````js
 class TreeNode {
-  constructor(value) {
-    this.value = value
-    this.left = null
-    this.right = null
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
   }
 }
 
 function findLevelAverages(root) {
-  let result = []
-  
-  //edge case => no root
-  if(!root) { 
-    return result
-  }
-  
-  const queue = [root]
-  
-  while(queue.length > 0) {
-    let levelSize = queue.length
-    let levelSum = 0.0
-    
-    for(let i = 0; i < levelSize; i++){
-      let currentNode = queue.shift()
-      
+  //If root is null return an empty array
+  if (!root) return [];
+
+  //declare output array
+  let result = [];
+
+  //initialize the queue with root
+  const queue = [root];
+
+  while (queue.length > 0) {
+    let levelSize = queue.length;
+    let levelSum = 0;
+
+    for (let i = 0; i < levelSize; i++) {
+      //get next node
+      const currNode = queue.shift();
+
       //add the node's value to the running sum
-      levelSum += currentNode.value
-      
-      //insert the children of the current node to the queue
-      if(currentNode.left !== null) {
-        queue.push(currentNode.left)
+      levelSum += currNode.value;
+
+      //insert the children of current node in the queue
+      if (currNode.left !== null) {
+        queue.push(currNode.left);
       }
-      
-      if(currentNode.right !== null) {
-        queue.push(currentNode.right)
+      if (currNode.right !== null) {
+        queue.push(currNode.right);
       }
     }
-    
     //append the current level's average to the result array
-    result.push(levelSum/levelSize)
+    result.push(levelSum / levelSize);
   }
-  return result
+  return result;
 }
 
-var root = new TreeNode(12)
-root.left = new TreeNode(7)
-root.right = new TreeNode(1)
-root.left.left = new TreeNode(9)
-root.left.right = new TreeNode(2)
-root.right.left = new TreeNode(10)
-root.right.right = new TreeNode(5)
-
+let root = new TreeNode(12);
+root.left = new TreeNode(7);
+root.right = new TreeNode(1);
+root.left.left = new TreeNode(9);
+root.left.right = new TreeNode(2);
+root.right.left = new TreeNode(10);
+root.right.right = new TreeNode(5);
 console.log(`Level averages are: ${findLevelAverages(root)}`)
+// [[12], [4], [6.5]];
 ````
 - The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` which is required for the queue. Since we can have a maximum of `N/2` nodes at any level (this could happen only at the lowest level), therefore we will need `O(N)` space to store them in the queue
@@ -338,62 +408,60 @@ We will follow a similar approach, but instead of having a running sum we will t
 
 `maxValue = Math.max(maxValue, currentNode.val)`
 
-
 ````js
 class TreeNode {
-  constructor(value) {
-    this.value = value
-    this.left = null
-    this.right = null
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
   }
 }
 
 function largestValue(root) {
-  let result = []
-  
-  //edge case => no root
-  if(!root) { 
-    return result
-  }
-  
-  const queue = [root]
-  
-  while(queue.length > 0) {
-    let levelSize = queue.length
-    let maxValue = 0
-    
-    for(let i = 0; i < levelSize; i++){
-      
-      let currentNode = queue.shift()
-      
-      maxValue = Math.max(maxValue, currentNode.value)
-      
-      //insert the children of the current node to the queue
-      if(currentNode.left !== null) {
-        queue.push(currentNode.left)
+  //If root is null return an empty array
+  if (!root) return [];
+
+  //declare output array
+  let result = [];
+
+  //initialize the queue with root
+  const queue = [root];
+
+  while (queue.length > 0) {
+    let levelSize = queue.length;
+    let maxValue = 0;
+
+    for (let i = 0; i < levelSize; i++) {
+      //get next node
+      const currNode = queue.shift();
+
+      maxValue = Math.max(maxValue, currNode.value);
+
+      //insert the children of current node in the queue
+      if (currNode.left !== null) {
+        queue.push(currNode.left);
       }
-      
-      if(currentNode.right !== null) {
-        queue.push(currentNode.right)
+      if (currNode.right !== null) {
+        queue.push(currNode.right);
       }
     }
-   
-    //append the current level's max value to the result array
-    result.push(maxValue)
-    maxValue = 0
+    //append the current level's average to the result array
+    result.push(maxValue);
+    maxValue = 0;
   }
-  return result
+  return result;
 }
 
-const root = new TreeNode(12)
-root.left = new TreeNode(7)
-root.right = new TreeNode(1)
-root.left.left = new TreeNode(9)
-root.left.right = new TreeNode(2)
-root.right.left = new TreeNode(10)
-root.right.right = new TreeNode(5)
+let root = new TreeNode(12);
+root.left = new TreeNode(7);
+root.right = new TreeNode(1);
+root.left.left = new TreeNode(9);
+root.left.right = new TreeNode(2);
+root.right.left = new TreeNode(10);
+root.right.right = new TreeNode(5);
 
-console.log(`Max value's for each level are: ${largestValue(root)}`)
+console.log(`Max value's for each level are: ${largestValue(root)}`);
+// [[12], [7], [10]];
 ````
 
 ## Minimum Depth of a Binary Tree (easy)
@@ -402,56 +470,57 @@ https://leetcode.com/problems/minimum-depth-of-binary-tree/
 > Find the minimum depth of a binary tree. The minimum depth is the number of nodes along the <b>shortest path from the root node to the nearest leaf node</b>.
 
 This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We can follow the same <b>BFS</b> approach. The only difference will be, instead of keeping track of all the nodes in a level, we will only track the depth of the tree. As soon as we find our first leaf node, that level will represent the minimum depth of the tree.
+
 ````js
 class TreeNode {
-  constructor(value) {
-    this.value = value
-    this.left = null
-    this.right = null
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
   }
 }
 
 function findMinimumDepth(root) {
-  //edge case => no root
-  if(!root) {
-    return 0
-  }
-  
-  const queue = [root]
-  
-  let minimumTreeDepth = 0
-  while(queue.length > 0) {
-    minimumTreeDepth++
-    let levelSize = queue.length
-    
-    for(let i = 0; i < levelSize; i++) {
-      let currentNode = queue.shift()
-      
+  if (!root) return 0;
+
+  //initialize the queue with root
+  const queue = [root];
+
+  let minimumTreeDepth = 0;
+
+  while (queue.length > 0) {
+    minimumTreeDepth++;
+    let levelSize = queue.length;
+
+    for (let i = 0; i < levelSize; i++) {
+      //get next node
+      const currNode = queue.shift();
+
       //check if this is a leaf node
-      if(currentNode.left === null && currentNode.right === null) {
-        return minimumTreeDepth
+      if (currNode.left === null && currNode.right === null) {
+        return minimumTreeDepth;
       }
-      
+
       //insert the children of current node in the queue
-      if(currentNode.left !== null) {
-        queue.push(currentNode.left)
+      if (currNode.left !== null) {
+        queue.push(currNode.left);
       }
-      if(currentNode.right !== null) {
-        queue.push(currentNode.right)
-      }  
+      if (currNode.right !== null) {
+        queue.push(currNode.right);
+      }
     }
-  }  
+  }
 }
 
-const root = new TreeNode(12)
-root.left = new TreeNode(7)
-root.right = new TreeNode(1)
-root.right.left = new TreeNode(10)
-root.right.right = new TreeNode(5)
-console.log(`Tree Minimum Depth: ${findMinimumDepth(root)}`)
-root.left.left = new TreeNode(9)
-root.right.left.left = new TreeNode(11)
-console.log(`Tree Minimum Depth: ${findMinimumDepth(root)}`)
+const root = new TreeNode(12);
+root.left = new TreeNode(7);
+root.right = new TreeNode(1);
+root.right.left = new TreeNode(10);
+root.right.right = new TreeNode(5);
+console.log(`Tree Minimum Depth: ${findMinimumDepth(root)}`);
+root.left.left = new TreeNode(9);
+root.right.left.left = new TreeNode(11);
+console.log(`Tree Minimum Depth: ${findMinimumDepth(root)}`);
 ````
 - The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` which is required for the queue. Since we can have a maximum of `N/2` nodes at any level (this could happen only at the lowest level), therefore we will need `O(N)` space to store them in the queue.
@@ -512,7 +581,7 @@ console.log(`Tree Maximum Depth: ${findMaximumDepth(root)}`);
 ## Level Order Successor (easy) 😕
 > Given a binary tree and a node, find the level order successor of the given node in the tree. The level order successor is the node that appears right after the given node in the level order traversal.
 
-This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We can follow the same <b>BFS</b> approach. The only difference will be that we will not keep track of all the levels. Instead we will keep inserting child nodes to the queue. As soon as we find the given node, we will return the next node from the queue as the level order successor.
+This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We can follow the same <b>BFS</b> approach. The only difference will be that we will not keep track of all the levels. Instead we will keep inserting child nodes to the queue. As soon as we find the given node, we will return the next node from the <b>queue</b> as the level order successor.
 
 ````js
 class Deque {
