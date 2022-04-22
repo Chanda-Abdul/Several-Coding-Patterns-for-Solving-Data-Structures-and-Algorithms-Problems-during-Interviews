@@ -154,7 +154,7 @@ In this pattern, we will go through a set of problems to develop an understandin
 
 After the recursive solution, we will modify our algorithm to apply advanced techniques of <b>Memoization</b> and <b>Bottom-Up Dynamic Programming</b> to develop a complete understanding of this pattern.
 
-## [Pattern 16: 🔎 Topological Sort (Graph)](./%E2%9C%85%20Pattern%2016:%20%F0%9F%94%8D%20Topological%20Sort%20(Graph).md)
+## [Pattern 16: 🔎 Topological Sort (Graph)](./%E2%9C%85%20Pattern%2016%3A%20%F0%9F%94%8E%20Topological%20Sort%20(Graph).md)
 <b>Topological Sort</b> is used to find a linear ordering of elements that have dependencies on each other. For example, if event `B` is dependent on event `A`, `A` comes before `B` in topological ordering.
 
 
