@@ -5,7 +5,7 @@ This pattern is based on the <b>Breadth First Search (BFS)</b> technique to trav
 Any problem involving the traversal of a tree in a level-by-level order can be efficiently solved using this approach. We will use a <b>Queue</b> to keep track of all the nodes of a level before we jump onto the next level. This also means that the space complexity of the algorithm will be `O(W)`, where `W` is the maximum number of nodes on any level.
 
 
-## Binary Tree Level Order Traversal (easy) 😕
+## Binary Tree Level Order Traversal (easy)
 https://leetcode.com/problems/binary-tree-level-order-traversal/
 
 > Given a binary tree, populate an array to represent its level-by-level traversal. You should populate the values of all <b>nodes of each level from left to right</b> in separate sub-arrays.
@@ -242,7 +242,7 @@ reverseLevelOrder(root);
 - The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` as we need to return a list containing the level order traversal. We will also need `O(N)` space for the queue. Since we can have a maximum of `N/2` nodes at any level (this could happen only at the lowest level), therefore we will need `O(N)` space to store them in the queue.
 
-## Zigzag Traversal (medium) 🌴
+## 🌴 Zigzag Traversal (medium)
 https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
 
 > Given a binary tree, populate an array to represent its zigzag level order traversal. You should populate the values of all <b>nodes of the first level from left to right</b>, then <b>right to left for the next level</b> and keep alternating in the same manner for the following levels.
@@ -532,39 +532,40 @@ https://leetcode.com/problems/maximum-depth-of-binary-tree/
 We will follow a similar approach. Instead of returning as soon as we find a leaf node, we will keep traversing for all the levels, incrementing `maximumDepth` each time we complete a level. 
 ````js
 class TreeNode {
-  constructor(value) {
-    this.value = value
-    this.left = null
-    this.right = null
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
   }
 }
 
 function findMaximumDepth(root) {
-  //edge case => no root
-  if(!root) {
-    return 0
-  }
-  
-  const queue = [root]
-  
-  let maximumTreeDepth = 0
-  
-  while(queue.length > 0) {
-    maximumTreeDepth++
-    const levelSize = queue.length
+  if (!root) return 0;
+
+  //initialize the queue with root
+  const queue = [root];
+
+  let maximumTreeDepth = 0;
+
+  while (queue.length > 0) {
+    maximumTreeDepth++;
+    let levelSize = queue.length;
+
+    for (let i = 0; i < levelSize; i++) {
+      //get next node
+      const currNode = queue.shift();
+
     
-    for(let i = 0; i < levelSize; i++) {
-      let currentNode = queue.shift()
-      
+
       //insert the children of current node in the queue
-      if(currentNode.left !== null) {
-        queue.push(currentNode.left)
+      if (currNode.left !== null) {
+        queue.push(currNode.left);
       }
-      if(currentNode.right !== null) {
-        queue.push(currentNode.right)
-      }  
+      if (currNode.right !== null) {
+        queue.push(currNode.right);
+      }
     }
-  }  
+  }
   return maximumTreeDepth
 }
 
@@ -578,96 +579,58 @@ root.left.left = new TreeNode(9);
 root.right.left.left = new TreeNode(11);
 console.log(`Tree Maximum Depth: ${findMaximumDepth(root)}`);
 ````
-## Level Order Successor (easy) 😕
+## Level Order Successor (easy) 
 > Given a binary tree and a node, find the level order successor of the given node in the tree. The level order successor is the node that appears right after the given node in the level order traversal.
 
 This problem follows the <b>Binary Tree Level Order Traversal</b> pattern. We can follow the same <b>BFS</b> approach. The only difference will be that we will not keep track of all the levels. Instead we will keep inserting child nodes to the queue. As soon as we find the given node, we will return the next node from the <b>queue</b> as the level order successor.
 
 ````js
-class Deque {
-    constructor() {
-        this.front = this.back = undefined;
-    }
-    addFront(value) {
-        if (!this.front) this.front = this.back = { value };
-        else this.front = this.front.next = { value, prev: this.front };
-    }
-    removeFront() {
-        let value = this.peekFront();
-        if (this.front === this.back) this.front = this.back = undefined;
-        else (this.front = this.front.prev).next = undefined;
-        return value;
-    }
-    peekFront() { 
-        return this.front && this.front.value;
-    }
-    addBack(value) {
-        if (!this.front) this.front = this.back = { value };
-        else this.back = this.back.prev = { value, next: this.back };
-    }
-    removeBack() {
-        let value = this.peekBack();
-        if (this.front === this.back) this.front = this.back = undefined;
-        else (this.back = this.back.next).back = undefined;
-        return value;
-    }
-    peekBack() { 
-        return this.back && this.back.value;
-    }
-}
-
 class TreeNode {
-  constructor(value) {
-    this.value = value
-    this.left = null
-    this.right = null
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
   }
 }
 
 function findSuccessor(root, key) {
-  //edge case => no root
-  // if(!root) {
-  //   return null
-  // }
- if (root === null) {
-    return null;
-  }
+  if (root == null) return null;
 
-  const queue = new Deque();
-  queue.addFront(root);
+  //initialize the queue with root
+  const queue = [root];
+
   while (queue.length > 0) {
-    currentNode = queue.shift();
-    // insert the children of current node in the queue
-    if (currentNode.left !== null) {
-      queue.push(currentNode.left);
-    }
-    if (currentNode.right !== null) {
-      queue.push(currentNode.right);
-    }
-    // break if we have found the key
-    if (currentNode.val === key) {
-      break;
-    }
-  }
+    //get next node
+    const currNode = queue.shift();
 
-  if (queue.length > 0) {
-    return queue.peek();
+    //insert the children of current node in the queue
+    if (currNode.left !== null) {
+      queue.push(currNode.left);
+    }
+    if (currNode.right !== null) {
+      queue.push(currNode.right);
+    }
+
+    // break if we have found the key
+    if (currNode.value === key) break;
   }
+  if (queue.length > 0) return queue.shift();
+
   return null;
 }
 
-var root = new TreeNode(12)
-root.left = new TreeNode(7)
-root.right = new TreeNode(1)
-root.left.left = new TreeNode(9)
-root.right.left = new TreeNode(10)
-root.right.right = new TreeNode(5)
-result = findSuccessor(root, 12)
-if (result != null)
-  console.log(result.val)
-result = findSuccessor(root, 9)
-if (result != null)
-  console.log(result.val)
+const root = new TreeNode(12);
+root.left = new TreeNode(7);
+root.right = new TreeNode(1);
+root.left.left = new TreeNode(9);
+root.right.left = new TreeNode(10);
+root.right.right = new TreeNode(5);
+
+result = findSuccessor(root, 12);
+if (result != null) console.log(result.value);
+
+result = findSuccessor(root, 9);
+if (result != null) console.log(result.value);
 ````
 
 - The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
