@@ -124,7 +124,7 @@ findPaths(root, 23);
   - We can calculate a tighter time complexity of `O(NlogN)` from the space complexity discussion below.
 - If we ignore the space required for the `allPaths` list, the space complexity of the above algorithm will be `O(N)` in the worst case. This space will be used to store the <b>recursion</b> stack. The worst-case will happen when the given tree is a <i>linked list</i> (i.e., every node has only one child).
 
-> 🌟 Given a binary tree, return all  <i>root-to-leaf path</i> s.
+> 🌟 Given a binary tree, return all  <i>root-to-leaf</i> paths.
 
 https://leetcode.com/problems/binary-tree-paths/
 
@@ -180,7 +180,7 @@ root.right.right = new TreeNode(5)
 findPaths(root);
 ````
 
-> 🌟 Given a binary tree, find the  <i>root-to-leaf path</i>  with the maximum sum.
+> 🌟 Given a binary tree, find the  <i>root-to-leaf</i> path  with the maximum sum.
 
 We need to find the path with the maximum sum. As we traverse all paths, we can keep track of the path with the maximum sum.
 ````js
@@ -287,9 +287,9 @@ console.log(`Total Sum of Path Numbers: ${findSumOfPathNumbers(root)}`)
 - The time complexity of the above algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is due to the fact that we traverse each node once.
 - The space complexity of the above algorithm will be `O(N)` in the worst case. This space will be used to store the <b>recursion</b> stack. The worst case will happen when the given tree is a <i>linked list</i> (i.e., every node has only one child).
 ## Path With Given Sequence (medium)
-> Given a binary tree and a number sequence, find if the sequence is present as a  <i>root-to-leaf path</i>  in the given tree.
+> Given a binary tree and a number sequence, find if the sequence is present as a <i>root-to-leaf path</i>  in the given tree.
 
-This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the same <b>DFS</b> approach and additionally, track the element of the given sequence that we should match with the current node. Also, we can return false as soon as we find a mismatch between the sequence and the node value.
+This problem follows the <b>[Binary Tree Path Sum](#binary-tree-path-sum-easy)</b> pattern. We can follow the same <b>DFS</b> approach and additionally, track the element of the given sequence that we should match with the current node. Also, we can return false as soon as we find a mismatch between the sequence and the node value.
 ````js
 class TreeNode {
   constructor(value) {
@@ -339,14 +339,14 @@ https://leetcode.com/problems/path-sum-iii/
 
 > Given a binary tree and a number `S`, find all paths in the tree such that the sum of all the node values of each path equals `S`. Please note that the paths can start or end at any node but all paths must follow direction from parent to child (top to bottom).
 
-This problem follows the <b>Binary Tree Path Sum</b> pattern. We can follow the same <b>DFS</b> approach. But there will be four differences:
+This problem follows the <b>[Binary Tree Path Sum](#binary-tree-path-sum-easy)</b> pattern. We can follow the same <b>DFS</b> approach. But there will be four differences:
 1. We will keep track of the current path in a list which will be passed to every recursive call.
 2. Whenever we traverse a node we will do two things:
 
     - Add the current node to the current path.
-    - As we added a new node to the current path, we should find the sums of all sub-paths ending at the current node. If the sum of any sub-path is equal to ‘S` we will increment our path count.
+    - As we added a new node to the current path, we should find the sums of all sub-paths ending at the current node. If the sum of any sub-path is equal to `S` we will increment our path count.
 3. We will traverse all paths and will not stop processing after finding the first path.
-4. Remove the current node from the current path before returning from the function. This is needed to Backtrack while we are going up the recursive call stack to process other paths.
+4. Remove the current node from the current path before returning from the function. This is needed to <i>backtrack</i> while we are going up the recursive call stack to process other paths.
 ````js
 class TreeNode {
   constructor(value, right = null, left = null) {
