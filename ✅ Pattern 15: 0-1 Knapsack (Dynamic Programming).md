@@ -150,7 +150,7 @@ This shows that `Banana + Melon` is the best combination as it gives us the `max
 
 > Given two integer arrays to represent weights and profits of `N` items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number `C`. Each item can only be selected once, which means either we put an item in the knapsack or we skip it.
 
-### Basic Soultion
+### Basic Brute Force Soultion
 
 A basic <b>brute-force solution</b> could be to try all combinations of the given items (as we did above), allowing us to choose the one with `maximum profit` and a weight that doesn’t exceed `C`. Take the example of four items `A, B, C, and D`, as shown in the diagram below. To try all the combinations, our algorithm will look like:
 ![](./images/./images/./images/knapsack.png)
@@ -1558,7 +1558,7 @@ Let’s try to put various combinations of fruits in the knapsack, such that the
 
 ### Basic Brute Force Solution
 
-A basic brute-force solution could be to try all combinations of the given items to choose the one with maximum profit and a weight that doesn’t exceed `C`. This is what our algorithm will look like:
+A basic  <b>brute-force solution</b> could be to try all combinations of the given items to choose the one with maximum profit and a weight that doesn’t exceed `C`. This is what our algorithm will look like:
 
 ```js
 for each item 'i'
@@ -1800,7 +1800,7 @@ This problem can be mapped to the <b>[Unbounded Knapsack pattern](#unbounded-kna
 
 ### Brute Force
 
-A basic brute-force solution could be to try all combinations of the given rod lengths to choose the one with the maximum sale price. This is what our algorithm will look like:
+A <b>basic brute-force solution</b> could be to try all combinations of the given rod lengths to choose the one with the maximum sale price. This is what our algorithm will look like:
 
 ```js
 for each rod length 'i'
@@ -2031,7 +2031,7 @@ Let’s try to find a better solution.
 
 ### Top-down Dynamic Programming with Memoization
 
-We can use memoization to overcome the <i>overlapping sub-problems</i>. We will be using a two-dimensional array to store the results of solved sub-problems. As mentioned above, we need to store results for every `coin` combination and for every possible sum:
+We can use <b>memoization</b> to overcome the <i>overlapping sub-problems</i>. We will be using a two-dimensional array to store the results of solved sub-problems. As mentioned above, we need to store results for every `coin` combination and for every possible sum:
 
 ```js
 function countChange(denominations, total) {
@@ -2153,7 +2153,7 @@ Explanation: We need a minimum of four coins {2,3,3,3} to make a total of '11'
 
 This problem follows the <b>[Unbounded Knapsack pattern](#pattern-2-unbounded-knapsack)</b>.
 
-### Basic Brute Solution
+### Basic Brute Force Solution
 A basic <b>brute-force solution</b> could be to try all combinations of the given coins to select the ones that give a total sum of `T`. This is what our algorithm will look like:
 
 ```js
