@@ -65,21 +65,20 @@ console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
 
 As we saw above, this problem shows the overlapping subproblems pattern, so let’s make use of <b>Memoization</b> here. We can use an array to store the already solved subproblems
+
 ```js
 function calculateFibonacci(n) {
-  const memoize = []
+  const memoize = [];
 
-  function fib(n){
+  function fib(n) {
     if (n < 2) return n;
 
-     // if we have already solved this subproblem, simply return the result from the cache
+    // if we have already solved this subproblem, simply return the result from the cache
     if (memoize[n]) return memoize[n];
 
     memoize[n] = fib(n - 1) + fib(n - 2);
     return memoize[n];
-
   }
-  
 
   return fib(n);
 }
@@ -90,32 +89,32 @@ console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
 
 ### Bottom-up with Tabulation
-<b>Tabulation</b>  is the opposite of the top-down approach and avoids recursion. In this approach, we solve the problem <i>“bottom-up”</i> (i.e. by solving all the related sub-problems first). This is typically done by filling up an `n`-dimensional table. Based on the results in the table, the solution to the top/original problem is then computed.
 
-<b>Tabulation</b>  is the opposite of <b>Memoization</b>, as in <b>Memoization</b> we solve the problem and maintain a map of already solved sub-problems. In other words, in <b>memoization</b> , we do it <i>top-down</i> in the sense that we solve the top problem first (which typically recurses down to solve the sub-problems).
+<b>Tabulation</b> is the opposite of the top-down approach and avoids recursion. In this approach, we solve the problem <i>“bottom-up”</i> (i.e. by solving all the related sub-problems first). This is typically done by filling up an `n`-dimensional table. Based on the results in the table, the solution to the top/original problem is then computed.
 
-Let’s apply <b>Tabulation</b>  to our example of Fibonacci numbers. Since we know that every Fibonacci number is the sum of the two preceding numbers, we can use this fact to populate our table.
+<b>Tabulation</b> is the opposite of <b>Memoization</b>, as in <b>Memoization</b> we solve the problem and maintain a map of already solved sub-problems. In other words, in <b>memoization</b> , we do it <i>top-down</i> in the sense that we solve the top problem first (which typically recurses down to solve the sub-problems).
+
+Let’s apply <b>Tabulation</b> to our example of Fibonacci numbers. Since we know that every Fibonacci number is the sum of the two preceding numbers, we can use this fact to populate our table.
 
 Here is the code for our <b>bottom-up dynamic programming</b> approach:
 
 ```js
-function calculateFibonacci (n) {
+function calculateFibonacci(n) {
   const dp = [0, 1];
   for (let i = 2; i <= n; i++) {
     dp[i] = dp[i - 1] + dp[i - 2];
   }
   return dp[n];
-};
+}
 
 console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
 console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
+
 <b>In this course, we will always start with a brute-force recursive solution, which is the best way to start solving any DP problem!</b> Once we have a recursive solution then we will apply Memoization and Tabulation techniques.
 
 Let’s apply this knowledge to solve some of the frequently asked <b>DP</b> problems.
-
-
 
 # Pattern 1: 0/1 Knapsack
 
@@ -151,7 +150,8 @@ This shows that `Banana + Melon` is the best combination as it gives us the `max
 
 > Given two integer arrays to represent weights and profits of `N` items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number `C`. Each item can only be selected once, which means either we put an item in the knapsack or we skip it.
 
-### Basic Soultion 
+### Basic Soultion
+
 A basic <b>brute-force solution</b> could be to try all combinations of the given items (as we did above), allowing us to choose the one with `maximum profit` and a weight that doesn’t exceed `C`. Take the example of four items `A, B, C, and D`, as shown in the diagram below. To try all the combinations, our algorithm will look like:
 ![](./images/./images/./images/knapsack.png)
 
@@ -852,7 +852,9 @@ return true if any of the above two sets has a sum equal to 'S', otherwise retur
 ```
 
 Since this problem is quite similar to <b>[Equal Subset Sum Partition](#equal-subset-sum-partition-medium)</b>, let’s jump directly to the <b>bottom-up dynamic programming</b> solution.
+
 ### Bottom-up Dynamic Programming
+
 We’ll try to find if we can make all possible sums with every subset to populate the array `dp[TotalNumbers][S+1]`.
 
 For every possible sum `s` (where `0 <= s <= S`), we have two options:
@@ -1551,22 +1553,24 @@ Let’s try to put various combinations of fruits in the knapsack, such that the
 - `Banana + Melon (total weight 5) => 10 profit`
 
 ## Unbounded Knapsack
+
 > Given two integer arrays to represent weights and profits of `N` items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number `C`. We can assume an infinite supply of item quantities; therefore, each item can be selected multiple times.
 
-### Basic Brute Force Solution 
+### Basic Brute Force Solution
+
 A basic brute-force solution could be to try all combinations of the given items to choose the one with maximum profit and a weight that doesn’t exceed `C`. This is what our algorithm will look like:
 
 ```
-for each item 'i' 
-  create a new set which includes one quantity of item 'i' if it does not exceed the capacity, and 
-     recursively call to process all items 
-  create a new set without item 'i', and recursively process the remaining items 
-return the set from the above two sets with higher profit 
+for each item 'i'
+  create a new set which includes one quantity of item 'i' if it does not exceed the capacity, and
+     recursively call to process all items
+  create a new set without item 'i', and recursively process the remaining items
+return the set from the above two sets with higher profit
 ```
 
 The only difference between the [0/1 Knapsack](#01-knapsack-medium) problem and this one is that, after including the item, we recursively call to process all the items (including the current item). In [0/1 Knapsack](#01-knapsack-medium), however, we recursively call to process the remaining items.
 
-````js
+```js
 function solveKnapsack(profits, weights, capacity) {
   function knapsackRecursive(profits, weights, capacity, currentIndex) {
     //recursive base case check
@@ -1611,19 +1615,22 @@ const weights = [1, 3, 4, 5];
 console.log(
   `Total knapsack profit: ---> ${solveKnapsack(profits, weights, 8)}`
 );
-````
-- The time complexity of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items. 
+```
+
+- The time complexity of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items.
 - The space complexity will be `O(N+C)` to store the recursion stack.
 
 Let’s try to find a better solution.
 
 ### Top-down Dynamic Programming with Memoization
+
 Once again, we can use <b>memoization</b> to overcome the overlapping sub-problems.
 
 We will be using a two-dimensional array to store the results of solved sub-problems. As mentioned above, we need to store results for every sub-array and for every possible capacity. Here is the code:
-````js
+
+```js
 function solveKnapsack(profits, weights, capacity) {
-  const dp = []
+  const dp = [];
   function knapsackRecursive(profits, weights, capacity, currentIndex) {
     //recursive base case check
     if (
@@ -1634,8 +1641,8 @@ function solveKnapsack(profits, weights, capacity) {
     )
       return 0;
 
-    dp[currentIndex] = dp[currentIndex] || []
-   
+    dp[currentIndex] = dp[currentIndex] || [];
+
     //recursive call after choosing the items at the currentIndex
     //**recursive call on all items as we did not increment currentIndex**
     let currentProfit = 0;
@@ -1658,11 +1665,13 @@ function solveKnapsack(profits, weights, capacity) {
       currentIndex + 1
     );
 
-    
-    dp[currentIndex][capacity] = Math.max(currentProfit, currentProfitMinusIndexItem);
-     
+    dp[currentIndex][capacity] = Math.max(
+      currentProfit,
+      currentProfitMinusIndexItem
+    );
+
     // console.log(dp)
-    return dp[currentIndex][capacity]
+    return dp[currentIndex][capacity];
   }
 
   return knapsackRecursive(profits, weights, capacity, 0);
@@ -1673,25 +1682,29 @@ const weights = [1, 3, 4, 5];
 console.log(
   `Total knapsack profit: ---> ${solveKnapsack(profits, weights, 8)}`
 );
-````
-#### What is the time and space complexity of the above solution? 
+```
+
+#### What is the time and space complexity of the above solution?
+
 - Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our time complexity will be `O(N∗C)`.
 - The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total space complexity will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
 
-### Bottom-up Dynamic Programming#
+### Bottom-up Dynamic Programming
+
 Let’s try to populate our `dp[][]` array from the above solution, working in a <i>bottom-up</i> fashion. Essentially, what we want to achieve is: <i>“Find the maximum profit for every sub-array and for every possible capacity”</i>.
 
-So for every possible capacity `c` (`0 <= c <= capacity), we have two options:
+So for every possible capacity `c` (`0 <= c <= capacity`), we have two options:
 
 1. Exclude the item. In this case, we will take whatever profit we get from the sub-array excluding this item: `dp[index-1][c]`
 2. Include the item if its weight is not more than the `c`. In this case, we include its profit plus whatever profit we get from the remaining capacity: `profit[index] + dp[index][c-weight[index]]`
 
 Finally, we have to take the maximum of the above two values:
+
 ```
 dp[index][c] = max (dp[index-1][c], profit[index] + dp[index][c-weight[index]])
 ```
 
-````js
+```js
 function solveKnapsack(profits, weights, capacity) {
   //base case check
   if (
@@ -1737,7 +1750,8 @@ console.log(
 console.log(
   `Total knapsack profit: ---> ${solveKnapsack(profits, weights, 6)}`
 );
-````
+```
+
 - The above solution has time and space complexity of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
 
 As we know, the final profit is at the right-bottom corner; hence we will start from there to find the items that will be going to the knapsack.
@@ -1757,17 +1771,178 @@ Let’s assume the four items are identified as `{A, B, C, and D}`, and use the 
 ![](./images/unbounded.png)
 
 ## Rod Cutting
+
 https://leetcode.com/problems/minimum-cost-to-cut-a-stick/
 
 > Given a rod of length `n`, we are asked to cut the rod and sell the pieces in a way that will maximize the profit. We are also given the price of every piece of length `i` where `1 <= i <= n`.
+
+```
+Lengths: [1, 2, 3, 4, 5]
+Prices: [2, 6, 7, 10, 13]
+Rod Length: 5
+```
+
+Let’s try different combinations of cutting the rod:
+
+- Five pieces of length `1` => `10` price
+- Two pieces of length `2` and one piece of length `1` => `14` price
+- One piece of length `3` and two pieces of length `1` => `11` price
+- One piece of length `3` and one piece of length `2` => `13` price
+- One piece of length `4` and one piece of length `1` => `12` price
+- One piece of length `5` => `13` price
+
+This shows that we get the maximum price (`14`) by cutting the rod into two pieces of length `2` and one piece of length `1`.
+
+This problem can be mapped to the [Unbounded Knapsack pattern](#unbounded-knapsack). The `Weights` array of the [Unbounded Knapsack pattern](#unbounded-knapsack)problem is equivalent to the `Lengths` array, and `Profits` is equivalent to `Prices`.
+
+### Brute Force
+
+A basic brute-force solution could be to try all combinations of the given rod lengths to choose the one with the maximum sale price. This is what our algorithm will look like:
+
+```
+for each rod length 'i'
+  create a new set which includes one quantity of length 'i', and recursively process
+      all rod lengths for the remaining length
+  create a new set without rod length 'i', and recursively process for remaining rod lengths
+return the set from the above two sets with a higher sales price
+```
+
+```js
+function solveRodCutting(lengths, prices, n) {
+  function solveRodCuttingRecursive(lengths, prices, n, currIndex) {
+    //recursive base case check
+    if (
+      n <= 0 ||
+      prices.length === 0 ||
+      lengths.length !== prices.length ||
+      currIndex >= prices.length
+    )
+      return 0;
+
+    //recursive call after choosing the items at the currentIndex
+    //**recursive call on all items as we did not increment currentIndex**
+    let currentProfit = 0;
+    if (lengths[currIndex] <= n) {
+      currentProfit =
+        prices[currIndex] +
+        solveRodCuttingRecursive(
+          prices,
+          lengths,
+          n - lengths[currIndex],
+          currIndex
+        );
+    }
+
+    //recursive call after excluding the element at the currentIndex
+    const currentProfitMinusIndexItem = solveRodCuttingRecursive(
+      prices,
+      lengths,
+      n - lengths[currIndex],
+      currIndex + 1
+    );
+
+    return Math.max(currentProfit, currentProfitMinusIndexItem);
+  }
+
+  return solveRodCuttingRecursive(lengths, prices, n, 0);
+}
+
+console.log(
+  `Maximum profit: ---> ${solveRodCutting(
+    (lengths = [1, 2, 3, 4, 5]),
+    (prices = [2, 6, 7, 10, 13]),
+    5
+  )}`
+);
+```
+
+Since this problem is quite similar to Unbounded Knapsack, let’s jump directly to the bottom-up dynamic solution.
+
+### Bottom-up Dynamic Programming
+
+Let’s try to populate our `dp[][]` array in a <b>bottom-up fashion</b>. Essentially, what we want to achieve is: <i>“Find the maximum sales price for every rod length and for every possible sales price”</i>.
+
+So for every possible rod length `len` (`0<= len <= n`), we have two options:
+
+1. Exclude the piece. In this case, we will take whatever price we get from the rod length excluding this piece => `dp[index-1][len]`
+2. Include the piece if its length is not more than `len`. In this case, we include its price plus whatever price we get from the remaining `rod` `length` => `prices[index] + dp[index][len-lengths[index]]`
+
+Finally, we have to take the maximum of the above two values:
+
+```
+dp[index][len] = max (dp[index-1][len], prices[index] + dp[index][len-lengths[index]])
+```
+
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
+
+```js
+function solveRodCutting(lengths, prices, n) {
+  //base checks
+  if (n <= 0 || prices.length === 0 || prices.length !== lengths.length)
+    return 0;
+
+  let lCount = lengths.length;
+  const dp = Array(lCount)
+    .fill(0)
+    .map(() => Array(n + 1).fill(0));
+
+  //process all rod lengths for all prices
+  for (let i = 0; i < lCount; i++) {
+    for (let len = 1; len <= n; len++) {
+      let pointer1 = 0;
+      let pointer2 = 0;
+
+      if (lengths[i] <= len) {
+        pointer1 = prices[i] + dp[i][len - lengths[i]];
+      }
+      if (i > 0) {
+        pointer2 = dp[i - 1][len];
+      }
+      dp[i][len] = Math.max(pointer1, pointer2);
+    }
+  }
+
+  console.log(dp);
+  //max price will be in the bottom-right corner
+  return dp[lCount - 1][n];
+}
+
+console.log(
+  `Maximum profit: ---> $${solveRodCutting(
+    (lengths = [1, 2, 3, 4, 5]),
+    (prices = [2, 6, 7, 10, 13]),
+    5
+  )}`
+);
+```
+- The above solution has time and space complexity of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
+
+#### Find the selected items#
+As we know, the final price is at the right-bottom corner; hence we will start from there to find the rod lengths.
+
+As you remember, at every step we had two options: include a rod piece or skip it. If we skip it, then we take the price from the cell right above it; if we include it, then we jump to the remaining length to find more pieces.
+
+Let’s understand this from the above example:
+
+1. `14` did come from the top cell, so we jump to the fourth row.
+2. `14` came from the top cell, so we jump to the third row.
+3. Again, `14` came from the top cell, so we jump to the second row.
+4. Now `14` is different from the top cell, so we must include rod of length `2`. After this, we subtract the price of the rod of length `2` from `14` and jump to that cell.
+5. `8` is different than the top cell, so we must include rod of length `2` again. After this, we subtract the price of the rod of length `2` from `8` and jump to that cell.
+6. 7. `2` did come from the top cell, so we jump to the first row.
+Now we must include a piece of length `1`. So the desired rod lengths are `{2, 2, 1}`.
+
+![](./images/dpRodCutting.png)
 
 ## Coin Change
 https://leetcode.com/problems/coin-change/
 
 ## Minimum Coin Change
+
 https://leetcode.com/problems/coin-change-2/
 
 ## Maximum Ribbon Cut
+
 https://leetcode.com/problems/cutting-ribbons/
 
 # Pattern 3: Fibonacci Numbers
