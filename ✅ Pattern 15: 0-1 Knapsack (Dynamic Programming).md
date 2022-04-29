@@ -2209,7 +2209,7 @@ console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 Let’s try to find a better solution.
 
 ### Top-down Dynamic Programming with Memoization
-We can use <b>memoization</b> to overcome the <b>overlapping sub-problems<b>. We will be using a two-dimensional array to store the results of solved <i>sub-problems</i>. As mentioned above, we need to store results for every `coin` combination and for every possible sum:
+We can use <b>memoization</b> to overcome the <b>overlapping sub-problems</b>. We will be using a two-dimensional array to store the results of solved <i>sub-problems</i>. As mentioned above, we need to store results for every `coin` combination and for every possible sum:
 
 ```js
 function countChange(denominations, total) {
