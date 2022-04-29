@@ -14,7 +14,7 @@ Let’s take the example of the <b>Fibonacci numbers</b>. As we all know, <i>Fib
 
 If we are asked to calculate the nth Fibonacci number, we can do that with the following equation,
 
-```
+```js
 Fib(n) = Fib(n-1) + Fib(n-2), for n > 1
 ```
 
@@ -36,7 +36,7 @@ We can clearly see the overlapping subproblem pattern here, as `fib(2)` has been
 
 Any problem has optimal substructure property if its overall optimal solution can be constructed from the optimal solutions of its subproblems. For Fibonacci numbers, as we know,
 
-```
+```js
 Fib(n) = Fib(n-1) + Fib(n-2)
 ```
 
@@ -126,7 +126,7 @@ After the recursive solution, we will modify our algorithm to apply advanced tec
 
 Let’s jump onto our first problem.
 
-## 0/1 Knapsack (medium)
+## 🔎 0/1 Knapsack (medium)
 
 https://leetcode.com/problems/maximum-earnings-from-taxi/
 
@@ -1292,7 +1292,7 @@ So, at every step we have two options:
 
 To find the total sets, we will add both of the above two values:
 
-```
+```js
     dp[index][sum] = dp[index-1][sum] + dp[index-1][sum-num[index]])
 ```
 
@@ -1560,7 +1560,7 @@ Let’s try to put various combinations of fruits in the knapsack, such that the
 
 A basic brute-force solution could be to try all combinations of the given items to choose the one with maximum profit and a weight that doesn’t exceed `C`. This is what our algorithm will look like:
 
-```
+```js
 for each item 'i'
   create a new set which includes one quantity of item 'i' if it does not exceed the capacity, and
      recursively call to process all items
@@ -1700,8 +1700,11 @@ So for every possible capacity `c` (`0 <= c <= capacity`), we have two options:
 
 Finally, we have to take the maximum of the above two values:
 
-```
-dp[index][c] = max (dp[index-1][c], profit[index] + dp[index][c-weight[index]])
+```js
+dp[index][c] = max(
+  dp[index - 1][c],
+  profit[index] + dp[index][c - weight[index]]
+);
 ```
 
 ```js
@@ -1793,13 +1796,13 @@ Let’s try different combinations of cutting the rod:
 
 This shows that we get the maximum price (`14`) by cutting the rod into two pieces of length `2` and one piece of length `1`.
 
-This problem can be mapped to the [Unbounded Knapsack pattern](#unbounded-knapsack). The `Weights` array of the [Unbounded Knapsack pattern](#unbounded-knapsack)problem is equivalent to the `Lengths` array, and `Profits` is equivalent to `Prices`.
+This problem can be mapped to the <b>[Unbounded Knapsack pattern](#unbounded-knapsack)</b>. The `Weights` array of the <b>[Unbounded Knapsack pattern](#unbounded-knapsack)</b> problem is equivalent to the `Lengths` array, and `Profits` is equivalent to `Prices`.
 
 ### Brute Force
 
 A basic brute-force solution could be to try all combinations of the given rod lengths to choose the one with the maximum sale price. This is what our algorithm will look like:
 
-```
+```js
 for each rod length 'i'
   create a new set which includes one quantity of length 'i', and recursively process
       all rod lengths for the remaining length
@@ -1856,7 +1859,7 @@ console.log(
 );
 ```
 
-Since this problem is quite similar to Unbounded Knapsack, let’s jump directly to the bottom-up dynamic solution.
+Since this problem is quite similar to <b>[Unbounded Knapsack pattern](#unbounded-knapsack)</b>, let’s jump directly to the bottom-up dynamic solution.
 
 ### Bottom-up Dynamic Programming
 
@@ -1869,8 +1872,11 @@ So for every possible rod length `len` (`0<= len <= n`), we have two options:
 
 Finally, we have to take the maximum of the above two values:
 
-```
-dp[index][len] = max (dp[index-1][len], prices[index] + dp[index][len-lengths[index]])
+```js
+dp[index][len] = max(
+  dp[index - 1][len],
+  prices[index] + dp[index][len - lengths[index]]
+);
 ```
 
 Here is the code for our <b>bottom-up dynamic programming</b> approach:
@@ -1915,9 +1921,11 @@ console.log(
   )}`
 );
 ```
+
 - The above solution has time and space complexity of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
 
-#### Find the selected items#
+#### Find the selected items
+
 As we know, the final price is at the right-bottom corner; hence we will start from there to find the rod lengths.
 
 As you remember, at every step we had two options: include a rod piece or skip it. If we skip it, then we take the price from the cell right above it; if we include it, then we jump to the remaining length to find more pieces.
@@ -1930,16 +1938,202 @@ Let’s understand this from the above example:
 4. Now `14` is different from the top cell, so we must include rod of length `2`. After this, we subtract the price of the rod of length `2` from `14` and jump to that cell.
 5. `8` is different than the top cell, so we must include rod of length `2` again. After this, we subtract the price of the rod of length `2` from `8` and jump to that cell.
 6. 7. `2` did come from the top cell, so we jump to the first row.
-Now we must include a piece of length `1`. So the desired rod lengths are `{2, 2, 1}`.
+      Now we must include a piece of length `1`. So the desired rod lengths are `{2, 2, 1}`.
 
 ![](./images/dpRodCutting.png)
 
-## Coin Change
+## 🔎👩🏽‍🦯 Coin Change
+
 https://leetcode.com/problems/coin-change/
+
+> Given an infinite supply of `n` coin denominations and a total money amount, we are asked to find the total number of distinct ways to make up that amount.
+
+Example:
+
+```
+Denominations: {1,2,3}
+Total amount: 5
+Output: 5
+```
+
+<b>Explanation:</b> There are five ways to make the change for `5`, here are those ways:
+
+1. `{1,1,1,1,1} `
+2. `{1,1,1,2} `
+3. `{1,2,2}`
+4. `{1,1,3}`
+5. `{2,3}`
+
+> Given a number array to represent different coin denominations and a total amount `T`, we need to find all the different ways to make a change for `T` with the given coin denominations. We can assume an infinite supply of coins, therefore, each coin can be chosen multiple times.
 
 ## Minimum Coin Change
 
 https://leetcode.com/problems/coin-change-2/
+
+This problem follows the <b>[Unbounded Knapsack](#pattern-2-unbounded-knapsack)</b> pattern.
+
+### Basic Brute Force Solution
+
+A basic <b>brute-force solution</b> could be to try all combinations of the given coins to select the ones that give a total sum of `T`. This is what our algorithm will look like:
+
+```js
+for each coin 'c'
+  create a new set which includes one quantity of coin 'c' if it does not exceed 'T', and
+     recursively call to process all coins
+  create a new set without coin 'c', and recursively call to process the remaining coins
+return the count of sets who have a sum equal to 'T'
+```
+
+This problem is quite similar to <b>[Count of Subset Sum](#🔎-subset-sum-medium)</b>. The only difference here is that after including the item (i.e., `coin`), we recursively call to process all the items (including the current `coin`). In <b>[Count of Subset Sum](#🔎-subset-sum-medium)</b>, however, we were recursively calling to process only the remaining items.
+
+Here is the code for the <b>brute-force</b> solution:
+
+```js
+function countChange(denominations, total) {
+  function countChangeRecursive(denominations, total, currIndex) {
+    //base checks
+    if (total === 0) return 1;
+
+    if (denominations.length === 0 || currIndex >= denominations.length)
+      return 0;
+
+    //recursive call after selecting the coin at currIndex
+    //if the coin at currIndex exceeds the total, we shouldn't process
+    let currSum = 0;
+    if (denominations[currIndex] <= total) {
+      currSum = countChangeRecursive(
+        denominations,
+        total - denominations[currIndex],
+        currIndex
+      );
+    }
+
+    //recursive call after excluding the coin at the currIndex
+    let sumAtNextIndex = countChangeRecursive(
+      denominations,
+      total,
+      currIndex + 1
+    );
+
+    return currSum + sumAtNextIndex;
+  }
+
+  return countChangeRecursive(denominations, total, 0);
+}
+
+console.log(
+  `Number of ways to make change: ---> ${countChange(
+    (denominations = [1, 2, 3]),
+    (total = 5)
+  )}`
+);
+```
+
+- The time complexity of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total coin denominations and `T` is the total amount that we want to make change. The space complexity will be `O(C+T)`.
+
+Let’s try to find a better solution.
+
+### Top-down Dynamic Programming with Memoization
+
+We can use memoization to overcome the <i>overlapping sub-problems</i>. We will be using a two-dimensional array to store the results of solved sub-problems. As mentioned above, we need to store results for every coin combination and for every possible sum:
+
+```js
+function countChange(denominations, total) {
+  const dp = [];
+  function countChangeRecursive(denominations, total, currIndex) {
+    //base checks
+    if (total === 0) return 1;
+
+    if (denominations.length === 0 || currIndex >= denominations.length)
+      return 0;
+
+    dp[currIndex] = dp[currIndex] || [];
+
+    //if we have already processed a similar sub-problem, return the result
+    if (typeof dp[currIndex][total] !== "undefined")
+      return dp[currIndex][total];
+
+    //recursive call after selecting the coin at currIndex
+    //if the coin at currIndex exceeds the total, we shouldn't process
+    let currSum = 0;
+    if (denominations[currIndex] <= total) {
+      currSum = countChangeRecursive(
+        denominations,
+        total - denominations[currIndex],
+        currIndex
+      );
+    }
+
+    //recursive call after excluding the coin at the currIndex
+    let sumAtNextIndex = countChangeRecursive(
+      denominations,
+      total,
+      currIndex + 1
+    );
+
+    dp[currIndex][total] = currSum + sumAtNextIndex;
+    return dp[currIndex][total];
+  }
+
+  return countChangeRecursive(denominations, total, 0);
+}
+console.log(
+  `Number of ways to make change: ---> ${countChange(
+    (denominations = [1, 2, 3]),
+    (total = 5)
+  )}`
+);
+```
+
+### Bottom-up Dynamic Programming
+
+We will try to find if we can make all possible sums, with every combination of coins, to populate the array `dp[TotalDenominations][Total+1]`.
+
+So for every possible total `t` (`0<= t <= Total`) and for every possible `coin` index (`0 <= index < denominations.length`), we have two options:
+
+1. Exclude the coin. Count all the coin combinations without the given coin up to the total `t` => `dp[index-1][t]`
+2. Include the coin if its value is not more than `t`. In this case, we will count all the coin combinations to get the remaining total: `dp[index][t-denominations[index]]`
+
+Finally, to find the total combinations, we will add both the above two values:
+
+```js
+dp[index][t] = dp[index - 1][t] + dp[index][t - denominations[index]];
+```
+
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
+
+```js
+function countChange(denominations, total) {
+  const n = denominations.length;
+  const dp = Array(n)
+    .fill(0)
+    .map(() => Array(total + 1).fill(0));
+
+  // populate the total=0 columns
+  //as we will always have an empty set for 0 total
+  for (let i = 0; i < n; i++) dp[i][0] = 1;
+
+  //process all sub-arrays for all capacities
+  for (let i = 0; i < n; i++) {
+    for (let t = 1; t <= total; t++) {
+      if (i > 0) dp[i][t] = dp[i - 1][t];
+      if (t >= denominations[i]) dp[i][t] += dp[i][t - denominations[i]];
+    }
+  }
+  //total combos will be at the bottom-right corner
+  console.log(dp);
+  return dp[n - 1][total];
+}
+
+console.log(
+  `Number of ways to make change: ---> ${countChange(
+    (denominations = [1, 2, 3]),
+    (total = 5)
+  )}`
+);
+```
+
+-The above solution has time and space complexity of `O(C*T)`, where `C` represents total coin denominations and `T` is the total amount that we want to make change.
 
 ## Maximum Ribbon Cut
 
