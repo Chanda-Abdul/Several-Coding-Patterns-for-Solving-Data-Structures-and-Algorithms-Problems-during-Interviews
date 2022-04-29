@@ -2315,7 +2315,7 @@ console.log(
 console.log(`Number of ways to make change: ---> ${countChange([1, 2, 3], 7)}`);
 console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
--The above solution has time and space complexity of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
+- The above solution has time and space complexity of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
 
 
 ## Maximum Ribbon Cut
@@ -2325,16 +2325,19 @@ https://leetcode.com/problems/cutting-ribbons/
 # Pattern 3: Fibonacci Numbers
 
 ## Fibonacci numbers
-
-## Staircase
+https://leetcode.com/problems/fibonacci-number/
+##  🔎👩🏽‍🦯 Staircase
+https://leetcode.com/problems/climbing-stairs/
 
 ## Number factors
+https://leetcode.com/problems/consecutive-numbers-sum/
 
 ## Minimum jumps to reach the end
-
+https://leetcode.com/problems/jump-game-ii/
 ## Minimum jumps with fee
-
-## House thief
+https://leetcode.com/problems/min-cost-climbing-stairs/
+## 🌴 🔎 👩🏽‍🦯 House thief
+https://leetcode.com/problems/house-robber/
 
 # Pattern 4: Palindromic Subsequence
 
