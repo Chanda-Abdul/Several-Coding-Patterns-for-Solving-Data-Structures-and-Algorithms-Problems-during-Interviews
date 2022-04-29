@@ -291,7 +291,7 @@ console.log(
   for counting, therefore, the overall time complexity of the algorithm will be `O(N*log(max-min))`.
 - The algorithm runs in constant space `O(1)`.
 
-## Smallest Number Range (Hard)
+## 📍 Smallest Number Range (Hard)
 
 https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
 
@@ -299,82 +299,119 @@ https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
 
 This problem follows the [K-way merge pattern](#pattern-14-k-way-merge) and we can follow a similar approach as discussed in [Merge K Sorted Lists](#👩🏽‍🦯-🌴-merge-k-sorted-arrays).
 
-We can start by inserting the first number from all the arrays in a `min-heap()`. We will keep track of the largest number that we have inserted in the heap (let’s call it `currentMax`).
+We can start by inserting the first number from all the arrays in a `min-heap()`. We will keep track of the largest number that we have inserted in the heap (let’s call it `maxNumber`).
 
-In a loop, we’ll take the smallest (top) element from the `min-heap()` and `currentMax` has the largest element that we inserted in the heap. If these two numbers give us a smaller range, we’ll update our range. Finally, if the array of the top element has more elements, we’ll insert the next element to the heap.
+In a loop, we’ll take the smallest (top) element from the `min-heap()` and `maxNumber` has the largest element that we inserted in the heap. If these two numbers give us a smaller range, we’ll update our range. Finally, if the array of the top element has more elements, we’ll insert the next element to the heap.
 
 We can finish searching the minimum range as soon as an array is completed or, in other terms, the <b>heap</b> has less than `M` elements.
 
 ```js
-class Heap {
+class MinHeap {
   constructor() {
-    this.arr = [];
+    this.list = []; // a list of [num, groupID]
+    this.size = 0;
   }
 
-  size() {
-    return this.arr.length;
-  }
+  push(item) {
+    const list = this.list;
+    const size = ++this.size;
 
-  push(val) {
-    this.arr.push(val);
-    this.arr.sort((a, b) => a[0] - b[0]);
+    list[size - 1] = item;
+    this.bubbleUp(size - 1);
   }
 
   pop() {
-    return this.arr.shift();
+    if (this.size === 0) return;
+
+    const list = this.list;
+    const size = this.size;
+    const item = list[0];
+
+    [list[0], list[size - 1]] = [list[size - 1], list[0]];
+    this.size--;
+    this.bubbleDown(0);
+    return item;
+  }
+
+  bubbleUp(index) {
+    const list = this.list;
+    const size = this.size;
+    const parent = Math.floor((index - 1) / 2);
+
+    if (parent < 0 || parent >= size) return;
+    if (index < 0 || index >= size) return;
+
+    if (list[index][0] < list[parent][0]) {
+      [list[index], list[parent]] = [list[parent], list[index]];
+      this.bubbleUp(parent);
+    }
+  }
+
+  bubbleDown(index) {
+    if (index < 0 || index >= this.size) return;
+
+    const list = this.list;
+    const size = this.size;
+    const left = index * 2 + 1;
+    const right = index * 2 + 2;
+    let minVal = list[index][0];
+    let minIndex = index;
+
+    if (left >= 0 && left < size) {
+      if (list[left][0] < minVal) {
+        minVal = list[left][0];
+        minIndex = left;
+      }
+    }
+    if (right >= 0 && right < size) {
+      if (list[right][0] < minVal) {
+        minVal = list[right][0];
+        minIndex = right;
+      }
+    }
+    if (minIndex !== index) {
+      [list[index], list[minIndex]] = [list[minIndex], list[index]];
+      this.bubbleDown(minIndex);
+    }
   }
 }
 
-function findSmallestRange(lists) {
-  let minHeap = new Heap();
+function smallestRange(nums) {
+  const minHeap = new MinHeap();
+  const pointers = Array(nums.length).fill(0);
   let rangeStart = 0;
   let rangeEnd = Infinity;
   let maxNumber = -Infinity;
 
   // put the first element of each array into the heap
-  for (let num of lists) {
-    minHeap.push([num[0], 0, num]);
-    maxNumber = Math.max(maxNumber, num[0]);
+  for (let i = 0; i < nums.length; i++) {
+    minHeap.push([nums[i][0], i]);
+    maxNumber = Math.max(maxNumber, nums[i][0]);
   }
 
   // take the smallest(top) element from the heap, if it gives us smaller range, update the ranges
   // if the array of the top element has more elements, insert the next element in the heap
-  while (minHeap.size() == lists.length) {
-    let [num, i, list] = minHeap.pop();
+  while (true) {
+    let [minNumber, group] = minHeap.pop();
 
-    if (rangeEnd - rangeStart > maxNumber - num) {
-      rangeStart = num;
+    if (maxNumber - minNumber < rangeEnd - rangeStart) {
+      rangeStart = minNumber;
       rangeEnd = maxNumber;
     }
 
-    if (list.length > i + 1) {
-      // insert the next element into the heap
-      minHeap.push([list[i + 1], i + 1, list]);
-      maxNumber = Math.max(maxNumber, list[i + 1]);
-    }
+    pointers[group]++;
+    if (pointers[group] >= nums[group].length) break;
+
+    // insert the next element into the heap
+    minHeap.push([nums[group][pointers[group]], group]);
+    maxNumber = Math.max(maxNumber, nums[group][pointers[group]]);
   }
 
   return [rangeStart, rangeEnd];
 }
 
 console.log(`Smallest range is: 
-${findSmallestRange([
-  [1, 5, 8],
-  [4, 12],
-  [7, 8, 10],
-])}`);
-// The range [4, 7] includes 5 from L1, 4 from L2 and 7 from L3.
-
-console.log(`Smallest range is: 
-${findSmallestRange([
-  [1, 9],
-  [4, 12],
-  [7, 10, 16],
-])}`);
-// The range [9, 12] includes 9 from L1, 12 from L2 and 10 from L3.
-
-console.log(`Smallest range is: 
-${findSmallestRange([
+${smallestRange([
   [4, 10, 15, 24, 26],
   [0, 9, 12, 20],
   [5, 18, 22, 30],
@@ -385,7 +422,7 @@ ${findSmallestRange([
 // List 3: [5, 18, 22, 30], 22 is in range [20,24].
 
 console.log(`Smallest range is: 
-${findSmallestRange(
+${smallestRange(
   (nums = [
     [1, 2, 3],
     [1, 2, 3],
@@ -393,6 +430,22 @@ ${findSmallestRange(
   ])
 )}`);
 // [1,1]
+
+console.log(`Smallest range is: 
+${smallestRange([
+  [1, 5, 8],
+  [4, 12],
+  [7, 8, 10],
+])}`);
+// The range [4, 7] includes 5 from L1, 4 from L2 and 7 from L3.
+
+console.log(`Smallest range is: 
+${smallestRange([
+  [1, 9],
+  [4, 12],
+  [7, 10, 16],
+])}`);
+// The range [9, 12] includes 9 from L1, 12 from L2 and 10 from L3.
 ```
 
 - Since, at most, we’ll be going through all the elements of all the arrays and will remove/add one element in the heap in each step, the time complexity of the above algorithm will be `O(N*logM)` where `N` is the total number of elements in all the `M` input arrays.

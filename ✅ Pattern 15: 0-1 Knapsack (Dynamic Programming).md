@@ -149,8 +149,6 @@ Let’s try to put various combinations of fruits in the knapsack, such that the
 
 This shows that `Banana + Melon` is the best combination as it gives us the `maximum profit`, and the total weight does not exceed the capacity.
 
-#
-
 > Given two integer arrays to represent weights and profits of `N` items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number `C`. Each item can only be selected once, which means either we put an item in the knapsack or we skip it.
 
 ### Basic Soultion 
@@ -1180,7 +1178,7 @@ https://leetcode.com/problems/combination-sum/
 
 > Given a set of positive numbers, find the total number of subsets whose sum is equal to a given number `S`.
 
-This problem follows the <b>[0/1 Knapsack pattern](#01-knapsack-medium)</b> and is quite similar to <b>Subset Sum</b>. The only difference in this problem is that we need to count the number of subsets, whereas in <b>Subset Sum</b> we only wanted to know if a subset with the given sum existed.
+This problem follows the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b> and is quite similar to <b>[Subset Sum](#🔎-subset-sum-medium)</b>. The only difference in this problem is that we need to count the number of subsets, whereas in <b>[Subset Sum](#🔎-subset-sum-medium)</b> we only wanted to know if a subset with the given sum existed.
 
 A basic <b>brute-force</b> solution could be to try all subsets of the given numbers to count the subsets that have a sum equal to `S`. So our <b>brute-force</b> algorithm will look like:
 
@@ -1400,7 +1398,7 @@ Now, let’s say `Sum(s1)` denotes the total sum of set `s1`, and `Sum(s2)` deno
     Sum(s1) - Sum(s2) = S
 ```
 
-This equation can be reduced to the subset sum problem. Let’s assume that `Sum(num)` denotes the total sum of all the numbers, therefore:
+This equation can be reduced to the [subset sum](#🔎-subset-sum-medium) problem. Let’s assume that `Sum(num)` denotes the total sum of all the numbers, therefore:
 
 ```js
     Sum(s1) + Sum(s2) = Sum(num)
@@ -1432,7 +1430,7 @@ function findTargetSubsets(num, s) {
 }
 
 function countSubsets(num, sum) {
-  // this function is the exactly simialar to what we
+  // this function is the exactly similar to what we
   //have in 'Count of Subsets Sum' problem
   let n = num.length;
 
@@ -1536,15 +1534,241 @@ console.log(
 
 # Pattern 2: Unbounded Knapsack
 
+> Given the weights and profits of `N` items, we are asked to put these items in a knapsack with a capacity `C`. The goal is to get the `maximum profit` out of the knapsack items. The only difference between the [0/1 Knapsack](#01-knapsack-medium) problem and this problem is that we are allowed to use an unlimited quantity of an item.
+
+Let’s take Merry’s example, who wants to carry some fruits in the knapsack to get `maximum profit`. Here are the weights and profits of the fruits:
+
+- `Items: { Apple, Orange, Banana, Melon }`
+- `Weights: { 2, 3, 1, 4 }`
+- `Profits: { 4, 5, 3, 7 }`
+- `Knapsack capacity: 5`
+
+Let’s try to put various combinations of fruits in the knapsack, such that their total weight is not more than `5`:
+
+- `Apple + Orange (total weight 5) => 9 profit`
+- `Apple + Banana (total weight 3) => 7 profit`
+- `Orange + Banana (total weight 4) => 8 profit`
+- `Banana + Melon (total weight 5) => 10 profit`
+
 ## Unbounded Knapsack
+> Given two integer arrays to represent weights and profits of `N` items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number `C`. We can assume an infinite supply of item quantities; therefore, each item can be selected multiple times.
+
+### Basic Brute Force Solution 
+A basic brute-force solution could be to try all combinations of the given items to choose the one with maximum profit and a weight that doesn’t exceed `C`. This is what our algorithm will look like:
+
+```
+for each item 'i' 
+  create a new set which includes one quantity of item 'i' if it does not exceed the capacity, and 
+     recursively call to process all items 
+  create a new set without item 'i', and recursively process the remaining items 
+return the set from the above two sets with higher profit 
+```
+
+The only difference between the [0/1 Knapsack](#01-knapsack-medium) problem and this one is that, after including the item, we recursively call to process all the items (including the current item). In [0/1 Knapsack](#01-knapsack-medium), however, we recursively call to process the remaining items.
+
+````js
+function solveKnapsack(profits, weights, capacity) {
+  function knapsackRecursive(profits, weights, capacity, currentIndex) {
+    //recursive base case check
+    if (
+      capacity <= 0 ||
+      profits.length === 0 ||
+      weights.length !== profits.length ||
+      currentIndex >= profits.length
+    )
+      return 0;
+
+    //recursive call after choosing the items at the currentIndex
+    //**recursive call on all items as we did not increment currentIndex**
+    let currentProfit = 0;
+    if (weights[currentIndex] <= capacity) {
+      currentProfit =
+        profits[currentIndex] +
+        knapsackRecursive(
+          profits,
+          weights,
+          capacity - weights[currentIndex],
+          currentIndex
+        );
+    }
+
+    //recursive call after excluding the element at the currentIndex
+    const currentProfitMinusIndexItem = knapsackRecursive(
+      profits,
+      weights,
+      capacity - weights[currentIndex],
+      currentIndex + 1
+    );
+
+    return Math.max(currentProfit, currentProfitMinusIndexItem);
+  }
+
+  return knapsackRecursive(profits, weights, capacity, 0);
+}
+
+const profits = [15, 50, 60, 90];
+const weights = [1, 3, 4, 5];
+console.log(
+  `Total knapsack profit: ---> ${solveKnapsack(profits, weights, 8)}`
+);
+````
+- The time complexity of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items. 
+- The space complexity will be `O(N+C)` to store the recursion stack.
+
+Let’s try to find a better solution.
+
+### Top-down Dynamic Programming with Memoization
+Once again, we can use <b>memoization</b> to overcome the overlapping sub-problems.
+
+We will be using a two-dimensional array to store the results of solved sub-problems. As mentioned above, we need to store results for every sub-array and for every possible capacity. Here is the code:
+````js
+function solveKnapsack(profits, weights, capacity) {
+  const dp = []
+  function knapsackRecursive(profits, weights, capacity, currentIndex) {
+    //recursive base case check
+    if (
+      capacity <= 0 ||
+      profits.length === 0 ||
+      weights.length !== profits.length ||
+      currentIndex >= profits.length
+    )
+      return 0;
+
+    dp[currentIndex] = dp[currentIndex] || []
+   
+    //recursive call after choosing the items at the currentIndex
+    //**recursive call on all items as we did not increment currentIndex**
+    let currentProfit = 0;
+    if (weights[currentIndex] <= capacity) {
+      currentProfit =
+        profits[currentIndex] +
+        knapsackRecursive(
+          profits,
+          weights,
+          capacity - weights[currentIndex],
+          currentIndex
+        );
+    }
+
+    //recursive call after excluding the element at the currentIndex
+    const currentProfitMinusIndexItem = knapsackRecursive(
+      profits,
+      weights,
+      capacity - weights[currentIndex],
+      currentIndex + 1
+    );
+
+    
+    dp[currentIndex][capacity] = Math.max(currentProfit, currentProfitMinusIndexItem);
+     
+    // console.log(dp)
+    return dp[currentIndex][capacity]
+  }
+
+  return knapsackRecursive(profits, weights, capacity, 0);
+}
+
+const profits = [15, 50, 60, 90];
+const weights = [1, 3, 4, 5];
+console.log(
+  `Total knapsack profit: ---> ${solveKnapsack(profits, weights, 8)}`
+);
+````
+#### What is the time and space complexity of the above solution? 
+- Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our time complexity will be `O(N∗C)`.
+- The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total space complexity will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
+
+### Bottom-up Dynamic Programming#
+Let’s try to populate our `dp[][]` array from the above solution, working in a <i>bottom-up</i> fashion. Essentially, what we want to achieve is: <i>“Find the maximum profit for every sub-array and for every possible capacity”</i>.
+
+So for every possible capacity `c` (`0 <= c <= capacity), we have two options:
+
+1. Exclude the item. In this case, we will take whatever profit we get from the sub-array excluding this item: `dp[index-1][c]`
+2. Include the item if its weight is not more than the `c`. In this case, we include its profit plus whatever profit we get from the remaining capacity: `profit[index] + dp[index][c-weight[index]]`
+
+Finally, we have to take the maximum of the above two values:
+```
+dp[index][c] = max (dp[index-1][c], profit[index] + dp[index][c-weight[index]])
+```
+
+````js
+function solveKnapsack(profits, weights, capacity) {
+  //base case check
+  if (
+    capacity <= 0 ||
+    profits.length === 0 ||
+    weights.length !== profits.length
+  )
+    return 0;
+
+  const n = profits.length;
+  const dp = Array(n)
+    .fill(0)
+    .map(() => Array(capacity + 1).fill(0));
+
+  //populate the capacity=0 columns
+  for (let i = 0; i < n; i++) dp[i][0] = 0;
+
+  //process all sub-arrays for all capacities
+  for (let i = 0; i < n; i++) {
+    for (let c = 1; c <= capacity; c++) {
+      let currentProfit = 0;
+      let currentProfitMinusIndex = 0;
+
+      if (weights[i] <= c) currentProfit = profits[i] + dp[i][c - weights[i]];
+      if (i > 0) currentProfitMinusIndex = dp[i - 1][c];
+      dp[i][c] =
+        currentProfit > currentProfitMinusIndex
+          ? currentProfit
+          : currentProfitMinusIndex;
+    }
+  }
+  //maximum profit will be in the bottom right corner
+  return dp[n - 1][capacity];
+
+  console.log(dp);
+}
+
+const profits = [15, 50, 60, 90];
+const weights = [1, 3, 4, 5];
+console.log(
+  `Total knapsack profit: ---> ${solveKnapsack(profits, weights, 8)}`
+);
+console.log(
+  `Total knapsack profit: ---> ${solveKnapsack(profits, weights, 6)}`
+);
+````
+- The above solution has time and space complexity of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
+
+As we know, the final profit is at the right-bottom corner; hence we will start from there to find the items that will be going to the knapsack.
+
+As you remember, at every step we had two options: include an item or skip it. If we skip an item, then we take the profit from the cell right above it; if we include the item, then we jump to the remaining profit to find more items.
+
+Let’s assume the four items are identified as `{A, B, C, and D}`, and use the above example to better understand this:
+
+1. `140` did not come from the top cell (which is `130`); hence we must include the item at index `3`, which is `D`.
+2. Subtract the profit of `D` from `140` to get the remaining profit `50`. We then jump to profit `50` on the same row.
+3. `50` came from the top cell, so we jump to row `2`.
+4. Again, `50` came from the top cell, so we jump to row `1`.
+5. `50` is different than the top cell, so we must include this item, which is `B`.
+6. Subtract the profit of `B` from `50` to get the remaining profit `0`. We then jump to profit `0` on the same row. As soon as we hit zero remaining profit, we can finish our item search.
+7. So items going into the knapsack are `{B, D}`.
+
+![](./images/unbounded.png)
 
 ## Rod Cutting
+https://leetcode.com/problems/minimum-cost-to-cut-a-stick/
+
+> Given a rod of length `n`, we are asked to cut the rod and sell the pieces in a way that will maximize the profit. We are also given the price of every piece of length `i` where `1 <= i <= n`.
 
 ## Coin Change
+https://leetcode.com/problems/coin-change/
 
 ## Minimum Coin Change
+https://leetcode.com/problems/coin-change-2/
 
 ## Maximum Ribbon Cut
+https://leetcode.com/problems/cutting-ribbons/
 
 # Pattern 3: Fibonacci Numbers
 
