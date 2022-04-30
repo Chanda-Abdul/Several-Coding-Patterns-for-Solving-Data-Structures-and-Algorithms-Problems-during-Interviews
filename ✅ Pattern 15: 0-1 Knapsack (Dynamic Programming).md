@@ -2416,20 +2416,18 @@ function countRibbonPieces(ribbonLengths, total) {
 }
 
 console.log(
-  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3, 5], 5)}`
-);
+  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3, 5], 5)}`);
 console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3], 7)}`);
 console.log(
-  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5, 7], 13)}`
-);
+  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5, 7], 13)}`;
 console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
 ```
 
 The above algorithm’s time complexity is exponential `O(2 ᴸ⁺ᴺ)`, where `L` represents total ribbon lengths, and `N` is the total length that we want to cut. The space complexity will be `O(L+N)`.
 
-Since this problem is quite similar to <b>[ Minimum Coin Change](#minimum-coin-change)</b>, let’s jump on to the <b>bottom-up dynamic programming solution</b>.
+Since this problem is quite similar to <b>[Minimum Coin Change](#minimum-coin-change)</b>, let’s jump on to the <b>bottom-up dynamic programming solution</b>.
 
 ### Bottom-up Dynamic Programming
 
@@ -2443,13 +2441,10 @@ So for every possible length `len` (`0 <= len <= total`) and for every possible 
 Finally, we will take the maximum of the above two values for our solution:
 
 ```js
-dp[index][len] = max(
-  dp[index - 1][len],
-  1 + dp[index][len - ribbonLengths[index]]
-);
+dp[index][len] = max(dp[index - 1][len],1 + dp[index][len -ribbonLengths[index]]);
 ```
 
-Here is the code for our <b>bottom-up dynamic programming approach<b>:
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
 
 ```js
 function countRibbonPieces(ribbonLengths, total) {
