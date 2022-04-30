@@ -1,5 +1,5 @@
 # Pattern 15: 0-1 Knapsack (Dynamic Programming)
-
+from this [course](https://www.educative.io/courses/grokking-dynamic-programming-patterns-for-coding-interviews)
 |                                                                                   |
 | --------------------------------------------------------------------------------- |
 | <b>[Pattern 1: 0/1 Knapsack](#pattern-1-01-knapsack)</b>                          |
@@ -2334,7 +2334,7 @@ console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 
 https://leetcode.com/problems/cutting-ribbons/
 
-We are given a ribbon of length `n` and a set of possible ribbon lengths. We need to cut the ribbon into the maximum number of pieces that comply with the above-mentioned possible lengths. Write a method that will return the count of pieces.
+We are given a ribbon of length `n` and a set of possible `ribbonLengths`. We need to cut the ribbon into the maximum number of pieces that comply with the above-mentioned possible lengths. Write a method that will return the count of pieces.
 
 #### Example 1:
 
@@ -2362,8 +2362,8 @@ Ribbon Lengths: {3,5,7}
 Output: 3
 Explanation: Ribbon pieces will be {3,3,7}.
 ```
-
-> Given a number array to represent possible ribbon lengths and a total ribbon length `n`, we need to find the maximum number of pieces that the ribbon can be cut into.
+##
+> Given a number array to represent possible `ribbonLengths` and a total ribbon length `n`, we need to find the maximum number of pieces that the ribbon can be cut into.
 
 This problem follows the <b>[Unbounded Knapsack pattern](#pattern-2-unbounded-knapsack)</b> and is quite similar to <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>. The only difference is that in <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>, we were asked to find the <b>minimum</b> number of coin changes, whereas, in this problem, we need to find the <b>maximum</b> number of pieces.
 
@@ -2418,16 +2418,18 @@ function countRibbonPieces(ribbonLengths, total) {
 console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3, 5], 5)}`
 );
-console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([2, 3], 7)}`);
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3], 7)}`);
 console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5, 7], 13)}`
 );
-console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
 ```
 
 The above algorithm’s time complexity is exponential `O(2 ᴸ⁺ᴺ)`, where `L` represents total ribbon lengths, and `N` is the total length that we want to cut. The space complexity will be `O(L+N)`.
 
-Since this problem is quite similar to <b>[ Minimum Coin Change](#minimum-coin-change)<b>, let’s jump on to the <b>bottom-up dynamic programming solution</b>.
+Since this problem is quite similar to <b>[ Minimum Coin Change](#minimum-coin-change)</b>, let’s jump on to the <b>bottom-up dynamic programming solution</b>.
 
 ### Bottom-up Dynamic Programming
 
