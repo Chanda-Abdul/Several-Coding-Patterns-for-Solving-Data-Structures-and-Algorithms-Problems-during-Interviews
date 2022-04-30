@@ -1558,7 +1558,7 @@ Let’s try to put various combinations of fruits in the knapsack, such that the
 
 ### Basic Brute Force Solution
 
-A basic  <b>brute-force solution</b> could be to try all combinations of the given items to choose the one with maximum profit and a weight that doesn’t exceed `C`. This is what our algorithm will look like:
+A basic <b>brute-force solution</b> could be to try all combinations of the given items to choose the one with maximum profit and a weight that doesn’t exceed `C`. This is what our algorithm will look like:
 
 ```js
 for each item 'i'
@@ -2130,41 +2130,49 @@ console.log(
 ```
 
 - The above solution has time and space complexity of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
+
 ## Minimum Coin Change
+
 https://leetcode.com/problems/coin-change-2/
 
 > Given an infinite supply of `n` `coin` denominations and a total money amount, we are asked to find the minimum number of coins needed to make up that amount.
 
 ### Example 1:
+
 ```
 Denominations: {1,2,3}
 Total amount: 5
 Output: 2
 Explanation: We need a minimum of two coins {2,3} to make a total of '5'
 ```
+
 ### Example 2:
+
 ```
 Denominations: {1,2,3}
 Total amount: 11
 Output: 4
 Explanation: We need a minimum of four coins {2,3,3,3} to make a total of '11'
 ```
+
 > Given a number array to represent different `coin` denominations and a total amount `T`, we need to find the minimum number of coins needed to make a change for `T`. We can assume an infinite supply of coins, therefore, each `coin` can be chosen multiple times.
 
 This problem follows the <b>[Unbounded Knapsack pattern](#pattern-2-unbounded-knapsack)</b>.
 
 ### Basic Brute Force Solution
+
 A basic <b>brute-force solution</b> could be to try all combinations of the given coins to select the ones that give a total sum of `T`. This is what our algorithm will look like:
 
 ```js
-for each coin 'c' 
-  create a new set which includes one quantity of coin 'c' if it does not exceed 'T', and 
-     recursively call to process all coins 
-  create a new set without coin 'c', and recursively call to process the remaining coins 
+for each coin 'c'
+  create a new set which includes one quantity of coin 'c' if it does not exceed 'T', and
+     recursively call to process all coins
+  create a new set without coin 'c', and recursively call to process the remaining coins
 return the count of coins from the above two sets with a smaller number of coins
 ```
 
 Here is the code for the <b>brute-force solution:</b>
+
 ```js
 function countChange(denominations, total) {
   function countChangeRecursive(denominations, total, currIndex) {
@@ -2204,11 +2212,13 @@ console.log(
 console.log(`Number of ways to make change: ---> ${countChange([1, 2, 3], 7)}`);
 console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
+
 - The time complexity of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The space complexity will be `O(C+T)`.
 
 Let’s try to find a better solution.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use <b>memoization</b> to overcome the <b>overlapping sub-problems</b>. We will be using a two-dimensional array to store the results of solved <i>sub-problems</i>. As mentioned above, we need to store results for every `coin` combination and for every possible sum:
 
 ```js
@@ -2223,7 +2233,7 @@ function countChange(denominations, total) {
     dp[currIndex] = dp[currIndex] || [];
 
     //check if we. have not alreay processed a similar subproblem
-    if (typeof dp[currIndex][total] === 'undefined') {
+    if (typeof dp[currIndex][total] === "undefined") {
       //recursive call after selecting the coin at currIndex
       //if the coin at currIndex exceeds the total, we won't process
       let currCoinCount = Infinity;
@@ -2260,6 +2270,7 @@ console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
 
 ### Bottom-up Dynamic Programming
+
 Let’s try to populate our array `dp[TotalDenominations][Total+1]` for every possible total with a minimum number of coins needed.
 
 So for every possible total `t` (`0<= t <= Total`) and for every possible `coin` index (`0 <= index < denominations.length`), we have two options:
@@ -2268,8 +2279,9 @@ So for every possible total `t` (`0<= t <= Total`) and for every possible `coin`
 2. Include the `coin` if its value is not more than `t`: In this case, we will take the minimum count needed to get the remaining total, plus include `1` for the current `coin` => `dp[index][t-denominations[index]] + 1`
 
 Finally, we will take the minimum of the above two values for our solution:
+
 ```js
-dp[index][t] = min(dp[index-1][t], dp[index][t-denominations[index]] + 1)
+dp[index][t] = min(dp[index - 1][t], dp[index][t - denominations[index]] + 1);
 ```
 
 Here is the code for our <b>bottom-up dynamic programming</b> approach:
@@ -2315,28 +2327,197 @@ console.log(
 console.log(`Number of ways to make change: ---> ${countChange([1, 2, 3], 7)}`);
 console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
-- The above solution has time and space complexity of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
 
+- The above solution has time and space complexity of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
 
 ## Maximum Ribbon Cut
 
 https://leetcode.com/problems/cutting-ribbons/
 
+We are given a ribbon of length `n` and a set of possible ribbon lengths. We need to cut the ribbon into the maximum number of pieces that comply with the above-mentioned possible lengths. Write a method that will return the count of pieces.
+
+#### Example 1:
+
+```
+n: 5
+Ribbon Lengths: {2,3,5}
+Output: 2
+Explanation: Ribbon pieces will be {2,3}.
+```
+
+#### Example 2:
+
+```
+n: 7
+Ribbon Lengths: {2,3}
+Output: 3
+Explanation: Ribbon pieces will be {2,2,3}.
+```
+
+#### Example 3:
+
+```
+n: 13
+Ribbon Lengths: {3,5,7}
+Output: 3
+Explanation: Ribbon pieces will be {3,3,7}.
+```
+
+> Given a number array to represent possible ribbon lengths and a total ribbon length `n`, we need to find the maximum number of pieces that the ribbon can be cut into.
+
+This problem follows the <b>[Unbounded Knapsack pattern](#pattern-2-unbounded-knapsack)</b> and is quite similar to <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>. The only difference is that in <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>, we were asked to find the <b>minimum</b> number of coin changes, whereas, in this problem, we need to find the <b>maximum</b> number of pieces.
+
+### Basic Brute Force Solution
+
+A <b>basic brute-force solution</b> could be to try all combinations of the given lengths to select the maximum one that gives the total length of `n`. This is what our algorithm will look like:
+
+```js
+for each length 'l'
+  create a new set which includes one quantity of length 'l' if it does not exceed 'n', and
+     recursively call to process all lengths
+  create a new set without length 'l', and recursively call to process the remaining lengths
+return the number of pieces from the above two sets with a higher number of pieces
+```
+
+Here is the code for the <b>brute-force solution:</b>
+
+```js
+function countRibbonPieces(ribbonLengths, total) {
+  function countRibbonPiecesRecursive(ribbonLengths, total, currIndex) {
+    //base check
+    if (total === 0) return 0;
+
+    if (ribbonLengths.length === 0 || currIndex >= ribbonLengths.length)
+      return -Infinity;
+
+    //recursive call after selecting the ribbon length at currIndex
+    //if the ribbon length at the currIndex exceeds total, we shouldn't process
+    let currRibbon = -Infinity;
+    if (ribbonLengths[currIndex] <= total) {
+      let withoutIndexRibbon = countRibbonPiecesRecursive(
+        ribbonLengths,
+        total - ribbonLengths[currIndex],
+        currIndex
+      );
+
+      if (withoutIndexRibbon !== -Infinity) currRibbon = withoutIndexRibbon + 1;
+    }
+
+    //recursive call after excluding the ribbon at currIndex
+    const nextRibbon = countRibbonPiecesRecursive(
+      ribbonLengths,
+      total,
+      currIndex + 1
+    );
+    return Math.min(currRibbon, nextRibbon);
+  }
+  const result = countRibbonPiecesRecursive(ribbonLengths, total, 0);
+  return result === -Infinity ? -1 : result;
+}
+
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3, 5], 5)}`
+);
+console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([2, 3], 7)}`);
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5, 7], 13)}`
+);
+console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
+```
+
+The above algorithm’s time complexity is exponential `O(2 ᴸ⁺ᴺ)`, where `L` represents total ribbon lengths, and `N` is the total length that we want to cut. The space complexity will be `O(L+N)`.
+
+Since this problem is quite similar to <b>[ Minimum Coin Change](#minimum-coin-change)<b>, let’s jump on to the <b>bottom-up dynamic programming solution</b>.
+
+### Bottom-up Dynamic Programming
+
+Let’s try to populate our array `dp[ribbonLength][total+1]` for every possible ribbon length with a maximum number of pieces.
+
+So for every possible length `len` (`0 <= len <= total`) and for every possible ribbon length index (`0 <= index < ribbonLengths.length`), we have two options:
+
+1. <b>Exclude the ribbon length:</b> In this case, we will take the maximum piece count from the previous set => `dp[index-1][len]`
+2. <b>Include the ribbon length</b> if its value is not more than `len`: In this case, we will take the maximum pieces needed to get the remaining total, plus include `1` for the current ribbon length => `1 + dp[index][len-ribbonLengths[index]]`
+
+Finally, we will take the maximum of the above two values for our solution:
+
+```js
+dp[index][len] = max(
+  dp[index - 1][len],
+  1 + dp[index][len - ribbonLengths[index]]
+);
+```
+
+Here is the code for our <b>bottom-up dynamic programming approach<b>:
+
+```js
+function countRibbonPieces(ribbonLengths, total) {
+  let n = ribbonLengths.length;
+  const dp = Array(n)
+    .fill(0)
+    .map(() => Array(total + 1).fill(0));
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j <= total; j++) {
+      dp[i][j] = -Infinity;
+    }
+  }
+
+  //populate the total=0 columns, as we don't need any ribbons to make 0 total
+  for (let i = 0; i < n; i++) dp[i][0] = 0;
+
+  for (let i = 0; i < n; i++) {
+    for (let t = 1; t <= total; t++) {
+      if (i > 0) {
+        //exclude the ribbon
+        dp[i][t] = dp[i - 1][t];
+      }
+
+      if (t >= ribbonLengths[i] && dp[i][t - ribbonLengths[i]] !== -Infinity) {
+        //include the ribbon and check if the remaining length can be cut into available lengths
+        dp[i][t] = Math.max(dp[i][t], dp[i][t - ribbonLengths[i]] + 1);
+      }
+    }
+  }
+
+  return dp[n - 1][total] === -Infinity ? -1 : dp[n - 1][total];
+}
+
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3, 5], 5)}`
+);
+console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([2, 3], 7)}`);
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5, 7], 13)}`
+);
+console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
+```
+
+- The above solution has time and space complexity of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
+
 # Pattern 3: Fibonacci Numbers
 
 ## Fibonacci numbers
+
 https://leetcode.com/problems/fibonacci-number/
-##  🔎👩🏽‍🦯 Staircase
+
+## 🔎👩🏽‍🦯 Staircase
+
 https://leetcode.com/problems/climbing-stairs/
 
 ## Number factors
+
 https://leetcode.com/problems/consecutive-numbers-sum/
 
 ## Minimum jumps to reach the end
+
 https://leetcode.com/problems/jump-game-ii/
+
 ## Minimum jumps with fee
+
 https://leetcode.com/problems/min-cost-climbing-stairs/
+
 ## 🌴 🔎 👩🏽‍🦯 House thief
+
 https://leetcode.com/problems/house-robber/
 
 # Pattern 4: Palindromic Subsequence
