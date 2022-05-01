@@ -2494,10 +2494,10 @@ https://leetcode.com/problems/fibonacci-number/
 <b>Fibonacci numbers</b> are a series of numbers in which each number is the sum of the two preceding numbers. First few <b>Fibonacci numbers</b>  are: `0, 1, 1, 2, 3, 5, 8, …`
 
 Mathematically we can define the <b>Fibonacci numbers</b>  as:
-```
-    Fib(n) = Fib(n-1) + Fib(n-2), for n > 1
+```js
+Fib(n) = Fib(n-1) + Fib(n-2), for n > 1
 
-    Given that: Fib(0) = 0, and Fib(1) = 1
+Given that: Fib(0) = 0, and Fib(1) = 1
 ```
 
 ### Basic Solution
@@ -2514,7 +2514,7 @@ console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
 
-The time complexity of the above algorithm is exponential `O(2ᴺ)` as we are making two recursive calls in the same function. The space complexity is `O(n)` which is used to store the recursion stack.
+The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ)` as we are making two recursive calls in the same function. The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
 
 Let’s visually draw the recursion for `CalculateFibonacci(4)` to see the overlapping subproblems:
 
@@ -2592,11 +2592,181 @@ console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 
 
 ## 🔎👩🏽‍🦯 Staircase
-
 https://leetcode.com/problems/climbing-stairs/
 
-## Number factors
+> Given a stair with `n` steps, implement a method to count how many possible ways are there to reach the top of the staircase, given that, at every step you can either take `1` step, `2` steps, or `3` steps.
 
+#### Example 1:
+```
+Number of stairs (n) : 3
+Number of ways = 4
+Explanation: Following are the four ways we can climb : {1,1,1}, {1,2}, {2,1}, {3} 
+```
+#### Example 2:
+````
+Number of stairs (n) : 4
+Number of ways = 7
+Explanation: Following are the seven ways we can climb : {1,1,1,1}, {1,1,2}, {1,2,1}, {2,1,1}, 
+{2,2}, {1,3}, {3,1}
+````
+Let’s first start with a <b>recursive brute-force solution</b>.
+### Brute-Force Solution
+At every step, we have three options: 
+- either jump `1` step, 
+- `2` steps, 
+- or `3` steps. 
+
+So our algorithm will look like this:
+
+```js
+function countWays(n) {
+  if (n === 0) {
+    return 1;
+  } // base case, we don't need to take any step, so there is only one way
+
+  if (n === 1) {
+    return 1;
+  } // we can take one step to reach the end, and that is the only way
+
+  if (n === 2) {
+    return 2;
+  } // we can take one step twice or jump two steps to reach at the top
+
+  // if we take 1 step, we are left with 'n-1' steps;
+  const take1Step = countWays(n - 1);
+  // similarly, if we took 2 steps, we are left with 'n-2' steps;
+  const take2Step = countWays(n - 2);
+  // if we took 3 steps, we are left with 'n-3' steps;
+  const take3Step = countWays(n - 3);
+
+  return take1Step + take2Step + take3Step;
+}
+
+console.log(`Number of ways: ---> ${countWays(3)}`);
+console.log(`Number of ways: ---> ${countWays(4)}`);
+console.log(`Number of ways: ---> ${countWays(5)}`);
+```
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(3ᴺ)` as we are making three <i>recursive calls</i> in the same function. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
+
+Let’s visually draw the recursion for `countWays(4)` to see the <i>overlapping subproblems</i>:
+![](./images/dpstairs.png)
+
+We can clearly see the overlapping subproblem pattern: `countWays(2)` and `countWays(1)` have been called twice. We can optimize this using <b>memoization</b>.
+
+### Top-down Dynamic Programming with Memoization
+We can use an array to store the already solved subproblems. Here is the code:
+
+```js
+function countWays(n) {
+  const dp = [1, 1, 2];
+
+  function countWaysRecursive(n) {
+    // base case
+    if (n <= 2) {
+      return dp[n];
+    }
+
+    // if we take 1 step, we are left with 'n-1' steps;
+    const take1Step = countWaysRecursive(n - 1);
+    // similarly, if we took 2 steps, we are left with 'n-2' steps;
+    const take2Step = countWaysRecursive(n - 2);
+    // if we took 3 steps, we are left with 'n-3' steps;
+    const take3Step = countWaysRecursive(n - 3);
+    dp[n] = take1Step + take2Step + take3Step;
+
+    console.log(dp);
+    return dp[n];
+  }
+
+  return countWaysRecursive(n);
+}
+
+console.log(`Number of ways: ---> ${countWays(0)}`);
+console.log(`Number of ways: ---> ${countWays(1)}`);
+console.log(`Number of ways: ---> ${countWays(2)}`);
+console.log(`Number of ways: ---> ${countWays(3)}`);
+console.log(`Number of ways: ---> ${countWays(4)}`);
+console.log(`Number of ways: ---> ${countWays(5)}`);
+```
+
+#### What is the time and space complexity of the above solution? 
+- Since our <b>memoization</b> array `dp[n+1]` stores the results for all the subproblems, we can conclude that we will not have more than `n+1` subproblems (where `n` represents the total number of steps). This means that our <b>time complexity</b> will be `O(N)`. 
+- The <b>space complexity</b> will also be `O(n)`; this space will be used to store the <i>recursion-stack</i>.
+
+### Bottom-up Dynamic Programming
+Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `countWaysRecursive(n`) is the sum of the previous three counts. We can use this fact to populate our array.
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function countWays(n) {
+  const dp = Array(n + 1).fill(1);
+  dp[2] = 2;
+
+  for (let i = 3; i <= n; i++) {
+    // if we take 1 step, we are left with 'n-1' steps;
+    const take1Step = dp[n - 1];
+    // similarly, if we took 2 steps, we are left with 'n-2' steps;
+    const take2Step = dp[n - 2];
+    // if we took 3 steps, we are left with 'n-3' steps;
+    const take3Step = dp[n - 3];
+
+    dp[i] = take1Step + take2Step + take3Step;
+  }
+
+  return dp[n];
+}
+
+console.log(`Number of ways: ---> ${countWays(0)}`);
+console.log(`Number of ways: ---> ${countWays(1)}`);
+console.log(`Number of ways: ---> ${countWays(2)}`);
+console.log(`Number of ways: ---> ${countWays(3)}`);
+console.log(`Number of ways: ---> ${countWays(4)}`);
+console.log(`Number of ways: ---> ${countWays(5)}`);
+```
+
+- The above solution has <b>time and space complexity</b> of `O(n)`.
+
+#### Memory optimization
+We can optimize the space used in our previous solution. We don’t need to store all the counts up to `n`, as we only need three previous numbers to calculate the next count. We can use this fact to further improve our solution:
+```js
+function countWays(n) {
+  const dp = [1, 1, 2];
+
+  for (let i = 3; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+  }
+
+  return dp[n];
+}
+
+console.log(`Number of ways: ---> ${countWays(0)}`);
+console.log(`Number of ways: ---> ${countWays(1)}`);
+console.log(`Number of ways: ---> ${countWays(2)}`);
+console.log(`Number of ways: ---> ${countWays(3)}`);
+console.log(`Number of ways: ---> ${countWays(4)}`);
+console.log(`Number of ways: ---> ${countWays(5)}`);
+```
+- The above solution has a <b>time complexity</b> of `O(n)` and a constant <b>space complexity</b> `O(1)`.
+
+#### Fibonacci number pattern
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that in <b>Fibonacci numbers</b> every number is a sum of the two preceding numbers, whereas in this problem every count is a sum of three preceding counts. Here is the recursive formula for this problem:
+
+```js
+countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3), 
+for n >=3
+```
+This problem can be extended further. Instead of taking `1`, `2`, or `3` steps at any time, what if we can take up to `k` steps at any time? In that case, our recursive formula will look like:
+
+```js
+countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3) + ... + countWays(n-k), 
+for n >= k
+```
+
+
+
+
+## Number factors
 https://leetcode.com/problems/consecutive-numbers-sum/
 
 ## Minimum jumps to reach the end
