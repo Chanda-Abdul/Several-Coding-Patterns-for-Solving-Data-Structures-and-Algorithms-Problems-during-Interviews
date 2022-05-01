@@ -2763,14 +2763,119 @@ countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3) + ... + countWay
 for n >= k
 ```
 
-
-
-
 ## Number factors
-https://leetcode.com/problems/consecutive-numbers-sum/
+https://www.geeksforgeeks.org/count-ofdifferent-ways-express-n-sum-1-3-4/ 
+
+> Given a number `n`, implement a method to count how many possible ways there are to express `n` as the sum of `1`, `3`, or `4`.
+
+#### Example 1:
+```
+n : 4
+Number of ways = 4
+Explanation: Following are the four ways we can express 'n' : {1,1,1,1}, {1,3}, {3,1}, {4} 
+```
+#### Example 2:
+```
+n : 5
+Number of ways = 6
+Explanation: Following are the six ways we can express 'n' : {1,1,1,1,1}, {1,1,3}, {1,3,1}, {3,1,1}, 
+{1,4}, {4,1}
+```
+### Brute-Force Solution
+Let’s first start with a <b>recursive brute-force solution</b>.
+
+For every number `i`, we have three option: subtract either `1`, `3`, or `4` from `i` and recursively process the remaining number. So our algorithm will look like:
+```js
+function countWays(n) {
+  function countWaysRecursive(n) {
+    //base case
+    if(n <= 2) return 1
+    if(n ===3 ) return 2
+    
+    // if we subtract 1, we are left with 'n-1'
+    const subtract1 = countWays(n-1)
+    // if we subtract 3, we are left with 'n-3'
+    const subtract3 = countWays(n-3)
+    // if we subtract 4, we are left with 'n-4'
+    const subtract4 = countWays(n-4)
+    
+    return subtract1 + subtract3 + subtract4
+ 
+};
+ return countWaysRecursive(n)
+};
+
+console.log(`Number of ways: ---> ${countWays(4)}`);
+console.log(`Number of ways: ---> ${countWays(5)}`);
+console.log(`Number of ways: ---> ${countWays(6)}`);
+```
+The <b>time complexity</b> of the above algorithm is exponential `O(3ᴺ)`. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
+
+Let’s visually draw the recursion for `CountWays(5)` to see the <i>overlapping subproblems</i>:
+![](./images/dpnumberfactors.png)
+
+We can clearly see the <i>overlapping subproblems pattern</i>: `CountWays(3)`, `CountWays(2)` and` CountWays(1)` have been called twice. We can optimize this using <b>memoization</b> to store the results for  <i>subproblems</i>.
+
+### Top-down Dynamic Programming with Memoization
+We can use an array to store the already solved <i>subproblems</i>. Here is the code:
+```js
+function countWays(n) {
+  const dp = [];
+  function countWaysRecursive(n) {
+    //base case
+    if (n <= 2) return 1;
+    if (n === 3) return 2;
+
+    // if(typeod dp[n] === 'undefined'){
+    // if we subtract 1, we are left with 'n-1'
+    const subtract1 = countWaysRecursive(n - 1);
+    // if we subtract 3, we are left with 'n-3'
+    const subtract3 = countWaysRecursive(n - 3);
+    // if we subtract 4, we are left with 'n-4'
+    const subtract4 = countWaysRecursive(n - 4);
+
+    dp[n] = subtract1 + subtract3 + subtract4;
+
+    return dp[n];
+  }
+  return countWaysRecursive(n);
+}
+
+console.log(`Number of ways: ---> ${countWays(4)}`);
+console.log(`Number of ways: ---> ${countWays(5)}`);
+console.log(`Number of ways: ---> ${countWays(6)}`);
+```
+### Bottom-up Dynamic Programming
+Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `CountWaysRecursive(n)` is the sum of the three counts. We can use this fact to populate our array.
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
+```js
+function countWays(n) {
+  const dp = [1, 1, 1, 2];
+
+  for (let i = 4; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 3] + dp[i - 4];
+  }
+  return dp[n];
+}
+
+console.log(`Number of ways: ---> ${countWays(4)}`);
+console.log(`Number of ways: ---> ${countWays(5)}`);
+console.log(`Number of ways: ---> ${countWays(6)}`);
+```
+
+The above solution has time and space complexity of `O(n)`.
+
+#### Fibonacci number pattern
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. However, every number in a <b>Fibonacci series</b> is the sum of the previous two numbers, whereas in this problem every count is a sum of previous three numbers: `previous-1`, `previous-3`, and `previous-4`. Here is the recursive formula for this problem:
+
+```js
+countWays(n) = countWays(n-1) + countWays(n-3) + countWays(n-4), 
+for n >= 4
+```
 
 ## Minimum jumps to reach the end
-
 https://leetcode.com/problems/jump-game-ii/
 
 ## Minimum jumps with fee
@@ -2782,41 +2887,59 @@ https://leetcode.com/problems/min-cost-climbing-stairs/
 https://leetcode.com/problems/house-robber/
 
 # Pattern 4: Palindromic Subsequence
-
 ## Longest Palindromic Subsequence
+https://leetcode.com/problems/longest-palindromic-subsequence/
 
-## Longest Palindromic Substring
+## 👩🏽‍🦯 Longest Palindromic Substring
+https://leetcode.com/problems/longest-palindromic-substring/
 
-## Count of Palindromic Substrings
+## 👩🏽‍🦯 Count of Palindromic Substrings
+https://leetcode.com/problems/palindromic-substrings/
 
-## Minimum Deletions in a String to make it a Palindrome
+## 🔎 Minimum Deletions in a String to make it a Palindrome
+https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
+
+https://www.geeksforgeeks.org/minimum-number-deletions-make-string-palindrome/
 
 ## Palindromic Partitioning
+https://leetcode.com/problems/palindrome-partitioning-ii/
 
 # Pattern 5: Longest Common Substring
-
 ## Longest Common Substring
+https://www.geeksforgeeks.org/longest-common-substring-dp-29/
 
-## Longest Common Subsequence
+## 😕 🔎 Longest Common Subsequence
+https://leetcode.com/problems/longest-common-subsequence/
 
 ## Minimum Deletions & Insertions to Transform a String into another
+https://leetcode.com/problems/edit-distance/
 
-## Longest Increasing Subsequence
+## 👩🏽‍🦯 🔎 Longest Increasing Subsequence
+https://leetcode.com/problems/longest-increasing-subsequence/
 
 ## Maximum Sum Increasing Subsequence
+https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
 
 ## Shortest Common Super-sequence
+https://leetcode.com/problems/shortest-common-supersequence/
 
 ## Minimum Deletions to Make a Sequence Sorted
+https://www.geeksforgeeks.org/minimum-number-deletions-make-sorted-sequence/
 
 ## Longest Repeating Subsequence
+https://www.geeksforgeeks.org/longest-repeating-subsequence/
 
 ## Subsequence Pattern Matching
+https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/
 
 ## Longest Bitonic Subsequence
+https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/
 
 ## Longest Alternating Subsequence
+https://www.geeksforgeeks.org/longest-alternating-subsequence/
 
 ## Edit Distance
+https://leetcode.com/problems/edit-distance/
 
 ## Strings Interleaving
+https://leetcode.com/problems/interleaving-string/
