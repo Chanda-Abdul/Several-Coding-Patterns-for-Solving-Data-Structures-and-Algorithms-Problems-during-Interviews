@@ -214,8 +214,8 @@ console.log(
 
 #### Time & Space Complexity
 
-- The above algorithm’s time complexity is exponential `O(2ⁿ)`, where `n` represents the total number of items. This can also be confirmed from the above recursion tree. As we can see, we will have a total of `31` 😲 recursive calls – calculated through `(2ⁿ) + (2ⁿ) - 1`, which is asymptotically equivalent to `O(2ⁿ)`.
-- The space complexity is `O(n)`. This space will be used to store the recursion stack. Since the recursive algorithm works in a depth-first fashion, which means that we can’t have more than `n` recursive calls on the call stack at any time.
+- The above algorithm’s <b>time complexity</b>  is exponential `O(2ⁿ)`, where `n` represents the total number of items. This can also be confirmed from the above recursion tree. As we can see, we will have a total of `31` 😲 recursive calls – calculated through `(2ⁿ) + (2ⁿ) - 1`, which is asymptotically equivalent to `O(2ⁿ)`.
+- The <b>space complexity</b>  is `O(n)`. This space will be used to store the recursion stack. Since the recursive algorithm works in a depth-first fashion, which means that we can’t have more than `n` recursive calls on the call stack at any time.
 
 ### Overlapping Sub-problems
 
@@ -298,8 +298,8 @@ console.log(
 
 #### Time & Space Complexity
 
-- Since our <b>Memoization</b> array `memo[profits.length][capacity+1]` stores the results for all subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our time complexity will be `O(N*C)`.
-- The above algorithm will use `O(N*C)` space for the <b>Memoization</b> array. Other than that, we will use `O(N)` space for the recursion call-stack. So the total space complexity will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
+- Since our <b>Memoization</b> array `memo[profits.length][capacity+1]` stores the results for all subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our <b>time complexity</b>  will be `O(N*C)`.
+- The above algorithm will use `O(N*C)` space for the <b>Memoization</b> array. Other than that, we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
 
@@ -375,7 +375,7 @@ console.log(
 
 #### Time & Space Complexity
 
-- The above solution has the time and space complexity of `O(N*C)`, where `N` represents total items, and `C` is the maximum capacity.
+- The above solution has the time and <b>space complexity</b>  of `O(N*C)`, where `N` represents total items, and `C` is the maximum capacity.
 
 #### How can we find the selected items?
 
@@ -695,8 +695,8 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 //The given set cannot be partitioned into two subsets with equal sum.
 ```
 
-- The time complexity of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The space complexity is `O(n)`, which will be used to store the recursion stack.
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b>  is `O(n)`, which will be used to store the recursion stack.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -764,7 +764,7 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 //The given set cannot be partitioned into two subsets with equal sum.
 ```
 
-- The above algorithm has the time and space complexity of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
+- The above algorithm has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
 
 ### Bottom-up Dynamic Programming
 
@@ -831,7 +831,7 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 //The given set cannot be partitioned into two subsets with equal sum.
 ```
 
-- The above solution the has time and space complexity of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
+- The above solution the has time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
 
 ## 🔎 Subset Sum (medium)
 
@@ -913,7 +913,7 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 4, 8], 6)}`);
 //The given set does not have any subset whose sum is equal to '6'.
 ```
 
-- The above solution has the time and space complexity of `O(N*S)`, where `N` represents total numbers and `S` is the required sum.
+- The above solution has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the required sum.
 
 ### Challenge
 
@@ -1030,8 +1030,8 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 100, 4])}`);
 //We can partition the given set into two subsets where minimum absolute difference between the sum of numbers is '92'. Here are the two subsets: {1, 3, 4} & {100}.
 ```
 
-- Because of the two recursive calls, the time complexity of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The space complexity is `O(n)` which is used to store the recursion stack.
+- Because of the two recursive calls, the <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b>  is `O(n)` which is used to store the recursion stack.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -1172,7 +1172,7 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 100, 4])}`);
 //We can partition the given set into two subsets where minimum absolute difference between the sum of numbers is '92'. Here are the two subsets: {1, 3, 4} & {100}.
 ```
 
-- The above solution has the time and space complexity of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
+- The above solution has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
 
 ## 🌟Count of Subset Sum (hard)
 
@@ -1230,8 +1230,8 @@ console.log(`Count of subset sum is: ---> ${countSubsets([1, 2, 7, 1, 5], 9)}`);
 //The given set has '3' subsets whose sum is '9': {2, 7}, {1, 7, 1}, {1, 2, 1, 5}
 ```
 
-- The time complexity of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The space complexity is `O(n)` which is used to store the recursion stack.
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b>  is `O(n)` which is used to store the recursion stack.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -1341,7 +1341,7 @@ console.log(`Count of subset sum is: ---> ${countSubsets([1, 2, 7, 1, 5], 9)}`);
 //The given set has '3' subsets whose sum is '9': {2, 7}, {1, 7, 1}, {1, 2, 1, 5}
 ```
 
-- The above solution has the time and space complexity of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
+- The above solution has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
 
 ### Challenge
 
@@ -1478,7 +1478,7 @@ console.log(
 // The given set has '2' ways to make a sum of '9': {+1+2+7-1} & {-1+2+7+1}
 ```
 
-- The above solution has time and space complexity of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
+- The above solution has time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
 
 - We can further improve the solution to use only `O(S)` space.
 
@@ -1617,8 +1617,8 @@ console.log(
 );
 ```
 
-- The time complexity of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items.
-- The space complexity will be `O(N+C)` to store the recursion stack.
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items.
+- The <b>space complexity</b>  will be `O(N+C)` to store the recursion stack.
 
 Let’s try to find a better solution.
 
@@ -1686,8 +1686,8 @@ console.log(
 
 #### What is the time and space complexity of the above solution?
 
-- Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our time complexity will be `O(N∗C)`.
-- The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total space complexity will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
+- Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our <b>time complexity</b>  will be `O(N∗C)`.
+- The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
 
@@ -1752,7 +1752,7 @@ console.log(
 );
 ```
 
-- The above solution has time and space complexity of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
+- The above solution has time and <b>space complexity</b>  of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
 
 As we know, the final profit is at the right-bottom corner; hence we will start from there to find the items that will be going to the knapsack.
 
@@ -1916,7 +1916,7 @@ console.log(
 );
 ```
 
-- The above solution has time and space complexity of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
+- The above solution has time and <b>space complexity</b>  of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
 
 #### Find the selected items
 
@@ -2019,7 +2019,7 @@ console.log(
 );
 ```
 
-- The time complexity of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The space complexity will be `O(C+T)`.
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The <b>space complexity</b>  will be `O(C+T)`.
 
 Let’s try to find a better solution.
 
@@ -2123,7 +2123,7 @@ console.log(
 );
 ```
 
-- The above solution has time and space complexity of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
+- The above solution has time and <b>space complexity</b>  of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
 
 ## Minimum Coin Change
 
@@ -2207,7 +2207,7 @@ console.log(`Number of ways to make change: ---> ${countChange([1, 2, 3], 7)}`);
 console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
 
-- The time complexity of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The space complexity will be `O(C+T)`.
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The <b>space complexity</b>  will be `O(C+T)`.
 
 Let’s try to find a better solution.
 
@@ -2322,7 +2322,7 @@ console.log(`Number of ways to make change: ---> ${countChange([1, 2, 3], 7)}`);
 console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
 
-- The above solution has time and space complexity of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
+- The above solution has time and <b>space complexity</b>  of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
 
 ## Maximum Ribbon Cut
 
@@ -2419,7 +2419,7 @@ console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
 ```
 
-The above algorithm’s time complexity is exponential `O(2 ᴸ⁺ᴺ)`, where `L` represents total ribbon lengths, and `N` is the total length that we want to cut. The space complexity will be `O(L+N)`.
+The above algorithm’s <b>time complexity</b>  is exponential `O(2 ᴸ⁺ᴺ)`, where `L` represents total ribbon lengths, and `N` is the total length that we want to cut. The <b>space complexity</b>  will be `O(L+N)`.
 
 Since this problem is quite similar to <b>[Minimum Coin Change](#minimum-coin-change)</b>, let’s jump on to the <b>bottom-up dynamic programming solution</b>.
 
@@ -2483,7 +2483,7 @@ console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
 ```
 
-- The above solution has time and space complexity of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
+- The above solution has time and <b>space complexity</b>  of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
 
 # Pattern 3: Fibonacci Numbers
 ## Fibonacci numbers
@@ -2565,7 +2565,7 @@ console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
 console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
-- The above solution has time and space complexity of `O(n)`.
+- The above solution has time and <b>space complexity</b>  of `O(n)`.
 
 #### Memory optimization
 We can optimize the space used in our previous solution. We don’t need to store all the <b>Fibonacci numbers</b> up to `n`, as we only need two previous numbers to calculate the next <b>Fibonacci number</b>. We can use this fact to further improve our solution:
@@ -2587,7 +2587,7 @@ console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
 console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
-- The above solution has a time complexity of `O(n)` but a constant space complexity `O(1)`.
+- The above solution has a <b>time complexity</b>  of `O(n)` but a constant <b>space complexity</b>  `O(1)`.
 
 
 
@@ -3062,7 +3062,7 @@ console.log(`Minimum fee needed: ---> ${findMinFee([1, 2, 5, 2, 1, 2])}`);
 console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
 ```
 
-- The time complexity of the above algorithm is exponential `O(3ⁿ)`. The space complexity is `O(n)` which is used to store the <i>recursion stack</i>.
+- The <b>time complexity</b>  of the above algorithm is exponential `O(3ⁿ)`. The <b>space complexity</b>  is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
 To resolve <i>overlapping subproblems</i>, we can use an array to store the already solved subproblems. Here is the code:
@@ -3128,8 +3128,130 @@ console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
 We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that every <b>Fibonacci number</b> is a sum of the two preceding numbers, whereas in this problem every number (total `fee`) is the minimum of previous three numbers.
 
 ## 🌴 🔎 👩🏽‍🦯 House thief
-
 https://leetcode.com/problems/house-robber/
+
+There are `n` houses built in a line. A thief wants to steal the maximum possible money from these houses. The only restriction the thief has is that he can’t steal from two consecutive houses, as that would alert the security system. How should the thief maximize his stealing?
+
+> Given a number array representing the wealth of `n` houses, determine the maximum amount of money the thief can steal without alerting the security system.
+
+#### Example 1:
+```js
+Input: {2, 5, 1, 3, 6, 2, 4}
+Output: 15
+Explanation: The thief should steal from houses 5 + 6 + 4
+```
+#### Example 2:
+```js
+Input: {2, 10, 14, 8, 1}
+Output: 18
+Explanation: The thief should steal from houses 10 + 8
+```
+Let’s first start with a <b>recursive brute-force solution</b>.
+
+### Brute-Force Solution
+For every house `i`, we have two options:
+
+1. Steal from the current house `i`, skip one and steal from `i+2`.
+2. Skip the current house `i`, and steal from the adjacent house `i+1`.
+
+The thief should choose the one with the maximum amount from the above two options. So our algorithm will look like this:
+```js
+function findMaxSteal(wealth) {
+  function findMaxStealRecursive(wealth, currIndex) {
+    if (currIndex >= wealth.length) return 0;
+
+    //steal from the current house and skip one to steal from the next house
+    const stealCurr =
+      wealth[currIndex] + findMaxStealRecursive(wealth, currIndex + 2);
+
+    //skip current house to steal from the adjacent house
+    const skipCurr = findMaxStealRecursive(wealth, currIndex + 1);
+
+    return Math.max(stealCurr, skipCurr);
+  }
+  return findMaxStealRecursive(wealth, 0);
+}
+
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 5, 1, 3, 6, 2, 4])}`);
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
+```
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`. The <b>space complexity</b>  is `O(n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+To resolve <i>overlapping subproblems</i>, we can use an array to store the already solved <i>subproblems</i>.
+```js
+function findMaxSteal(wealth) {
+  const dp = [];
+
+  function findMaxStealRecursive(wealth, currIndex) {
+    if (currIndex >= wealth.length) return 0;
+
+    //steal from the current house and skip one to steal from the next house
+    const stealCurr =
+      wealth[currIndex] + findMaxStealRecursive(wealth, currIndex + 2);
+
+    //skip current house to steal from the adjacent house
+    const skipCurr = findMaxStealRecursive(wealth, currIndex + 1);
+
+    dp[currIndex] = Math.max(stealCurr, skipCurr);
+    return dp[currIndex];
+  }
+  return findMaxStealRecursive(wealth, 0);
+}
+
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 5, 1, 3, 6, 2, 4])}`);
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
+```
+
+### Bottom-up Dynamic Programming
+Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `findMaxStealRecursive()` is the maximum of the two <i>recursive calls</i>; we can use this fact to populate our array.
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function findMaxSteal(wealth) {
+  //+1 to handle the 0 index house
+  const dp = Array(wealth.length + 1).fill(0);
+  //if there are no houses, the thief can't steal anything
+  //only one house, so the thief will only be able to steal from that single house
+  dp[1] = wealth[1];
+
+  //please note that dp[] has one extra to handle house zero
+  for (let i = 1; i < wealth.length; i++) {
+    dp[i + 1] = Math.max(wealth[i] + dp[i - 1], dp[i]);
+  }
+
+  return dp[wealth.length];
+}
+
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 5, 1, 3, 6, 2, 4])}`);
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
+```
+- The above solution has <b>time and space complexity</b> of `O(n)`.
+#### Memory optimization
+We can optimize the space used in our previous solution. We don’t need to store all the previous numbers up to `n`, as we only need two previous numbers to calculate the next number in the sequence. Let’s use this fact to further improve our solution:
+
+```js
+function findMaxSteal(wealth) {
+  if (wealth.length === 0) return 0;
+
+  let house1 = 0;
+  let house2 = wealth[0];
+  for (let i = 1; i < wealth.length; i++) {
+    [house1, house2] = [house2, Math.max(house1 + wealth[i], house2)];
+  }
+
+  return house2;
+}
+
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 5, 1, 3, 6, 2, 4])}`);
+console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
+
+```
+- The above solution has a <b>time complexity</b> of `O(n)` and a constant <b>space complexity</b> `O(1)`.
+
+#### Fibonacci number pattern
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that every <b>Fibonacci number</b> is a sum of the two preceding numbers, whereas in this problem every number (total `wealth`) is the maximum of previous two numbers.
+
 
 # Pattern 4: Palindromic Subsequence
 ## Longest Palindromic Subsequence
