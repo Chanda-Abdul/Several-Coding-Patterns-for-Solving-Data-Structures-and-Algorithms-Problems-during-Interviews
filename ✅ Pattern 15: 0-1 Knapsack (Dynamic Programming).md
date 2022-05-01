@@ -20,11 +20,11 @@ Fib(n) = Fib(n-1) + Fib(n-2), for n > 1
 
 As we can clearly see here, to solve the overall problem (i.e. `Fib(n)`), we broke it down into two smaller subproblems (which are `Fib(n-1)` and `Fib(n-2)`). This shows that we can use <b>DP</b> to solve this problem.
 
-## Characteristics of Dynamic Programming#
+## Characteristics of Dynamic Programming
 
 Before moving on to understand different methods of solving a <b>DP</b> problem, let’s first take a look at what are the characteristics of a problem that tells us that we can apply <b>DP</b> to solve it.
 
-### Overlapping Subproblems#
+### Overlapping Subproblems
 
 Subproblems are smaller versions of the original problem. Any problem has overlapping sub-problems if finding its solution involves solving the same subproblem multiple times. Take the example of the Fibonacci numbers; to find the `fib(4)`, we need to break it down into the following sub-problems:
 
@@ -651,7 +651,7 @@ https://leetcode.com/problems/partition-equal-subset-sum/
 
 > Given a set of positive numbers, find if we can partition it into two subsets such that the sum of elements in both subsets is equal.
 
-This problem follows the <b>[0/1 Knapsack pattern](#01-knapsack-medium)</b>. A basic <b>brute-force</b> solution could be to try all combinations of partitioning the given numbers into two sets to see if any pair of sets has an equal sum.
+This problem follows the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>. A basic <b>brute-force</b> solution could be to try all combinations of partitioning the given numbers into two sets to see if any pair of sets has an equal sum.
 
 Assume that `S` represents the total sum of all the given numbers. Then the two equal subsets must have a sum equal to `S/2`. This essentially transforms our problem to: <i>"Find a subset of the given numbers that has a total sum of S/2"</i>.
 
@@ -1536,7 +1536,7 @@ console.log(
 
 # Pattern 2: Unbounded Knapsack
 
-> Given the weights and profits of `N` items, we are asked to put these items in a knapsack with a capacity `C`. The goal is to get the `maximum profit` out of the knapsack items. The only difference between the [0/1 Knapsack](#01-knapsack-medium) problem and this problem is that we are allowed to use an unlimited quantity of an item.
+> Given the weights and profits of `N` items, we are asked to put these items in a knapsack with a capacity `C`. The goal is to get the `maximum profit` out of the knapsack items. The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this problem is that we are allowed to use an unlimited quantity of an item.
 
 Let’s take Merry’s example, who wants to carry some fruits in the knapsack to get `maximum profit`. Here are the weights and profits of the fruits:
 
@@ -1568,7 +1568,7 @@ for each item 'i'
 return the set from the above two sets with higher profit
 ```
 
-The only difference between the [0/1 Knapsack](#01-knapsack-medium) problem and this one is that, after including the item, we recursively call to process all the items (including the current item). In [0/1 Knapsack](#01-knapsack-medium), however, we recursively call to process the remaining items.
+The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this one is that, after including the item, we recursively call to process all the items (including the current item). In <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>., however, we recursively call to process the remaining items.
 
 ```js
 function solveKnapsack(profits, weights, capacity) {
@@ -1700,11 +1700,8 @@ So for every possible capacity `c` (`0 <= c <= capacity`), we have two options:
 
 Finally, we have to take the maximum of the above two values:
 
-```js
-dp[index][c] = max(
-  dp[index - 1][c],
-  profit[index] + dp[index][c - weight[index]]
-);
+```js 
+dp[index][c] = max(dp[index - 1][c],profit[index] + dp[index][c - weight[index]]);
 ```
 
 ```js
@@ -1873,10 +1870,7 @@ So for every possible rod length `len` (`0<= len <= n`), we have two options:
 Finally, we have to take the maximum of the above two values:
 
 ```js
-dp[index][len] = max(
-  dp[index - 1][len],
-  prices[index] + dp[index][len - lengths[index]]
-);
+dp[index][len] = max(dp[index - 1][len], prices[index] + dp[index][len - lengths[index]]);
 ```
 
 Here is the code for our <b>bottom-up dynamic programming</b> approach:
@@ -2480,22 +2474,122 @@ function countRibbonPieces(ribbonLengths, total) {
 }
 
 console.log(
-  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3, 5], 5)}`
-);
-console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([2, 3], 7)}`);
+  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3, 5], 5)}`);
 console.log(
-  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5, 7], 13)}`
-);
-console.log(`Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
+  `Maximum number of ribbons: ---> ${countRibbonPieces([2, 3], 7)}`);
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5, 7], 13)}`;
+console.log(
+  `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
 ```
 
 - The above solution has time and space complexity of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
 
 # Pattern 3: Fibonacci Numbers
-
 ## Fibonacci numbers
-
 https://leetcode.com/problems/fibonacci-number/
+
+> Write a function to calculate the `nth` <b>Fibonacci number<b>.
+
+<b>Fibonacci numbers</b> are a series of numbers in which each number is the sum of the two preceding numbers. First few <b>Fibonacci numbers</b>  are: `0, 1, 1, 2, 3, 5, 8, …`
+
+Mathematically we can define the <b>Fibonacci numbers</b>  as:
+```
+    Fib(n) = Fib(n-1) + Fib(n-2), for n > 1
+
+    Given that: Fib(0) = 0, and Fib(1) = 1
+```
+
+### Basic Solution
+A <i>basic solution</i> could be to have a recursive implementation of the mathematical formula discussed above:
+
+```js
+function calculateFibonacci(n) {
+  if (n < 2) return n;
+  return calculateFibonacci(n - 1) + calculateFibonacci(n - 2);
+}
+
+console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
+console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
+console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
+```
+
+The time complexity of the above algorithm is exponential `O(2ᴺ)` as we are making two recursive calls in the same function. The space complexity is `O(n)` which is used to store the recursion stack.
+
+Let’s visually draw the recursion for `CalculateFibonacci(4)` to see the overlapping subproblems:
+
+![](./images/fib4.png)
+
+We can use an array to store the already solved subproblems. Here is the code:
+
+```js
+function calculateFibonacci(n) {
+  const memoize = [];
+
+  function fib(n) {
+    if (n < 2) return n;
+
+    //if we have already solved this subproblem, simply return the result from the cache
+    if (memoize[n]) return memoize[n];
+
+    memoize[n] = calculateFibonacci(n - 1) + calculateFibonacci(n - 2);
+
+    return memoize[n];
+  }
+
+  return fib(n);
+}
+
+console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
+console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
+console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
+```
+
+### Bottom-up Dynamic Programming
+Let’s try to populate our `dp[]` array from the above solution, working in a bottom-up fashion. Since every <b>Fibonacci number</b> is the sum of the previous two numbers, we can use this fact to populate our array.
+
+Here is the code for the <b>bottom-up dynamic programming approach</b>:
+```js
+function calculateFibonacci(n) {
+  if (n < 2) return n;
+  const dp = [0, 1];
+
+  for (let i = 2; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+
+  return dp[n];
+}
+
+console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
+console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
+console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
+```
+- The above solution has time and space complexity of `O(n)`.
+
+#### Memory optimization
+We can optimize the space used in our previous solution. We don’t need to store all the <b>Fibonacci numbers</b> up to `n`, as we only need two previous numbers to calculate the next <b>Fibonacci number</b>. We can use this fact to further improve our solution:
+```js
+function calculateFibonacci(n) {
+  if (n < 2) return n;
+
+  let n1 = 0;
+  let n2 = 1;
+
+  for (let i = 2; i <= n; i++) {
+    [n1, n2] = [n2, n1 + n2];
+  }
+
+  return n2;
+}
+
+console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
+console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
+console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
+```
+- The above solution has a time complexity of `O(n)` but a constant space complexity `O(1)`.
+
+
 
 ## 🔎👩🏽‍🦯 Staircase
 
