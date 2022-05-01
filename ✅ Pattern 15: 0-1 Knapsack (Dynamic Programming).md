@@ -3005,14 +3005,127 @@ console.log(
 - The above solution has a <b>time complexity</b> of `O(n²)` (because of the two `for` loops) and <b>space complexity</b> of `O(n)` to store `dp[]`.
 
 #### Fibonacci number pattern
-We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)<b>. The only difference is that every <b>Fibonacci number<b> is a sum of the two preceding numbers, whereas in this problem every number is the minimum of two numbers (`start` and `end`):
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that every <b>Fibonacci number</b> is a sum of the two preceding numbers, whereas in this problem every number is the minimum of two numbers (`start` and `end`):
 ````js
 dp[end] = Math.min(dp[end], dp[start]+1);
 ````
-
 ## Minimum jumps with fee
-
 https://leetcode.com/problems/min-cost-climbing-stairs/
+> Given a staircase with `n` steps and an array of `n` numbers representing the fee that you have to pay if you take the step. Implement a method to calculate the minimum fee required to reach the top of the staircase (beyond the top-most step). At every step, you have an option to take either `1` step, `2` steps, or `3` steps. You should assume that you are standing at the first step.
+
+#### Example 1:
+```js
+Number of stairs (n) : 6
+Fee: {1,2,5,2,1,2}
+Output: 3
+Explanation: Starting from index '0', we can reach the top through: 0->3->top
+The total fee we have to pay will be (1+2).
+```
+#### Example 2:
+```js
+Number of stairs (n): 4
+Fee: {2,3,4,5}
+Output: 5
+Explanation: Starting from index '0', we can reach the top through: 0->1->top
+The total fee we have to pay will be (2+3).
+```
+
+Let’s first start with a <b>recursive brute-force solution</b>.
+
+### Brute-Force Solution
+At every step, we have three options: 
+- either jump `1` step, 
+- `2` steps, 
+- or `3` steps. 
+
+So our algorithm will look like:
+```js
+function findMinFee(fee) {
+  function findMinFeeRecursive(fee, currIndex) {
+    if (currIndex > fee.length - 1) return 0;
+
+    //if we take 1 step, we are left with n-1 steps
+    const take1Step = findMinFeeRecursive(fee, currIndex + 1);
+    //similarly, if we take 2 steps, we are left with n-2 steps
+    const take2Steps = findMinFeeRecursive(fee, currIndex + 2);
+    //if we take 3 steps, we are left with n-3 steps
+    const take3Steps = findMinFeeRecursive(fee, currIndex + 3);
+
+    const minCost = Math.min(take1Step, take2Steps, take3Steps);
+
+    return minCost + fee[currIndex];
+  }
+  return findMinFeeRecursive(fee, 0);
+}
+
+console.log(`Minimum fee needed: ---> ${findMinFee([1, 2, 5, 2, 1, 2])}`);
+console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
+```
+
+- The time complexity of the above algorithm is exponential `O(3ⁿ)`. The space complexity is `O(n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+To resolve <i>overlapping subproblems</i>, we can use an array to store the already solved subproblems. Here is the code:
+```js
+function findMinFee(fee) {
+  const dp = [];
+  function findMinFeeRecursive(fee, currIndex) {
+    if (currIndex > fee.length - 1) return 0;
+
+    //if we take 1 step, we are left with n-1 steps
+    const take1Step = findMinFeeRecursive(fee, currIndex + 1);
+    //similarly, if we take 2 steps, we are left with n-2 steps
+    const take2Steps = findMinFeeRecursive(fee, currIndex + 2);
+    //if we take 3 steps, we are left with n-3 steps
+    const take3Steps = findMinFeeRecursive(fee, currIndex + 3);
+
+    dp[currIndex] =
+      Math.min(take1Step, take2Steps, take3Steps) + fee[currIndex];
+
+    return dp[currIndex];
+  }
+  return findMinFeeRecursive(fee, 0);
+}
+
+console.log(`Minimum fee needed: ---> ${findMinFee([1, 2, 5, 2, 1, 2])}`);
+console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
+```
+
+### Bottom-up Dynamic Programming 
+Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `findMinFeeRecursive(n)` is the minimum of the three <i>recursive calls</i>; we can use this fact to populate our array.
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function findMinFee(fee) {
+  const dp = Array(fee.length + 1).fill(0);
+  // if there are no steps, we dont have to pay any fee
+  // only one step, so we have to pay its fee
+  dp[1] = fee[0];
+  // for 2 steps, since we start from the first step, so we have to pay its fee
+  dp[2] = fee[0];
+  // and from the first step we can reach the top by taking two steps, so
+  // we dont have to pay any other fee.
+
+  //please note that dp[] has one extra element to handle the 0th step
+  for (let i = 2; i < fee.length; i++) {
+    dp[i + 1] = Math.min(
+      fee[i] + dp[i],
+      fee[i - 1] + dp[i - 1],
+      fee[i - 2] + dp[i - 2]
+    );
+  }
+
+  return dp[fee.length];
+}
+
+console.log(`Minimum fee needed: ---> ${findMinFee([1, 2, 5, 2, 1, 2])}`);
+console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
+
+```
+- The above solution has <b>time and space complexity</b> of `O(n)`.
+
+#### Fibonacci number pattern
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that every <b>Fibonacci number</b> is a sum of the two preceding numbers, whereas in this problem every number (total `fee`) is the minimum of previous three numbers.
 
 ## 🌴 🔎 👩🏽‍🦯 House thief
 
