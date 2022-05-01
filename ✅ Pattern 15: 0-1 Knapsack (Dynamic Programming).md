@@ -2489,7 +2489,7 @@ console.log(
 ## Fibonacci numbers
 https://leetcode.com/problems/fibonacci-number/
 
-> Write a function to calculate the `nth` <b>Fibonacci number<b>.
+> Write a function to calculate the `nth` <b>Fibonacci number</b>.
 
 <b>Fibonacci numbers</b> are a series of numbers in which each number is the sum of the two preceding numbers. First few <b>Fibonacci numbers</b>  are: `0, 1, 1, 2, 3, 5, 8, …`
 
