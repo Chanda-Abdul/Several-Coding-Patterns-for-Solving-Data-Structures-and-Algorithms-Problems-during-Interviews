@@ -2875,8 +2875,140 @@ countWays(n) = countWays(n-1) + countWays(n-3) + countWays(n-4),
 for n >= 4
 ```
 
-## Minimum jumps to reach the end
+## 🌴 Minimum jumps to reach the end
 https://leetcode.com/problems/jump-game-ii/
+
+> Given an array of positive numbers, where each element represents the max number of `jumps` that can be made forward from that element, write a program to find the minimum number of `jumps` needed to reach the end of the array (starting from the first element). If an element is `0`, then we cannot move through that element.
+
+#### Example 1:
+```js
+Input = {2,1,1,1,4}
+Output = 3
+Explanation: Starting from index '0', we can reach the last index through: 0->2->3->4
+```
+#### Example 2:
+```js
+Input = {1,1,3,6,9,3,0,1,3}
+Output = 4
+Explanation: Starting from index '0', we can reach the last index through: 0->1->2->3->8
+```
+
+Let’s first start with a <b>recursive brute-force solution</b>.
+
+### Basic brute-force solution
+We will start with the `0`th index and try all options. So, if the value at the current index is `p`, we will try every jump in the range (`1` to `p`) from that index. After taking a jump, we <i>recursively</i> try all options from that index.
+
+Here is the code:
+```js
+function countMinJumps(jumps) {
+  function countMinJumpsRecursive(jumps, jumpIndex) {
+    //if we have reached the last index
+    //we don't need to do any more jumping
+    if (jumpIndex >= jumps.length - 1) return 0;
+
+    if (jumps[jumpIndex] === 0) return Infinity;
+
+    let totalJumps = Infinity;
+    let start = jumpIndex + 1;
+    let end = jumpIndex + jumps[jumpIndex];
+    while (start < jumps.length && start <= end) {
+      //jump one step and recurse for the remainder
+      const minJumps = countMinJumpsRecursive(jumps, start++);
+
+      if (minJumps !== Infinity) {
+        totalJumps = Math.min(totalJumps, minJumps + 1);
+      }
+    }
+
+    return totalJumps;
+  }
+
+  return countMinJumpsRecursive(jumps, 0);
+}
+
+console.log(
+  `Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
+console.log(
+  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`);
+```
+
+- The <b>time complexity</b> of the above algorithm is `O(2ⁿ)`, where `n` is the size of the input array. The <i>while loop</i> can execute a maximum of `n` times (for the case where we can jump to all the steps ahead) and since in each iteration, the function <i>recursively calls</i> itself, therefore, the <b>time complexity</b> is `O(2ⁿ)`. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
+
+We can clearly see the <i>overlapping subproblem pattern</i>. We can optimize this using <b>memoization</b> to store the results for <i>subproblems</i>.
+
+### Top-down Dynamic Programming with Memoization
+We can use an array to store the already solved <i>subproblems</i>. Here is the code for this:
+```js
+function countMinJumps(jumps) {
+  const dp = Array(jumps.length).fill(0)
+  function countMinJumpsRecursive(jumps, jumpIndex) {
+    //if we have reached the last index
+    //we don't need to do any more jumping
+    if (jumpIndex >= jumps.length - 1) return 0;
+
+    if (jumps[jumpIndex] === 0) return Infinity;
+
+    let totalJumps = Infinity;
+    let start = jumpIndex + 1;
+    let end = jumpIndex + jumps[jumpIndex];
+    while (start < jumps.length && start <= end) {
+      //jump one step and recurse for the remainder
+      const minJumps = countMinJumpsRecursive(jumps, start++);
+
+      if (minJumps !== Infinity) {
+        totalJumps = Math.min(totalJumps, minJumps + 1);
+      }
+      dp[jumpIndex] = totalJumps
+    }
+
+    return dp[jumpIndex];
+  }
+
+  return countMinJumpsRecursive(jumps, 0);
+}
+
+console.log(
+  `Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
+console.log(
+  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`);
+```
+
+### Bottom-up Dynamic Programming
+Let’s try to populate our `dp[]` array from the above solution, working in the <i>bottom-up fashion</i>. As we saw in the above code, we were trying to find the minimum jumps needed to reach every index (if it is within the range) from the current index. We can use this fact to populate our array.
+
+As we know, every index within the range of current index can be reached in one jump. Therefore, we can say that we can reach every index (within the range of current index) in:
+```js
+'jumps to reach current index' + 1
+```
+So, while going through all the indexes, we will take the minimum value between the `current jump-count` and the jumps needed to reach the `current index + 1`.
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function countMinJumps(jumps) {
+  const dp = Array(jumps.length).fill(Infinity);
+  dp[0] = 0;
+
+  for (let start = 0; start < jumps.length - 1; start++) {
+    for (let end = start + 1; end <= start + jumps[start] && end < jumps.length; end++) {
+      dp[end] = Math.min(dp[end], dp[start] + 1);
+    }
+  }
+
+  return dp[jumps.length - 1];
+}
+
+console.log(
+  `Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
+console.log(
+  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`);
+```
+- The above solution has a <b>time complexity</b> of `O(n²)` (because of the two `for` loops) and <b>space complexity</b> of `O(n)` to store `dp[]`.
+
+#### Fibonacci number pattern
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)<b>. The only difference is that every <b>Fibonacci number<b> is a sum of the two preceding numbers, whereas in this problem every number is the minimum of two numbers (`start` and `end`):
+````js
+dp[end] = Math.min(dp[end], dp[start]+1);
+````
 
 ## Minimum jumps with fee
 
