@@ -3256,7 +3256,7 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 # Pattern 4: Palindromic Subsequence
 ## Longest Palindromic Subsequence
 https://leetcode.com/problems/longest-palindromic-subsequence/
-> Given a sequence, find the length of its <b>Longest Palindromic Subsequence (LPS)<b>. In a <b>palindromic subsequence</b>, <i>elements read the same backward and forward</i>.
+> Given a sequence, find the length of its <b>Longest Palindromic Subsequence (LPS)</b>. In a <b>palindromic subsequence</b>, <i>elements read the same backward and forward</i>.
 
 A <b>subsequence</b> is a <i>sequence</i> that can be derived from another <i>sequence</i> by <i>deleting some or no elements without changing the order of the remaining elements</i>.
 
