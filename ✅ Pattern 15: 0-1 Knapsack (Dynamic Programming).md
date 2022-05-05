@@ -3228,7 +3228,7 @@ console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
 ```
 - The above solution has <b>time and space complexity</b> of `O(n)`.
 #### Memory optimization
-We can optimize the space used in our previous solution. We don’t need to store all the previous numbers up to `n`, as we only need two previous numbers to calculate the next number in the sequence. Let’s use this fact to further improve our solution:
+We can optimize the space used in our previous solution. We don’t need to store all the previous numbers up to `n`, as we only need two previous numbers to calculate the next number in the <b>sequence</b>. Let’s use this fact to further improve our solution:
 
 ```js
 function findMaxSteal(wealth) {
@@ -3256,24 +3256,24 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 # Pattern 4: Palindromic Subsequence
 ## Longest Palindromic Subsequence
 https://leetcode.com/problems/longest-palindromic-subsequence/
-> Given a sequence, find the length of its <b>Longest Palindromic Subsequence (LPS)</b>. In a <b>palindromic subsequence</b>, <i>elements read the same backward and forward</i>.
+> Given a <b>sequence</b>, find the length of its <b>Longest Palindromic Subsequence (LPS)</b>. In a <b>palindromic subsequence</b>, <i>elements read the same backward and forward</i>.
 
 A <b>subsequence</b> is a <i>sequence</i> that can be derived from another <i>sequence</i> by <i>deleting some or no elements without changing the order of the remaining elements</i>.
 
 #### Example 1:
-```
+```js
 Input: "abdbca"
 Output: 5
 Explanation: LPS is "abdba".
 ```
 #### Example 2:
-```
+```js
 Input: = "cddpd"
 Output: 3
 Explanation: LPS is "ddd".
 ```
 #### Example 3:
-```
+```js
 Input: = "pqr"
 Output: 1
 Explanation: LPS could be "p", "q" or "r".
@@ -3322,7 +3322,7 @@ findLPSLength('pqr');
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
-- In each function call, we are either having one <i>recursive call</i> or <i>two recursive calls</i> (we will never have <i>three recursive calls</i>); hence, the <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the length of the input sequence. The <b>space complexity</b> is `O(n)`, which is used to store the <i>recursion stack</i>.
+- In each function call, we are either having one <i>recursive call</i> or <i>two recursive calls</i> (we will never have <i>three recursive calls</i>); hence, the <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the length of the input <i>sequence</i>. The <b>space complexity</b> is `O(n)`, which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
 We can use an array to store the already solved <i>subproblems</i>.
@@ -3372,19 +3372,20 @@ findLPSLength('pqr');
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
-- Since our memoization array `dp[str.length][str.length]` stores the results for all the <i>subproblems</i>, we can conclude that we will not have more than `N*N` <i>subproblems</i>(where `N` is the length of the input sequence). This means that our time complexity will be `O(N²)`.
+- Since our <b>memoization</b> array `dp[str.length][str.length]` stores the results for all the <i>subproblems</i>, we can conclude that we will not have more than `N*N` <i>subproblems</i>(where `N` is the length of the input <i>sequence</i>). This means that our time complexity will be `O(N²)`.
 - The above algorithm will be using `O(N²)` <b>space</b> for the <b>memoization</b> array. Other than that we will use `O(N)` <b>space</b> for the <i>recursion call-stack</i>. So the total <b>space complexity</b> will be `O(N² + N)`, which is asymptotically equivalent to `O(N²)`.
 
 ### Bottom-up Dynamic Programming
-Since we want to try all the subsequences of the given sequence, we can use a two-dimensional array to store our results. We can start from the beginning of the sequence and keep adding one element at a time. At every step, we will try all of its subsequences. So for every `startIndex` and `endIndex` in the given string, we will choose one of the following two options:
+Since we want to try all the <b>subsequences</b> of the given <i>sequence</i>, we can use a two-dimensional array to store our results. We can start from the beginning of the <i>sequence</i> and keep adding one element at a time. At every step, we will try all of its <b>subsequences</b>. So for every `startIndex` and `endIndex` in the given string, we will choose one of the following two options:
 
-1. If the element at the `startIndex` matches the element at the `endIndex`, the length of <b>LPS</b> would be two plus the length of <b>LPS</b> till `startIndex+1`` and endIndex-1`.
+1. If the element at the `startIndex` matches the element at the `endIndex`, the length of <b>LPS</b> would be two plus the length of <b>LPS</b> until `startIndex+1` and `endIndex-1`.
 2. If the element at the `startIndex` does not match the element at the `endIndex`, we will take the maximum <b>LPS</b> created by either skipping element at the `startIndex` or the `endIndex`.
 
 So our recursive formula would be:
 ```js
 if st[endIndex] == st[startIndex] 
   dp[startIndex][endIndex] = 2 + dp[startIndex + 1][endIndex - 1]
+
 else 
   dp[startIndex][endIndex] = Math.max(dp[startIndex + 1][endIndex], dp[startInde[endIndex - 1])
 ```
@@ -3432,9 +3433,203 @@ console.log('Length of LPS ---> ' + findLPSLength('pqr'));
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
-- The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input sequence.
+- The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input <i>sequence</i>.
 ## 👩🏽‍🦯 Longest Palindromic Substring
 https://leetcode.com/problems/longest-palindromic-substring/
+
+> Given a string, find the length of its <b>Longest Palindromic Substring (LPS)</b>. In a <i>palindromic</i> string, <i>elements read the same backward and forward</i>.
+
+#### Example 1:
+```
+Input: "abdbca"
+Output: 3
+Explanation: LPS is "bdb".
+```
+#### Example 2:
+```
+Input: = "cddpd"
+Output: 3
+Explanation: LPS is "dpd".
+```
+#### Example 3:
+```
+Input: = "pqr"
+Output: 1
+Explanation: LPS could be "p", "q" or "r".
+```
+### Basic Brute-Force Solution
+This problem follows the <b>[Longest Palindromic Subsequence pattern](#pattern-4-palindromic-subsequence)</b>. The only difference is that in a <i>palindromic subsequence</i> characters can be non-adjacent, whereas in a <i>substring</i> all characters should form a <i>palindrome</i>. We will follow a similar approach though.
+
+The <b>basic brute-force solution</b> will be to try all the <i>substrings</i> of the given string. We can start processing from the beginning and the end of the string. So at any step, we will have two options:
+
+1. If the element at the beginning and the end are the same, we make a <i>recursive call</i> to check if the remaining <i>substring</i> is also a <i>palindrome</i>. If so, the <i>substring</i> is a <i>palindrome</i> from beginning to end.
+2. We will skip either the element from the beginning or the end to make two <i>recursive calls</i> for the remaining <i>substring</i>. The length of <b>LPS</b> would be the maximum of these two <i>recursive calls</i>.
+
+Here is the code:
+```js
+function findLPSLength(str) {
+  function findLPSLengthRecursive(str, startIndex, endIndex) {
+    //base check
+    if (startIndex > endIndex) return 0;
+
+    //every string with one character is a palindrome
+    if (startIndex === endIndex) return 1;
+
+    //case 1: elements at the start and the end are the same
+    if (str[startIndex] === str[endIndex]) {
+      const remainingLength = endIndex - startIndex - 1;
+
+      //check if the remaining string is also a palindrom
+      if (
+        remainingLength ===
+        findLPSLengthRecursive(str, startIndex + 1, endIndex - 1)
+      ) {
+        return remainingLength + 2;
+      }
+    }
+
+    //case 2: skip one character either from the start or end
+    const skipStartChar = findLPSLengthRecursive(str, startIndex + 1, endIndex);
+    const skipEndChar = findLPSLengthRecursive(str, startIndex, endIndex - 1);
+    return Math.max(skipStartChar, skipEndChar);
+  }
+
+  return findLPSLengthRecursive(str, 0, str.length - 1);
+}
+
+console.log('Length of LPS ---> ' + findLPSLength('abdbca'));
+// Output: 3
+// Explanation: LPS is "bdb".
+
+console.log('Length of LPS ---> ' + findLPSLength('cddpd'));
+// Output: 3
+// Explanation: LPS is "dpd".
+
+console.log('Length of LPS ---> ' + findLPSLength('pqr'));
+// Output: 1
+// Explanation: LPS could be "p", "q" or "r".
+```
+- Due to the three <b>recursive calls</b>, the <b>time complexity</b> of the above algorithm is exponential `O(3ⁿ)`, where `n` is the length of the input string. 
+- The <b>space complexity</b> is `O(n)` which is used to store the <b>recursion stack</b>.
+
+### Top-down Dynamic Programming with Memoization
+We can use an array to store the already solved <i>subproblems</i>.
+
+The two changing values to our <b>recursive function</b> are the two indexes, `startIndex` and `endIndex`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`startIndex + “|” + endIndex`))
+
+Here is the code for this:
+```js
+function findLPSLength(str) {
+  const dp = [];
+  function findLPSLengthRecursive(str, startIndex, endIndex) {
+    //base check
+    if (startIndex > endIndex) return 0;
+
+    //every string with one character is a palindrome
+    if (startIndex === endIndex) return 1;
+
+    dp[startIndex] = dp[startIndex] || [];
+
+    //case 1: elements at the start and the end are the same
+    if (str[startIndex] === str[endIndex]) {
+      const remainingLength = endIndex - startIndex - 1;
+
+      //check if the remaining string is also a palindrom
+      if (
+        remainingLength ===
+        findLPSLengthRecursive(str, startIndex + 1, endIndex - 1)
+      ) {
+        dp[startIndex][endIndex] = remainingLength + 2;
+        return dp[startIndex][endIndex];
+      }
+    }
+
+    //case 2: skip one character either from the start or end
+    const skipStartChar = findLPSLengthRecursive(str, startIndex + 1, endIndex);
+    const skipEndChar = findLPSLengthRecursive(str, startIndex, endIndex - 1);
+    dp[startIndex][endIndex] = Math.max(skipStartChar, skipEndChar);
+    return dp[startIndex][endIndex];
+  }
+
+  return findLPSLengthRecursive(str, 0, str.length - 1);
+}
+
+console.log('Length of LPS ---> ' + findLPSLength('abdbca'));
+// Output: 3
+// Explanation: LPS is "bdb".
+
+console.log('Length of LPS ---> ' + findLPSLength('cddpd'));
+// Output: 3
+// Explanation: LPS is "dpd".
+
+console.log('Length of LPS ---> ' + findLPSLength('pqr'));
+// Output: 1
+// Explanation: LPS could be "p", "q" or "r".
+```
+- The above algorithm has a <b>time and space complexity</b> of `O(n²)` because we will not have more than `n∗n` <i>subproblems</i>.
+
+### Bottom-up Dynamic Programming
+Since we want to try all the <i>substrings</i> of the given string, we can use a two-dimensional array to store the <i>subproblems’</i> results. So `dp[i][j]` will be `true` if the <i>substring</i> from index `i` to index `j` is a <i>palindrome</i>.
+
+We can start from the beginning of the string and keep adding one element at a time. At every step, we will try all of its <i>substrings</i>. So for every `endIndex` and `startIndex` in the given string, we need to check the following thing:
+
+- If the element at the `startIndex` matches the element at the `endIndex`, we will further check if the remaining <i>substring</i> (from `startIndex+1` to `endIndex-1`) is a <i>substring</i> too.
+
+So our <i>recursive</i> formula will look like:
+```js
+if st[startIndex] == st[endIndex], and 
+  if the remaing string is of zero length or dp[startIndex+1][endIndex-1] is a palindrome then
+  
+  dp[startIndex][endIndex] = true
+```
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function findLPSLength(str) {
+  // dp[i][j] will be 'true' if the string from index 'start' to index 'end' is a palindrome
+  const dp = Array(str.length)
+    .fill(0)
+    .map(() => Array(str.length).fill(0));
+  //every string with one character is a palindrome
+  for (let start = 0; start < str.length; start++) {
+    dp[start][start] = true;
+  }
+
+  let maxLength = 1;
+
+  for (let startIndex = str.length - 1; startIndex >= 0; startIndex--) {
+    for (let endIndex = startIndex + 1; endIndex < str.length; endIndex++) {
+      if (str.charAt(startIndex) === str.charAt(endIndex)) {
+        //if it's a two character string or if the
+        //remain string is a palindrome too
+        if (endIndex - startIndex === 1 || dp[startIndex + 1][endIndex - 1]) {
+          dp[startIndex][endIndex] = true;
+          maxLength = Math.max(maxLength, endIndex - startIndex + 1);
+        }
+      }
+    }
+  }
+  return maxLength;
+}
+
+console.log('Length of LPS ---> ' + findLPSLength('abdbca'));
+// Output: 3
+// Explanation: LPS is "bdb".
+
+console.log('Length of LPS ---> ' + findLPSLength('cddpd'));
+// Output: 3
+// Explanation: LPS is "dpd".
+
+console.log('Length of LPS ---> ' + findLPSLength('pqr'));
+// Output: 1
+// Explanation: LPS could be "p", "q" or "r".
+```
+
+- The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
+
+#### Manacher’s Algorithm
+The best-known algorithm to find the <b>[longest palindromic substring](#👩🏽‍🦯-longest-palindromic-substring)</b> which runs in linear time `O(n)` is <b>[Manacher’s Algorithm](https://en.wikipedia.org/wiki/Longest_palindromic_substring)</b>. However, it is a non-trivial algorithm that doesn’t use <b>DP</b>. Please take a look to familiarize yourself with this algorithm, however, no one expects you to come up with such an algorithm in a 45 minutes coding interview.
+
 
 ## 👩🏽‍🦯 Count of Palindromic Substrings
 https://leetcode.com/problems/palindromic-substrings/
