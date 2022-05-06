@@ -696,7 +696,7 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 ```
 
 - The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The <b>space complexity</b>  is `O(n)`, which will be used to store the recursion stack.
+- The <b>space complexity</b>  is `O(n)`, which will be used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -3928,21 +3928,260 @@ function isValidPalindrome(s, K) {
 }
 
 console.log(
-  `Is ${(s = 'abcdeca')} a k-palindrome ---> ` + isValidPalindrome(s, 2)
-);
+  `Is ${(s = 'abcdeca')} a k-palindrome ---> ` + isValidPalindrome(s, 2));
 // Output: true
 // Explanation: Remove 'b' and 'e' characters.
 
 console.log(
-  `Is ${(s = 'abbababa')} a k-palindrome ---> ` + isValidPalindrome(s, 1)
-);
+  `Is ${(s = 'abbababa')} a k-palindrome ---> ` + isValidPalindrome(s, 1));
 // Output: true
 ```
 
-
-
 ## Palindromic Partitioning
 https://leetcode.com/problems/palindrome-partitioning-ii/
+
+> Given a string, we want to cut it into pieces such that each piece is a <b>palindrome</b>. Write a function to return the minimum number of cuts needed.
+
+#### Example 1:
+```js
+Input: "abdbca"
+Output: 3
+Explanation: Palindrome pieces are "a", "bdb", "c", "a".
+```
+#### Example 2:
+```js
+Input: = "cddpd"
+Output: 2
+Explanation: Palindrome pieces are "c", "d", "dpd".
+```
+#### Example 3:
+```js
+Input: = "pqr"
+Output: 2
+Explanation: Palindrome pieces are "p", "q", "r".
+```
+#### Example 4:
+```js
+Input: = "pp"
+Output: 0
+Explanation: We do not need to cut, as "pp" is a palindrome.
+```
+
+### Brute-Force Recursive Solution
+This problem follows the <b>[Longest Palindromic Subsequence pattern](#pattern-4-palindromic-subsequence)</b> and shares a similar approach as that of the [Longest Palindromic Substring](#longest-palindromic-subsequence).
+
+The <b>brute-force solution</b> will be to try all the <i>substring combinations</i> of the given string. We can start processing from the beginning of the string and keep adding one character at a time. At any step, if we get a <i>palindrome</i>, we take it as one piece and <i>recursively</i> process the remaining length of the string to find the minimum cuts needed.
+
+Here is the code:
+```js
+function findMPPCuts(str) {
+  function findMPPCutsRecursive(str, startIndex, endIndex) {
+    //base case: we don't need to cut the str if it is a palindrom
+    if (startIndex >= endIndex || isPalindrome(str, startIndex, endIndex))
+      return 0;
+
+    //at most, we need to cut the str into it's length-1 pieces
+    let minimumCuts = endIndex - startIndex;
+    for (let i = startIndex; i <= endIndex; i++) {
+      if (isPalindrome(str, startIndex, i)) {
+        //we can cut here as we have a palindrome from
+        // startIndex to i
+        minimumCuts = Math.min(
+          minimumCuts,
+          1 + findMPPCutsRecursive(str, i + 1, endIndex)
+        );
+      }
+    }
+    return minimumCuts;
+  }
+
+
+  function isPalindrome(str, start, end) {
+    while (start <= end) {
+      if (str[start++] !== str[end--]) return false;
+    }
+    return true;
+  }
+
+  return findMPPCutsRecursive(str, 0, str.length - 1);
+}
+
+console.log(
+  `Minimum palindrome partitions ---> ${findMPPCuts('abdbca')}`);
+// Output: 3
+// Explanation: Palindrome pieces are "a", "bdb", "c", "a".
+
+console.log(
+  `Minimum palindrome partitions ---> ${findMPPCuts('cdpdd')}`);
+// Output: 2
+// Explanation: Palindrome pieces are "c", "d", "dpd".
+
+console.log(
+  `Minimum palindrome partitions ---> ${findMPPCuts('pqr')}`);
+// Output: 2
+// Explanation: Palindrome pieces are "p", "q", "r".
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
+// Output: 0
+// Explanation: We do not need to cut, as "pp" is a palindrome.
+```
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b>  is `O(n)`, which will be used to store the <i>recursion stack</i>.
+### Top-down Dynamic Programming with Memoization#
+We can memoize both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indexes; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
+
+Here is the code:
+```js
+function findMPPCuts(str) {
+  const dp = [];
+  const dpIsPalindrome = [];
+  
+  function findMPPCutsRecursive(str, startIndex, endIndex) {
+    //base case: we don't need to cut the str if it is a palindrom
+    if (startIndex >= endIndex || isPalindrome(str, startIndex, endIndex))
+      return 0;
+
+    //at most, we need to cut the str into it's length-1 pieces
+    let minimumCuts = endIndex - startIndex;
+    for (let i = startIndex; i <= endIndex; i++) {
+      if (isPalindrome(str, startIndex, i)) {
+        //we can cut here as we have a palindrome from
+        // startIndex to i
+        minimumCuts = Math.min(
+          minimumCuts,
+          1 + findMPPCutsRecursive(str, i + 1, endIndex)
+        );
+      }
+    }
+    return minimumCuts;
+  }
+
+  function isPalindrome(str, start, end) {
+    dpIsPalindrome[start] = dpIsPalindrome[start] || [];
+    if (typeof dpIsPalindrome[start][end] === 'undefined') {
+      dpIsPalindrome[start][end] = true;
+      let i = start;
+      let j = end;
+
+      while (i <= j) {
+        if (str[i++] !== str[j--]) {
+          dpIsPalindrome[start][end] = false;
+          break;
+        }
+        //use memoization to find if the remaining string is a palindrome
+        dpIsPalindrome[i] = dpIsPalindrome[i] || [];
+        if (i < j && typeof dpIsPalindrome[i][j] !== 'undefined') {
+          dpIsPalindrome[start][end] = dpIsPalindrome[i][j];
+          break;
+        }
+      }
+    }
+
+    return dpIsPalindrome[start][end];
+  }
+
+  return findMPPCutsRecursive(str, 0, str.length - 1);
+}
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('abdbca')}`);
+// Output: 3
+// Explanation: Palindrome pieces are "a", "bdb", "c", "a".
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('cdpdd')}`);
+// Output: 2
+// Explanation: Palindrome pieces are "c", "d", "dpd".
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pqr')}`);
+// Output: 2
+// Explanation: Palindrome pieces are "p", "q", "r".
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
+// Output: 0
+// Explanation: We do not need to cut, as "pp" is a palindrome.
+```
+### Bottom-up Dynamic Programming#
+The above solution tells us that we need to build two tables, one for the `isPalindrome()` and one for `findMPPCuts()`.
+
+If you remember, we built a table in the [Longest Palindromic Substring (LPS)](#longest-palindromic-subsequence) chapter that can tell us what <i>substrings</i> (of the input <i>string</i>) are <i>palindrome</i>. We will use the same approach here to build the table required for `isPalindrome()`. 
+
+To build the second table for finding the minimum cuts, we can iterate through the first table built for `isPalindrome()`. At any step, if we get a <i>palindrome</i>, we can cut the <i>string</i> there. Which means minimum cuts will be one plus the cuts needed for the <i>remaining string</i>.
+
+Here is the code for the <b>bottom-up approach</b>:
+```js
+function findMPPCuts(str) {
+  // isPalindrome[i][j] will be 'true' if the string from index 'i' to index 'j' is a palindrome
+  const isPalindrome = Array(str.length)
+    .fill(false)
+    .map(() => Array(str.length).fill(false));
+
+  //every string with one character is a palindrome
+  for (let i = 0; i < str.length; i++) {
+    isPalindrome[i][i] = true;
+  }
+
+  //populate isPalindrome[][]
+  for (let startIndex = str.length - 1; startIndex >= 0; startIndex--) {
+    for (let endIndex = startIndex + 1; endIndex < str.length; endIndex++) {
+      if (str.charAt(startIndex) === str.charAt(endIndex)) {
+        //if it's a two cahracter strin or if the remaing
+        //string is a palindrome too
+        if (
+          endIndex - startIndex === 1 ||
+          isPalindrome[startIndex + 1][endIndex - 1]
+        ) {
+          isPalindrome[startIndex][endIndex] = true;
+        }
+      }
+    }
+  }
+
+  //now lets populate the other [][], every index in cuts
+  //stores the min cuts needed for the substring
+  //from that index until the end
+  const cuts = Array(str.length).fill(0);
+
+  for (let startIndex = str.length - 1; startIndex >= 0; startIndex--) {
+    //maximum cuts
+    let minCuts = str.length;
+
+    for (let endIndex = str.length - 1; endIndex >= startIndex; endIndex--) {
+      if (isPalindrome[startIndex][endIndex]) {
+        //we can cut here as we got a palindrome
+        //also we dont need any cut if the whole substring is a palindrome
+        minCuts =
+          endIndex === str.length - 1
+            ? 0
+            : Math.min(minCuts, 1 + cuts[endIndex + 1]);
+      }
+    }
+    cuts[startIndex] = minCuts;
+  }
+
+  return cuts[0];
+}
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('abdbca')}`);
+// Output: 3
+// Explanation: Palindrome pieces are "a", "bdb", "c", "a".
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('cdpdd')}`);
+// Output: 2
+// Explanation: Palindrome pieces are "c", "d", "dpd".
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pqr')}`);
+// Output: 2
+// Explanation: Palindrome pieces are "p", "q", "r".
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
+// Output: 0
+// Explanation: We do not need to cut, as "pp" is a palindrome.
+
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
+// Output: 0
+// Explanation: We do not need to cut, as "madam" is a palindrome.
+```
+
+- The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 # Pattern 5: Longest Common Substring
 ## Longest Common Substring
