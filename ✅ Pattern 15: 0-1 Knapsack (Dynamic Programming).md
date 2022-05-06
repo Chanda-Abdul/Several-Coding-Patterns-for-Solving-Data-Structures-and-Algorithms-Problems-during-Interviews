@@ -3797,26 +3797,26 @@ console.log(
 ### Similar problems
 Here are a couple of similar problems:
 
-#### 1. Minimum insertions in a string to make it a palindrome
+## 1. Minimum insertions in a string to make it a palindrome
 https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
 
 Will the above approach work if we make insertions instead of deletions?
 
 Yes, the length of the <b>Longest Palindromic Subsequence</b> is the best <i>palindromic subsequence</i> we can have. Let’s take a few examples:
 
-##### Example 1:
+### Example 1:
 ```js
 Input: "abdbca"   
 Output: 1  
 Explanation: By inserting “c”, we get a palindrome “acbdbca”.
 ```
-##### Example 2:
+### Example 2:
 ```js
 Input: = "cddpd"  
 Output: 2  
 Explanation: Inserting “cp”, we get a palindrome “cdpdpdc”. We can also get a palindrome by inserting “dc”: “cddpddc”
 ```
-##### Example 3:
+### Example 3:
 ```js
 Input: = "pqr"  
 Output: 2  
@@ -3887,7 +3887,7 @@ console.log(
 // Output: 5
 // Explanation: Inserting 5 characters the string becomes "leetcodocteel".
 ```
-#### 2. Find if a string is K-Palindromic
+## 2. Find if a string is K-Palindromic
 https://leetcode.com/problems/valid-palindrome-iii/
 
 Any string will be called `K`<b>-palindromic</b> if it can be transformed into a <i>palindrome</i> by removing at most `K` characters from it.
