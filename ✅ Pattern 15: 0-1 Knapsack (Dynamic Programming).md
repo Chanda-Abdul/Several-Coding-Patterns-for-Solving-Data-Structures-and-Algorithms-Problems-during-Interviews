@@ -3434,25 +3434,25 @@ console.log('Length of LPS ---> ' + findLPSLength('pqr'));
 // Explanation: LPS could be "p", "q" or "r".
 ```
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input <i>sequence</i>.
-## 👩🏽‍🦯 Longest Palindromic Substring
+## 👩🏽‍🦯 🌴 Longest Palindromic Substring
 https://leetcode.com/problems/longest-palindromic-substring/
 
 > Given a string, find the length of its <b>Longest Palindromic Substring (LPS)</b>. In a <i>palindromic</i> string, <i>elements read the same backward and forward</i>.
 
 #### Example 1:
-```
+```js
 Input: "abdbca"
 Output: 3
 Explanation: LPS is "bdb".
 ```
 #### Example 2:
-```
+```js
 Input: = "cddpd"
 Output: 3
 Explanation: LPS is "dpd".
 ```
 #### Example 3:
-```
+```js
 Input: = "pqr"
 Output: 1
 Explanation: LPS could be "p", "q" or "r".
@@ -3633,6 +3633,79 @@ The best-known algorithm to find the <b>[longest palindromic substring](#👩�
 
 ## 👩🏽‍🦯 Count of Palindromic Substrings
 https://leetcode.com/problems/palindromic-substrings/
+
+> Given a <i>string</i>, find the total number of <i>palindromic substrings</i> in it. Please note we need to find the total number of <i>substrings</i> and not <i>subsequences</i>.
+
+#### Example 1:
+```js
+Input: "abdbca"
+Output: 7
+Explanation: Here are the palindromic substrings, "a", "b", "d", "b", "c", "a", "bdb".
+```
+#### Example 2:
+```js
+Input: = "cddpd"
+Output: 7
+Explanation: Here are the palindromic substrings, "c", "d", "d", "p", "d", "dd", "dpd".
+```
+#### Example 3:
+```js
+Input: = "pqr"
+Output: 3
+Explanation: Here are the palindromic substrings,"p", "q", "r".
+```
+
+This problem follows the <b>[Longest Palindromic Subsequence pattern](#pattern-4-palindromic-subsequence)</b>and can be easily converted to <b>[Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)</b>. The only difference is that instead of calculating the <b>longest palindromic substring</b>, we will instead count all the <b>palindromic substrings</b>.
+
+### Bottom-up Dynamic Programming
+
+Let’s jump directly to the <b>bottom-up dynamic programming</b> solution:
+
+```js
+function findCPS(str) {
+  // dp[i][j] will be 'true' if the string from index 'i' to index 'j' is a palindrome
+  const dp = Array(str.length)
+    .fill(false)
+    .map(() => Array(str.length).fill(false));
+
+  let count = 0;
+
+  //every string with one character is a palindrome
+  for (let i = 0; i < str.length; i++) {
+    dp[i][i] = true;
+    count++;
+  }
+
+  for (let startIndex = str.length - 1; startIndex >= 0; startIndex--) {
+    for (let endIndex = startIndex + 1; endIndex < str.length; endIndex++) {
+      if (str.charAt(startIndex) === str.charAt(endIndex)) {
+        //if it's a two character string or if the remaining string is palindrome too
+        if (endIndex - startIndex === 1 || dp[startIndex + 1][endIndex - 1]) {
+          dp[startIndex][endIndex] = true;
+          count++;
+        }
+      }
+    }
+  }
+  console.log(dp);
+  return count;
+}
+
+console.log('Length of LPS: ---> ' + findCPS('abdbca'));
+// Output: 7
+// Explanation: Here are the palindromic substrings, "a", "b", "d", "b", "c", "a", "bdb".
+
+console.log('Length of LPS: ---> ' + findCPS('cddpd'));
+// Output: 7
+// Explanation: Here are the palindromic substrings, "c", "d", "d", "p", "d", "dd", "dpd".
+
+console.log('Length of LPS: ---> ' + findCPS('pqr'));
+// Output: 3
+// Explanation: Here are the palindromic substrings,"p", "q", "r".
+```
+
+- The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
+
 
 ## 🔎 Minimum Deletions in a String to make it a Palindrome
 https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
