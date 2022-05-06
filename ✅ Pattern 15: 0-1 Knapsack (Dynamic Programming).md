@@ -3708,9 +3708,238 @@ console.log('Length of LPS: ---> ' + findCPS('pqr'));
 
 
 ## 🔎 Minimum Deletions in a String to make it a Palindrome
+https://www.geeksforgeeks.org/minimum-number-deletions-make-string-palindrome/
+
+> Given a string, find the minimum number of characters that we can remove to make it a <i>palindrome</i>.
+
+#### Example 1:
+```js
+Input: "abdbca"
+Output: 1
+Explanation: By removing "c", we get a palindrome "abdba".
+```
+#### Example 2:
+```js
+Input: = "cddpd"
+Output: 2
+Explanation: Deleting "cp", we get a palindrome "ddd".
+```
+#### Example 3:
+```js
+Input: = "pqr"
+Output: 2
+Explanation: We have to remove any two characters to get a palindrome, 
+e.g. if we remove "pq", we get palindrome "r".
+```
+
+This problem can be easily converted to the <b>[Longest Palindromic Subsequence (LPS)](#longest-palindromic-subsequence)</b> problem. We can use the fact that <b>LPS</b> is the best subsequence we can have, so any character that is not part of <b>LPS</b> must be removed. Please note that it is [‘Longest Palindromic SubSequence’](#longest-palindromic-subsequence) and not [‘Longest Palindrome Substring’](#👩🏽‍🦯-🌴-longest-palindromic-substring).
+
+So, our solution for a given string `str` will be:
+```js
+Minimum_deletions_to_make_palindrome = Length(st) - LPS(st)
+```
+
+### Bottom-up Dynamic Programming
+
+Let’s jump directly to <b>bottom-up dynamic programming</b>:
+```js
+function findMinimumDeletions(str) {
+  function findLPSLength(str) {
+    // dp[i][j] stores the length of LPS from index 'i' to index 'j'
+    const dp = Array(str.length)
+      .fill(0)
+      .map(() => Array(str.length).fill(0));
+
+    //every sequence with one element is a palindrome of length 1
+    for (let i = 0; i < str.length; i++) dp[i][i] = 1;
+
+    for (let startIndex = str.length - 1; startIndex >= 0; startIndex--) {
+      for (let endIndex = startIndex + 1; endIndex < str.length; endIndex++) {
+        // case: 1 elements at the beggining and end are the same
+        if (str.charAt(startIndex) === str.charAt(endIndex)) {
+          dp[startIndex][endIndex] = 2 + dp[startIndex + 1][endIndex - 1];
+        } else {
+          // case: 2 skip one element either from the beginning or the end
+          dp[startIndex][endIndex] = Math.max(
+            dp[startIndex + 1][endIndex],
+            dp[startIndex][endIndex - 1]
+          );
+        }
+      }
+    }
+    // console.log(dp);
+    return dp[0][str.length - 1];
+  }
+
+  //subtracting the length of the LPS from the length
+  //of the input string to get minimum number of deletions
+  return str.length - findLPSLength(str);
+}
+
+console.log(
+  'Minimum number of deletions required ---> ' + findMinimumDeletions('abdbca'));
+// Output: 1
+// Explanation: By removing "c", we get a palindrome "abdba".
+
+console.log(
+  'Minimum number of deletions required ---> ' + findMinimumDeletions('cddpd'));
+// Output: 2
+// Explanation: Deleting "cp", we get a palindrome "ddd".
+
+console.log(
+  'Minimum number of deletions required ---> ' + findMinimumDeletions('pqr'));
+// 2
+// Explanation: We have to remove any two characters to get a palindrome, e.g. if we
+// remove "pq", we get palindrome "r".
+```
+- The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
+
+### Similar problems
+Here are a couple of similar problems:
+
+#### 1. Minimum insertions in a string to make it a palindrome
 https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
 
-https://www.geeksforgeeks.org/minimum-number-deletions-make-string-palindrome/
+Will the above approach work if we make insertions instead of deletions?
+
+Yes, the length of the <b>Longest Palindromic Subsequence</b> is the best <i>palindromic subsequence</i> we can have. Let’s take a few examples:
+
+##### Example 1:
+```js
+Input: "abdbca"   
+Output: 1  
+Explanation: By inserting “c”, we get a palindrome “acbdbca”.
+```
+##### Example 2:
+```js
+Input: = "cddpd"  
+Output: 2  
+Explanation: Inserting “cp”, we get a palindrome “cdpdpdc”. We can also get a palindrome by inserting “dc”: “cddpddc”
+```
+##### Example 3:
+```js
+Input: = "pqr"  
+Output: 2  
+Explanation: We have to insert any two characters to get a palindrome (e.g. if we insert “pq”, we get a palindrome “pqrqp”).
+```
+
+```js
+function  minInsertions(s) {
+  function findLPSLength(s) {
+    // dp[i][j] stores the length of LPS from index 'i' to index 'j'
+    const dp = Array(s.length)
+      .fill(0)
+      .map(() => Array(s.length).fill(0));
+
+    //every sequence with one element is a palindrome of length 1
+    for (let i = 0; i < s.length; i++) dp[i][i] = 1;
+
+    for (let startIndex = s.length - 1; startIndex >= 0; startIndex--) {
+      for (let endIndex = startIndex + 1; endIndex < s.length; endIndex++) {
+        // case: 1 elements at the beggining and end are the same
+        if (s.charAt(startIndex) === s.charAt(endIndex)) {
+          dp[startIndex][endIndex] = 2 + dp[startIndex + 1][endIndex - 1];
+        } else {
+          // case: 2 skip one element either from the beginning or the end
+          dp[startIndex][endIndex] = Math.max(
+            dp[startIndex + 1][endIndex],
+            dp[startIndex][endIndex - 1]
+          );
+        }
+      }
+    }
+    // console.log(dp);
+    return dp[0][s.length - 1];
+  }
+
+  //subtracting the length of the LPS from the length
+  //of the input string to get minimum number of deletions
+  return s.length - findLPSLength(s);
+}
+
+console.log(
+  'Minimum number of insertions required ---> ' +  minInsertions('abdbca'));
+// Output: 1
+// Explanation: Explanation: By inserting “c”, we get a palindrome “aCbdbca”.
+
+console.log(
+  'Minimum number of insertions required ---> ' +  minInsertions('cddpd'));
+// Output: 2
+// Explanation: Inserting “cp”, we get a palindrome “cdPdpdC”. We can also get a palindrome by inserting “dc”: “cddpdDC”
+
+console.log(
+  'Minimum number of insertions required ---> ' +  minInsertions('pqr'));
+// 2
+// Explanation: We have to insert any two characters to get a palindrome (e.g. if we insert “pq”, we get a palindrome “pqrQP”).
+
+console.log(
+  'Minimum number of insertions required ---> ' +  minInsertions("zzazz"));
+// Output: 0
+// Explanation: The string "zzazz" is already palindrome we don't need any insertions.
+
+console.log(
+  'Minimum number of insertions required ---> ' +  minInsertions("mbadm"));
+// Output: 2
+// Explanation: String can be "mbdadbm" or "mdbabdm".
+
+console.log(
+  'Minimum number of insertions required ---> ' +  minInsertions("leetcode"));
+// Output: 5
+// Explanation: Inserting 5 characters the string becomes "leetcodocteel".
+```
+#### 2. Find if a string is K-Palindromic
+https://leetcode.com/problems/valid-palindrome-iii/
+
+Any string will be called `K`<b>-palindromic</b> if it can be transformed into a <i>palindrome</i> by removing at most `K` characters from it.
+
+This problem can easily be converted to our base problem of <i>finding the minimum deletions in a string to make it a palindrome</i>. If the <i>“minimum deletion count”</i> is not more than `K`, the string will be `K`<b>-palindromic</b>.
+```js
+function isValidPalindrome(s, K) {
+  function findLPSLength(s) {
+    // dp[i][j] stores the length of LPS from index 'i' to index 'j'
+    const dp = Array(s.length)
+      .fill(0)
+      .map(() => Array(s.length).fill(0));
+
+    //every sequence with one element is a palindrome of length 1
+    for (let i = 0; i < s.length; i++) dp[i][i] = 1;
+
+    for (let startIndex = s.length - 1; startIndex >= 0; startIndex--) {
+      for (let endIndex = startIndex + 1; endIndex < s.length; endIndex++) {
+        // case: 1 elements at the beggining and end are the same
+        if (s.charAt(startIndex) === s.charAt(endIndex)) {
+          dp[startIndex][endIndex] = 2 + dp[startIndex + 1][endIndex - 1];
+        } else {
+          // case: 2 skip one element either from the beginning or the end
+          dp[startIndex][endIndex] = Math.max(
+            dp[startIndex + 1][endIndex],
+            dp[startIndex][endIndex - 1]
+          );
+        }
+      }
+    }
+    // console.log(dp[0]);
+    return dp[0][s.length - 1];
+  }
+
+  //subtracting the length of the LPS from the length
+  //of the input string to get minimum number of deletions < k
+  return s.length - findLPSLength(s) <= k;
+}
+
+console.log(
+  `Is ${(s = 'abcdeca')} a k-palindrome ---> ` + isValidPalindrome(s, 2)
+);
+// Output: true
+// Explanation: Remove 'b' and 'e' characters.
+
+console.log(
+  `Is ${(s = 'abbababa')} a k-palindrome ---> ` + isValidPalindrome(s, 1)
+);
+// Output: true
+```
+
+
 
 ## Palindromic Partitioning
 https://leetcode.com/problems/palindrome-partitioning-ii/
