@@ -4027,7 +4027,7 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
 ```
 - The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
 - The <b>space complexity</b>  is `O(n)`, which will be used to store the <i>recursion stack</i>.
-### Top-down Dynamic Programming with Memoization#
+### Top-down Dynamic Programming with Memoization
 We can memoize both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indexes; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
 
 Here is the code:
@@ -4099,7 +4099,7 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
 // Output: 0
 // Explanation: We do not need to cut, as "pp" is a palindrome.
 ```
-### Bottom-up Dynamic Programming#
+### Bottom-up Dynamic Programming
 The above solution tells us that we need to build two tables, one for the `isPalindrome()` and one for `findMPPCuts()`.
 
 If you remember, we built a table in the [Longest Palindromic Substring (LPS)](#longest-palindromic-subsequence) chapter that can tell us what <i>substrings</i> (of the input <i>string</i>) are <i>palindrome</i>. We will use the same approach here to build the table required for `isPalindrome()`. 
@@ -4186,6 +4186,214 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 # Pattern 5: Longest Common Substring
 ## Longest Common Substring
 https://www.geeksforgeeks.org/longest-common-substring-dp-29/
+> Given two strings `s1` and `s2`, find the length of the longest <b>substring</b> which is common in both the strings.
+
+#### Example 1:
+```js
+Input: s1 = "abdca"
+       s2 = "cbda"
+Output: 2
+Explanation: The longest common substring is "bd".
+```
+#### Example 2:
+```js
+Input: s1 = "passport"
+       s2 = "ppsspt"
+Output: 3
+Explanation: The longest common substring is "ssp".
+```
+### Brute-Force Solution
+A basic <b>brute-force solution</b> could be to try all substrings of `s1` and `s2` to find the longest common one. We can start matching both the strings one character at a time, so we have two options at any step:
+
+1. If the strings have a matching character, we can <i>recursively</i> match for the remaining lengths and keep a track of the current matching length.
+2. If the strings don’t match, we start two new <i>recursive calls</i> by skipping one character separately from each string and reset the matching length.
+
+The length of the <b>Longest Common Substring (LCS)</b> will be the maximum number returned by the three <i>recurse calls</i> in the above two options.
+
+Here is the code:
+```js
+function findLCSLength(str1, str2) {
+  function findLCSLengthRecursive(str1, str2, index1, index2, count) {
+    //base case
+    if (index1 === str1.length || index2 === str2.length) return count;
+
+    if (str1[index1] === str2[index2]) {
+      count = findLCSLengthRecursive(
+        str1,
+        str2,
+        index1 + 1,
+        index2 + 1,
+        count + 1
+      );
+    }
+
+    let checkFirstString = findLCSLengthRecursive(
+      str1,
+      str2,
+      index1,
+      index2 + 1,
+      0
+    );
+    let checkSecondString = findLCSLengthRecursive(
+      str1,
+      str2,
+      index1 + 1,
+      index2,
+      0
+    );
+
+    return Math.max(count, Math.max(checkFirstString, checkSecondString));
+  }
+  return findLCSLengthRecursive(str1, str2, 0, 0, 0);
+}
+
+console.log(
+  `Length of Longest Common Substring: ---> ${findLCSLength('abdca', 'cbda')}`
+);
+// Output: 2
+// Explanation: The longest common substring is "bd".
+
+console.log(
+  `Length of Longest Common Substring: ---> ${findLCSLength(
+    'passport',
+    'ppsspt'
+  )}`
+);
+// Output: 3
+// Explanation: The longest common substring is "ssp".
+```
+
+- Because of the three <i>recursive calls</i>, the <b>time complexity</b> of the above algorithm is exponential `O(3ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the two input strings. The <b>space complexity</b> is `O(m+n)`, this <b>space</b>  will be used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+We can use an array to store the already solved <i>subproblems</i>.
+
+The three changing values to our <i>recursive function</i> are the two indexes (`index1` and `index2`) and the `count`. Therefore, we can store the results of all <i>subproblems</i>in a <i>three-dimensional array</i>. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`index1` + `“|”` `index2` + `“|”` + `count`)).
+
+Here is the code:
+```js
+function findLCSLength(str1, str2) {
+  const maxLength = Math.min(str1.length, str2.length);
+  const dp = [];
+
+  function findLCSLengthRecursive(str1, str2, index1, index2, count) {
+    //base case
+    if (index1 === str1.length || index2 === str2.length) return count;
+
+    dp[index1] = dp[index1] || [];
+    dp[index1][index2] = dp[index1][index2] || [];
+
+    if (typeof dp[index1][index2][count] === 'undefined') {
+      let checkFirstString = count;
+      if (str1[index1] === str2[index2]) {
+        checkFirstString = findLCSLengthRecursive(
+          str1,
+          str2,
+          index1 + 1,
+          index2 + 1,
+          count + 1
+        );
+      }
+
+      let checkSecondString = findLCSLengthRecursive(
+        str1,
+        str2,
+        index1,
+        index2 + 1,
+        0
+      );
+      let checkThirdString = findLCSLengthRecursive(
+        str1,
+        str2,
+        index1 + 1,
+        index2,
+        0
+      );
+      dp[index1][index2][count] = Math.max(
+        checkFirstString,
+        Math.max(checkSecondString, checkThirdString)
+      );
+    }
+
+    return dp[index1][index2][count];
+  }
+  return findLCSLengthRecursive(str1, str2, 0, 0, 0);
+}
+
+console.log(
+  `Length of Longest Common Substring: ---> ${findLCSLength('abdca', 'cbda')}`
+);
+// Output: 2
+// Explanation: The longest common substring is "bd".
+
+console.log(
+  `Length of Longest Common Substring: ---> ${findLCSLength(
+    'passport',
+    'ppsspt'
+  )}`
+);
+// Output: 3
+// Explanation: The longest common substring is "ssp".
+```
+
+### Bottom-up Dynamic Programming 
+Since we want to match all the <i>substrings</i> of the given two <i>strings</i>, we can use a two-dimensional array to store our results. The lengths of the two <i>strings</i> will define the size of the two dimensions of the array. So for every index `index1` in string `s1` and `index2` in string `s2`, we have two options:
+
+1. If the character at `s1[index1]` matches `s2[index2]`, the length of the <i>common substring<i> would be one plus the length of the <i>common substring<i> till `index1-1` and `index2-1` indexes in the two <i>strings</i>.
+2. If the character at the `s1[index1]` does not match `s2[index2]`, we don’t have any <i>common substring<i>.
+So our <i>recursive formula<i> would be:
+
+```js
+if s1[index1] == s2[index2] 
+  dp[index1][index2] = 1 + dp[index1-1][index2-1]
+else 
+  dp[index1][index2] = 0 
+```
+we can clearly see that the <b>longest common substring</b> is of length `2`-- as shown by `dp[3][3]`. Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function findLCSLength(str1, str2) {
+  const dp = Array(str1.length + 1)
+    .fill(0)
+    .map(() => Array(str2.length + 1).fill(0));
+  let maxLength = 0;
+
+  for (let i = 1; i <= str1.length; i++) {
+    for (let j = 1; j <= str2.length; j++) {
+      if (str1.charAt(i - 1) === str2.charAt(j - 1)) {
+        dp[i][j] = 1 + dp[i - 1][j - 1];
+        maxLength = Math.max(maxLength, dp[i][j]);
+      }
+    }
+  }
+
+  return maxLength;
+}
+
+console.log(
+  `Length of Longest Common Substring: ---> ${findLCSLength('abdca', 'cbda')}`
+);
+// Output: 2
+// Explanation: The longest common substring is "bd".
+
+console.log(
+  `Length of Longest Common Substring: ---> ${findLCSLength(
+    'passport',
+    'ppsspt'
+  )}`
+);
+// Output: 3
+// Explanation: The longest common substring is "ssp".
+```
+
+- The <b>time and space complexity</b> of the above algorithm is `O(m∗n)`, where `m` and `n` are the lengths of the two input <i>strings</i>.
+
+### Challenge
+Can we further improve our <b>bottom-up DP</b> solution? Can you find an algorithm that has `O(n)` <b>space complexity</b?
+
+
+
+
+
 
 ## 😕 🔎 Longest Common Subsequence
 https://leetcode.com/problems/longest-common-subsequence/
