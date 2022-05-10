@@ -4469,7 +4469,7 @@ console.log(
 ### Top-down Dynamic Programming with Memoization
 We can use an array to store the already solved <i>subproblems</i>.
 
-The two changing values to our <i>recursive function<i> are the two indexes, `index1` and `index2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a <i>string</i> (`index1` + `“|”` + `index2`)).
+The two changing values to our <i>recursive function</i> are the two indexes, `index1` and `index2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a <i>string</i> (`index1` + `“|”` + `index2`)).
 
 Here is the code:
 ```js
