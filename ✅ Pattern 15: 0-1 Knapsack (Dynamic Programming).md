@@ -973,14 +973,14 @@ https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-di
 
 This problem follows the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b> and can be converted into a <b>[Subset Sum](#🔎-subset-sum-medium)</b> problem.
 
-Let’s assume `S1` and `S2` are the two desired subsets. A basic <b>brute-force</b> solution could be to try adding each element either in `S1` or `S2` in order to find the combination that gives the minimum sum difference between the two sets.
+Let’s assume `str1` and `str2` are the two desired subsets. A basic <b>brute-force</b> solution could be to try adding each element either in `str1` or `str2` in order to find the combination that gives the minimum sum difference between the two sets.
 
 So our <b>brute-force</b> algorithm will look like:
 
 ```js
 for each number 'i'
-  add number 'i' to S1 and recursively process the remaining numbers
-  add number 'i' to S2 and recursively process the remaining numbers
+  add number 'i' to str1 and recursively process the remaining numbers
+  add number 'i' to str2 and recursively process the remaining numbers
 return the minimum absolute difference of the above two sets
 ```
 
@@ -1394,27 +1394,27 @@ We are asked to find two subsets of the given numbers whose difference is equal 
     (1 + 3) - (1 + 2 ) = 1
 ```
 
-Now, let’s say `Sum(s1)` denotes the total sum of set `s1`, and `Sum(s2)` denotes the total sum of set `s2`. So the required equation is:
+Now, let’s say `Sum(str1)` denotes the total sum of set `str1`, and `Sum(str2)` denotes the total sum of set `str2`. So the required equation is:
 
 ```js
-    Sum(s1) - Sum(s2) = S
+    Sum(str1) - Sum(str2) = S
 ```
 
 This equation can be reduced to the [subset sum](#🔎-subset-sum-medium) problem. Let’s assume that `Sum(num)` denotes the total sum of all the numbers, therefore:
 
 ```js
-    Sum(s1) + Sum(s2) = Sum(num)
+    Sum(str1) + Sum(str2) = Sum(num)
 ```
 
 Let’s add the above two equations:
 
 ```js
-    => Sum(s1) - Sum(s2) + Sum(s1) + Sum(s2) = S + Sum(num)
-    => 2 * Sum(s1) =  S + Sum(num)
-    => Sum(s1) = (S + Sum(num)) / 2
+    => Sum(str1) - Sum(str2) + Sum(str1) + Sum(str2) = S + Sum(num)
+    => 2 * Sum(str1) =  S + Sum(num)
+    => Sum(str1) = (S + Sum(num)) / 2
 ```
 
-Which means that one of the set `s1` has a sum equal to `(S + Sum(num)) / 2`. This essentially converts our problem to: <b>"Find the count of subsets of the given numbers whose sum is equal to `(S + Sum(num)) / 2`"</b>
+Which means that one of the set `str1` has a sum equal to `(S + Sum(num)) / 2`. This essentially converts our problem to: <b>"Find the count of subsets of the given numbers whose sum is equal to `(S + Sum(num)) / 2`"</b>
 
 Let’s take the <b>dynamic programming</b> code of <b>[Count of Subset Sum](#count-of-subset-sum-hard)</b> and extend it to solve this problem:
 
@@ -4186,24 +4186,24 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 # Pattern 5: Longest Common Substring
 ## Longest Common Substring
 https://www.geeksforgeeks.org/longest-common-substring-dp-29/
-> Given two strings `s1` and `s2`, find the length of the longest <b>substring</b> which is common in both the strings.
+> Given two strings `str1` and `str2`, find the length of the longest <b>substring</b> which is common in both the strings.
 
 #### Example 1:
 ```js
-Input: s1 = "abdca"
-       s2 = "cbda"
+Input: str1 = "abdca"
+       str2 = "cbda"
 Output: 2
 Explanation: The longest common substring is "bd".
 ```
 #### Example 2:
 ```js
-Input: s1 = "passport"
-       s2 = "ppsspt"
+Input: str1 = "passport"
+       str2 = "ppsspt"
 Output: 3
 Explanation: The longest common substring is "ssp".
 ```
 ### Brute-Force Solution
-A basic <b>brute-force solution</b> could be to try all substrings of `s1` and `s2` to find the longest common one. We can start matching both the strings one character at a time, so we have two options at any step:
+A basic <b>brute-force solution</b> could be to try all substrings of `str1` and `str2` to find the longest common one. We can start matching both the strings one character at a time, so we have two options at any step:
 
 1. If the strings have a matching character, we can <i>recursively</i> match for the remaining lengths and keep a track of the current matching length.
 2. If the strings don’t match, we start two new <i>recursive calls</i> by skipping one character separately from each string and reset the matching length.
@@ -4337,19 +4337,21 @@ console.log(
 ```
 
 ### Bottom-up Dynamic Programming 
-Since we want to match all the <i>substrings</i> of the given two <i>strings</i>, we can use a two-dimensional array to store our results. The lengths of the two <i>strings</i> will define the size of the two dimensions of the array. So for every index `index1` in string `s1` and `index2` in string `s2`, we have two options:
+Since we want to match all the <i>substrings</i> of the given two <i>strings</i>, we can use a two-dimensional array to store our results. The lengths of the two <i>strings</i> will define the size of the two dimensions of the array. So for every index `index1` in string `str1` and `index2` in string `str2`, we have two options:
 
-1. If the character at `s1[index1]` matches `s2[index2]`, the length of the <i>common substring<i> would be one plus the length of the <i>common substring<i> till `index1-1` and `index2-1` indexes in the two <i>strings</i>.
-2. If the character at the `s1[index1]` does not match `s2[index2]`, we don’t have any <i>common substring<i>.
-So our <i>recursive formula<i> would be:
+1. If the character at `str1[index1]` matches `str2[index2]`, the length of the <i>common substring</i> would be one plus the length of the <i>common substring</i> till `index1-1` and `index2-1` indexes in the two <i>strings</i>.
+2. If the character at the `str1[index1]` does not match `str2[index2]`, we don’t have any <i>common substring</i>.
+So our <i>recursive formula</i> would be:
 
 ```js
-if s1[index1] == s2[index2] 
+if str1[index1] == str2[index2] 
   dp[index1][index2] = 1 + dp[index1-1][index2-1]
 else 
   dp[index1][index2] = 0 
 ```
-we can clearly see that the <b>longest common substring</b> is of length `2`-- as shown by `dp[3][3]`. Here is the code for our <b>bottom-up dynamic programming approach</b>:
+we can clearly see that the <b>longest common substring</b> is of length `2`-- as shown by `dp[3][3]`. 
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
 ```js
 function findLCSLength(str1, str2) {
   const dp = Array(str1.length + 1)
@@ -4388,15 +4390,199 @@ console.log(
 - The <b>time and space complexity</b> of the above algorithm is `O(m∗n)`, where `m` and `n` are the lengths of the two input <i>strings</i>.
 
 ### Challenge
-Can we further improve our <b>bottom-up DP</b> solution? Can you find an algorithm that has `O(n)` <b>space complexity</b?
+Can we further improve our <b>bottom-up DP</b> solution? Can you find an algorithm that has `O(n)` <b>space complexity</b>
 
-
-
-
-
-
-## 😕 🔎 Longest Common Subsequence
+## 🔎 Longest Common Subsequence
 https://leetcode.com/problems/longest-common-subsequence/
+
+> Given two strings `str1` and `str2`, find the length of the <i>longest subsequence</i> which is common in both the strings.
+
+A <b>subsequence</b> is a <i>sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements</i>.
+
+#### Example :
+```js
+Input: str1 = "abdca"
+       str2 = "cbda"
+Output: 3
+Explanation: The longest common subsequence is "bda".
+```
+#### Example 2:
+```js
+Input: str1 = "passport"
+       str2 = "ppsspt"
+Output: 5
+Explanation: The longest common subsequence is "psspt".
+```
+
+### Basic Brute-Force Solution
+A <b>basic brute-force solution</b> could be to try all <i>subsequences</i> of `str1` and `str2` to find the longest one. We can match both the strings one character at a time. So for every index `index1` in `str1` and `index2` in `str2` we must choose between:
+
+1. If the character `str1[index1]` matches `str2[index2`, we can <i>recursively</i> match for the remaining lengths.
+2. If the character `str1[index1]` does not match `str2[index2]`, we will start two new <i>recursive calls</i> by skipping one character separately from each string.
+
+Here is the code:
+```js
+function findLCSLength(str1, str2) {
+  function findLCSLengthRecursive(str1, str2, index1, index2) {
+    // base check
+    if (index1 === str1.length || index2 === str2.length) return 0;
+
+    if (str1[index1] === str2[index2])
+      return 1 + findLCSLengthRecursive(str1, str2, index1 + 1, index2 + 1);
+
+    let checkFirstString = findLCSLengthRecursive(
+      str1,
+      str2,
+      index1,
+      index2 + 1
+    );
+    let checkSecondString = findLCSLengthRecursive(
+      str1,
+      str2,
+      index1 + 1,
+      index2
+    );
+    return Math.max(checkFirstString, checkSecondString);
+  }
+  return findLCSLengthRecursive(str1, str2, 0, 0);
+}
+
+console.log(
+  `Length of Longest Common Subsequence: ---> ${findLCSLength('abdca', 'cbda')}`
+);
+// Output: 3
+// Explanation: The longest common subsequence is "bda".
+
+console.log(
+  `Length of Longest Common Subsequence: ---> ${findLCSLength(
+    'passport',
+    'ppsspt'
+  )}`
+);
+// Output: 5
+// Explanation: The longest common subsequence is "psspt".
+```
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the two input strings. 
+- The <b>space complexity</b> is `O(m+n)`, this <b>space</b>  will be used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+We can use an array to store the already solved <i>subproblems</i>.
+
+The two changing values to our <i>recursive function<i> are the two indexes, `index1` and `index2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a <i>string</i> (`index1` + `“|”` + `index2`)).
+
+Here is the code:
+```js
+function findLCSLength(str1, str2) {
+  const dp = [];
+  function findLCSLengthRecursive(str1, str2, index1, index2) {
+    // base check
+    if (index1 === str1.length || index2 === str2.length) return 0;
+
+    dp[index1] = dp[index1] || [];
+
+    if (typeof dp[index1][index2] === 'undefined') {
+      if (str1[index1] === str2[index2]) {
+        dp[index1][index2] =
+          1 + findLCSLengthRecursive(str1, str2, index1 + 1, index2 + 1);
+      } else {
+        let checkFirstString = findLCSLengthRecursive(
+          str1,
+          str2,
+          index1,
+          index2 + 1
+        );
+        let checkSecondString = findLCSLengthRecursive(
+          str1,
+          str2,
+          index1 + 1,
+          index2
+        );
+        dp[index1][index2] = Math.max(checkFirstString, checkSecondString);
+      }
+    }
+    // console.log(dp);
+    return dp[index1][index2];
+  }
+  return findLCSLengthRecursive(str1, str2, 0, 0);
+}
+
+console.log(
+  `Length of Longest Common Subsequence: ---> ${findLCSLength('abdca', 'cbda')}`
+);
+// Output: 3
+// Explanation: The longest common subsequence is "bda".
+
+console.log(
+  `Length of Longest Common Subsequence: ---> ${findLCSLength(
+    'passport',
+    'ppsspt'
+  )}`
+);
+// Output: 5
+// Explanation: The longest common subsequence is "psspt".
+```
+#### Bottom-up Dynamic Programming
+Since we want to match all the <b>subsequences</b> of the given two strings, we can use a two-dimensional array to store our results. The lengths of the two strings will define the size of the array’s two dimensions. So for every index `index1` in string `str1` and `index2` in string `str2`, we will choose one of the following two options:
+
+1. If the character `str1[index1]` matches `str2[index2]`, the length of the <b>common subsequence</b> would be one plus the length of the <b>common subsequence</b> until the `index1-1` and `index2-1` indexes in the two respective strings.
+2. If the character `str1[index1]`does not match `str2[index2]`, we will take the <i>longest subsequence</i> by either skipping `[index1]th` or `[index2]th` character from the respective strings.
+
+So our recursive formula would be:
+```js
+if str1[index1] == str2[index2] 
+  dp[index1][index2] = 1 + dp[index1-1][index2-1]
+else 
+  dp[index1][index2] = Math.max(dp[index1-1][index2], dp[index1][index2-1])
+```
+
+From the above visualization, we can clearly see that the <b>longest common subsequence</b> is of length `3` – as shown by `dp[4][5]`.
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function findLCSLength(str1, str2) {
+  const dp = Array(str1.length + 1)
+    .fill(0)
+    .map(() => Array(str2.length + 1)
+    .fill(0));
+
+  let maxLength = 0;
+
+  for (let index1 = 1; index1 <= str1.length; index1++) {
+    for (let index2 = 1; index2 <= str2.length; index2++) {
+      if (str1[index1 - 1] === str2[index2 - 1]) {
+        dp[index1][index2] = 1 + dp[index1 - 1][index2 - 1];
+      } else {
+        dp[index1][index2] = Math.max(
+          dp[index1 - 1][index2],
+          dp[index1][index2 - 1]
+        );
+      }
+      // console.log(dp)
+      maxLength = Math.max(maxLength, dp[index1][index2]);
+    }
+  }
+
+  return maxLength;
+}
+
+console.log(
+  `Length of Longest Common Subsequence: ---> ${findLCSLength('abdca', 'cbda')}`);
+// Output: 3
+// Explanation: The longest common subsequence is "bda".
+
+console.log(
+  `Length of Longest Common Subsequence: ---> ${findLCSLength('passport', 'ppsspt')}`);
+// Output: 5
+// Explanation: The longest common subsequence is "psspt".
+```
+
+- The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the two input strings.
+
+### Challenge
+Can we further improve our <b>bottom-up DP solution</b>? Can you find an algorithm that has `O(n)` <b>space complexity</b>?
+
+
 
 ## Minimum Deletions & Insertions to Transform a String into another
 https://leetcode.com/problems/edit-distance/
@@ -4425,8 +4611,8 @@ https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/
 ## Longest Alternating Subsequence
 https://www.geeksforgeeks.org/longest-alternating-subsequence/
 
-## Edit Distance
+## 🔎 Edit Distance
 https://leetcode.com/problems/edit-distance/
 
-## Strings Interleaving
+## 🔎 Strings Interleaving
 https://leetcode.com/problems/interleaving-string/
