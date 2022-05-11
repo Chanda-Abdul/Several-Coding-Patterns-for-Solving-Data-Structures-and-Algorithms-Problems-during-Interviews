@@ -138,9 +138,9 @@ Let’s jump onto our first problem.
 
 https://leetcode.com/problems/maximum-earnings-from-taxi/
 
-> Given the weights and profits of `N` items, we are asked to put these items in a knapsack with a capacity `C`. The goal is to get the `maximum profit` out of the knapsack items. Each item can only be selected once, as we don’t have multiple quantities of any item.
+> Given the weights and profits of `N` items, we are asked to put these items in a <b>knapsack</b> with a capacity `C`. The goal is to get the `maximum profit` out of the <b>knapsack</b> items. Each item can only be selected once, as we don’t have multiple quantities of any item.
 
-Let’s take Merry’s example, who wants to carry some fruits in the knapsack to get `maximum profit`. Here are the weights and profits of the fruits:
+Let’s take Merry’s example, who wants to carry some fruits in the <b>knapsack</b> to get `maximum profit`. Here are the weights and profits of the fruits:
 
 - `Items: { Apple, Orange, Banana, Melon }`
 - `Weights: { 2, 3, 1, 4 }`
@@ -156,7 +156,7 @@ Let’s try to put various combinations of fruits in the knapsack, such that the
 
 This shows that `Banana + Melon` is the best combination as it gives us the `maximum profit`, and the total weight does not exceed the capacity.
 
-> Given two integer arrays to represent weights and profits of `N` items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number `C`. Each item can only be selected once, which means either we put an item in the knapsack or we skip it.
+> Given two integer arrays to represent weights and profits of `N` items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number `C`. Each item can only be selected once, which means either we put an item in the <b>knapsack</b> or we skip it.
 
 ### Basic Brute Force Soultion
 
@@ -169,32 +169,32 @@ All <b>green boxes</b> have a total weight that is less than or equal to the cap
 
 ```js
 function solveKnapsack(profits, weights, capacity) {
-  function knapsackRecursive(profits, wights, capacity, currentIndex) {
+  function knapsackRecursive(profits, wights, capacity, currIndex) {
     //check base case
-    if (capacity <= 0 || currentIndex >= profits.length) return 0;
+    if (capacity <= 0 || currIndex >= profits.length) return 0;
 
-    //recursive call after choosing the element at currentIndex
-    // create a new set which INCLUDES item at currentIndex if the total weight does not exceed the capacity, and
+    //recursive call after choosing the element at currIndex
+    // create a new set which INCLUDES item at currIndex if the total weight does not exceed the capacity, and
     let currentProfit = 0;
 
-    if (weights[currentIndex] <= capacity) {
+    if (weights[currIndex] <= capacity) {
       currentProfit =
-        profits[currentIndex] +
+        profits[currIndex] +
         knapsackRecursive(
           profits,
           weights,
-          capacity - weights[currentIndex],
-          currentIndex + 1
+          capacity - weights[currIndex],
+          currIndex + 1
         );
     }
 
     // recursively process the remaining capacity and items
-    // WITHOUT item at currentIndex
+    // WITHOUT item at currIndex
     let currentProfitMinusIndexItem = knapsackRecursive(
       profits,
       weights,
       capacity,
-      currentIndex + 1
+      currIndex + 1
     );
 
     // return the set from the above two sets with higher profit
@@ -227,7 +227,7 @@ console.log(
 
 ### Overlapping Sub-problems
 
-Let’s visually draw the recursive calls to see if there are any overlapping sub-problems. As we can see, in each recursive call, `profits` and `weights` arrays remain constant, and only `capacity` and `currentIndex` change. For simplicity, let’s denote capacity with `c` and `currentIndex` with `i`:
+Let’s visually draw the recursive calls to see if there are any overlapping sub-problems. As we can see, in each recursive call, `profits` and `weights` arrays remain constant, and only `capacity` and `currIndex` change. For simplicity, let’s denote capacity with `c` and `currIndex` with `i`:
 ![](./images/./images/./images/subproblems.png)
 We can clearly see that `c:4, i=3` has been called twice. Hence we have an <b>overlapping sub-problems pattern</b>. We can use <b>[Memoization](https://en.wikipedia.org/wiki/Memoization)</b> to solve <b>overlapping sub-problems</b> efficiently.
 
@@ -235,7 +235,7 @@ We can clearly see that `c:4, i=3` has been called twice. Hence we have an <b>ov
 
 We can use <b>memoization</b> to overcome the overlapping sub-problems. <b>[Memoization](https://en.wikipedia.org/wiki/Memoization)</b> is when we store the results of all the previously solved <b>sub-problems</b> and return the results from memory if we encounter a problem that has already been solved.
 
-Since we have two changing values (`capacity` and `currentIndex`) in our recursive `function knapsackRecursive()`, we can use a two-dimensional array to store the results of all the solved sub-problems. As mentioned above, we need to store results for every sub-array (i.e., for every possible index `i`) and every possible capacity `c`.
+Since we have two changing values (`capacity` and `currIndex`) in our recursive `function knapsackRecursive()`, we can use a two-dimensional array to store the results of all the solved sub-problems. As mentioned above, we need to store results for every sub-array (i.e., for every possible index `i`) and every possible capacity `c`.
 
 Here is the code with <b>memoization</b>
 
@@ -243,46 +243,46 @@ Here is the code with <b>memoization</b>
 function solveKnapsack(profits, weights, capacity) {
   const memo = [];
 
-  function knapsackRecursive(profits, weights, capacity, currentIndex) {
+  function knapsackRecursive(profits, weights, capacity, currIndex) {
     //check base case
-    if (capacity <= 0 || currentIndex >= profits.length) return 0;
+    if (capacity <= 0 || currIndex >= profits.length) return 0;
 
-    memo[currentIndex] = memo[currentIndex] || [];
+    memo[currIndex] = memo[currIndex] || [];
 
-    if (typeof memo[currentIndex][capacity] !== "undefined") {
-      return memo[currentIndex][capacity];
+    if (typeof memo[currIndex][capacity] !== "undefined") {
+      return memo[currIndex][capacity];
     }
 
-    //recursive call after choosing the element at currentIndex
-    // create a new set which INCLUDES item at currentIndex if the total weight does not exceed the capacity, and
+    //recursive call after choosing the element at currIndex
+    // create a new set which INCLUDES item at currIndex if the total weight does not exceed the capacity, and
     let currentProfit = 0;
 
-    if (weights[currentIndex] <= capacity) {
+    if (weights[currIndex] <= capacity) {
       currentProfit =
-        profits[currentIndex] +
+        profits[currIndex] +
         knapsackRecursive(
           profits,
           weights,
-          capacity - weights[currentIndex],
-          currentIndex + 1
+          capacity - weights[currIndex],
+          currIndex + 1
         );
     }
 
     // recursively process the remaining capacity and items
-    // WITHOUT item at currentIndex
+    // WITHOUT item at currIndex
     let currentProfitMinusIndexItem = knapsackRecursive(
       profits,
       weights,
       capacity,
-      currentIndex + 1
+      currIndex + 1
     );
 
     // return the set from the above two sets with higher profit
-    memo[currentIndex][capacity] = Math.max(
+    memo[currIndex][capacity] = Math.max(
       currentProfit,
       currentProfitMinusIndexItem
     );
-    return memo[currentIndex][capacity];
+    return memo[currIndex][capacity];
   }
 
   return knapsackRecursive(profits, weights, capacity, 0, memo);
@@ -306,12 +306,12 @@ console.log(
 
 #### Time & Space Complexity
 
-- Since our <b>Memoization</b> array `memo[profits.length][capacity+1]` stores the results for all subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our <b>time complexity</b>  will be `O(N*C)`.
+- Since our <b>Memoization</b> array `memo[profits.length][capacity+1]` stores the results for all subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the <b>knapsack</b> capacity). This means that our <b>time complexity</b>  will be `O(N*C)`.
 - The above algorithm will use `O(N*C)` space for the <b>Memoization</b> array. Other than that, we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
 
-Let’s try to populate our `memo[][]` array from the above solution by working in a <b>bottom-up</b> fashion. Essentially, we want to find the `maximum profit` for every sub-array and every possible capacity. <b>This means that `dp[i][c]` will represent the maximum knapsack profit for capacity `c` calculated from the first `i` items</b>.
+Let’s try to populate our `memo[][]` array from the above solution by working in a <b>bottom-up</b> fashion. Essentially, we want to find the `maximum profit` for every sub-array and every possible capacity. <b>This means that `dp[i][c]` will represent the maximum <b>knapsack</b> profit for capacity `c` calculated from the first `i` items</b>.
 
 So, for each item at index `i` (`0 <= i < items.length`) and capacity `c` (`0 <= c <= capacity`), we have two options:
 
@@ -400,7 +400,7 @@ Let’s understand this from the above example:
 4. Again, `6` came from the top cell, so we jump to row `1`.
 5. `6` is different from the top cell, so we must include this item (which is item `B`).
 6. Subtract the profit of `B` from `6` to get profit `0`. We then jump to profit `0` on the same row. As soon as we hit zero remaining profit, we can finish our item search.
-7. Thus, the items going into the knapsack are `{B, D}`.
+7. Thus, the items going into the <b>knapsack</b> are `{B, D}`.
 
 Let’s write a function to print the set of items included in the knapsack.
 
@@ -483,7 +483,7 @@ console.log(
 );
 ```
 
-#### Challenge
+### Challenge
 
 Can we improve our <b>bottom-up DP</b> solution even further? Can you find an algorithm that has `O(C)` space complexity?
 
@@ -661,7 +661,7 @@ https://leetcode.com/problems/partition-equal-subset-sum/
 
 This problem follows the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>. A basic <b>brute-force</b> solution could be to try all combinations of partitioning the given numbers into two sets to see if any pair of sets has an equal sum.
 
-Assume that `S` represents the total sum of all the given numbers. Then the two equal subsets must have a sum equal to `S/2`. This essentially transforms our problem to: <i>"Find a subset of the given numbers that has a total sum of S/2"</i>.
+Assume that `S` represents the total sum of all the given numbers. Then the two equal subsets must have a sum equal to `S/2`. This essentially transforms our problem to: <i>"Find a subset of the given numbers that has a total sum of `S/2`"</i>.
 
 So our <b>brute-force</b> algorithm will look like:
 
@@ -676,21 +676,21 @@ function canPartition(num) {
 
   return canPartitionRecursive(num, sum / 2, 0);
 
-  function canPartitionRecursive(num, sum, currentIndex) {
+  function canPartitionRecursive(num, sum, currIndex) {
     //recursive base case check
     if (sum === 0) return true;
 
-    if (num.length === 0 || currentIndex >= num.length) return false;
+    if (num.length === 0 || currIndex >= num.length) return false;
 
-    //recursive call after choosing the number at currentIndex
-    //if the number at currentIndex exceed the sum, we shouldn't process
-    if (num[currentIndex] <= sum) {
-      if (canPartitionRecursive(num, sum - num[currentIndex], currentIndex + 1))
+    //recursive call after choosing the number at currIndex
+    //if the number at currIndex exceed the sum, we shouldn't process
+    if (num[currIndex] <= sum) {
+      if (canPartitionRecursive(num, sum - num[currIndex], currIndex + 1))
         return true;
     }
 
-    //recursive call after excluding the number at currentIndex
-    return canPartitionRecursive(num, sum, currentIndex + 1);
+    //recursive call after excluding the number at currIndex
+    return canPartitionRecursive(num, sum, currIndex + 1);
   }
   return false;
 }
@@ -710,7 +710,7 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 
 We can use <b>Memoization</b> to overcome the overlapping sub-problems. As stated in previous lessons, <b>Memoization</b> is when we store the results of all the previously solved sub-problems so we can return the results from memory if we encounter a problem that has already been solved.
 
-Since we need to store the results for every subset and for every possible `sum`, therefore we will be using a two-dimensional array to store the results of the solved sub-problems. The first dimension of the array will represent different subsets and the second dimension will represent different `sums` that we can calculate from each subset. These two dimensions of the array can also be inferred from the two changing values (`sum` and `currentIndex`) in our recursive `function canPartitionRecursive()`.
+Since we need to store the results for every subset and for every possible `sum`, therefore we will be using a two-dimensional array to store the results of the solved sub-problems. The first dimension of the array will represent different subsets and the second dimension will represent different `sums` that we can calculate from each subset. These two dimensions of the array can also be inferred from the two changing values (`sum` and `currIndex`) in our recursive `function canPartitionRecursive()`.
 
 Here is the code for <b>Top-down Dynamic Programming with Memoization</b>:
 
@@ -726,42 +726,42 @@ function canPartition(num) {
   const dp = [];
   return canPartitionRecursive(num, sum / 2, 0);
 
-  function canPartitionRecursive(dp, num, sum, currentIndex) {
+  function canPartitionRecursive(dp, num, sum, currIndex) {
     //recursive base case check
     if (sum === 0) return true;
 
-    if (num.length === 0 || currentIndex >= num.length) return false;
+    if (num.length === 0 || currIndex >= num.length) return false;
 
-    dp[currentIndex] = dp[currentIndex] || [];
+    dp[currIndex] = dp[currIndex] || [];
 
     //if we have not already processed a similar problem
-    if (typeof dp[currentIndex][sum] === "undefined") {
-      //recursive call after choosing the number at currentIndex
-      //if the number at currentIndex exceed the sum, we shouldn't process
-      if (num[currentIndex] <= sum) {
+    if (typeof dp[currIndex][sum] === "undefined") {
+      //recursive call after choosing the number at currIndex
+      //if the number at currIndex exceed the sum, we shouldn't process
+      if (num[currIndex] <= sum) {
         if (
           canPartitionRecursive(
             dp,
             num,
-            sum - num[currentIndex],
-            currentIndex + 1
+            sum - num[currIndex],
+            currIndex + 1
           )
         )
-          dp[currentIndex][sum] = true;
+          dp[currIndex][sum] = true;
 
         return true;
       }
     }
 
-    //recursive call after excluding the number at currentIndex
-    return (dp[currentIndex][sum] = canPartitionRecursive(
+    //recursive call after excluding the number at currIndex
+    return (dp[currIndex][sum] = canPartitionRecursive(
       dp,
       num,
       sum,
-      currentIndex + 1
+      currIndex + 1
     ));
   }
-  return dp[currentIndex][sum];
+  return dp[currIndex][sum];
 }
 
 console.log(`Can partition: ${canPartition([1, 2, 3, 4])}`); //True
@@ -925,7 +925,7 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 4, 8], 6)}`);
 
 ### Challenge
 
-- [ ] Can we improve our <b>bottom-up DP</b> solution even further? Can you find an algorithm that has `O(S)` space complexity?
+- [x] Can we improve our <b>bottom-up DP</b> solution even further? Can you find an algorithm that has `O(S)` space complexity?
 
 ```js
 function canPartition(nums, sum) {
@@ -998,26 +998,26 @@ Here is the code for the <b>brute-force</b> solution:
 function canPartition(nums) {
   //brute force
 
-  function canPartitionRecursive(nums, currentIndex, sum1, sum2) {
+  function canPartitionRecursive(nums, currIndex, sum1, sum2) {
     //recursive base check
-    if (currentIndex === nums.length) return Math.abs(sum1 - sum2);
+    if (currIndex === nums.length) return Math.abs(sum1 - sum2);
 
     //recursive call after including the number at the
-    //currentIndex in the first set
+    //currIndex in the first set
     const difference1 = canPartitionRecursive(
       nums,
-      currentIndex + 1,
-      sum1 + nums[currentIndex],
+      currIndex + 1,
+      sum1 + nums[currIndex],
       sum2
     );
 
     //recursive call after including the number at the
-    //currentIndex in the second set
+    //currIndex in the second set
     const difference2 = canPartitionRecursive(
       nums,
-      currentIndex + 1,
+      currIndex + 1,
       sum1,
-      sum2 + nums[currentIndex]
+      sum2 + nums[currIndex]
     );
 
     return Math.min(difference1, difference2);
@@ -1045,7 +1045,7 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 100, 4])}`);
 
 We can use <b>memoization</b> to overcome the overlapping sub-problems.
 
-We will be using a two-dimensional array to store the results of the solved sub-problems. We can uniquely identify a sub-problem from `currentIndex` and `sum1` as `sum2` will always be the sum of the remaining numbers.
+We will be using a two-dimensional array to store the results of the solved sub-problems. We can uniquely identify a sub-problem from `currIndex` and `sum1` as `sum2` will always be the sum of the remaining numbers.
 
 ```js
 function canPartition(nums) {
@@ -1054,34 +1054,34 @@ function canPartition(nums) {
   for (let i = 0; i < nums.length; i++) sum += nums[i];
   const dp = [];
 
-  function canPartitionRecursive(nums, currentIndex, sum1, sum2) {
+  function canPartitionRecursive(nums, currIndex, sum1, sum2) {
     //recursive base check
-    if (currentIndex === nums.length) return Math.abs(sum1 - sum2);
+    if (currIndex === nums.length) return Math.abs(sum1 - sum2);
 
-    dp[currentIndex] = dp[currentIndex] || [];
+    dp[currIndex] = dp[currIndex] || [];
 
     //check if we have not already process similar problem
-    if (typeof dp[currentIndex][sum1] === "undefined") {
+    if (typeof dp[currIndex][sum1] === "undefined") {
       //recursive call after including the number at the
-      //currentIndex in the first set
+      //currIndex in the first set
       const difference1 = canPartitionRecursive(
         nums,
-        currentIndex + 1,
-        sum1 + nums[currentIndex],
+        currIndex + 1,
+        sum1 + nums[currIndex],
         sum2
       );
 
       //recursive call after including the number at the
-      //currentIndex in the second set
+      //currIndex in the second set
       const difference2 = canPartitionRecursive(
         nums,
-        currentIndex + 1,
+        currIndex + 1,
         sum1,
-        sum2 + nums[currentIndex]
+        sum2 + nums[currIndex]
       );
-      dp[currentIndex][sum1] = Math.min(difference1, difference2);
+      dp[currIndex][sum1] = Math.min(difference1, difference2);
     }
-    return dp[currentIndex][sum1];
+    return dp[currIndex][sum1];
   }
 
   return canPartitionRecursive(nums, 0, 0, 0);
@@ -1204,25 +1204,25 @@ Here is the code for the <b>brute-force</b> solution:
 
 ```js
 function countSubsets(num, sum) {
-  function countSubsetsRecursive(num, sum, currentIndex) {
+  function countSubsetsRecursive(num, sum, currIndex) {
     //recursive base case check
     if (sum === 0) return 1;
 
-    if (num.length === 0 || currentIndex >= num.length) return 0;
+    if (num.length === 0 || currIndex >= num.length) return 0;
 
-    //recursive call after selecting the number at the currentIndex
-    //if the number at currentIndex exceeds the sum, we shouldn't process this
+    //recursive call after selecting the number at the currIndex
+    //if the number at currIndex exceeds the sum, we shouldn't process this
     let sum1 = 0;
-    if (num[currentIndex] <= sum) {
+    if (num[currIndex] <= sum) {
       sum1 = countSubsetsRecursive(
         num,
-        sum - num[currentIndex],
-        currentIndex + 1
+        sum - num[currIndex],
+        currIndex + 1
       );
     }
 
-    //recursive call after excluding the number at currentIndex
-    const sum2 = countSubsetsRecursive(num, sum, currentIndex + 1);
+    //recursive call after excluding the number at currIndex
+    const sum2 = countSubsetsRecursive(num, sum, currIndex + 1);
     return sum1 + sum2;
   }
 
@@ -1249,32 +1249,32 @@ We can use <b>memoization</b> to overcome the overlapping sub-problems. We will 
 function countSubsets(num, sum) {
   const dp = [];
 
-  function countSubsetsRecursive(num, sum, currentIndex) {
+  function countSubsetsRecursive(num, sum, currIndex) {
     //recursive base case check
     if (sum === 0) return 1;
 
-    if (num.length === 0 || currentIndex >= num.length) return 0;
+    if (num.length === 0 || currIndex >= num.length) return 0;
 
-    dp[currentIndex] = dp[currentIndex] || [];
+    dp[currIndex] = dp[currIndex] || [];
 
     //check if we have not already processed a similar problem
-    if (typeof dp[currentIndex][sum] === "undefined") {
-      //recursive call after selecting the number at the currentIndex
-      //if the number at currentIndex exceeds the sum, we shouldn't process this
+    if (typeof dp[currIndex][sum] === "undefined") {
+      //recursive call after selecting the number at the currIndex
+      //if the number at currIndex exceeds the sum, we shouldn't process this
       let sum1 = 0;
-      if (num[currentIndex] <= sum) {
+      if (num[currIndex] <= sum) {
         sum1 = countSubsetsRecursive(
           num,
-          sum - num[currentIndex],
-          currentIndex + 1
+          sum - num[currIndex],
+          currIndex + 1
         );
       }
-      //recursive call after excluding the number at currentIndex
-      const sum2 = countSubsetsRecursive(num, sum, currentIndex + 1);
-      dp[currentIndex][sum] = sum1 + sum2;
+      //recursive call after excluding the number at currIndex
+      const sum2 = countSubsetsRecursive(num, sum, currIndex + 1);
+      dp[currIndex][sum] = sum1 + sum2;
     }
 
-    return dp[currentIndex][sum];
+    return dp[currIndex][sum];
   }
 
   return countSubsetsRecursive(num, sum, 0);
@@ -1554,9 +1554,9 @@ console.log(
 
 ## 
 
-> Given the weights and profits of `N` items, we are asked to put these items in a knapsack with a capacity `C`. The goal is to get the `maximum profit` out of the knapsack items. The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this problem is that we are allowed to use an unlimited quantity of an item.
+> Given the weights and profits of `N` items, we are asked to put these items in a <b>knapsack</b> with a capacity `C`. The goal is to get the `maximum profit` out of the <b>knapsack</b> items. The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this problem is that we are allowed to use an unlimited quantity of an item.
 
-Let’s take Merry’s example, who wants to carry some fruits in the knapsack to get `maximum profit`. Here are the weights and profits of the fruits:
+Let’s take Merry’s example, who wants to carry some fruits in the <b>knapsack</b> to get `maximum profit`. Here are the weights and profits of the fruits:
 
 - `Items: { Apple, Orange, Banana, Melon }`
 - `Weights: { 2, 3, 1, 4 }`
@@ -1590,36 +1590,36 @@ The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack
 
 ```js
 function solveKnapsack(profits, weights, capacity) {
-  function knapsackRecursive(profits, weights, capacity, currentIndex) {
+  function knapsackRecursive(profits, weights, capacity, currIndex) {
     //recursive base case check
     if (
       capacity <= 0 ||
       profits.length === 0 ||
       weights.length !== profits.length ||
-      currentIndex >= profits.length
+      currIndex >= profits.length
     )
       return 0;
 
-    //recursive call after choosing the items at the currentIndex
-    //**recursive call on all items as we did not increment currentIndex**
+    //recursive call after choosing the items at the currIndex
+    //**recursive call on all items as we did not increment currIndex**
     let currentProfit = 0;
-    if (weights[currentIndex] <= capacity) {
+    if (weights[currIndex] <= capacity) {
       currentProfit =
-        profits[currentIndex] +
+        profits[currIndex] +
         knapsackRecursive(
           profits,
           weights,
-          capacity - weights[currentIndex],
-          currentIndex
+          capacity - weights[currIndex],
+          currIndex
         );
     }
 
-    //recursive call after excluding the element at the currentIndex
+    //recursive call after excluding the element at the currIndex
     const currentProfitMinusIndexItem = knapsackRecursive(
       profits,
       weights,
-      capacity - weights[currentIndex],
-      currentIndex + 1
+      capacity - weights[currIndex],
+      currIndex + 1
     );
 
     return Math.max(currentProfit, currentProfitMinusIndexItem);
@@ -1649,47 +1649,47 @@ We will be using a two-dimensional array to store the results of solved sub-prob
 ```js
 function solveKnapsack(profits, weights, capacity) {
   const dp = [];
-  function knapsackRecursive(profits, weights, capacity, currentIndex) {
+  function knapsackRecursive(profits, weights, capacity, currIndex) {
     //recursive base case check
     if (
       capacity <= 0 ||
       profits.length === 0 ||
       weights.length !== profits.length ||
-      currentIndex >= profits.length
+      currIndex >= profits.length
     )
       return 0;
 
-    dp[currentIndex] = dp[currentIndex] || [];
+    dp[currIndex] = dp[currIndex] || [];
 
-    //recursive call after choosing the items at the currentIndex
-    //**recursive call on all items as we did not increment currentIndex**
+    //recursive call after choosing the items at the currIndex
+    //**recursive call on all items as we did not increment currIndex**
     let currentProfit = 0;
-    if (weights[currentIndex] <= capacity) {
+    if (weights[currIndex] <= capacity) {
       currentProfit =
-        profits[currentIndex] +
+        profits[currIndex] +
         knapsackRecursive(
           profits,
           weights,
-          capacity - weights[currentIndex],
-          currentIndex
+          capacity - weights[currIndex],
+          currIndex
         );
     }
 
-    //recursive call after excluding the element at the currentIndex
+    //recursive call after excluding the element at the currIndex
     const currentProfitMinusIndexItem = knapsackRecursive(
       profits,
       weights,
-      capacity - weights[currentIndex],
-      currentIndex + 1
+      capacity - weights[currIndex],
+      currIndex + 1
     );
 
-    dp[currentIndex][capacity] = Math.max(
+    dp[currIndex][capacity] = Math.max(
       currentProfit,
       currentProfitMinusIndexItem
     );
 
     // console.log(dp)
-    return dp[currentIndex][capacity];
+    return dp[currIndex][capacity];
   }
 
   return knapsackRecursive(profits, weights, capacity, 0);
@@ -1704,7 +1704,7 @@ console.log(
 
 #### What is the time and space complexity of the above solution?
 
-- Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our <b>time complexity</b>  will be `O(N∗C)`.
+- Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the <b>knapsack</b> capacity). This means that our <b>time complexity</b>  will be `O(N∗C)`.
 - The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
@@ -1784,7 +1784,7 @@ Let’s assume the four items are identified as `{A, B, C, and D}`, and use the 
 4. Again, `50` came from the top cell, so we jump to row `1`.
 5. `50` is different than the top cell, so we must include this item, which is `B`.
 6. Subtract the profit of `B` from `50` to get the remaining profit `0`. We then jump to profit `0` on the same row. As soon as we hit zero remaining profit, we can finish our item search.
-7. So items going into the knapsack are `{B, D}`.
+7. So items going into the <b>knapsack</b> are `{B, D}`.
 
 ![](./images/unbounded.png)
 
@@ -1837,8 +1837,8 @@ function solveRodCutting(lengths, prices, n) {
     )
       return 0;
 
-    //recursive call after choosing the items at the currentIndex
-    //**recursive call on all items as we did not increment currentIndex**
+    //recursive call after choosing the items at the currIndex
+    //**recursive call on all items as we did not increment currIndex**
     let currentProfit = 0;
     if (lengths[currIndex] <= n) {
       currentProfit =
@@ -1851,7 +1851,7 @@ function solveRodCutting(lengths, prices, n) {
         );
     }
 
-    //recursive call after excluding the element at the currentIndex
+    //recursive call after excluding the element at the currIndex
     const currentProfitMinusIndexItem = solveRodCuttingRecursive(
       prices,
       lengths,
