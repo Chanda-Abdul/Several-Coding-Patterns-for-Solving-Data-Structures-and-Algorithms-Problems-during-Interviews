@@ -222,7 +222,7 @@ console.log(
 
 #### Time & Space Complexity
 
-- The above algorithm’s <b>time complexity</b>  is exponential `O(2ⁿ)`, where `n` represents the total number of items. This can also be confirmed from the above recursion tree. As we can see, we will have a total of `31` 😲 recursive calls – calculated through `(2ⁿ) + (2ⁿ) - 1`, which is asymptotically equivalent to `O(2ⁿ)`.
+- The above algorithm’s <b>time complexity</b>  is exponential `O(2ⁿ)`, where `n` represents the total number of items. This can also be confirmed from the above recursion tree. As we can see, we will have a total of `31` 😲 recursive calls – calculated through `(2ⁿ) + (2ⁿ) - 1`, which is <i>asymptotically</i> equivalent to `O(2ⁿ)`.
 - The <b>space complexity</b>  is `O(n)`. This space will be used to store the recursion stack. Since the recursive algorithm works in a depth-first fashion, which means that we can’t have more than `n` recursive calls on the call stack at any time.
 
 ### Overlapping Sub-problems
@@ -307,7 +307,7 @@ console.log(
 #### Time & Space Complexity
 
 - Since our <b>Memoization</b> array `memo[profits.length][capacity+1]` stores the results for all subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our <b>time complexity</b>  will be `O(N*C)`.
-- The above algorithm will use `O(N*C)` space for the <b>Memoization</b> array. Other than that, we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
+- The above algorithm will use `O(N*C)` space for the <b>Memoization</b> array. Other than that, we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
 
@@ -1705,7 +1705,7 @@ console.log(
 #### What is the time and space complexity of the above solution?
 
 - Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the knapsack capacity). This means that our <b>time complexity</b>  will be `O(N∗C)`.
-- The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is asymptotically equivalent to `O(N*C)`.
+- The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
 
@@ -3285,18 +3285,12 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 # Pattern 4: Palindromic Subsequence
 ### Problem Set
 
-1. [Longest Palindromic Subsequence](#longest-palindromic-subsequence)
-
+1. [Longest Palindromic Subsequence](#longest-palindromic-subsequence) 
 2. [👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
-
 3. [👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
-
 4. [🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
-
 5. [Minimum insertions in a string to make it a palindrome](#1-minimum-insertions-in-a-string-to-make-it-a-palindrome)
-
 6. [Find if a string is K-Palindromic](#2-find-if-a-string-is-k-palindromic)
-
 7. [Palindromic Partitioning](#palindromic-partitioning)
 
 ## Longest Palindromic Subsequence
@@ -3418,7 +3412,7 @@ findLPSLength('pqr');
 // Explanation: LPS could be "p", "q" or "r".
 ```
 - Since our <b>memoization</b> array `dp[str.length][str.length]` stores the results for all the <i>subproblems</i>, we can conclude that we will not have more than `N*N` <i>subproblems</i>(where `N` is the length of the input <i>sequence</i>). This means that our time complexity will be `O(N²)`.
-- The above algorithm will be using `O(N²)` <b>space</b> for the <b>memoization</b> array. Other than that we will use `O(N)` <b>space</b> for the <i>recursion call-stack</i>. So the total <b>space complexity</b> will be `O(N² + N)`, which is asymptotically equivalent to `O(N²)`.
+- The above algorithm will be using `O(N²)` <b>space</b> for the <b>memoization</b> array. Other than that we will use `O(N)` <b>space</b> for the <i>recursion call-stack</i>. So the total <b>space complexity</b> will be `O(N² + N)`, which is <i>asymptotically</i> equivalent to `O(N²)`.
 
 ### Bottom-up Dynamic Programming
 Since we want to try all the <b>subsequences</b> of the given <i>sequence</i>, we can use a two-dimensional array to store our results. We can start from the beginning of the <i>sequence</i> and keep adding one element at a time. At every step, we will try all of its <b>subsequences</b>. So for every `startIndex` and `endIndex` in the given string, we will choose one of the following two options:
@@ -4237,19 +4231,12 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 4. [👩🏽‍🦯 🔎 Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)
 5. [Maximum Sum Increasing Subsequence](#maximum-sum-increasing-subsequence)
 6. [Shortest Common Super-sequence](#shortest-common-super-sequence)
-
 7. [Minimum Deletions to Make a Sequence Sorted](#minimum-deletions-to-make-a-sequence-sorted)
-
 8. [Longest Repeating Subsequence](#longest-repeating-subsequence)
-
 9. [Subsequence Pattern Matching](#subsequence-pattern-matching)
-
 10. [Longest Bitonic Subsequence](#longest-bitonic-subsequence)
-
 11. [Longest Alternating Subsequence](#longest-alternating-subsequence)
-
 12. [🔎 Edit Distance](#🔎-edit-distance)
-
 13. [🔎 Strings Interleaving](#🔎-strings-interleaving)
 
 
@@ -4748,6 +4735,139 @@ Input: {-4,10,3,7,15}
 Output: 4
 Explanation: The LIS is {-4,3,7,15}.
 ```
+
+### Basic Brute-Force Solution
+A <b>basic brute-force solution</b> could be to try all the <i>subsequences</i> of the given number sequence. We can process one number at a time, so we have two options at any step:
+
+1. If the current number is greater than the previous number that we included, we can <i>increment our count</i> and make a <i>recursive call</i> for the remaining array.
+2. We can skip the current number to make a <i>recursive call</i> for the remaining array.
+
+The length of the <b>longest increasing subsequence</b> will be the maximum number returned by the two recurse calls from the above two options.
+
+Here is the code:
+```js
+function findLISLength(nums) {
+  function findLISLengthRecursive(nums, currIndex, prevIndex) {
+    // base check
+    if (currIndex === nums.length) return 0;
+
+    //include nums[currIndex] if if is larger than the last included number
+    let count1 = 0;
+
+    if (prevIndex === -1 || nums[currIndex] > nums[prevIndex]) {
+      count1 = 1 + findLISLengthRecursive(nums, currIndex + 1, currIndex);
+    }
+
+    //exluding number at currIndex
+    let count2 = findLISLengthRecursive(nums, currIndex + 1, prevIndex);
+    return Math.max(count1, count2);
+  }
+  return findLISLengthRecursive(nums, 0, -1);
+}
+
+console.log(
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([4, 2, 3, 6, 10, 1, 12,])}`);
+// Output: 5
+// Explanation: The LIS is {2,3,6,10,12}.
+
+console.log(
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([-4, 10, 3, 7, 15,])}`);
+// Output: 4
+// Explanation: The LIS is {-4,3,7,15}.
+
+```
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array. 
+- The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+To overcome the <i>overlapping subproblems</i>, we can use an array to store the already solved <i>subproblems</i>.
+
+The two changing values for our <i>recursive function</i> are the `currIndex` and the `prevIndex`. Therefore, we can store the results of all <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`currIndex` + `“|”` + `prevIndex`)).
+
+Here is the code:
+
+```js
+function findLISLength(nums) {
+  const dp = [];
+  function findLISLengthRecursive(nums, currIndex, prevIndex) {
+    // base check
+    if (currIndex === nums.length) return 0;
+
+    dp[currIndex] = dp[currIndex] || [];
+
+    if (typeof dp[currIndex][prevIndex + 1] === 'undefined') {
+      //include nums[currIndex] if if is larger than the last included number
+      let count1 = 0;
+
+      if (prevIndex === -1 || nums[currIndex] > nums[prevIndex]) {
+        count1 = 1 + findLISLengthRecursive(nums, currIndex + 1, currIndex);
+      }
+      //exluding number at currIndex
+      let count2 = findLISLengthRecursive(nums, currIndex + 1, prevIndex);
+      dp[currIndex][prevIndex + 1] = Math.max(count1, count2);
+    }
+
+    return dp[currIndex][prevIndex + 1];
+  }
+  return findLISLengthRecursive(nums, 0, -1);
+}
+
+console.log(
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([4, 2, 3, 6, 10, 1, 12,])}`);
+// Output: 5
+// Explanation: The LIS is {2,3,6,10,12}.
+
+console.log(
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([-4, 10, 3, 7, 15,])}`);
+// Output: 4
+// Explanation: The LIS is {-4,3,7,15}.
+```
+
+- Since our memoization array `dp[nums.length()][nums.length()]` stores the results for all the <i>subproblems</i>, we can conclude that we will not have more than `N*N` <i>subproblems</i> (where `N` is the length of the input sequence). This means that our <b>time complexity</b> will be `O(N²)`.
+- The above algorithm will be using `O(N²)` <b>space</b> for the <i>memoization array</i>. Other than that we will use `O(N)` <b>space</b> for the <i>recursion call-stack</i>. So the total <b>space complexity</b> will be `O(N² + N)`, which is <i>asymptotically</i> equivalent to `O(N²)`.
+
+### Bottom-up Dynamic Programming
+The above algorithm tells us two things:
+
+1. If the number at the `currIndex` is bigger than the number at the `prevIndex`, we increment the count for <b>LIS</b> up to the `currIndex`.
+2. But if there is a bigger <b>LIS</b> without including the number at the `currIndex`, we take that.
+So we need to find all the <i>increasing subsequences</i> for the number at index `i`, from all the previous numbers (i.e. number till index `i-1`), to eventually find the <i>longest increasing subsequence.</i>
+
+If `i` represents the `currIndex` and `j` represents the `prevIndex`, our <i>recursive formula</i> would look like:
+```js
+    if num[i] > num[j] => dp[i] = dp[j] + 1 if there is no bigger LIS for 'i'
+```
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function findLISLength(nums) {
+  const dp = [1];
+
+  let maxLength = 1;
+
+  for (let i = 0; i < nums.length; i++) {
+    dp[i] = 1;
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j] && dp[i] <= dp[j]) {
+        dp[i] = dp[j] + 1;
+        maxLength = Math.max(maxLength, dp[i]);
+      }
+    }
+  }
+
+  return maxLength;
+}
+
+console.log(
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([ 4, 2, 3, 6, 10, 1, 12,])}`);
+// Output: 5
+// Explanation: The LIS is {2,3,6,10,12}.
+
+console.log(
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([-4, 10, 3, 7, 15,])}`);
+// Output: 4
+// Explanation: The LIS is {-4,3,7,15}.
+```
+-The <b>time complexity</b> of the above algorithm is `O(N²)` and the <b>space complexity</b> is `O(n)`.
 ## Maximum Sum Increasing Subsequence
 https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
 
