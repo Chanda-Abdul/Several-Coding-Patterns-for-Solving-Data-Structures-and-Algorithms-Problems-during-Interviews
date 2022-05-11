@@ -4522,13 +4522,13 @@ console.log(
 // Output: 5
 // Explanation: The longest common subsequence is "psspt".
 ```
-#### Bottom-up Dynamic Programming
+### Bottom-up Dynamic Programming
 Since we want to match all the <b>subsequences</b> of the given two strings, we can use a two-dimensional array to store our results. The lengths of the two strings will define the size of the array’s two dimensions. So for every index `index1` in string `str1` and `index2` in string `str2`, we will choose one of the following two options:
 
 1. If the character `str1[index1]` matches `str2[index2]`, the length of the <b>common subsequence</b> would be one plus the length of the <b>common subsequence</b> until the `index1-1` and `index2-1` indexes in the two respective strings.
 2. If the character `str1[index1]`does not match `str2[index2]`, we will take the <i>longest subsequence</i> by either skipping `[index1]th` or `[index2]th` character from the respective strings.
 
-So our recursive formula would be:
+So our <b>recursive formula</b> would be:
 ```js
 if str1[index1] == str2[index2] 
   dp[index1][index2] = 1 + dp[index1-1][index2-1]
@@ -4582,10 +4582,85 @@ console.log(
 ### Challenge
 Can we further improve our <b>bottom-up DP solution</b>? Can you find an algorithm that has `O(n)` <b>space complexity</b>?
 
-
-
 ## Minimum Deletions & Insertions to Transform a String into another
-https://leetcode.com/problems/edit-distance/
+https://practice.geeksforgeeks.org/problems/minimum-number-of-deletions-and-insertions0209/1/
+
+> Given strings `str1` and `str2`, we need to transform `str1` into `str2` by deleting and inserting characters. Write a function to calculate the count of the minimum number of deletion and insertion operations.
+
+### Example 1:
+```js
+Input: str1 = "abc"
+       str2 = "fbc"
+Output: 1 deletion and 1 insertion.
+Explanation: We need to delete {'a'} and insert {'f'} to str1 to transform it into str2.
+```
+### Example 2:
+```js
+Input: str1 = "abdca"
+       str2 = "cbda"
+Output: 2 deletions and 1 insertion.
+Explanation: We need to delete {'a', 'c'} and insert {'c'} to str1 to transform it into str2.
+```
+### Example 3:
+```js
+Input: str1 = "passport"
+       str2 = "ppsspt"
+Output: 3 deletions and 1 insertion
+Explanation: We need to delete {'a', 'o', 'r'} and insert {'p'} to str1 to transform it into str2.
+```
+
+This problem can easily be converted to the <b>[Longest Common Subsequence (LCS)](#🔎-longest-common-subsequence)</b>. If we can find the <b>LCS</b> of the two input strings, we can easily find how many characters we need to insert and delete from `str1`. Here is how we can do this:
+
+1. Let’s assume `length1` is the length of `str1` and `length2` is the length of `str2`.
+2. Now let’s assume `c1` is the length of <b>LCS</b> of the two strings `str1` and `str2`.
+3. To transform `str1` into `str2`, we need to delete everything from `str1` which is not part of <b>LCS</b>, so minimum deletions we need to perform from `str1` => `length1 - c1`
+4. Similarly, we need to insert everything in `str1` which is present in `str2` but not part of <b>LCS</b>, so minimum insertions we need to perform in `str1` => `length2 - c1`
+
+### Bottom-up Dynamic Programming Solution
+Let’s jump directly to the <b>bottom-up dynamic programming solution</b>:
+
+```js
+function findMDI(str1, str2) {
+  const c1 = findLCSLength(str1, str2);
+
+  function findLCSLength(str1, str2) {
+    const dp = Array(str1.length + 1)
+      .fill(0)
+      .map(() => Array(str2.length + 1).fill(0));
+
+    let maxLength = 0;
+
+    for (let i = 1; i <= str1.length; i++) {
+      for (let j = 1; j <= str2.length; j++) {
+        if (str1[i - 1] === str2[j - 1]) {
+          dp[i][j] = 1 + dp[i - 1][j - 1];
+        } else {
+          dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+        }
+        maxLength = Math.max(maxLength, dp[i][j]);
+      }
+    }
+    // console.log(dp);
+    return maxLength;
+  }
+
+  console.log(
+    `We need ${str1.length - c1} deletions and ${str2.length - c1} insertions to transform "${str1}" into "${str2}"`);
+}
+
+findMDI('abc', 'fbc');
+// Output: 1 deletion and 1 insertion.
+// Explanation: We need to delete {'a'} and insert {'f'} to s1 to transform it into s2.
+
+findMDI('abdca', 'cbda');
+// Output: 2 deletions and 1 insertion.
+// Explanation: We need to delete {'a', 'c'} and insert {'c'} to s1 to transform it into s2.
+
+findMDI('passport', 'ppsspt');
+// Output: 3 deletions and 1 insertion
+// Explanation: We need to delete {'a', 'o', 'r'} and insert {'p'} to s1 to transform it into s2.
+```
+- The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the two input strings.
 
 ## 👩🏽‍🦯 🔎 Longest Increasing Subsequence
 https://leetcode.com/problems/longest-increasing-subsequence/
