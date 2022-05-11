@@ -118,12 +118,19 @@ Let’s apply this knowledge to solve some of the frequently asked <b>DP</b> pro
 
 # Pattern 1: 0/1 Knapsack
 <b>Problem Set</b>
+
 [🔎 0/1 Knapsack](#🔎-01-knapsack-medium)
+
 [Equal Subset Sum Partition](#equal-subset-sum-partition-medium)
+
 [Subset Sum](#🔎-subset-sum-medium)
+
 [Minimum Subset Sum Difference ](#minimum-subset-sum-difference-hard)
+
 [🌟Count of Subset Sum](#🌟count-of-subset-sum-hard)
+
 [🌟 Target Sum](#🌟-target-sum-hard)
+
 
 
 <b>0/1 Knapsack pattern</b> is based on the famous problem with the same name which is efficiently solved using <b>Dynamic Programming (DP)</b>.
@@ -1544,14 +1551,23 @@ console.log(
 
 # Pattern 2: Unbounded Knapsack
 <b>Problem Set</b>
+
+[Unbounded Knapsack](#unbounded-knapsack)
+
+[Rod Cutting](#rod-cutting)
+
+[🔎👩🏽‍🦯 Coin Change](#🔎👩🏽‍🦯-coin-change)
+
+[Minimum Coin Change](#minimum-coin-change)
+
+[Maximum Ribbon Cut](#maximum-ribbon-cut)
+
 []()
+
 []()
+
 []()
-[]()
-[]()
-[]()
-[]()
-[]()
+
 ## 
 
 > Given the weights and profits of `N` items, we are asked to put these items in a knapsack with a capacity `C`. The goal is to get the `maximum profit` out of the knapsack items. The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this problem is that we are allowed to use an unlimited quantity of an item.
@@ -2348,6 +2364,10 @@ https://leetcode.com/problems/cutting-ribbons/
 
 We are given a ribbon of length `n` and a set of possible `ribbonLengths`. We need to cut the ribbon into the maximum number of pieces that comply with the above-mentioned possible lengths. Write a method that will return the count of pieces.
 
+> Given a number array to represent possible `ribbonLengths` and a total ribbon length `n`, we need to find the maximum number of pieces that the ribbon can be cut into.
+
+This problem follows the <b>[Unbounded Knapsack pattern](#pattern-2-unbounded-knapsack)</b> and is quite similar to <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>. The only difference is that in <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>, we were asked to find the <b>minimum</b> number of coin changes, whereas, in this problem, we need to find the <b>maximum</b> number of pieces.
+
 #### Example 1:
 
 ```
@@ -2374,10 +2394,6 @@ Ribbon Lengths: {3,5,7}
 Output: 3
 Explanation: Ribbon pieces will be {3,3,7}.
 ```
-##
-> Given a number array to represent possible `ribbonLengths` and a total ribbon length `n`, we need to find the maximum number of pieces that the ribbon can be cut into.
-
-This problem follows the <b>[Unbounded Knapsack pattern](#pattern-2-unbounded-knapsack)</b> and is quite similar to <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>. The only difference is that in <b>[Minimum Coin Change (MCC)](#minimum-coin-change)</b>, we were asked to find the <b>minimum</b> number of coin changes, whereas, in this problem, we need to find the <b>maximum</b> number of pieces.
 
 ### Basic Brute Force Solution
 
@@ -2505,14 +2521,23 @@ console.log(
 
 # Pattern 3: Fibonacci Numbers
 <b>Problem Set</b>
+
+[Fibonacci numbers](#fibonacci-numbers)
+
+[🔎👩🏽‍🦯 Staircase](#🔎👩🏽‍🦯-staircase)
+
+[Number factors](#number-factors)
+
+[🌴 Minimum jumps to reach the end](#🌴-minimum-jumps-to-reach-the-end)
+
+[Minimum jumps with fee](#minimum-jumps-with-fee)
+
+[🌴 🔎 👩🏽‍🦯 House thief](#🌴-🔎-👩🏽‍🦯-house-thief)
+
 []()
+
 []()
-[]()
-[]()
-[]()
-[]()
-[]()
-[]()
+
 
 ## Fibonacci numbers
 https://leetcode.com/problems/fibonacci-number/
@@ -3283,12 +3308,19 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 
 # Pattern 4: Palindromic Subsequence
 <b>Problem Set</b>
+
 [Longest Palindromic Subsequence](#longest-palindromic-subsequence)
+
 [👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
+
 [👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
+
 [🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
+
 [Minimum insertions in a string to make it a palindrome](#1-minimum-insertions-in-a-string-to-make-it-a-palindrome)
+
 [Find if a string is K-Palindromic](#2-find-if-a-string-is-k-palindromic)
+
 [Palindromic Partitioning](#palindromic-partitioning)
 
 ## Longest Palindromic Subsequence
@@ -4222,19 +4254,33 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 
 # Pattern 5: Longest Common Substring
 ### Problem Set
+
 [Longest Common Substring](#longest-common-substring)
+
 [🔎 Longest Common Subsequence](#🔎-longest-common-subsequence)
+
 [Minimum Deletions & Insertions to Transform a String into another](#minimum-deletions--insertions-to-transform-a-string-into-another)
+
 [👩🏽‍🦯 🔎 Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)
+
 [Maximum Sum Increasing Subsequence](#maximum-sum-increasing-subsequence)
+
 [Shortest Common Super-sequence](#shortest-common-super-sequence)
+
 [Minimum Deletions to Make a Sequence Sorted](#minimum-deletions-to-make-a-sequence-sorted)
+
 [Longest Repeating Subsequence](#longest-repeating-subsequence)
+
 [Subsequence Pattern Matching](#subsequence-pattern-matching)
+
 [Longest Bitonic Subsequence](#longest-bitonic-subsequence)
+
 [Longest Alternating Subsequence](#longest-alternating-subsequence)
+
 [🔎 Edit Distance](#🔎-edit-distance)
+
 [🔎 Strings Interleaving](#🔎-strings-interleaving)
+
 
 ## Longest Common Substring
 https://www.geeksforgeeks.org/longest-common-substring-dp-29/
