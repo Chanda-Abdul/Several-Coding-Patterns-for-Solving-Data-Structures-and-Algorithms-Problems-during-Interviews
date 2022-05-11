@@ -3254,6 +3254,15 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 
 
 # Pattern 4: Palindromic Subsequence
+## Problem Set
+- [Longest Palindromic Subsequence](#longest-palindromic-subsequence)
+- [👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
+- [👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
+- [🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
+- [Minimum insertions in a string to make it a palindrome](#1-minimum-insertions-in-a-string-to-make-it-a-palindrome)
+- [Find if a string is K-Palindromic](#2-find-if-a-string-is-k-palindromic)
+- [Palindromic Partitioning](#palindromic-partitioning)
+
 ## Longest Palindromic Subsequence
 https://leetcode.com/problems/longest-palindromic-subsequence/
 > Given a <b>sequence</b>, find the length of its <b>Longest Palindromic Subsequence (LPS)</b>. In a <b>palindromic subsequence</b>, <i>elements read the same backward and forward</i>.
@@ -4184,6 +4193,21 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 # Pattern 5: Longest Common Substring
+## Problem Set
+- [Longest Common Substring](#longest-common-substring)
+- [🔎 Longest Common Subsequence](#🔎-longest-common-subsequence)
+- [Minimum Deletions & Insertions to Transform a String into another](#minimum-deletions--insertions-to-transform-a-string-into-another)
+- [👩🏽‍🦯 🔎 Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)
+- [Maximum Sum Increasing Subsequence](#maximum-sum-increasing-subsequence)
+- [Shortest Common Super-sequence](#shortest-common-super-sequence)
+- [Minimum Deletions to Make a Sequence Sorted](#minimum-deletions-to-make-a-sequence-sorted)
+- [Longest Repeating Subsequence](#longest-repeating-subsequence)
+- [Subsequence Pattern Matching](#subsequence-pattern-matching)
+- [Longest Bitonic Subsequence](#longest-bitonic-subsequence)
+- [Longest Alternating Subsequence](#longest-alternating-subsequence)
+- [🔎 Edit Distance](#🔎-edit-distance)
+- [🔎 Strings Interleaving](#🔎-strings-interleaving)
+
 ## Longest Common Substring
 https://www.geeksforgeeks.org/longest-common-substring-dp-29/
 > Given two strings `str1` and `str2`, find the length of the longest <b>substring</b> which is common in both the strings.
@@ -4665,6 +4689,20 @@ findMDI('passport', 'ppsspt');
 ## 👩🏽‍🦯 🔎 Longest Increasing Subsequence
 https://leetcode.com/problems/longest-increasing-subsequence/
 
+> Given a number `sequence`, find the length of its <b>Longest Increasing Subsequence (LIS)</b>. In an <b>increasing subsequence</b>, <i>all the elements are in increasing order (from lowest to highest)</i>.
+
+### Example 1:
+```js
+Input: {4,2,3,6,10,1,12}
+Output: 5
+Explanation: The LIS is {2,3,6,10,12}.
+```
+### Example 2:
+```js
+Input: {-4,10,3,7,15}
+Output: 4
+Explanation: The LIS is {-4,3,7,15}.
+```
 ## Maximum Sum Increasing Subsequence
 https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
 
