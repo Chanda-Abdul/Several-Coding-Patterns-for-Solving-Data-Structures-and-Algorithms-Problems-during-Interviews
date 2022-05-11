@@ -117,7 +117,7 @@ console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 Let’s apply this knowledge to solve some of the frequently asked <b>DP</b> problems.
 
 # Pattern 1: 0/1 Knapsack
-<b>Problem Set</b>
+## Problem Set
 
 [🔎 0/1 Knapsack](#🔎-01-knapsack-medium)
 
@@ -1550,7 +1550,7 @@ console.log(
 ```
 
 # Pattern 2: Unbounded Knapsack
-<b>Problem Set</b>
+## Problem Set
 
 [Unbounded Knapsack](#unbounded-knapsack)
 
@@ -2520,7 +2520,7 @@ console.log(
 - The above solution has time and <b>space complexity</b>  of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
 
 # Pattern 3: Fibonacci Numbers
-<b>Problem Set</b>
+## Problem Set
 
 [Fibonacci numbers](#fibonacci-numbers)
 
@@ -3307,7 +3307,7 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 
 
 # Pattern 4: Palindromic Subsequence
-<b>Problem Set</b>
+### Problem Set
 
 [Longest Palindromic Subsequence](#longest-palindromic-subsequence)
 
@@ -4253,33 +4253,28 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 # Pattern 5: Longest Common Substring
-### Problem Set
+## Problem Set
 
-[Longest Common Substring](#longest-common-substring)
+1. [Longest Common Substring](#longest-common-substring)
+2. [🔎 Longest Common Subsequence](#🔎-longest-common-subsequence)
+3. [Minimum Deletions & Insertions to Transform a String into another](#minimum-deletions--insertions-to-transform-a-string-into-another)
+4. [👩🏽‍🦯 🔎 Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)
+5. [Maximum Sum Increasing Subsequence](#maximum-sum-increasing-subsequence)
+6. [Shortest Common Super-sequence](#shortest-common-super-sequence)
 
-[🔎 Longest Common Subsequence](#🔎-longest-common-subsequence)
+7. [Minimum Deletions to Make a Sequence Sorted](#minimum-deletions-to-make-a-sequence-sorted)
 
-[Minimum Deletions & Insertions to Transform a String into another](#minimum-deletions--insertions-to-transform-a-string-into-another)
+8. [Longest Repeating Subsequence](#longest-repeating-subsequence)
 
-[👩🏽‍🦯 🔎 Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)
+9. [Subsequence Pattern Matching](#subsequence-pattern-matching)
 
-[Maximum Sum Increasing Subsequence](#maximum-sum-increasing-subsequence)
+10. [Longest Bitonic Subsequence](#longest-bitonic-subsequence)
 
-[Shortest Common Super-sequence](#shortest-common-super-sequence)
+11. [Longest Alternating Subsequence](#longest-alternating-subsequence)
 
-[Minimum Deletions to Make a Sequence Sorted](#minimum-deletions-to-make-a-sequence-sorted)
+12. [🔎 Edit Distance](#🔎-edit-distance)
 
-[Longest Repeating Subsequence](#longest-repeating-subsequence)
-
-[Subsequence Pattern Matching](#subsequence-pattern-matching)
-
-[Longest Bitonic Subsequence](#longest-bitonic-subsequence)
-
-[Longest Alternating Subsequence](#longest-alternating-subsequence)
-
-[🔎 Edit Distance](#🔎-edit-distance)
-
-[🔎 Strings Interleaving](#🔎-strings-interleaving)
+13. [🔎 Strings Interleaving](#🔎-strings-interleaving)
 
 
 ## Longest Common Substring
