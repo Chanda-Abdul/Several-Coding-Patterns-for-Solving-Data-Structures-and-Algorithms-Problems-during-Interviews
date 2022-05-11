@@ -112,7 +112,7 @@ console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
 
-<b>In this course, we will always start with a brute-force recursive solution, which is the best way to start solving any DP problem!</b> Once we have a recursive solution then we will apply Memoization and Tabulation techniques.
+<b>In this course, we will always start with a brute-force recursive solution, which is the best way to start solving any DP problem!</b> Once we have a recursive solution then we will apply <i>memoization</i> and Tabulation techniques.
 
 Let’s apply this knowledge to solve some of the frequently asked <b>DP</b> problems.
 
@@ -4107,7 +4107,7 @@ function findMPPCuts(str) {
           dpIsPalindrome[start][end] = false;
           break;
         }
-        //use memoization to find if the remaining string is a palindrome
+        //use <i>memoization</i> to find if the remaining string is a palindrome
         dpIsPalindrome[i] = dpIsPalindrome[i] || [];
         if (i < j && typeof dpIsPalindrome[i][j] !== 'undefined') {
           dpIsPalindrome[start][end] = dpIsPalindrome[i][j];
@@ -4823,7 +4823,7 @@ console.log(
 // Explanation: The LIS is {-4,3,7,15}.
 ```
 
-- Since our memoization array `dp[nums.length()][nums.length()]` stores the results for all the <i>subproblems</i>, we can conclude that we will not have more than `N*N` <i>subproblems</i> (where `N` is the length of the input sequence). This means that our <b>time complexity</b> will be `O(N²)`.
+- Since our <i>memoization</i> array `dp[nums.length()][nums.length()]` stores the results for all the <i>subproblems</i>, we can conclude that we will not have more than `N*N` <i>subproblems</i> (where `N` is the length of the input sequence). This means that our <b>time complexity</b> will be `O(N²)`.
 - The above algorithm will be using `O(N²)` <b>space</b> for the <i>memoization array</i>. Other than that we will use `O(N)` <b>space</b> for the <i>recursion call-stack</i>. So the total <b>space complexity</b> will be `O(N² + N)`, which is <i>asymptotically</i> equivalent to `O(N²)`.
 
 ### Bottom-up Dynamic Programming
@@ -4867,7 +4867,7 @@ console.log(
 // Output: 4
 // Explanation: The LIS is {-4,3,7,15}.
 ```
--The <b>time complexity</b> of the above algorithm is `O(N²)` and the <b>space complexity</b> is `O(n)`.
+- The <b>time complexity</b> of the above algorithm is `O(N²)` and the <b>space complexity</b> is `O(n)`.
 ## Maximum Sum Increasing Subsequence
 https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
 
