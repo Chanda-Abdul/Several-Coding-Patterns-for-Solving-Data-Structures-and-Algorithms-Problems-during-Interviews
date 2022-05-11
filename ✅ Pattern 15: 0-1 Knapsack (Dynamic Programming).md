@@ -117,6 +117,14 @@ console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 Let’s apply this knowledge to solve some of the frequently asked <b>DP</b> problems.
 
 # Pattern 1: 0/1 Knapsack
+<b>Problem Set</b>
+[🔎 0/1 Knapsack](#🔎-01-knapsack-medium)
+[Equal Subset Sum Partition](#equal-subset-sum-partition-medium)
+[Subset Sum](#🔎-subset-sum-medium)
+[Minimum Subset Sum Difference ](#minimum-subset-sum-difference-hard)
+[🌟Count of Subset Sum](#🌟count-of-subset-sum-hard)
+[🌟 Target Sum](#🌟-target-sum-hard)
+
 
 <b>0/1 Knapsack pattern</b> is based on the famous problem with the same name which is efficiently solved using <b>Dynamic Programming (DP)</b>.
 
@@ -1535,6 +1543,16 @@ console.log(
 ```
 
 # Pattern 2: Unbounded Knapsack
+<b>Problem Set</b>
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+## 
 
 > Given the weights and profits of `N` items, we are asked to put these items in a knapsack with a capacity `C`. The goal is to get the `maximum profit` out of the knapsack items. The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this problem is that we are allowed to use an unlimited quantity of an item.
 
@@ -2486,6 +2504,16 @@ console.log(
 - The above solution has time and <b>space complexity</b>  of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
 
 # Pattern 3: Fibonacci Numbers
+<b>Problem Set</b>
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+
 ## Fibonacci numbers
 https://leetcode.com/problems/fibonacci-number/
 
@@ -3254,14 +3282,14 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 
 
 # Pattern 4: Palindromic Subsequence
-## Problem Set
-- [Longest Palindromic Subsequence](#longest-palindromic-subsequence)
-- [👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
-- [👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
-- [🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
-- [Minimum insertions in a string to make it a palindrome](#1-minimum-insertions-in-a-string-to-make-it-a-palindrome)
-- [Find if a string is K-Palindromic](#2-find-if-a-string-is-k-palindromic)
-- [Palindromic Partitioning](#palindromic-partitioning)
+<b>Problem Set</b>
+[Longest Palindromic Subsequence](#longest-palindromic-subsequence)
+[👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
+[👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
+[🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
+[Minimum insertions in a string to make it a palindrome](#1-minimum-insertions-in-a-string-to-make-it-a-palindrome)
+[Find if a string is K-Palindromic](#2-find-if-a-string-is-k-palindromic)
+[Palindromic Partitioning](#palindromic-partitioning)
 
 ## Longest Palindromic Subsequence
 https://leetcode.com/problems/longest-palindromic-subsequence/
@@ -4193,20 +4221,20 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 # Pattern 5: Longest Common Substring
-## Problem Set
-- [Longest Common Substring](#longest-common-substring)
-- [🔎 Longest Common Subsequence](#🔎-longest-common-subsequence)
-- [Minimum Deletions & Insertions to Transform a String into another](#minimum-deletions--insertions-to-transform-a-string-into-another)
-- [👩🏽‍🦯 🔎 Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)
-- [Maximum Sum Increasing Subsequence](#maximum-sum-increasing-subsequence)
-- [Shortest Common Super-sequence](#shortest-common-super-sequence)
-- [Minimum Deletions to Make a Sequence Sorted](#minimum-deletions-to-make-a-sequence-sorted)
-- [Longest Repeating Subsequence](#longest-repeating-subsequence)
-- [Subsequence Pattern Matching](#subsequence-pattern-matching)
-- [Longest Bitonic Subsequence](#longest-bitonic-subsequence)
-- [Longest Alternating Subsequence](#longest-alternating-subsequence)
-- [🔎 Edit Distance](#🔎-edit-distance)
-- [🔎 Strings Interleaving](#🔎-strings-interleaving)
+### Problem Set
+[Longest Common Substring](#longest-common-substring)
+[🔎 Longest Common Subsequence](#🔎-longest-common-subsequence)
+[Minimum Deletions & Insertions to Transform a String into another](#minimum-deletions--insertions-to-transform-a-string-into-another)
+[👩🏽‍🦯 🔎 Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)
+[Maximum Sum Increasing Subsequence](#maximum-sum-increasing-subsequence)
+[Shortest Common Super-sequence](#shortest-common-super-sequence)
+[Minimum Deletions to Make a Sequence Sorted](#minimum-deletions-to-make-a-sequence-sorted)
+[Longest Repeating Subsequence](#longest-repeating-subsequence)
+[Subsequence Pattern Matching](#subsequence-pattern-matching)
+[Longest Bitonic Subsequence](#longest-bitonic-subsequence)
+[Longest Alternating Subsequence](#longest-alternating-subsequence)
+[🔎 Edit Distance](#🔎-edit-distance)
+[🔎 Strings Interleaving](#🔎-strings-interleaving)
 
 ## Longest Common Substring
 https://www.geeksforgeeks.org/longest-common-substring-dp-29/
