@@ -119,19 +119,12 @@ Let’s apply this knowledge to solve some of the frequently asked <b>DP</b> pro
 # Pattern 1: 0/1 Knapsack
 ## Problem Set
 
-[🔎 0/1 Knapsack](#🔎-01-knapsack-medium)
-
-[Equal Subset Sum Partition](#equal-subset-sum-partition-medium)
-
-[Subset Sum](#🔎-subset-sum-medium)
-
-[Minimum Subset Sum Difference ](#minimum-subset-sum-difference-hard)
-
-[🌟Count of Subset Sum](#🌟count-of-subset-sum-hard)
-
-[🌟 Target Sum](#🌟-target-sum-hard)
-
-
+1. [🔎 0/1 Knapsack](#🔎-01-knapsack-medium)
+2. [Equal Subset Sum Partition](#equal-subset-sum-partition-medium)
+3. [Subset Sum](#🔎-subset-sum-medium)
+4. [Minimum Subset Sum Difference ](#minimum-subset-sum-difference-hard)
+5. [🌟Count of Subset Sum](#🌟count-of-subset-sum-hard)
+6. [🌟 Target Sum](#🌟-target-sum-hard)
 
 <b>0/1 Knapsack pattern</b> is based on the famous problem with the same name which is efficiently solved using <b>Dynamic Programming (DP)</b>.
 
@@ -1552,21 +1545,12 @@ console.log(
 # Pattern 2: Unbounded Knapsack
 ## Problem Set
 
-[Unbounded Knapsack](#unbounded-knapsack)
+1. [Unbounded Knapsack](#unbounded-knapsack)
+2. [Rod Cutting](#rod-cutting)
+3. [🔎👩🏽‍🦯 Coin Change](#🔎👩🏽‍🦯-coin-change)
+4. [Minimum Coin Change](#minimum-coin-change)
+5. [Maximum Ribbon Cut](#maximum-ribbon-cut)
 
-[Rod Cutting](#rod-cutting)
-
-[🔎👩🏽‍🦯 Coin Change](#🔎👩🏽‍🦯-coin-change)
-
-[Minimum Coin Change](#minimum-coin-change)
-
-[Maximum Ribbon Cut](#maximum-ribbon-cut)
-
-[]()
-
-[]()
-
-[]()
 
 ## 
 
@@ -2522,21 +2506,13 @@ console.log(
 # Pattern 3: Fibonacci Numbers
 ## Problem Set
 
-[Fibonacci numbers](#fibonacci-numbers)
+1. [Fibonacci numbers](#fibonacci-numbers)
+2. [🔎👩🏽‍🦯 Staircase](#🔎👩🏽‍🦯-staircase)
+3. [Number factors](#number-factors)
+4. [🌴 Minimum jumps to reach the end](#🌴-minimum-jumps-to-reach-the-end)
+5. [Minimum jumps with fee](#minimum-jumps-with-fee)
+6. [🌴 🔎 👩🏽‍🦯 House thief](#🌴-🔎-👩🏽‍🦯-house-thief)
 
-[🔎👩🏽‍🦯 Staircase](#🔎👩🏽‍🦯-staircase)
-
-[Number factors](#number-factors)
-
-[🌴 Minimum jumps to reach the end](#🌴-minimum-jumps-to-reach-the-end)
-
-[Minimum jumps with fee](#minimum-jumps-with-fee)
-
-[🌴 🔎 👩🏽‍🦯 House thief](#🌴-🔎-👩🏽‍🦯-house-thief)
-
-[]()
-
-[]()
 
 
 ## Fibonacci numbers
@@ -3309,19 +3285,19 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 # Pattern 4: Palindromic Subsequence
 ### Problem Set
 
-[Longest Palindromic Subsequence](#longest-palindromic-subsequence)
+1. [Longest Palindromic Subsequence](#longest-palindromic-subsequence)
 
-[👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
+2. [👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
 
-[👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
+3. [👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
 
-[🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
+4. [🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
 
-[Minimum insertions in a string to make it a palindrome](#1-minimum-insertions-in-a-string-to-make-it-a-palindrome)
+5. [Minimum insertions in a string to make it a palindrome](#1-minimum-insertions-in-a-string-to-make-it-a-palindrome)
 
-[Find if a string is K-Palindromic](#2-find-if-a-string-is-k-palindromic)
+6. [Find if a string is K-Palindromic](#2-find-if-a-string-is-k-palindromic)
 
-[Palindromic Partitioning](#palindromic-partitioning)
+7. [Palindromic Partitioning](#palindromic-partitioning)
 
 ## Longest Palindromic Subsequence
 https://leetcode.com/problems/longest-palindromic-subsequence/
