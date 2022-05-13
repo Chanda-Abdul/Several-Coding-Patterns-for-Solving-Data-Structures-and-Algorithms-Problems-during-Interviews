@@ -387,7 +387,7 @@ console.log(
 
 #### How can we find the selected items?
 
-As we know, the final profit is at the bottom-right corner. Therefore, we will start from there to find the items that will be going into the knapsack.
+As we know, the final profit is at the bottom-right corner. Therefore, we will start from there to find the items that will be going into the <b>knapsack</b>.
 
 As you remember, at every step, we had two options: include an item or skip it. If we skip an item, we take the profit from the remaining items (i.e., from the cell right above it); if we include the item, then we jump to the remaining profit to find more items.
 
@@ -402,7 +402,7 @@ Let’s understand this from the above example:
 6. Subtract the profit of `B` from `6` to get profit `0`. We then jump to profit `0` on the same row. As soon as we hit zero remaining profit, we can finish our item search.
 7. Thus, the items going into the <b>knapsack</b> are `{B, D}`.
 
-Let’s write a function to print the set of items included in the knapsack.
+Let’s write a function to print the set of items included in the <b>knapsack</b>.
 
 ```js
 function solveKnapsack(profits, weights, capacity) {
@@ -1772,7 +1772,7 @@ console.log(
 
 - The above solution has time and <b>space complexity</b>  of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
 
-As we know, the final profit is at the right-bottom corner; hence we will start from there to find the items that will be going to the knapsack.
+As we know, the final profit is at the right-bottom corner; hence we will start from there to find the items that will be going to the <b>knapsack</b>.
 
 As you remember, at every step we had two options: include an item or skip it. If we skip an item, then we take the profit from the cell right above it; if we include the item, then we jump to the remaining profit to find more items.
 
@@ -1874,7 +1874,7 @@ console.log(
 );
 ```
 
-Since this problem is quite similar to <b>[Unbounded Knapsack pattern](#unbounded-knapsack)</b>, let’s jump directly to the bottom-up dynamic solution.
+Since this problem is quite similar to <b>[Unbounded Knapsack pattern](#unbounded-knapsack)</b>, let’s jump directly to the <b>bottom-up dynamic solution</b>.
 
 ### Bottom-up Dynamic Programming
 
@@ -1962,7 +1962,7 @@ https://leetcode.com/problems/coin-change/
 
 <b>Example:</b>
 
-```
+```js
 Denominations: {1,2,3}
 Total amount: 5
 Output: 5
@@ -2151,7 +2151,7 @@ https://leetcode.com/problems/coin-change-2/
 
 ### Example 1:
 
-```
+```js
 Denominations: {1,2,3}
 Total amount: 5
 Output: 2
@@ -2160,7 +2160,7 @@ Explanation: We need a minimum of two coins {2,3} to make a total of '5'
 
 ### Example 2:
 
-```
+```js
 Denominations: {1,2,3}
 Total amount: 11
 Output: 4
@@ -2354,7 +2354,7 @@ This problem follows the <b>[Unbounded Knapsack pattern](#pattern-2-unbounded-kn
 
 #### Example 1:
 
-```
+```js
 n: 5
 Ribbon Lengths: {2,3,5}
 Output: 2
@@ -2363,7 +2363,7 @@ Explanation: Ribbon pieces will be {2,3}.
 
 #### Example 2:
 
-```
+```js
 n: 7
 Ribbon Lengths: {2,3}
 Output: 3
@@ -2372,7 +2372,7 @@ Explanation: Ribbon pieces will be {2,2,3}.
 
 #### Example 3:
 
-```
+```js
 n: 13
 Ribbon Lengths: {3,5,7}
 Output: 3
@@ -2529,8 +2529,8 @@ Fib(n) = Fib(n-1) + Fib(n-2), for n > 1
 Given that: Fib(0) = 0, and Fib(1) = 1
 ```
 
-### Basic Solution
-A <i>basic solution</i> could be to have a recursive implementation of the mathematical formula discussed above:
+### Basic Brute Force Solution
+A <i>Basic Brute Force Solution</i> could be to have a recursive implementation of the mathematical formula discussed above:
 
 ```js
 function calculateFibonacci(n) {
@@ -2626,13 +2626,13 @@ https://leetcode.com/problems/climbing-stairs/
 > Given a stair with `n` steps, implement a method to count how many possible ways are there to reach the top of the staircase, given that, at every step you can either take `1` step, `2` steps, or `3` steps.
 
 #### Example 1:
-```
+```js
 Number of stairs (n) : 3
 Number of ways = 4
 Explanation: Following are the four ways we can climb : {1,1,1}, {1,2}, {2,1}, {3} 
 ```
 #### Example 2:
-````
+````js
 Number of stairs (n) : 4
 Number of ways = 7
 Explanation: Following are the seven ways we can climb : {1,1,1,1}, {1,1,2}, {1,2,1}, {2,1,1}, 
@@ -2779,13 +2779,13 @@ console.log(`Number of ways: ---> ${countWays(5)}`);
 - The above solution has a <b>time complexity</b> of `O(n)` and a constant <b>space complexity</b> `O(1)`.
 
 #### Fibonacci number pattern
-We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that in <b>Fibonacci numbers</b> every number is a sum of the two preceding numbers, whereas in this problem every count is a sum of three preceding counts. Here is the recursive formula for this problem:
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that in <b>Fibonacci numbers</b> every number is a sum of the two preceding numbers, whereas in this problem every count is a sum of three preceding counts. Here is the <i>recursive formula</i>for this problem:
 
 ```js
 countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3), 
 for n >=3
 ```
-This problem can be extended further. Instead of taking `1`, `2`, or `3` steps at any time, what if we can take up to `k` steps at any time? In that case, our recursive formula will look like:
+This problem can be extended further. Instead of taking `1`, `2`, or `3` steps at any time, what if we can take up to `k` steps at any time? In that case, our <i>recursive formula</i>will look like:
 
 ```js
 countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3) + ... + countWays(n-k), 
@@ -2798,13 +2798,13 @@ https://www.geeksforgeeks.org/count-ofdifferent-ways-express-n-sum-1-3-4/
 > Given a number `n`, implement a method to count how many possible ways there are to express `n` as the sum of `1`, `3`, or `4`.
 
 #### Example 1:
-```
+```js
 n : 4
 Number of ways = 4
 Explanation: Following are the four ways we can express 'n' : {1,1,1,1}, {1,3}, {3,1}, {4} 
 ```
 #### Example 2:
-```
+```js
 n : 5
 Number of ways = 6
 Explanation: Following are the six ways we can express 'n' : {1,1,1,1,1}, {1,1,3}, {1,3,1}, {3,1,1}, 
@@ -2897,7 +2897,7 @@ console.log(`Number of ways: ---> ${countWays(6)}`);
 The above solution has time and space complexity of `O(n)`.
 
 #### Fibonacci number pattern
-We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. However, every number in a <b>Fibonacci series</b> is the sum of the previous two numbers, whereas in this problem every count is a sum of previous three numbers: `previous-1`, `previous-3`, and `previous-4`. Here is the recursive formula for this problem:
+We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. However, every number in a <b>Fibonacci series</b> is the sum of the previous two numbers, whereas in this problem every count is a sum of previous three numbers: `previous-1`, `previous-3`, and `previous-4`. Here is the <i>recursive formula</i>for this problem:
 
 ```js
 countWays(n) = countWays(n-1) + countWays(n-3) + countWays(n-4), 
@@ -3420,7 +3420,7 @@ Since we want to try all the <b>subsequences</b> of the given <i>sequence</i>, w
 1. If the element at the `startIndex` matches the element at the `endIndex`, the length of <b>LPS</b> would be two plus the length of <b>LPS</b> until `startIndex+1` and `endIndex-1`.
 2. If the element at the `startIndex` does not match the element at the `endIndex`, we will take the maximum <b>LPS</b> created by either skipping element at the `startIndex` or the `endIndex`.
 
-So our recursive formula would be:
+So our <i>recursive formula</i>would be:
 ```js
 if st[endIndex] == st[startIndex] 
   dp[startIndex][endIndex] = 2 + dp[startIndex + 1][endIndex - 1]
@@ -3667,7 +3667,7 @@ console.log('Length of LPS ---> ' + findLPSLength('pqr'));
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 #### Manacher’s Algorithm
-The best-known algorithm to find the <b>[longest palindromic substring](#👩🏽‍🦯-longest-palindromic-substring)</b> which runs in linear time `O(n)` is <b>[Manacher’s Algorithm](https://en.wikipedia.org/wiki/Longest_palindromic_substring)</b>. However, it is a non-trivial algorithm that doesn’t use <b>DP</b>. Please take a look to familiarize yourself with this algorithm, however, no one expects you to come up with such an algorithm in a 45 minutes coding interview.
+The best-known algorithm to find the <b>[longest palindromic substring](#👩🏽‍🦯-longest-palindromic-substring)</b> which runs in linear time `O(n)` is <b>[Manacher’s Algorithm](https://en.wikipedia.org/wiki/Longest_palindromic_substring)</b>. However, it is a non-trivial algorithm that doesn’t use <b>DP</b>. Please take a look to familiarize yourself with this algorithm, however, no one expects you to come up with such an algorithm in a 45 minute coding interview.
 
 
 ## 👩🏽‍🦯 Count of Palindromic Substrings
@@ -4067,7 +4067,7 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
 - The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
 - The <b>space complexity</b>  is `O(n)`, which will be used to store the <i>recursion stack</i>.
 ### Top-down Dynamic Programming with Memoization
-We can memoize both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indexes; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
+We can <i>memoize</i>both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indexes; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
 
 Here is the code:
 ```js
@@ -4141,7 +4141,7 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
 ### Bottom-up Dynamic Programming
 The above solution tells us that we need to build two tables, one for the `isPalindrome()` and one for `findMPPCuts()`.
 
-If you remember, we built a table in the [Longest Palindromic Substring (LPS)](#longest-palindromic-subsequence) chapter that can tell us what <i>substrings</i> (of the input <i>string</i>) are <i>palindrome</i>. We will use the same approach here to build the table required for `isPalindrome()`. 
+If you remember, we built a table in the <b>[Longest Palindromic Substring (LPS)](#longest-palindromic-subsequence)</b> chapter that can tell us what <i>substrings</i> (of the input <i>string</i>) are <i>palindrome</i>. We will use the same approach here to build the table required for `isPalindrome()`. 
 
 To build the second table for finding the minimum cuts, we can iterate through the first table built for `isPalindrome()`. At any step, if we get a <i>palindrome</i>, we can cut the <i>string</i> there. Which means minimum cuts will be one plus the cuts needed for the <i>remaining string</i>.
 
@@ -4870,6 +4870,195 @@ console.log(
 - The <b>time complexity</b> of the above algorithm is `O(N²)` and the <b>space complexity</b> is `O(n)`.
 ## Maximum Sum Increasing Subsequence
 https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
+
+> Given a number sequence, find the increasing subsequence with the highest `sum`. Write a method that returns the highest `sum`.
+
+#### Example 1:
+```js
+Input: {4,1,2,6,10,1,12}
+Output: 32
+Explanation: The increaseing sequence is {4,6,10,12}. 
+Please note the difference, as the LIS is {1,2,6,10,12} which has a sum of '31'.
+```
+#### Example 2:
+```js
+Input: {-4,10,3,7,15}
+Output: 25
+Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
+```
+
+### Basic Brute Force Solution
+The problem is quite similar to the <b>[Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)</b>. The only difference is that, instead of finding the increasing subsequence with the maximum length, we need to find an increasing sequence with the maximum `sum`.
+
+A <b>basic brute-force solution</b> could be to try all the <i>subsequences</i> of the given array. We can process one number at a time, so we have two options at any step:
+
+1. If the current number is greater than the previous number that we included, we include that number in a running `sum` and make a <i>recursive call</i> for the remaining array.
+2. We can skip the current number to make a <i>recursive call</i> for the remaining array.
+
+The highest `sum` of any <i>increasing subsequence</i> would be the max value returned by the two <i>recurse calls</i> from the above two options.
+
+Here is the code:
+```js
+function findMSIS(nums) {
+  function findMSISRecursive(nums, currIndex, prevIndex, sum) {
+    //base check
+    if (currIndex === nums.length) return sum;
+
+    //include nums[currIndex] if it is larger than the last include number
+    let sumIncludingCurrIndex = sum;
+
+    if (prevIndex === -1 || nums[currIndex] > nums[prevIndex]) {
+      sumIncludingCurrIndex = findMSISRecursive(
+        nums,
+        currIndex + 1,
+        currIndex,
+        sum + nums[currIndex]
+      );
+    }
+
+    //exclude the number at currIndex
+    let sumWithoutCurrIndex = findMSISRecursive(
+      nums,
+      currIndex + 1,
+      prevIndex,
+      sum
+    );
+    return Math.max(sumIncludingCurrIndex, sumWithoutCurrIndex);
+  }
+  return findMSISRecursive(nums, 0, -1, 0);
+}
+
+console.log(
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([
+    4, 1, 2, 6, 10, 1, 12,
+  ])}`
+);
+// Output: 32
+// Explanation: The increaseing sequence is {4,6,10,12}.
+// Please note the difference, as the LIS is {1,2,6,10,12} which has a sum of '31'.
+
+console.log(
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([-4, 10, 3, 7, 15])}`
+);
+// Output: 25
+// Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
+```
+- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array. 
+- The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+We can use <b>memoization</b> to overcome the <i>overlapping subproblems</i>.
+
+The three changing values for our <i>recursive function</i> are the `currIndex`, the `prevIndex`, and the `sum`. An efficient way of storing the results of the <i>subproblems</i> could be a <i>hash-table</i> whose <i>key</i> would be a string (`currIndex` + `“|”` + `prevIndex` + `“|”` + `sum`).
+
+Here is the code:
+```js
+function findMSIS(nums) {
+  const dp = [];
+
+  function findMSISRecursive(nums, currIndex, prevIndex, sum) {
+    //base check
+    if (currIndex === nums.length) return sum;
+
+    const subProbKey = `${currIndex}-${prevIndex}-${sum}`;
+
+    if (typeof dp[subProbKey] === 'undefined') {
+      //include nums[currIndex] if it is larger than the last include number
+      let sumIncludingCurrIndex = sum;
+
+      if (prevIndex == -1 || nums[currIndex] > nums[prevIndex]) {
+        sumIncludingCurrIndex = findMSISRecursive(
+          nums,
+          currIndex + 1,
+          currIndex,
+          sum + nums[currIndex]
+        );
+      }
+
+      //exclude the number at currIndex
+      let sumWithoutCurrIndex = findMSISRecursive(
+        nums,
+        currIndex + 1,
+        prevIndex,
+        sum
+      );
+      // console.log(dp)
+      dp[subProbKey] = Math.max(sumIncludingCurrIndex, sumWithoutCurrIndex);
+      return dp[subProbKey];
+    }
+  }
+  return findMSISRecursive(nums, 0, -1, 0);
+}
+
+
+
+console.log(
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([
+    4, 1, 2, 6, 10, 1, 12,])}`);
+// Output: 32
+// Explanation: The increaseing sequence is {4,6,10,12}.
+// Please note the difference, as the LIS is {1,2,6,10,12} which has a sum of '31'.
+
+console.log(
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([-4, 10, 3, 7, 15])}`);
+// Output: 25
+// Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
+
+```
+
+### Bottom-up Dynamic Programming
+The above algorithm tells us two things:
+
+1. If the number at the `currIndex` is bigger than the number at the `prevIndex`, we include that number in the `sum` for an increasing sequence up to the `currIndex`.
+2. But if there is a <b>maximum sum increasing subsequence (MSIS)</b>, without including the number at the `currIndex`, we take that.
+
+So we need to find all the <i>increasing subsequences</i> for a number at index `i`, from all the previous numbers (i.e. numbers until index `i-1`), to find <b>MSIS</b>.
+
+If `i` represents the `currIndex` and `j` represents the `prevIndex`, our <i>recursive formula</i> would look like:
+
+```js
+    if num[i] > num[j] => dp[i] = dp[j] + num[i] if there is no bigger MSIS for 'i'
+```
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+```js
+function findMSIS(nums) {
+  const dp = [nums[0]];
+
+  let maxSum = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    dp[i] = nums[i];
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j] && dp[i] < dp[j] + nums[i]) dp[i] = dp[j] + nums[i];
+    }
+    // console.log(dp);
+    maxSum = Math.max(maxSum, dp[i]);
+  }
+
+  return maxSum;
+}
+
+console.log(
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([
+    4, 1, 2, 6, 10, 1, 12,])}`);
+// Output: 32
+// Explanation: The increaseing sequence is {4,6,10,12}.
+// Please note the difference, as the LIS is {1,2,6,10,12} which has a sum of '31'.
+
+console.log(
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([-4, 10, 3, 7, 15])}`);
+// Output: 25
+// Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
+
+console.log(
+  'Maximum Sum Increasing Subsequence is: ---> ' +
+    findMSIS([1, 3, 8, 4, 14, 6, 14, 1, 9, 4, 13, 3, 11, 17, 29])
+);
+```
+
+- The  <b>time complexity</b>  of the above algorithm is is `O(n²)` and the <b>space complexity</b> is `O(n)`.
+
 
 ## Shortest Common Super-sequence
 https://leetcode.com/problems/shortest-common-supersequence/
