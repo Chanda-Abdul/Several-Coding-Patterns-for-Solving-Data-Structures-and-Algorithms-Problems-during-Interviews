@@ -4395,7 +4395,7 @@ console.log(
 ### Bottom-up Dynamic Programming 
 Since we want to match all the <i>substrings</i> of the given two <i>strings</i>, we can use a two-dimensional array to store our results. The lengths of the two <i>strings</i> will define the size of the two dimensions of the array. So for every index `index1` in string `str1` and `index2` in string `str2`, we have two options:
 
-1. If the character at `str1[index1]` matches `str2[index2]`, the length of the <i>common substring</i> would be one plus the length of the <i>common substring</i> till `index1-1` and `index2-1` indexes in the two <i>strings</i>.
+1. If the character at `str1[index1]` matches `str2[index2]`, the length of the <i>common substring</i> would be one plus the length of the <i>common substring</i> until `index1-1` and `index2-1` indexes in the two <i>strings</i>.
 2. If the character at the `str1[index1]` does not match `str2[index2]`, we don’t have any <i>common substring</i>.
 So our <i>recursive formula</i> would be:
 
@@ -4831,7 +4831,7 @@ The above algorithm tells us two things:
 
 1. If the number at the `currIndex` is bigger than the number at the `prevIndex`, we increment the count for <b>LIS</b> up to the `currIndex`.
 2. But if there is a bigger <b>LIS</b> without including the number at the `currIndex`, we take that.
-So we need to find all the <i>increasing subsequences</i> for the number at index `i`, from all the previous numbers (i.e. number till index `i-1`), to eventually find the <i>longest increasing subsequence.</i>
+So we need to find all the <i>increasing subsequences</i> for the number at index `i`, from all the previous numbers (i.e. number until index `i-1`), to eventually find the <i>longest increasing subsequence.</i>
 
 If `i` represents the `currIndex` and `j` represents the `prevIndex`, our <i>recursive formula</i> would look like:
 ```js
@@ -5059,9 +5059,207 @@ console.log(
 
 - The  <b>time complexity</b>  of the above algorithm is is `O(n²)` and the <b>space complexity</b> is `O(n)`.
 
-
 ## Shortest Common Super-sequence
 https://leetcode.com/problems/shortest-common-supersequence/
+
+> Given two </b>sequences `s1` and `s2`, write a method to find the length of the shortest sequence which has `s1` and `s2` as <b>subsequences</b>.
+
+#### Example 1:
+```js
+Input: s1: "abcf" s2:"bdcf" 
+Output: 5
+Explanation: The shortest common super-sequence (SCS) is "abdcf". 
+```
+#### Example 2:
+```js
+Input: s1: "dynamic" s2:"programming" 
+Output: 15
+Explanation: The SCS is "dynprogrammicng". 
+```
+### Basic Brute-Force Solution
+The problem is quite similar to the <b>[Longest Common Subsequence](#🔎-longest-common-subsequence)</b>.
+
+A <b>basic brute-force solution</b> could be to try all the <b>super-sequences</b> of the given <b>sequences</b>. We can process both of the <b>sequences</b> one character at a time, so at any step, we must choose between:
+1. If the <b>sequences</b> have a matching character, we can skip one character from both the <b>sequences</b> and make a <i>recursive call</i> for the remaining lengths to get <b>SCS</b>.
+2. If the strings don’t match, we start two new <i>recursive calls</i> by skipping one character separately from each string. The minimum of these two <i>recursive calls</i> will have our answer.
+
+Here is the code:
+```js
+function findSCSLength(s1, s2) {
+  // **MY THOUGHT PROCESS**
+  //1 => traverse each string until you find the first common shared char at i
+  //2 => push s1.substring(0,i) + s2.substring(0,i) onto output string (dyn + progr)
+  //3 => then check s1[i] against s2[j] push entire length of common char onto output(A)n
+  //4 => if one is longer push longer length onto output(MM)
+  //5 => if next char is not shared, find next common shared char and push whateve was not shared onto output(step 1 & 2 again)
+  //6 => when we reach end of either string push whatever is left from the longer string to output and 
+  //7 => return output
+
+  function findSCSLengthRecursive(s1, s2, index1, index2) {
+    //if we have reached the end of a string
+    //return the remaining length of the other string
+    //as in this case we have to take all of the remaining other string
+    if(index1 === s1.length) return s2.length-index2
+    if(index2 === s2.length) return s1.length-index1
+    
+    if(s1[index1] === s2[index2]) return 1 + findSCSLengthRecursive(s1, s2, index1+1, index2+1) 
+    
+    let length1 = 1 + findSCSLengthRecursive(s1, s2, index1, index2+1) 
+    let length2 = 1 + findSCSLengthRecursive(s1, s2, index1+1, index2) 
+    
+    return Math.min(length1, length2)
+  }
+  
+  
+  
+  
+  return findSCSLengthRecursive(s1, s2, 0, 0) ;
+};
+
+console.log(
+  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength(
+    'dynamic',
+    'programming'
+  )}`
+);
+//Output: 15
+// Explanation: The SCS is "dynprogrammicng". 
+// 'dyn AMI c',
+// 'progr AMMI ng'
+
+console.log(
+  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength('abcf', 'bdcf')}`
+);
+// Output: 5
+// Explanation: The shortest common super-sequence (SCS) is "abdcf". 
+// aBCF
+// 'BdCF'
+```
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the input <b>sequences</b>. 
+- The <b>space complexity</b> is `O(m+n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+Let's use <b>memoization</b> to overcome the <i>overlapping subproblems</i>.
+
+The two changing values to our <b>recursive function</b> are the two indexes, `i1` and `i2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`i1` + `|` + `i2`)).
+
+Here is the code:
+```js
+function findSCSLength(s1, s2) {
+  const dp = [];
+
+  function findSCSLengthRecursive(s1, s2, index1, index2) {
+    //if we have reached the end of a string
+    //return the remaining length of the other string
+    //as in this case we have to take all of the remaining other string
+    if (index1 === s1.length) return s2.length - index2;
+    if (index2 === s2.length) return s1.length - index1;
+
+    dp[index1] = dp[index1] || [];
+    if (typeof dp[index1][index2] === 'undefined') {
+      if (s1[index1] === s2[index2]) {
+        dp[index1][index2] =
+          1 + findSCSLengthRecursive(s1, s2, index1 + 1, index2 + 1);
+      } else {
+        let length1 = 1 + findSCSLengthRecursive(s1, s2, index1, index2 + 1);
+        let length2 = 1 + findSCSLengthRecursive(s1, s2, index1 + 1, index2);
+
+        dp[index1][index2] = Math.min(length1, length2);
+      }
+    }
+
+    return dp[index1][index2];
+  }
+
+  return findSCSLengthRecursive(s1, s2, 0, 0);
+}
+
+console.log(
+  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength(
+    'dynamic',
+    'programming'
+  )}`
+);
+//Output: 15
+// Explanation: The SCS is "dynprogrammicng".
+
+console.log(
+  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength(
+    'abcf',
+    'bdcf'
+  )}`
+);
+// Output: 5
+// Explanation: The shortest common super-sequence (SCS) is "abdcf".
+```
+
+### Bottom-up Dynamic Programming
+Since we want to match all the <b>subsequences</b> of the given <b>sequences</b>, we can use a two-dimensional array to store our results. The lengths of the two strings will define the size of the array’s dimensions. So for every index `i` in sequence `s1` and `j` in sequence `s2`, we will choose one of the following two options:
+
+1. If the character `s1[i]` matches `s2[j]`, the length of the <b>SCS<b> would be the one plus the length of the <b>SCS<b> until `i-1` and `j-1` indexes in the two strings.
+2. If the character `s1[i]` does not match `s2[j]`, we will consider two <b>SCS<b>: 
+  - one without `s1[i]` and one without `s2[j]`. 
+  - Our required <b>SCS<b> length will be the shortest of these two super-sequences plus one.
+
+So our <b>recursive formula<b> would be:
+
+```js
+if s1[i] == s2[j] 
+  dp[i][j] = 1 + dp[i-1][j-1]
+else 
+  dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1]) 
+```
+
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
+```js
+function findSCSLength(s1, s2) {
+  const dp = Array(s1.length + 1)
+    .fill(0)
+    .map(() => Array(s2.length + 1).fill(0));
+
+  // if one of the strings is of zero length
+  // SCS would be equl to the length of the other string
+
+  for (let i = 0; i <= s1.length; i++) {
+    dp[i][0] = i;
+    for (let j = 0; j <= s2.length; j++) {
+      dp[0][j] = j;
+    }
+  }
+
+  for (let i = 1; i <= s1.length; i++) {
+    for (let j = 1; j <= s2.length; j++) {
+      if (s1.charAt(i - 1) === s2.charAt(j - 1)) {
+        dp[i][j] = 1 + dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1]);
+      }
+    }
+  }
+  console.log(dp);
+
+  return dp[s1.length][s2.length];
+}
+
+console.log(
+  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength(
+    'dynamic',
+    'programming'
+  )}`
+);
+//Output: 15
+// Explanation: The SCS is "dynprogrammicng".
+
+console.log(
+  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength(
+    'abcf',
+    'bdcf'
+  )}`
+);
+// Output: 5
+// Explanation: The shortest common super-sequence (SCS) is "abdcf".
+```
+- The time and space complexity of the above algorithm is `O(n*m)`.
 
 ## Minimum Deletions to Make a Sequence Sorted
 https://www.geeksforgeeks.org/minimum-number-deletions-make-sorted-sequence/
