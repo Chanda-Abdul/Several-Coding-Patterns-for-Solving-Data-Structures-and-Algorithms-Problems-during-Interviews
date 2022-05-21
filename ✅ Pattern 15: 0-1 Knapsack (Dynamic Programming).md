@@ -5062,7 +5062,7 @@ console.log(
 ## Shortest Common Super-sequence
 https://leetcode.com/problems/shortest-common-supersequence/
 
-> Given two </b>sequences `s1` and `s2`, write a method to find the length of the shortest sequence which has `s1` and `s2` as <b>subsequences</b>.
+> Given two <b>sequences</b> `s1` and `s2`, write a method to find the length of the shortest sequence which has `s1` and `s2` as <b>subsequences</b>.
 
 #### Example 1:
 ```js
@@ -5109,9 +5109,6 @@ function findSCSLength(s1, s2) {
     
     return Math.min(length1, length2)
   }
-  
-  
-  
   
   return findSCSLengthRecursive(s1, s2, 0, 0) ;
 };
@@ -5196,12 +5193,12 @@ console.log(
 ### Bottom-up Dynamic Programming
 Since we want to match all the <b>subsequences</b> of the given <b>sequences</b>, we can use a two-dimensional array to store our results. The lengths of the two strings will define the size of the array’s dimensions. So for every index `i` in sequence `s1` and `j` in sequence `s2`, we will choose one of the following two options:
 
-1. If the character `s1[i]` matches `s2[j]`, the length of the <b>SCS<b> would be the one plus the length of the <b>SCS<b> until `i-1` and `j-1` indexes in the two strings.
-2. If the character `s1[i]` does not match `s2[j]`, we will consider two <b>SCS<b>: 
+1. If the character `s1[i]` matches `s2[j]`, the length of the <b>SCS</b> would be the one plus the length of the <b>SCS</b> until `i-1` and `j-1` indexes in the two strings.
+2. If the character `s1[i]` does not match `s2[j]`, we will consider two <b>SCS</b>: 
   - one without `s1[i]` and one without `s2[j]`. 
-  - Our required <b>SCS<b> length will be the shortest of these two super-sequences plus one.
+  - Our required <b>SCS</b> length will be the shortest of these two super-sequences plus one.
 
-So our <b>recursive formula<b> would be:
+So our <b>recursive formula</b> would be:
 
 ```js
 if s1[i] == s2[j] 
@@ -5264,6 +5261,27 @@ console.log(
 ## Minimum Deletions to Make a Sequence Sorted
 https://www.geeksforgeeks.org/minimum-number-deletions-make-sorted-sequence/
 
+> Given a number <b>sequence</b>, find the minimum number of elements that should be deleted to make the remaining <b>sequence</b> sorted.
+
+#### Example 1:
+```js
+Input: {4,2,3,6,10,1,12}
+Output: 2
+Explanation: We need to delete {4,1} to make the remaing sequence sorted {2,3,6,10,12}.
+```
+#### Example 2:
+```js
+Input: {-4,10,3,7,15}
+Output: 1
+Explanation: We need to delete {10} to make the remaing sequence sorted {-4,3,7,15}.
+```
+#### Example 3:
+```js
+Input: {3,2,1,0}
+Output: 3
+Explanation: Since the elements are in reverse order, we have to delete all except one to get a 
+sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
+```
 ## Longest Repeating Subsequence
 https://www.geeksforgeeks.org/longest-repeating-subsequence/
 
