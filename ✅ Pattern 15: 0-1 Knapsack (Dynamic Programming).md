@@ -5564,7 +5564,7 @@ A <b>basic brute-force solution</b> could be to try deleting all combinations of
 
 Alternately, we can convert this problem into a <b>[Longest Increasing Subsequence (LIS)](#👩🏽‍🦯-🔎-longest-increasing-subsequence)</b> problem. As we know that <b>LIS</b> will give us the length of the <b>longest increasing subsequence</b> (in the sorted order!), which means that the elements which are not part of the <b>LIS</b> should be removed to make the <b>sequence</b> sorted. This is exactly what we need. So we’ll get our solution by subtracting the length of <b>LIS</b> from the length of the input array: `Length-of-input-array - LIS()`
 
-Let’s jump directly to the <b>bottom-up dynamic programming<b> solution.
+Let’s jump directly to the <b>bottom-up dynamic programming</b> solution.
 
 ### Bottom-up Dynamic Programming
 
@@ -5730,7 +5730,7 @@ console.log(
 
 We can use an array to store the already solved <b>subproblems</b>.
 
-The two changing values to our <b>recursive<b> function are the two <i>indices</i>, `index1` and `index2`. Therefore, we can store the results of all the <b>subproblems</b> in a two-dimensional array. (Another alternative could be to use a <b>hash-tabl</b>e whose key would be a string (`index1` + `“|”` + `index2`)).
+The two changing values to our <b>recursive</b> function are the two <i>indices</i>, `index1` and `index2`. Therefore, we can store the results of all the <b>subproblems</b> in a two-dimensional array. (Another alternative could be to use a <b>hash-table</b> whose key would be a string (`index1` + `“|”` + `index2`)).
 
 Here is the code:
 
