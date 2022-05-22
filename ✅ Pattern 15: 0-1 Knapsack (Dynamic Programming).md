@@ -5525,7 +5525,7 @@ console.log(
 // Explanation: The shortest common super-sequence (SCS) is "abdcf".
 ```
 
-- The time and space complexity of the above algorithm is `O(n*m)`.
+- The <b>time and space complexity</b> of the above algorithm is `O(n*m)`.
 
 ## Minimum Deletions to Make a Sequence Sorted
 
@@ -5658,7 +5658,8 @@ Explanation: The longest repeating subsequence is “a b c” {a a b d b c e c}.
 ```js
 Input: “f m f f”
 Output: 2
-Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}. Please note the second last character is shared in LRS.
+Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}. 
+Please note the second last character is shared in LRS.
 ```
 
 ### Basic Brute-Force Solution
@@ -5671,7 +5672,7 @@ The problem is quite similar to the <b>[Longest Common Subsequence (LCS)](#🔎-
 A <b>basic brute-force solution</b> could be to try all <b>subsequences</b> of the given <b>sequence</b> to find <i>the longest repeating one</i>, but the problem is how to ensure that the <b>LRS</b>’s characters do not have the <i>same index</i>. For this, we can start with two <i>indices</i> in the given <b>sequence</b>, so at any step we have two choices:
 
 1. If the <i>two indices</i> are not the same and the characters at both the <i>indices</i> are same, we can <b>recursively</b> match for the remaining length (i.e. by incrementing both the <i>indices</i>).
-2. If the characters at both the <i>indicies</i> don’t match, we start two new <b>recursive calls</b> by incrementing each <i>index</i> separately. The <b>LRS</b> would be the one with the highest length from the two <b>recursive calls</b>.
+2. If the characters at both the <i>indices</i> don’t match, we start two new <b>recursive calls</b> by incrementing each <i>index</i> separately. The <b>LRS</b> would be the one with the highest length from the two <b>recursive calls</b>.
 
 Here is the code:
 
@@ -5846,8 +5847,194 @@ console.log(
 - The <b>time complexity and space complexity</b> of the above algorithm is is `O(n²)`.
 
 ## Subsequence Pattern Matching
-
 https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/
+
+> Given a `string` and a `pattern`, write a method to count the number of times the `pattern` appears in the `string` as a <b>subsequence</b>.
+
+#### Example 1: 
+```js
+Input: string: “baxmx”, pattern: “ax”
+Output: 2
+Explanation: {baxmx, baxmx}.
+```
+#### Example 2:
+```js
+Input: string: “tomorrow”, pattern: “tor”
+Output: 4
+Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, tomorrow}.
+```
+
+### Basic Brute-force Solution
+This problem follows the <b>[Longest Common Subsequence (LCS) pattern](#pattern-5-longest-common-substring)</b> and is quite similar to the <b>[Longest Repeating Subsequence](#longest-repeating-subsequence)</b>; the difference is that we need to count the total occurrences of the <b>subsequence</b>.
+
+A <b>basic brute-force solution</b> could be to try all the <b>subsequences<b> of the given `string` to count all that match the given `pattern`. We can match the pattern with the given `string` one character at a time, so we can do two things at any step:
+1. If the `pattern` has a matching character with the `string`, we can <b>recursively</b> match for the remaining lengths of the `pattern` and the `string`.
+2. At every step, we can always skip a character from the `string` to try to match the remaining `string` with the `pattern`. So we can start a <b>recursive call</b> by skipping one character from the `string`.
+
+Our total count will be the sum of the counts returned by the above two options.
+
+Here is the code:
+```js
+function findSPMCount(str, pattern) {
+  function findSPMCountRecursive(str, pattern, strIndex, patternIndex) {
+    // base case => if we have reached the end of the pattern
+    if (patternIndex === pattern.length) return 1;
+
+    // base case => if we have reached the end of the str
+    // but pattern has some chars left
+    if (strIndex === str.length) return 0;
+
+    let count1 = 0;
+
+    if (str[strIndex] === pattern[patternIndex]) {
+      count1 = findSPMCountRecursive(
+        str,
+        pattern,
+        strIndex + 1,
+        patternIndex + 1
+      );
+    }
+
+    let count2 = findSPMCountRecursive(
+      str,
+      pattern,
+      strIndex + 1,
+      patternIndex
+    );
+
+    return count1 + count2;
+  }
+  return findSPMCountRecursive(str, pattern, 0, 0);
+}
+
+console.log(
+  `Count of pattern in the string: ---> ${findSPMCount('baxmx', 'ax')}`
+);
+// Output: 2
+// Explanation: {baxmx, baxmx}.
+
+console.log(
+  `Count of pattern in the string: ---> ${findSPMCount('tomorrow', 'tor')}`
+);
+// Output: 4
+// Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, tomorrow}.
+```
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᵐ)`, where `m` is the length of the `string`, as our <i>recursion stack</i> will not be deeper than `m`. The <b>space complexity</b> is `O(m)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+
+We can use an array to store the already solved <i>subproblems</i>.
+
+The two changing values to our <b>recursive function</b> are the two <i>indices</i> `strIndex` and `patternIndex`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <b>hash-table</b> whose key would be a `string` (`strIndex` + `“|”` + `patternIndex`)).
+
+Here is the code:
+```js
+function findSPMCount(str, pattern) {
+  const dp = [];
+
+  function findSPMCountRecursive(str, pattern, strIndex, patternIndex) {
+    // base case => if we have reached the end of the pattern
+    if (patternIndex === pattern.length) return 1;
+
+    // base case => if we have reached the end of the str
+    // but pattern has some chars left
+    if (strIndex === str.length) return 0;
+
+    dp[strIndex] = dp[strIndex] || [];
+
+    let count1 = 0;
+
+    if (str.charAt(strIndex) === pattern.charAt(patternIndex)) {
+      count1 = findSPMCountRecursive(
+        str,
+        pattern,
+        strIndex + 1,
+        patternIndex + 1
+      );
+    }
+
+    let count2 = findSPMCountRecursive(
+      str,
+      pattern,
+      strIndex + 1,
+      patternIndex
+    );
+    dp[strIndex][patternIndex] = count1 + count2;
+    return dp[strIndex][patternIndex];
+  }
+  return findSPMCountRecursive(str, pattern, 0, 0);
+}
+
+console.log(
+  `Count of pattern in the string: ---> ${findSPMCount('baxmx', 'ax')}`
+);
+// Output: 2
+// Explanation: {baxmx, baxmx}.
+
+console.log(
+  `Count of pattern in the string: ---> ${findSPMCount('tomorrow', 'tor')}`
+);
+// Output: 4
+// Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, tomorrow}.
+```
+
+### Bottom-up Dynamic Programming 
+Since we want to match all the <b>subsequences</b> of the given `string`, we can use a two-dimensional array to store our results. As mentioned above, we will be tracking separate <i>indices</i> for the `string` and the `pattern`, so we will be doing two things for every value of `strIndex` and `patternIndex`:
+
+1. If the character at the `strIndex` (in the `string`) matches the character at `patIndex` (in the `pattern`), the count of the <b>SPM</b> would be equal to the count of <b>SPM</b> up to `strIndex-1` and `patternIndex-1`.
+2. At every step, we can always skip a character from the `string` to try matching the remaining `string` with the `pattern`; therefore, we can add the <b>SPM</b> count from the <i>indices</i> `strIndex-1` and `patternIndex`.
+
+So our <b>recursive formula</b> would be:
+
+```js
+if str[strIndex] == pat[patIndex] {
+  dp[strIndex][patIndex] = dp[strIndex-1][patIndex-1]
+}
+dp[strIndex][patIndex] += dp[strIndex-1][patIndex]
+```
+
+Here is the code for our </b>bottom-up dynamic programming</b> approach:
+```js
+function findSPMCount(str, pattern) {
+  //every empty pattern has one match
+  if (pattern.length === 0) return 1;
+
+  if (str.length === 0 || pattern.length > str.length) return 0;
+
+  // dp[strIndex][patIndex] will be storing the count of SPM up to str[0..strIndex-1][0..patIndex-1]
+  const dp = Array(str.length + 1)
+    .fill(0)
+    .map(() => Array(pattern.length + 1).fill(0));
+
+  // for the empty pattern, we have one matching
+  for (let i = 0; i <= str.length; i++) dp[i][0] = 1;
+
+  for (let strIndex = 1; strIndex <= str.length; strIndex++) {
+    for (let patternIndex = 1; patternIndex <= pattern.length; patternIndex++) {
+      if (str[strIndex - 1] === pattern[patternIndex - 1]) {
+        dp[strIndex][patternIndex] = dp[strIndex - 1][patternIndex - 1];
+      }
+      dp[strIndex][patternIndex] += dp[strIndex - 1][patternIndex];
+    }
+  }
+
+  return dp[str.length][pattern.length];
+}
+
+console.log(
+  `Count of pattern in the string: ---> ${findSPMCount('baxmx', 'ax')}`
+);
+// Output: 2
+// Explanation: {baxmx, baxmx}.
+
+console.log(
+  `Count of pattern in the string: ---> ${findSPMCount('tomorrow', 'tor')}`
+);
+// Output: 4
+// Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, tomorrow}.
+```
+- The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the `string` and the `pattern` respectively.
 
 ## Longest Bitonic Subsequence
 
