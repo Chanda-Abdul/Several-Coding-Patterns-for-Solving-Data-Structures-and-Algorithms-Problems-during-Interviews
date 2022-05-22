@@ -5282,6 +5282,76 @@ Output: 3
 Explanation: Since the elements are in reverse order, we have to delete all except one to get a 
 sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
 ```
+### Basic Brute-force Solution#
+A <b>basic brute-force solution</b> could be to try deleting all combinations of elements, one by one, and checking if that makes the <b>subsequence</b> sorted.
+
+Alternately, we can convert this problem into a <b>[Longest Increasing Subsequence (LIS)](#👩🏽‍🦯-🔎-longest-increasing-subsequence)</b> problem. As we know that <b>LIS</b> will give us the length of the <b>longest increasing subsequence</b> (in the sorted order!), which means that the elements which are not part of the <b>LIS</b> should be removed to make the <b>sequence</b> sorted. This is exactly what we need. So we’ll get our solution by subtracting the length of <b>LIS<b> from the length of the input array: `Length-of-input-array - LIS()`
+
+Let’s jump directly to the <b>bottom-up dynamic programming<b> solution.
+
+### Bottom-up Dynamic Programming#
+Here is the code for our <b>bottom-up dynamic programming<b> approach:
+
+```js
+function findMinimumDeletions(nums) {
+  /* Given a number sequence, find the minimum number of elements that should be deleted to make the remaining sequence sorted. */
+
+  /*MY THOUGHT PROCESS*/
+  // check currIndex and prevIndex,
+  // case 1 => if currIndex and prevIndex are sorted increase currIndex and prevIndex and try to extend subsequence
+  // case 2 => if currIndex and prevIndex are  not sorted, SKIP currIndex and check prevIndex is sorted in comparison to currIndex + 1, increment deletions counter
+
+  // substracting the length of the LIS from the length of the input array to
+  // get the minimum number of deletions
+  return nums.length - findLISLength(nums);
+
+  function findLISLength(nums) {
+    const dp = Array(nums.length).fill(0);
+
+    dp[0] = 1;
+
+    let maxLength = 1;
+
+    for (let i = 1; i < nums.length; i++) {
+      dp[i] = 1;
+      for (let j = 0; j < i; j++) {
+        // console.log(dp[i], i, dp[j], j)
+        if (nums[i] > nums[j] && dp[i] <= dp[j]) {
+          dp[i] = dp[j] + 1;
+          maxLength = Math.max(maxLength, dp[i]);
+          // console.log(dp)
+        }
+      }
+    }
+    return maxLength;
+  }
+}
+
+console.log(
+  `Minimum deletion needed: ---> ${findMinimumDeletions(
+    [4, 2, 3, 6, 10, 1, 12])}`
+);
+// Output: 2
+// Explanation: We need to delete {4,1} to make the remaing sequence sorted {2,3,6,10,12}.
+
+console.log(
+  `Minimum deletion needed: ---> ${findMinimumDeletions(
+    [-4, 10, 3, 7, 15])}`
+);
+// Output: 1
+// Explanation: We need to delete {10} to make the remaing sequence sorted {-4,3,7,15}.
+
+console.log(
+  `Minimum deletion needed: ---> ${findMinimumDeletions(
+    [3, 2, 1, 0])}`
+);
+// Output: 3
+// Explanation: Since the elements are in reverse order, we have to delete all except one to get a sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
+```
+
+- The  <b>time complexity</b>  of the above algorithm is is `O(n²)` and the <b>space complexity</b> is `O(n)`.
+
+
 ## Longest Repeating Subsequence
 https://www.geeksforgeeks.org/longest-repeating-subsequence/
 
