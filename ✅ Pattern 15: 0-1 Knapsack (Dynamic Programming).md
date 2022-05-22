@@ -5282,14 +5282,14 @@ Output: 3
 Explanation: Since the elements are in reverse order, we have to delete all except one to get a 
 sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
 ```
-### Basic Brute-force Solution#
+### Basic Brute-force Solution
 A <b>basic brute-force solution</b> could be to try deleting all combinations of elements, one by one, and checking if that makes the <b>subsequence</b> sorted.
 
-Alternately, we can convert this problem into a <b>[Longest Increasing Subsequence (LIS)](#👩🏽‍🦯-🔎-longest-increasing-subsequence)</b> problem. As we know that <b>LIS</b> will give us the length of the <b>longest increasing subsequence</b> (in the sorted order!), which means that the elements which are not part of the <b>LIS</b> should be removed to make the <b>sequence</b> sorted. This is exactly what we need. So we’ll get our solution by subtracting the length of <b>LIS<b> from the length of the input array: `Length-of-input-array - LIS()`
+Alternately, we can convert this problem into a <b>[Longest Increasing Subsequence (LIS)](#👩🏽‍🦯-🔎-longest-increasing-subsequence)</b> problem. As we know that <b>LIS</b> will give us the length of the <b>longest increasing subsequence</b> (in the sorted order!), which means that the elements which are not part of the <b>LIS</b> should be removed to make the <b>sequence</b> sorted. This is exactly what we need. So we’ll get our solution by subtracting the length of <b>LIS</b> from the length of the input array: `Length-of-input-array - LIS()`
 
 Let’s jump directly to the <b>bottom-up dynamic programming<b> solution.
 
-### Bottom-up Dynamic Programming#
+### Bottom-up Dynamic Programming
 Here is the code for our <b>bottom-up dynamic programming<b> approach:
 
 ```js
