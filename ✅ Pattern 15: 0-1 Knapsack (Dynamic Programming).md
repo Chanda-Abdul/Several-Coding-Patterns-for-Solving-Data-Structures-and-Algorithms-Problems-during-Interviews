@@ -1,11 +1,12 @@
 # Pattern 15: 0-1 Knapsack (Dynamic Programming)
+
 from this [course](https://www.educative.io/courses/grokking-dynamic-programming-patterns-for-coding-interviews)
-|                                                                                   |
+| |
 | --------------------------------------------------------------------------------- |
-| <b>[Pattern 1: 0/1 Knapsack](#pattern-1-01-knapsack)</b>                          |
-| <b>[Pattern 2: Unbounded Knapsack](#pattern-2-unbounded-knapsack)</b>             |
-| <b>[Pattern 3: Fibonacci Numbers](#pattern-3-fibonacci-numbers)</b>               |
-| <b>[Pattern 4: Palindromic Subsequence](#pattern-4-palindromic-subsequence)</b>   |
+| <b>[Pattern 1: 0/1 Knapsack](#pattern-1-01-knapsack)</b> |
+| <b>[Pattern 2: Unbounded Knapsack](#pattern-2-unbounded-knapsack)</b> |
+| <b>[Pattern 3: Fibonacci Numbers](#pattern-3-fibonacci-numbers)</b> |
+| <b>[Pattern 4: Palindromic Subsequence](#pattern-4-palindromic-subsequence)</b> |
 | <b>[Pattern 5: Longest Common Substring](#pattern-5-longest-common-substring)</b> |
 
 <b>Dynamic Programming (DP)</b> is an algorithmic technique for solving an optimization problem by breaking it down into simpler subproblems and utilizing the fact that the optimal solution to the overall problem depends upon the optimal solution to its subproblems.
@@ -117,6 +118,7 @@ console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 Let’s apply this knowledge to solve some of the frequently asked <b>DP</b> problems.
 
 # Pattern 1: 0/1 Knapsack
+
 ## Problem Set
 
 1. [🔎 0/1 Knapsack](#🔎-01-knapsack-medium)
@@ -222,8 +224,8 @@ console.log(
 
 #### Time & Space Complexity
 
-- The above algorithm’s <b>time complexity</b>  is exponential `O(2ⁿ)`, where `n` represents the total number of items. This can also be confirmed from the above recursion tree. As we can see, we will have a total of `31` 😲 recursive calls – calculated through `(2ⁿ) + (2ⁿ) - 1`, which is <i>asymptotically</i> equivalent to `O(2ⁿ)`.
-- The <b>space complexity</b>  is `O(n)`. This space will be used to store the recursion stack. Since the recursive algorithm works in a depth-first fashion, which means that we can’t have more than `n` recursive calls on the call stack at any time.
+- The above algorithm’s <b>time complexity</b> is exponential `O(2ⁿ)`, where `n` represents the total number of items. This can also be confirmed from the above recursion tree. As we can see, we will have a total of `31` 😲 recursive calls – calculated through `(2ⁿ) + (2ⁿ) - 1`, which is <i>asymptotically</i> equivalent to `O(2ⁿ)`.
+- The <b>space complexity</b> is `O(n)`. This space will be used to store the recursion stack. Since the recursive algorithm works in a depth-first fashion, which means that we can’t have more than `n` recursive calls on the call stack at any time.
 
 ### Overlapping Sub-problems
 
@@ -249,7 +251,7 @@ function solveKnapsack(profits, weights, capacity) {
 
     memo[currIndex] = memo[currIndex] || [];
 
-    if (typeof memo[currIndex][capacity] !== "undefined") {
+    if (typeof memo[currIndex][capacity] !== 'undefined') {
       return memo[currIndex][capacity];
     }
 
@@ -306,8 +308,8 @@ console.log(
 
 #### Time & Space Complexity
 
-- Since our <b>Memoization</b> array `memo[profits.length][capacity+1]` stores the results for all subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the <b>knapsack</b> capacity). This means that our <b>time complexity</b>  will be `O(N*C)`.
-- The above algorithm will use `O(N*C)` space for the <b>Memoization</b> array. Other than that, we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
+- Since our <b>Memoization</b> array `memo[profits.length][capacity+1]` stores the results for all subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the <b>knapsack</b> capacity). This means that our <b>time complexity</b> will be `O(N*C)`.
+- The above algorithm will use `O(N*C)` space for the <b>Memoization</b> array. Other than that, we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b> will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
 
@@ -383,7 +385,7 @@ console.log(
 
 #### Time & Space Complexity
 
-- The above solution has the time and <b>space complexity</b>  of `O(N*C)`, where `N` represents total items, and `C` is the maximum capacity.
+- The above solution has the time and <b>space complexity</b> of `O(N*C)`, where `N` represents total items, and `C` is the maximum capacity.
 
 #### How can we find the selected items?
 
@@ -444,7 +446,7 @@ function solveKnapsack(profits, weights, capacity) {
   }
 
   //**function to print the set of items included in the knapsack**//
-  let selectedWeights = "";
+  let selectedWeights = '';
   let totalProfit = dp[weights.length - 1][capacity];
   let remainingCapacity = capacity;
   for (let i = weights.length - 1; i > 0; i--) {
@@ -527,7 +529,7 @@ function solveKnapsack(profits, weights, capacity) {
     }
   }
   //**function to print the set of items included in the knapsack**
-  let selectedWeights = "";
+  let selectedWeights = '';
   let totalProfit = dp[(weights.length - 1) % 2][capacity];
   let remainingCapacity = capacity;
   for (let i = weights.length - 1; i > 0; i--) {
@@ -616,7 +618,7 @@ function solveKnapsack(profits, weights, capacity) {
     }
   }
   //**function to print the set of items included in the knapsack**
-  let selectedWeights = "";
+  let selectedWeights = '';
   let totalProfit = dp[capacity];
   let remainingCapacity = capacity;
   //*look into this for loop
@@ -703,8 +705,8 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 //The given set cannot be partitioned into two subsets with equal sum.
 ```
 
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The <b>space complexity</b>  is `O(n)`, which will be used to store the <i>recursion stack</i>.
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b> is `O(n)`, which will be used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -735,18 +737,11 @@ function canPartition(num) {
     dp[currIndex] = dp[currIndex] || [];
 
     //if we have not already processed a similar problem
-    if (typeof dp[currIndex][sum] === "undefined") {
+    if (typeof dp[currIndex][sum] === 'undefined') {
       //recursive call after choosing the number at currIndex
       //if the number at currIndex exceed the sum, we shouldn't process
       if (num[currIndex] <= sum) {
-        if (
-          canPartitionRecursive(
-            dp,
-            num,
-            sum - num[currIndex],
-            currIndex + 1
-          )
-        )
+        if (canPartitionRecursive(dp, num, sum - num[currIndex], currIndex + 1))
           dp[currIndex][sum] = true;
 
         return true;
@@ -772,7 +767,7 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 //The given set cannot be partitioned into two subsets with equal sum.
 ```
 
-- The above algorithm has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
+- The above algorithm has the time and <b>space complexity</b> of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
 
 ### Bottom-up Dynamic Programming
 
@@ -839,7 +834,7 @@ console.log(`Can partition: ${canPartition([2, 3, 4, 6])}`); //False
 //The given set cannot be partitioned into two subsets with equal sum.
 ```
 
-- The above solution the has time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
+- The above solution the has time and <b>space complexity</b> of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
 
 ## 🔎 Subset Sum (medium)
 
@@ -921,7 +916,7 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 4, 8], 6)}`);
 //The given set does not have any subset whose sum is equal to '6'.
 ```
 
-- The above solution has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the required sum.
+- The above solution has the time and <b>space complexity</b> of `O(N*S)`, where `N` represents total numbers and `S` is the required sum.
 
 ### Challenge
 
@@ -1038,8 +1033,8 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 100, 4])}`);
 //We can partition the given set into two subsets where minimum absolute difference between the sum of numbers is '92'. Here are the two subsets: {1, 3, 4} & {100}.
 ```
 
-- Because of the two recursive calls, the <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The <b>space complexity</b>  is `O(n)` which is used to store the recursion stack.
+- Because of the two recursive calls, the <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -1061,7 +1056,7 @@ function canPartition(nums) {
     dp[currIndex] = dp[currIndex] || [];
 
     //check if we have not already process similar problem
-    if (typeof dp[currIndex][sum1] === "undefined") {
+    if (typeof dp[currIndex][sum1] === 'undefined') {
       //recursive call after including the number at the
       //currIndex in the first set
       const difference1 = canPartitionRecursive(
@@ -1180,7 +1175,7 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 100, 4])}`);
 //We can partition the given set into two subsets where minimum absolute difference between the sum of numbers is '92'. Here are the two subsets: {1, 3, 4} & {100}.
 ```
 
-- The above solution has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
+- The above solution has the time and <b>space complexity</b> of `O(N*S)`, where `N` represents total numbers and `S` is the total sum of all the numbers.
 
 ## 🌟Count of Subset Sum (hard)
 
@@ -1214,11 +1209,7 @@ function countSubsets(num, sum) {
     //if the number at currIndex exceeds the sum, we shouldn't process this
     let sum1 = 0;
     if (num[currIndex] <= sum) {
-      sum1 = countSubsetsRecursive(
-        num,
-        sum - num[currIndex],
-        currIndex + 1
-      );
+      sum1 = countSubsetsRecursive(num, sum - num[currIndex], currIndex + 1);
     }
 
     //recursive call after excluding the number at currIndex
@@ -1238,8 +1229,8 @@ console.log(`Count of subset sum is: ---> ${countSubsets([1, 2, 7, 1, 5], 9)}`);
 //The given set has '3' subsets whose sum is '9': {2, 7}, {1, 7, 1}, {1, 2, 1, 5}
 ```
 
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The <b>space complexity</b>  is `O(n)` which is used to store the recursion stack.
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -1258,16 +1249,12 @@ function countSubsets(num, sum) {
     dp[currIndex] = dp[currIndex] || [];
 
     //check if we have not already processed a similar problem
-    if (typeof dp[currIndex][sum] === "undefined") {
+    if (typeof dp[currIndex][sum] === 'undefined') {
       //recursive call after selecting the number at the currIndex
       //if the number at currIndex exceeds the sum, we shouldn't process this
       let sum1 = 0;
       if (num[currIndex] <= sum) {
-        sum1 = countSubsetsRecursive(
-          num,
-          sum - num[currIndex],
-          currIndex + 1
-        );
+        sum1 = countSubsetsRecursive(num, sum - num[currIndex], currIndex + 1);
       }
       //recursive call after excluding the number at currIndex
       const sum2 = countSubsetsRecursive(num, sum, currIndex + 1);
@@ -1349,7 +1336,7 @@ console.log(`Count of subset sum is: ---> ${countSubsets([1, 2, 7, 1, 5], 9)}`);
 //The given set has '3' subsets whose sum is '9': {2, 7}, {1, 7, 1}, {1, 2, 1, 5}
 ```
 
-- The above solution has the time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
+- The above solution has the time and <b>space complexity</b> of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
 
 ### Challenge
 
@@ -1486,7 +1473,7 @@ console.log(
 // The given set has '2' ways to make a sum of '9': {+1+2+7-1} & {-1+2+7+1}
 ```
 
-- The above solution has time and <b>space complexity</b>  of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
+- The above solution has time and <b>space complexity</b> of `O(N*S)`, where `N` represents total numbers and `S` is the desired sum.
 
 - We can further improve the solution to use only `O(S)` space.
 
@@ -1543,6 +1530,7 @@ console.log(
 ```
 
 # Pattern 2: Unbounded Knapsack
+
 ## Problem Set
 
 1. [Unbounded Knapsack](#unbounded-knapsack)
@@ -1551,10 +1539,9 @@ console.log(
 4. [Minimum Coin Change](#minimum-coin-change)
 5. [Maximum Ribbon Cut](#maximum-ribbon-cut)
 
+##
 
-## 
-
-> Given the weights and profits of `N` items, we are asked to put these items in a <b>knapsack</b> with a capacity `C`. The goal is to get the `maximum profit` out of the <b>knapsack</b> items. The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this problem is that we are allowed to use an unlimited quantity of an item.
+> Given the weights and profits of `N` items, we are asked to put these items in a <b>knapsack</b> with a capacity `C`. The goal is to get the `maximum profit` out of the <b>knapsack</b> items. The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b> problem and this problem is that we are allowed to use an unlimited quantity of an item.
 
 Let’s take Merry’s example, who wants to carry some fruits in the <b>knapsack</b> to get `maximum profit`. Here are the weights and profits of the fruits:
 
@@ -1586,7 +1573,7 @@ for each item 'i'
 return the set from the above two sets with higher profit
 ```
 
-The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>  problem and this one is that, after including the item, we recursively call to process all the items (including the current item). In <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>., however, we recursively call to process the remaining items.
+The only difference between the <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b> problem and this one is that, after including the item, we recursively call to process all the items (including the current item). In <b>[0/1 Knapsack pattern](#pattern-1-01-knapsack)</b>., however, we recursively call to process the remaining items.
 
 ```js
 function solveKnapsack(profits, weights, capacity) {
@@ -1635,8 +1622,8 @@ console.log(
 );
 ```
 
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items.
-- The <b>space complexity</b>  will be `O(N+C)` to store the recursion stack.
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items.
+- The <b>space complexity</b> will be `O(N+C)` to store the recursion stack.
 
 Let’s try to find a better solution.
 
@@ -1704,8 +1691,8 @@ console.log(
 
 #### What is the time and space complexity of the above solution?
 
-- Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the <b>knapsack</b> capacity). This means that our <b>time complexity</b>  will be `O(N∗C)`.
-- The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b>  will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
+- Since our <i>memoization</i> array `dp[profits.length][capacity+1]` stores the results for all the subproblems, we can conclude that we will not have more than `N*C` subproblems (where `N` is the number of items and `C` is the <b>knapsack</b> capacity). This means that our <b>time complexity</b> will be `O(N∗C)`.
+- The above algorithm will be using `O(N*C)` space for the <i>memoization</i> array. Other than that we will use `O(N)` space for the recursion call-stack. So the total <b>space complexity</b> will be `O(N*C + N)`, which is <i>asymptotically</i> equivalent to `O(N*C)`.
 
 ### Bottom-up Dynamic Programming
 
@@ -1718,8 +1705,11 @@ So for every possible capacity `c` (`0 <= c <= capacity`), we have two options:
 
 Finally, we have to take the maximum of the above two values:
 
-```js 
-dp[index][c] = max(dp[index - 1][c],profit[index] + dp[index][c - weight[index]]);
+```js
+dp[index][c] = max(
+  dp[index - 1][c],
+  profit[index] + dp[index][c - weight[index]]
+);
 ```
 
 ```js
@@ -1770,7 +1760,7 @@ console.log(
 );
 ```
 
-- The above solution has time and <b>space complexity</b>  of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
+- The above solution has time and <b>space complexity</b> of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
 
 As we know, the final profit is at the right-bottom corner; hence we will start from there to find the items that will be going to the <b>knapsack</b>.
 
@@ -1888,7 +1878,10 @@ So for every possible rod length `len` (`0<= len <= n`), we have two options:
 Finally, we have to take the maximum of the above two values:
 
 ```js
-dp[index][len] = max(dp[index - 1][len], prices[index] + dp[index][len - lengths[index]]);
+dp[index][len] = max(
+  dp[index - 1][len],
+  prices[index] + dp[index][len - lengths[index]]
+);
 ```
 
 Here is the code for our <b>bottom-up dynamic programming</b> approach:
@@ -1934,7 +1927,7 @@ console.log(
 );
 ```
 
-- The above solution has time and <b>space complexity</b>  of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
+- The above solution has time and <b>space complexity</b> of `O(N*C)`, where `N` represents total items and `C` is the maximum capacity.
 
 #### Find the selected items
 
@@ -2037,7 +2030,7 @@ console.log(
 );
 ```
 
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The <b>space complexity</b>  will be `O(C+T)`.
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The <b>space complexity</b> will be `O(C+T)`.
 
 Let’s try to find a better solution.
 
@@ -2058,7 +2051,7 @@ function countChange(denominations, total) {
     dp[currIndex] = dp[currIndex] || [];
 
     //if we have already processed a similar sub-problem, return the result
-    if (typeof dp[currIndex][total] !== "undefined")
+    if (typeof dp[currIndex][total] !== 'undefined')
       return dp[currIndex][total];
 
     //recursive call after selecting the coin at currIndex
@@ -2141,7 +2134,7 @@ console.log(
 );
 ```
 
-- The above solution has time and <b>space complexity</b>  of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
+- The above solution has time and <b>space complexity</b> of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
 
 ## Minimum Coin Change
 
@@ -2225,7 +2218,7 @@ console.log(`Number of ways to make change: ---> ${countChange([1, 2, 3], 7)}`);
 console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
 
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The <b>space complexity</b>  will be `O(C+T)`.
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᶜ⁺ᵀ)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change. The <b>space complexity</b> will be `O(C+T)`.
 
 Let’s try to find a better solution.
 
@@ -2245,7 +2238,7 @@ function countChange(denominations, total) {
     dp[currIndex] = dp[currIndex] || [];
 
     //check if we. have not alreay processed a similar subproblem
-    if (typeof dp[currIndex][total] === "undefined") {
+    if (typeof dp[currIndex][total] === 'undefined') {
       //recursive call after selecting the coin at currIndex
       //if the coin at currIndex exceeds the total, we won't process
       let currCoinCount = Infinity;
@@ -2340,7 +2333,7 @@ console.log(`Number of ways to make change: ---> ${countChange([1, 2, 3], 7)}`);
 console.log(`Number of ways to make change: ---> ${countChange([3, 5], 7)}`);
 ```
 
-- The above solution has time and <b>space complexity</b>  of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
+- The above solution has time and <b>space complexity</b> of `O(C*T)`, where `C` represents total `coin` denominations and `T` is the total amount that we want to make change.
 
 ## Maximum Ribbon Cut
 
@@ -2437,7 +2430,7 @@ console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
 ```
 
-The above algorithm’s <b>time complexity</b>  is exponential `O(2 ᴸ⁺ᴺ)`, where `L` represents total ribbon lengths, and `N` is the total length that we want to cut. The <b>space complexity</b>  will be `O(L+N)`.
+The above algorithm’s <b>time complexity</b> is exponential `O(2 ᴸ⁺ᴺ)`, where `L` represents total ribbon lengths, and `N` is the total length that we want to cut. The <b>space complexity</b> will be `O(L+N)`.
 
 Since this problem is quite similar to <b>[Minimum Coin Change](#minimum-coin-change)</b>, let’s jump on to the <b>bottom-up dynamic programming solution</b>.
 
@@ -2453,7 +2446,10 @@ So for every possible length `len` (`0 <= len <= total`) and for every possible 
 Finally, we will take the maximum of the above two values for our solution:
 
 ```js
-dp[index][len] = max(dp[index - 1][len],1 + dp[index][len -ribbonLengths[index]]);
+dp[index][len] = max(
+  dp[index - 1][len],
+  1 + dp[index][len - ribbonLengths[index]]
+);
 ```
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
@@ -2501,9 +2497,10 @@ console.log(
   `Maximum number of ribbons: ---> ${countRibbonPieces([3, 5], 7)}`);
 ```
 
-- The above solution has time and <b>space complexity</b>  of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
+- The above solution has time and <b>space complexity</b> of `O(L*N)`, where `L` represents total ribbon lengths and `N` is the total length that we want to cut.
 
 # Pattern 3: Fibonacci Numbers
+
 ## Problem Set
 
 1. [Fibonacci numbers](#fibonacci-numbers)
@@ -2513,16 +2510,16 @@ console.log(
 5. [Minimum jumps with fee](#minimum-jumps-with-fee)
 6. [🌴 🔎 👩🏽‍🦯 House thief](#🌴-🔎-👩🏽‍🦯-house-thief)
 
-
-
 ## Fibonacci numbers
+
 https://leetcode.com/problems/fibonacci-number/
 
 > Write a function to calculate the `nth` <b>Fibonacci number</b>.
 
-<b>Fibonacci numbers</b> are a series of numbers in which each number is the sum of the two preceding numbers. First few <b>Fibonacci numbers</b>  are: `0, 1, 1, 2, 3, 5, 8, …`
+<b>Fibonacci numbers</b> are a series of numbers in which each number is the sum of the two preceding numbers. First few <b>Fibonacci numbers</b> are: `0, 1, 1, 2, 3, 5, 8, …`
 
-Mathematically we can define the <b>Fibonacci numbers</b>  as:
+Mathematically we can define the <b>Fibonacci numbers</b> as:
+
 ```js
 Fib(n) = Fib(n-1) + Fib(n-2), for n > 1
 
@@ -2530,6 +2527,7 @@ Given that: Fib(0) = 0, and Fib(1) = 1
 ```
 
 ### Basic Brute Force Solution
+
 A <i>Basic Brute Force Solution</i> could be to have a recursive implementation of the mathematical formula discussed above:
 
 ```js
@@ -2575,9 +2573,11 @@ console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
 
 ### Bottom-up Dynamic Programming
+
 Let’s try to populate our `dp[]` array from the above solution, working in a bottom-up fashion. Since every <b>Fibonacci number</b> is the sum of the previous two numbers, we can use this fact to populate our array.
 
 Here is the code for the <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function calculateFibonacci(n) {
   if (n < 2) return n;
@@ -2594,10 +2594,13 @@ console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
 console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
-- The above solution has time and <b>space complexity</b>  of `O(n)`.
+
+- The above solution has time and <b>space complexity</b> of `O(n)`.
 
 #### Memory optimization
+
 We can optimize the space used in our previous solution. We don’t need to store all the <b>Fibonacci numbers</b> up to `n`, as we only need two previous numbers to calculate the next <b>Fibonacci number</b>. We can use this fact to further improve our solution:
+
 ```js
 function calculateFibonacci(n) {
   if (n < 2) return n;
@@ -2616,34 +2619,41 @@ console.log(`5th Fibonacci is ---> ${calculateFibonacci(5)}`);
 console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
-- The above solution has a <b>time complexity</b>  of `O(n)` but a constant <b>space complexity</b>  `O(1)`.
 
-
+- The above solution has a <b>time complexity</b> of `O(n)` but a constant <b>space complexity</b> `O(1)`.
 
 ## 🔎👩🏽‍🦯 Staircase
+
 https://leetcode.com/problems/climbing-stairs/
 
 > Given a stair with `n` steps, implement a method to count how many possible ways are there to reach the top of the staircase, given that, at every step you can either take `1` step, `2` steps, or `3` steps.
 
 #### Example 1:
+
 ```js
 Number of stairs (n) : 3
 Number of ways = 4
-Explanation: Following are the four ways we can climb : {1,1,1}, {1,2}, {2,1}, {3} 
+Explanation: Following are the four ways we can climb : {1,1,1}, {1,2}, {2,1}, {3}
 ```
+
 #### Example 2:
-````js
+
+```js
 Number of stairs (n) : 4
 Number of ways = 7
-Explanation: Following are the seven ways we can climb : {1,1,1,1}, {1,1,2}, {1,2,1}, {2,1,1}, 
+Explanation: Following are the seven ways we can climb : {1,1,1,1}, {1,1,2}, {1,2,1}, {2,1,1},
 {2,2}, {1,3}, {3,1}
-````
+```
+
 Let’s first start with a <b>recursive brute-force solution</b>.
+
 ### Brute-Force Solution
-At every step, we have three options: 
-- either jump `1` step, 
-- `2` steps, 
-- or `3` steps. 
+
+At every step, we have three options:
+
+- either jump `1` step,
+- `2` steps,
+- or `3` steps.
 
 So our algorithm will look like this:
 
@@ -2684,6 +2694,7 @@ Let’s visually draw the recursion for `countWays(4)` to see the <i>overlapping
 We can clearly see the overlapping subproblem pattern: `countWays(2)` and `countWays(1)` have been called twice. We can optimize this using <b>memoization</b>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use an array to store the already solved subproblems. Here is the code:
 
 ```js
@@ -2719,14 +2730,17 @@ console.log(`Number of ways: ---> ${countWays(4)}`);
 console.log(`Number of ways: ---> ${countWays(5)}`);
 ```
 
-#### What is the time and space complexity of the above solution? 
-- Since our <b>memoization</b> array `dp[n+1]` stores the results for all the subproblems, we can conclude that we will not have more than `n+1` subproblems (where `n` represents the total number of steps). This means that our <b>time complexity</b> will be `O(N)`. 
+#### What is the time and space complexity of the above solution?
+
+- Since our <b>memoization</b> array `dp[n+1]` stores the results for all the subproblems, we can conclude that we will not have more than `n+1` subproblems (where `n` represents the total number of steps). This means that our <b>time complexity</b> will be `O(N)`.
 - The <b>space complexity</b> will also be `O(n)`; this space will be used to store the <i>recursion-stack</i>.
 
 ### Bottom-up Dynamic Programming
+
 Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `countWaysRecursive(n`) is the sum of the previous three counts. We can use this fact to populate our array.
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function countWays(n) {
   const dp = Array(n + 1).fill(1);
@@ -2757,7 +2771,9 @@ console.log(`Number of ways: ---> ${countWays(5)}`);
 - The above solution has <b>time and space complexity</b> of `O(n)`.
 
 #### Memory optimization
+
 We can optimize the space used in our previous solution. We don’t need to store all the counts up to `n`, as we only need three previous numbers to calculate the next count. We can use this fact to further improve our solution:
+
 ```js
 function countWays(n) {
   const dp = [1, 1, 2];
@@ -2776,77 +2792,89 @@ console.log(`Number of ways: ---> ${countWays(3)}`);
 console.log(`Number of ways: ---> ${countWays(4)}`);
 console.log(`Number of ways: ---> ${countWays(5)}`);
 ```
+
 - The above solution has a <b>time complexity</b> of `O(n)` and a constant <b>space complexity</b> `O(1)`.
 
 #### Fibonacci number pattern
+
 We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that in <b>Fibonacci numbers</b> every number is a sum of the two preceding numbers, whereas in this problem every count is a sum of three preceding counts. Here is the <i>recursive formula</i>for this problem:
 
 ```js
-countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3), 
+countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3),
 for n >=3
 ```
+
 This problem can be extended further. Instead of taking `1`, `2`, or `3` steps at any time, what if we can take up to `k` steps at any time? In that case, our <i>recursive formula</i>will look like:
 
 ```js
-countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3) + ... + countWays(n-k), 
+countWays(n) = countWays(n-1) + countWays(n-2) + countWays(n-3) + ... + countWays(n-k),
 for n >= k
 ```
 
 ## Number factors
-https://www.geeksforgeeks.org/count-ofdifferent-ways-express-n-sum-1-3-4/ 
+
+https://www.geeksforgeeks.org/count-ofdifferent-ways-express-n-sum-1-3-4/
 
 > Given a number `n`, implement a method to count how many possible ways there are to express `n` as the sum of `1`, `3`, or `4`.
 
 #### Example 1:
+
 ```js
 n : 4
 Number of ways = 4
-Explanation: Following are the four ways we can express 'n' : {1,1,1,1}, {1,3}, {3,1}, {4} 
+Explanation: Following are the four ways we can express 'n' : {1,1,1,1}, {1,3}, {3,1}, {4}
 ```
+
 #### Example 2:
+
 ```js
 n : 5
 Number of ways = 6
-Explanation: Following are the six ways we can express 'n' : {1,1,1,1,1}, {1,1,3}, {1,3,1}, {3,1,1}, 
+Explanation: Following are the six ways we can express 'n' : {1,1,1,1,1}, {1,1,3}, {1,3,1}, {3,1,1},
 {1,4}, {4,1}
 ```
+
 ### Brute-Force Solution
+
 Let’s first start with a <b>recursive brute-force solution</b>.
 
 For every number `i`, we have three option: subtract either `1`, `3`, or `4` from `i` and recursively process the remaining number. So our algorithm will look like:
+
 ```js
 function countWays(n) {
   function countWaysRecursive(n) {
     //base case
-    if(n <= 2) return 1
-    if(n ===3 ) return 2
-    
+    if (n <= 2) return 1;
+    if (n === 3) return 2;
+
     // if we subtract 1, we are left with 'n-1'
-    const subtract1 = countWays(n-1)
+    const subtract1 = countWays(n - 1);
     // if we subtract 3, we are left with 'n-3'
-    const subtract3 = countWays(n-3)
+    const subtract3 = countWays(n - 3);
     // if we subtract 4, we are left with 'n-4'
-    const subtract4 = countWays(n-4)
-    
-    return subtract1 + subtract3 + subtract4
- 
-};
- return countWaysRecursive(n)
-};
+    const subtract4 = countWays(n - 4);
+
+    return subtract1 + subtract3 + subtract4;
+  }
+  return countWaysRecursive(n);
+}
 
 console.log(`Number of ways: ---> ${countWays(4)}`);
 console.log(`Number of ways: ---> ${countWays(5)}`);
 console.log(`Number of ways: ---> ${countWays(6)}`);
 ```
+
 The <b>time complexity</b> of the above algorithm is exponential `O(3ᴺ)`. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 Let’s visually draw the recursion for `CountWays(5)` to see the <i>overlapping subproblems</i>:
 ![](./images/dpnumberfactors.png)
 
-We can clearly see the <i>overlapping subproblems pattern</i>: `CountWays(3)`, `CountWays(2)` and` CountWays(1)` have been called twice. We can optimize this using <b>memoization</b> to store the results for  <i>subproblems</i>.
+We can clearly see the <i>overlapping subproblems pattern</i>: `CountWays(3)`, `CountWays(2)` and` CountWays(1)` have been called twice. We can optimize this using <b>memoization</b> to store the results for <i>subproblems</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use an array to store the already solved <i>subproblems</i>. Here is the code:
+
 ```js
 function countWays(n) {
   const dp = [];
@@ -2874,7 +2902,9 @@ console.log(`Number of ways: ---> ${countWays(4)}`);
 console.log(`Number of ways: ---> ${countWays(5)}`);
 console.log(`Number of ways: ---> ${countWays(6)}`);
 ```
+
 ### Bottom-up Dynamic Programming
+
 Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `CountWaysRecursive(n)` is the sum of the three counts. We can use this fact to populate our array.
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
@@ -2897,25 +2927,30 @@ console.log(`Number of ways: ---> ${countWays(6)}`);
 The above solution has time and space complexity of `O(n)`.
 
 #### Fibonacci number pattern
+
 We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. However, every number in a <b>Fibonacci series</b> is the sum of the previous two numbers, whereas in this problem every count is a sum of previous three numbers: `previous-1`, `previous-3`, and `previous-4`. Here is the <i>recursive formula</i>for this problem:
 
 ```js
-countWays(n) = countWays(n-1) + countWays(n-3) + countWays(n-4), 
+countWays(n) = countWays(n-1) + countWays(n-3) + countWays(n-4),
 for n >= 4
 ```
 
 ## 🌴 Minimum jumps to reach the end
+
 https://leetcode.com/problems/jump-game-ii/
 
 > Given an array of positive numbers, where each element represents the max number of `jumps` that can be made forward from that element, write a program to find the minimum number of `jumps` needed to reach the end of the array (starting from the first element). If an element is `0`, then we cannot move through that element.
 
 #### Example 1:
+
 ```js
 Input = {2,1,1,1,4}
 Output = 3
 Explanation: Starting from index '0', we can reach the last index through: 0->2->3->4
 ```
+
 #### Example 2:
+
 ```js
 Input = {1,1,3,6,9,3,0,1,3}
 Output = 4
@@ -2925,9 +2960,11 @@ Explanation: Starting from index '0', we can reach the last index through: 0->1-
 Let’s first start with a <b>recursive brute-force solution</b>.
 
 ### Basic brute-force solution
+
 We will start with the `0`th index and try all options. So, if the value at the current index is `p`, we will try every jump in the range (`1` to `p`) from that index. After taking a jump, we <i>recursively</i> try all options from that index.
 
 Here is the code:
+
 ```js
 function countMinJumps(jumps) {
   function countMinJumpsRecursive(jumps, jumpIndex) {
@@ -2955,10 +2992,10 @@ function countMinJumps(jumps) {
   return countMinJumpsRecursive(jumps, 0);
 }
 
+console.log(`Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
 console.log(
-  `Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
-console.log(
-  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`);
+  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`
+);
 ```
 
 - The <b>time complexity</b> of the above algorithm is `O(2ⁿ)`, where `n` is the size of the input array. The <i>while loop</i> can execute a maximum of `n` times (for the case where we can jump to all the steps ahead) and since in each iteration, the function <i>recursively calls</i> itself, therefore, the <b>time complexity</b> is `O(2ⁿ)`. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
@@ -2966,10 +3003,12 @@ console.log(
 We can clearly see the <i>overlapping subproblem pattern</i>. We can optimize this using <b>memoization</b> to store the results for <i>subproblems</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use an array to store the already solved <i>subproblems</i>. Here is the code for this:
+
 ```js
 function countMinJumps(jumps) {
-  const dp = Array(jumps.length).fill(0)
+  const dp = Array(jumps.length).fill(0);
   function countMinJumpsRecursive(jumps, jumpIndex) {
     //if we have reached the last index
     //we don't need to do any more jumping
@@ -2987,7 +3026,7 @@ function countMinJumps(jumps) {
       if (minJumps !== Infinity) {
         totalJumps = Math.min(totalJumps, minJumps + 1);
       }
-      dp[jumpIndex] = totalJumps
+      dp[jumpIndex] = totalJumps;
     }
 
     return dp[jumpIndex];
@@ -2996,29 +3035,37 @@ function countMinJumps(jumps) {
   return countMinJumpsRecursive(jumps, 0);
 }
 
+console.log(`Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
 console.log(
-  `Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
-console.log(
-  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`);
+  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`
+);
 ```
 
 ### Bottom-up Dynamic Programming
+
 Let’s try to populate our `dp[]` array from the above solution, working in the <i>bottom-up fashion</i>. As we saw in the above code, we were trying to find the minimum jumps needed to reach every index (if it is within the range) from the current index. We can use this fact to populate our array.
 
 As we know, every index within the range of current index can be reached in one jump. Therefore, we can say that we can reach every index (within the range of current index) in:
+
 ```js
-'jumps to reach current index' + 1
+'jumps to reach current index' + 1;
 ```
-So, while going through all the indexes, we will take the minimum value between the `current jump-count` and the jumps needed to reach the `current index + 1`.
+
+So, while going through all the indices, we will take the minimum value between the `current jump-count` and the jumps needed to reach the `current index + 1`.
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function countMinJumps(jumps) {
   const dp = Array(jumps.length).fill(Infinity);
   dp[0] = 0;
 
   for (let start = 0; start < jumps.length - 1; start++) {
-    for (let end = start + 1; end <= start + jumps[start] && end < jumps.length; end++) {
+    for (
+      let end = start + 1;
+      end <= start + jumps[start] && end < jumps.length;
+      end++
+    ) {
       dp[end] = Math.min(dp[end], dp[start] + 1);
     }
   }
@@ -3026,23 +3073,30 @@ function countMinJumps(jumps) {
   return dp[jumps.length - 1];
 }
 
+console.log(`Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
 console.log(
-  `Minimum jumps needed: ---> ${countMinJumps([2, 1, 1, 1, 4])}`);
-console.log(
-  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`);
+  `Minimum jumps needed: ---> ${countMinJumps([1, 1, 3, 6, 9, 3, 0, 1, 3])}`
+);
 ```
+
 - The above solution has a <b>time complexity</b> of `O(n²)` (because of the two `for` loops) and <b>space complexity</b> of `O(n)` to store `dp[]`.
 
 #### Fibonacci number pattern
+
 We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that every <b>Fibonacci number</b> is a sum of the two preceding numbers, whereas in this problem every number is the minimum of two numbers (`start` and `end`):
-````js
-dp[end] = Math.min(dp[end], dp[start]+1);
-````
+
+```js
+dp[end] = Math.min(dp[end], dp[start] + 1);
+```
+
 ## Minimum jumps with fee
+
 https://leetcode.com/problems/min-cost-climbing-stairs/
+
 > Given a staircase with `n` steps and an array of `n` numbers representing the fee that you have to pay if you take the step. Implement a method to calculate the minimum fee required to reach the top of the staircase (beyond the top-most step). At every step, you have an option to take either `1` step, `2` steps, or `3` steps. You should assume that you are standing at the first step.
 
 #### Example 1:
+
 ```js
 Number of stairs (n) : 6
 Fee: {1,2,5,2,1,2}
@@ -3050,7 +3104,9 @@ Output: 3
 Explanation: Starting from index '0', we can reach the top through: 0->3->top
 The total fee we have to pay will be (1+2).
 ```
+
 #### Example 2:
+
 ```js
 Number of stairs (n): 4
 Fee: {2,3,4,5}
@@ -3062,12 +3118,15 @@ The total fee we have to pay will be (2+3).
 Let’s first start with a <b>recursive brute-force solution</b>.
 
 ### Brute-Force Solution
-At every step, we have three options: 
-- either jump `1` step, 
-- `2` steps, 
-- or `3` steps. 
+
+At every step, we have three options:
+
+- either jump `1` step,
+- `2` steps,
+- or `3` steps.
 
 So our algorithm will look like:
+
 ```js
 function findMinFee(fee) {
   function findMinFeeRecursive(fee, currIndex) {
@@ -3091,10 +3150,12 @@ console.log(`Minimum fee needed: ---> ${findMinFee([1, 2, 5, 2, 1, 2])}`);
 console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
 ```
 
-- The <b>time complexity</b>  of the above algorithm is exponential `O(3ⁿ)`. The <b>space complexity</b>  is `O(n)` which is used to store the <i>recursion stack</i>.
+- The <b>time complexity</b> of the above algorithm is exponential `O(3ⁿ)`. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 To resolve <i>overlapping subproblems</i>, we can use an array to store the already solved subproblems. Here is the code:
+
 ```js
 function findMinFee(fee) {
   const dp = [];
@@ -3120,10 +3181,12 @@ console.log(`Minimum fee needed: ---> ${findMinFee([1, 2, 5, 2, 1, 2])}`);
 console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
 ```
 
-### Bottom-up Dynamic Programming 
+### Bottom-up Dynamic Programming
+
 Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `findMinFeeRecursive(n)` is the minimum of the three <i>recursive calls</i>; we can use this fact to populate our array.
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findMinFee(fee) {
   const dp = Array(fee.length + 1).fill(0);
@@ -3149,14 +3212,16 @@ function findMinFee(fee) {
 
 console.log(`Minimum fee needed: ---> ${findMinFee([1, 2, 5, 2, 1, 2])}`);
 console.log(`Minimum fee needed: ---> ${findMinFee([2, 3, 4, 5])}`);
-
 ```
+
 - The above solution has <b>time and space complexity</b> of `O(n)`.
 
 #### Fibonacci number pattern
+
 We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that every <b>Fibonacci number</b> is a sum of the two preceding numbers, whereas in this problem every number (total `fee`) is the minimum of previous three numbers.
 
 ## 🌴 🔎 👩🏽‍🦯 House thief
+
 https://leetcode.com/problems/house-robber/
 
 There are `n` houses built in a line. A thief wants to steal the maximum possible money from these houses. The only restriction the thief has is that he can’t steal from two consecutive houses, as that would alert the security system. How should the thief maximize his stealing?
@@ -3164,26 +3229,32 @@ There are `n` houses built in a line. A thief wants to steal the maximum possibl
 > Given a number array representing the wealth of `n` houses, determine the maximum amount of money the thief can steal without alerting the security system.
 
 #### Example 1:
+
 ```js
 Input: {2, 5, 1, 3, 6, 2, 4}
 Output: 15
 Explanation: The thief should steal from houses 5 + 6 + 4
 ```
+
 #### Example 2:
+
 ```js
 Input: {2, 10, 14, 8, 1}
 Output: 18
 Explanation: The thief should steal from houses 10 + 8
 ```
+
 Let’s first start with a <b>recursive brute-force solution</b>.
 
 ### Brute-Force Solution
+
 For every house `i`, we have two options:
 
 1. Steal from the current house `i`, skip one and steal from `i+2`.
 2. Skip the current house `i`, and steal from the adjacent house `i+1`.
 
 The thief should choose the one with the maximum amount from the above two options. So our algorithm will look like this:
+
 ```js
 function findMaxSteal(wealth) {
   function findMaxStealRecursive(wealth, currIndex) {
@@ -3204,10 +3275,13 @@ function findMaxSteal(wealth) {
 console.log(`Maximum stealing: ---> ${findMaxSteal([2, 5, 1, 3, 6, 2, 4])}`);
 console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
 ```
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`. The <b>space complexity</b>  is `O(n)` which is used to store the <i>recursion stack</i>.
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 To resolve <i>overlapping subproblems</i>, we can use an array to store the already solved <i>subproblems</i>.
+
 ```js
 function findMaxSteal(wealth) {
   const dp = [];
@@ -3233,9 +3307,11 @@ console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
 ```
 
 ### Bottom-up Dynamic Programming
+
 Let’s try to populate our `dp[]` array from the above solution, working in a <i>bottom-up fashion</i>. As we saw in the above code, every `findMaxStealRecursive()` is the maximum of the two <i>recursive calls</i>; we can use this fact to populate our array.
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findMaxSteal(wealth) {
   //+1 to handle the 0 index house
@@ -3255,8 +3331,11 @@ function findMaxSteal(wealth) {
 console.log(`Maximum stealing: ---> ${findMaxSteal([2, 5, 1, 3, 6, 2, 4])}`);
 console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
 ```
+
 - The above solution has <b>time and space complexity</b> of `O(n)`.
+
 #### Memory optimization
+
 We can optimize the space used in our previous solution. We don’t need to store all the previous numbers up to `n`, as we only need two previous numbers to calculate the next number in the <b>sequence</b>. Let’s use this fact to further improve our solution:
 
 ```js
@@ -3274,18 +3353,19 @@ function findMaxSteal(wealth) {
 
 console.log(`Maximum stealing: ---> ${findMaxSteal([2, 5, 1, 3, 6, 2, 4])}`);
 console.log(`Maximum stealing: ---> ${findMaxSteal([2, 10, 14, 8, 1])}`);
-
 ```
+
 - The above solution has a <b>time complexity</b> of `O(n)` and a constant <b>space complexity</b> `O(1)`.
 
 #### Fibonacci number pattern
+
 We can clearly see that this problem follows the <b>[Fibonacci number pattern](#fibonacci-number-pattern)</b>. The only difference is that every <b>Fibonacci number</b> is a sum of the two preceding numbers, whereas in this problem every number (total `wealth`) is the maximum of previous two numbers.
 
-
 # Pattern 4: Palindromic Subsequence
+
 ### Problem Set
 
-1. [Longest Palindromic Subsequence](#longest-palindromic-subsequence) 
+1. [Longest Palindromic Subsequence](#longest-palindromic-subsequence)
 2. [👩🏽‍🦯 🌴 Longest Palindromic Substring](#👩🏽‍🦯-🌴-longest-palindromic-substring)
 3. [👩🏽‍🦯 Count of Palindromic Substrings](#👩🏽‍🦯-count-of-palindromic-substrings)
 4. [🔎 Minimum Deletions in a String to make it a Palindrome](#🔎-minimum-deletions-in-a-string-to-make-it-a-palindrome)
@@ -3294,30 +3374,39 @@ We can clearly see that this problem follows the <b>[Fibonacci number pattern](#
 7. [Palindromic Partitioning](#palindromic-partitioning)
 
 ## Longest Palindromic Subsequence
+
 https://leetcode.com/problems/longest-palindromic-subsequence/
+
 > Given a <b>sequence</b>, find the length of its <b>Longest Palindromic Subsequence (LPS)</b>. In a <b>palindromic subsequence</b>, <i>elements read the same backward and forward</i>.
 
 A <b>subsequence</b> is a <i>sequence</i> that can be derived from another <i>sequence</i> by <i>deleting some or no elements without changing the order of the remaining elements</i>.
 
 #### Example 1:
+
 ```js
 Input: "abdbca"
 Output: 5
 Explanation: LPS is "abdba".
 ```
+
 #### Example 2:
+
 ```js
 Input: = "cddpd"
 Output: 3
 Explanation: LPS is "ddd".
 ```
+
 #### Example 3:
+
 ```js
 Input: = "pqr"
 Output: 1
 Explanation: LPS could be "p", "q" or "r".
 ```
+
 ### Basic Brute-Force Solution
+
 A <b>basic brute-force solution</b> could be to try all the <b>subsequences</b> of the given <i>sequence</i>. We can start processing from the beginning and the end of the <i>sequence</i>. So at any step, we have two options:
 
 1. If the element at the beginning and the end are the same, we increment our count by two and make a recursive call for the remaining <i>sequence</i>.
@@ -3326,6 +3415,7 @@ A <b>basic brute-force solution</b> could be to try all the <b>subsequences</b> 
 If option one applies then it will give us the length of <b>LPS</b>; otherwise, the length of <b>LPS</b> will be the maximum number returned by the two recurse calls from the second option.
 
 Here is the code:
+
 ```js
 function findLPSLength(str) {
   function findLPSLengthRecursive(str, startIndex, endIndex) {
@@ -3361,14 +3451,17 @@ findLPSLength('pqr');
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
+
 - In each function call, we are either having one <i>recursive call</i> or <i>two recursive calls</i> (we will never have <i>three recursive calls</i>); hence, the <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the length of the input <i>sequence</i>. The <b>space complexity</b> is `O(n)`, which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use an array to store the already solved <i>subproblems</i>.
 
-The two changing values to our recursive function are the two indexes, `startIndex` and `endIndex`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`startIndex + “|” + endIndex`))
+The two changing values to our recursive function are the two indices, `startIndex` and `endIndex`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`startIndex + “|” + endIndex`))
 
 Here is the code for this:
+
 ```js
 function findLPSLength(str) {
   const dp = [];
@@ -3411,24 +3504,29 @@ findLPSLength('pqr');
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
+
 - Since our <b>memoization</b> array `dp[str.length][str.length]` stores the results for all the <i>subproblems</i>, we can conclude that we will not have more than `N*N` <i>subproblems</i>(where `N` is the length of the input <i>sequence</i>). This means that our time complexity will be `O(N²)`.
 - The above algorithm will be using `O(N²)` <b>space</b> for the <b>memoization</b> array. Other than that we will use `O(N)` <b>space</b> for the <i>recursion call-stack</i>. So the total <b>space complexity</b> will be `O(N² + N)`, which is <i>asymptotically</i> equivalent to `O(N²)`.
 
 ### Bottom-up Dynamic Programming
+
 Since we want to try all the <b>subsequences</b> of the given <i>sequence</i>, we can use a two-dimensional array to store our results. We can start from the beginning of the <i>sequence</i> and keep adding one element at a time. At every step, we will try all of its <b>subsequences</b>. So for every `startIndex` and `endIndex` in the given string, we will choose one of the following two options:
 
 1. If the element at the `startIndex` matches the element at the `endIndex`, the length of <b>LPS</b> would be two plus the length of <b>LPS</b> until `startIndex+1` and `endIndex-1`.
 2. If the element at the `startIndex` does not match the element at the `endIndex`, we will take the maximum <b>LPS</b> created by either skipping element at the `startIndex` or the `endIndex`.
 
 So our <i>recursive formula</i>would be:
+
 ```js
-if st[endIndex] == st[startIndex] 
+if st[endIndex] == st[startIndex]
   dp[startIndex][endIndex] = 2 + dp[startIndex + 1][endIndex - 1]
 
-else 
+else
   dp[startIndex][endIndex] = Math.max(dp[startIndex + 1][endIndex], dp[startInde[endIndex - 1])
 ```
+
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findLPSLength(str) {
   //dp[i][j] stores the length of LPS from index start to end
@@ -3455,7 +3553,6 @@ function findLPSLength(str) {
       }
     }
   }
-  
 
   return dp[0][str.length - 1];
 }
@@ -3472,31 +3569,41 @@ console.log('Length of LPS ---> ' + findLPSLength('pqr'));
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
+
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input <i>sequence</i>.
+
 ## 👩🏽‍🦯 🌴 Longest Palindromic Substring
+
 https://leetcode.com/problems/longest-palindromic-substring/
 
 > Given a string, find the length of its <b>Longest Palindromic Substring (LPS)</b>. In a <i>palindromic</i> string, <i>elements read the same backward and forward</i>.
 
 #### Example 1:
+
 ```js
 Input: "abdbca"
 Output: 3
 Explanation: LPS is "bdb".
 ```
+
 #### Example 2:
+
 ```js
 Input: = "cddpd"
 Output: 3
 Explanation: LPS is "dpd".
 ```
+
 #### Example 3:
+
 ```js
 Input: = "pqr"
 Output: 1
 Explanation: LPS could be "p", "q" or "r".
 ```
+
 ### Basic Brute-Force Solution
+
 This problem follows the <b>[Longest Palindromic Subsequence pattern](#pattern-4-palindromic-subsequence)</b>. The only difference is that in a <i>palindromic subsequence</i> characters can be non-adjacent, whereas in a <i>substring</i> all characters should form a <i>palindrome</i>. We will follow a similar approach though.
 
 The <b>basic brute-force solution</b> will be to try all the <i>substrings</i> of the given string. We can start processing from the beginning and the end of the string. So at any step, we will have two options:
@@ -3505,6 +3612,7 @@ The <b>basic brute-force solution</b> will be to try all the <i>substrings</i> o
 2. We will skip either the element from the beginning or the end to make two <i>recursive calls</i> for the remaining <i>substring</i>. The length of <b>LPS</b> would be the maximum of these two <i>recursive calls</i>.
 
 Here is the code:
+
 ```js
 function findLPSLength(str) {
   function findLPSLengthRecursive(str, startIndex, endIndex) {
@@ -3548,15 +3656,18 @@ console.log('Length of LPS ---> ' + findLPSLength('pqr'));
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
-- Due to the three <b>recursive calls</b>, the <b>time complexity</b> of the above algorithm is exponential `O(3ⁿ)`, where `n` is the length of the input string. 
+
+- Due to the three <b>recursive calls</b>, the <b>time complexity</b> of the above algorithm is exponential `O(3ⁿ)`, where `n` is the length of the input string.
 - The <b>space complexity</b> is `O(n)` which is used to store the <b>recursion stack</b>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use an array to store the already solved <i>subproblems</i>.
 
-The two changing values to our <b>recursive function</b> are the two indexes, `startIndex` and `endIndex`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`startIndex + “|” + endIndex`))
+The two changing values to our <b>recursive function</b> are the two indices, `startIndex` and `endIndex`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`startIndex + “|” + endIndex`))
 
 Here is the code for this:
+
 ```js
 function findLPSLength(str) {
   const dp = [];
@@ -3605,9 +3716,11 @@ console.log('Length of LPS ---> ' + findLPSLength('pqr'));
 // Output: 1
 // Explanation: LPS could be "p", "q" or "r".
 ```
+
 - The above algorithm has a <b>time and space complexity</b> of `O(n²)` because we will not have more than `n∗n` <i>subproblems</i>.
 
 ### Bottom-up Dynamic Programming
+
 Since we want to try all the <i>substrings</i> of the given string, we can use a two-dimensional array to store the <i>subproblems’</i> results. So `dp[i][j]` will be `true` if the <i>substring</i> from index `i` to index `j` is a <i>palindrome</i>.
 
 We can start from the beginning of the string and keep adding one element at a time. At every step, we will try all of its <i>substrings</i>. So for every `endIndex` and `startIndex` in the given string, we need to check the following thing:
@@ -3615,14 +3728,16 @@ We can start from the beginning of the string and keep adding one element at a t
 - If the element at the `startIndex` matches the element at the `endIndex`, we will further check if the remaining <i>substring</i> (from `startIndex+1` to `endIndex-1`) is a <i>substring</i> too.
 
 So our <i>recursive</i> formula will look like:
+
 ```js
-if st[startIndex] == st[endIndex], and 
+if st[startIndex] == st[endIndex], and
   if the remaing string is of zero length or dp[startIndex+1][endIndex-1] is a palindrome then
-  
+
   dp[startIndex][endIndex] = true
 ```
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findLPSLength(str) {
   // dp[i][j] will be 'true' if the string from index 'start' to index 'end' is a palindrome
@@ -3667,27 +3782,33 @@ console.log('Length of LPS ---> ' + findLPSLength('pqr'));
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 #### Manacher’s Algorithm
+
 The best-known algorithm to find the <b>[longest palindromic substring](#👩🏽‍🦯-longest-palindromic-substring)</b> which runs in linear time `O(n)` is <b>[Manacher’s Algorithm](https://en.wikipedia.org/wiki/Longest_palindromic_substring)</b>. However, it is a non-trivial algorithm that doesn’t use <b>DP</b>. Please take a look to familiarize yourself with this algorithm, however, no one expects you to come up with such an algorithm in a 45 minute coding interview.
 
-
 ## 👩🏽‍🦯 Count of Palindromic Substrings
+
 https://leetcode.com/problems/palindromic-substrings/
 
 > Given a <i>string</i>, find the total number of <i>palindromic substrings</i> in it. Please note we need to find the total number of <i>substrings</i> and not <i>subsequences</i>.
 
 #### Example 1:
+
 ```js
 Input: "abdbca"
 Output: 7
 Explanation: Here are the palindromic substrings, "a", "b", "d", "b", "c", "a", "bdb".
 ```
+
 #### Example 2:
+
 ```js
 Input: = "cddpd"
 Output: 7
 Explanation: Here are the palindromic substrings, "c", "d", "d", "p", "d", "dd", "dpd".
 ```
+
 #### Example 3:
+
 ```js
 Input: = "pqr"
 Output: 3
@@ -3745,42 +3866,49 @@ console.log('Length of LPS: ---> ' + findCPS('pqr'));
 
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
-
 ## 🔎 Minimum Deletions in a String to make it a Palindrome
+
 https://www.geeksforgeeks.org/minimum-number-deletions-make-string-palindrome/
 
 > Given a string, find the minimum number of characters that we can remove to make it a <i>palindrome</i>.
 
 #### Example 1:
+
 ```js
 Input: "abdbca"
 Output: 1
 Explanation: By removing "c", we get a palindrome "abdba".
 ```
+
 #### Example 2:
+
 ```js
 Input: = "cddpd"
 Output: 2
 Explanation: Deleting "cp", we get a palindrome "ddd".
 ```
+
 #### Example 3:
+
 ```js
 Input: = "pqr"
 Output: 2
-Explanation: We have to remove any two characters to get a palindrome, 
+Explanation: We have to remove any two characters to get a palindrome,
 e.g. if we remove "pq", we get palindrome "r".
 ```
 
 This problem can be easily converted to the <b>[Longest Palindromic Subsequence (LPS)](#longest-palindromic-subsequence)</b> problem. We can use the fact that <b>LPS</b> is the best subsequence we can have, so any character that is not part of <b>LPS</b> must be removed. Please note that it is [‘Longest Palindromic SubSequence’](#longest-palindromic-subsequence) and not [‘Longest Palindrome Substring’](#👩🏽‍🦯-🌴-longest-palindromic-substring).
 
 So, our solution for a given string `str` will be:
+
 ```js
-Minimum_deletions_to_make_palindrome = Length(st) - LPS(st)
+Minimum_deletions_to_make_palindrome = Length(st) - LPS(st);
 ```
 
 ### Bottom-up Dynamic Programming
 
 Let’s jump directly to <b>bottom-up dynamic programming</b>:
+
 ```js
 function findMinimumDeletions(str) {
   function findLPSLength(str) {
@@ -3816,27 +3944,33 @@ function findMinimumDeletions(str) {
 }
 
 console.log(
-  'Minimum number of deletions required ---> ' + findMinimumDeletions('abdbca'));
+  'Minimum number of deletions required ---> ' + findMinimumDeletions('abdbca')
+);
 // Output: 1
 // Explanation: By removing "c", we get a palindrome "abdba".
 
 console.log(
-  'Minimum number of deletions required ---> ' + findMinimumDeletions('cddpd'));
+  'Minimum number of deletions required ---> ' + findMinimumDeletions('cddpd')
+);
 // Output: 2
 // Explanation: Deleting "cp", we get a palindrome "ddd".
 
 console.log(
-  'Minimum number of deletions required ---> ' + findMinimumDeletions('pqr'));
+  'Minimum number of deletions required ---> ' + findMinimumDeletions('pqr')
+);
 // 2
 // Explanation: We have to remove any two characters to get a palindrome, e.g. if we
 // remove "pq", we get palindrome "r".
 ```
+
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 ### Similar problems
+
 Here are a couple of similar problems:
 
 ## 1. Minimum insertions in a string to make it a palindrome
+
 https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
 
 Will the above approach work if we make insertions instead of deletions?
@@ -3844,26 +3978,31 @@ Will the above approach work if we make insertions instead of deletions?
 Yes, the length of the <b>Longest Palindromic Subsequence</b> is the best <i>palindromic subsequence</i> we can have. Let’s take a few examples:
 
 ### Example 1:
+
 ```js
-Input: "abdbca"   
-Output: 1  
+Input: "abdbca"
+Output: 1
 Explanation: By inserting “c”, we get a palindrome “acbdbca”.
 ```
+
 ### Example 2:
+
 ```js
-Input: = "cddpd"  
-Output: 2  
+Input: = "cddpd"
+Output: 2
 Explanation: Inserting “cp”, we get a palindrome “cdpdpdc”. We can also get a palindrome by inserting “dc”: “cddpddc”
 ```
+
 ### Example 3:
+
 ```js
-Input: = "pqr"  
-Output: 2  
+Input: = "pqr"
+Output: 2
 Explanation: We have to insert any two characters to get a palindrome (e.g. if we insert “pq”, we get a palindrome “pqrqp”).
 ```
 
 ```js
-function  minInsertions(s) {
+function minInsertions(s) {
   function findLPSLength(s) {
     // dp[i][j] stores the length of LPS from index 'i' to index 'j'
     const dp = Array(s.length)
@@ -3897,41 +4036,50 @@ function  minInsertions(s) {
 }
 
 console.log(
-  'Minimum number of insertions required ---> ' +  minInsertions('abdbca'));
+  'Minimum number of insertions required ---> ' + minInsertions('abdbca')
+);
 // Output: 1
 // Explanation: Explanation: By inserting “c”, we get a palindrome “aCbdbca”.
 
 console.log(
-  'Minimum number of insertions required ---> ' +  minInsertions('cddpd'));
+  'Minimum number of insertions required ---> ' + minInsertions('cddpd')
+);
 // Output: 2
 // Explanation: Inserting “cp”, we get a palindrome “cdPdpdC”. We can also get a palindrome by inserting “dc”: “cddpdDC”
 
 console.log(
-  'Minimum number of insertions required ---> ' +  minInsertions('pqr'));
+  'Minimum number of insertions required ---> ' + minInsertions('pqr')
+);
 // 2
 // Explanation: We have to insert any two characters to get a palindrome (e.g. if we insert “pq”, we get a palindrome “pqrQP”).
 
 console.log(
-  'Minimum number of insertions required ---> ' +  minInsertions("zzazz"));
+  'Minimum number of insertions required ---> ' + minInsertions('zzazz')
+);
 // Output: 0
 // Explanation: The string "zzazz" is already palindrome we don't need any insertions.
 
 console.log(
-  'Minimum number of insertions required ---> ' +  minInsertions("mbadm"));
+  'Minimum number of insertions required ---> ' + minInsertions('mbadm')
+);
 // Output: 2
 // Explanation: String can be "mbdadbm" or "mdbabdm".
 
 console.log(
-  'Minimum number of insertions required ---> ' +  minInsertions("leetcode"));
+  'Minimum number of insertions required ---> ' + minInsertions('leetcode')
+);
 // Output: 5
 // Explanation: Inserting 5 characters the string becomes "leetcodocteel".
 ```
+
 ## 2. Find if a string is K-Palindromic
+
 https://leetcode.com/problems/valid-palindrome-iii/
 
 Any string will be called `K`<b>-palindromic</b> if it can be transformed into a <i>palindrome</i> by removing at most `K` characters from it.
 
 This problem can easily be converted to our base problem of <i>finding the minimum deletions in a string to make it a palindrome</i>. If the <i>“minimum deletion count”</i> is not more than `K`, the string will be `K`<b>-palindromic</b>.
+
 ```js
 function isValidPalindrome(s, K) {
   function findLPSLength(s) {
@@ -3967,39 +4115,49 @@ function isValidPalindrome(s, K) {
 }
 
 console.log(
-  `Is ${(s = 'abcdeca')} a k-palindrome ---> ` + isValidPalindrome(s, 2));
+  `Is ${(s = 'abcdeca')} a k-palindrome ---> ` + isValidPalindrome(s, 2)
+);
 // Output: true
 // Explanation: Remove 'b' and 'e' characters.
 
 console.log(
-  `Is ${(s = 'abbababa')} a k-palindrome ---> ` + isValidPalindrome(s, 1));
+  `Is ${(s = 'abbababa')} a k-palindrome ---> ` + isValidPalindrome(s, 1)
+);
 // Output: true
 ```
 
 ## Palindromic Partitioning
+
 https://leetcode.com/problems/palindrome-partitioning-ii/
 
 > Given a string, we want to cut it into pieces such that each piece is a <b>palindrome</b>. Write a function to return the minimum number of cuts needed.
 
 #### Example 1:
+
 ```js
 Input: "abdbca"
 Output: 3
 Explanation: Palindrome pieces are "a", "bdb", "c", "a".
 ```
+
 #### Example 2:
+
 ```js
 Input: = "cddpd"
 Output: 2
 Explanation: Palindrome pieces are "c", "d", "dpd".
 ```
+
 #### Example 3:
+
 ```js
 Input: = "pqr"
 Output: 2
 Explanation: Palindrome pieces are "p", "q", "r".
 ```
+
 #### Example 4:
+
 ```js
 Input: = "pp"
 Output: 0
@@ -4007,11 +4165,13 @@ Explanation: We do not need to cut, as "pp" is a palindrome.
 ```
 
 ### Brute-Force Recursive Solution
+
 This problem follows the <b>[Longest Palindromic Subsequence pattern](#pattern-4-palindromic-subsequence)</b> and shares a similar approach as that of the [Longest Palindromic Substring](#longest-palindromic-subsequence).
 
 The <b>brute-force solution</b> will be to try all the <i>substring combinations</i> of the given string. We can start processing from the beginning of the string and keep adding one character at a time. At any step, if we get a <i>palindrome</i>, we take it as one piece and <i>recursively</i> process the remaining length of the string to find the minimum cuts needed.
 
 Here is the code:
+
 ```js
 function findMPPCuts(str) {
   function findMPPCutsRecursive(str, startIndex, endIndex) {
@@ -4034,7 +4194,6 @@ function findMPPCuts(str) {
     return minimumCuts;
   }
 
-
   function isPalindrome(str, start, end) {
     while (start <= end) {
       if (str[start++] !== str[end--]) return false;
@@ -4045,18 +4204,15 @@ function findMPPCuts(str) {
   return findMPPCutsRecursive(str, 0, str.length - 1);
 }
 
-console.log(
-  `Minimum palindrome partitions ---> ${findMPPCuts('abdbca')}`);
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('abdbca')}`);
 // Output: 3
 // Explanation: Palindrome pieces are "a", "bdb", "c", "a".
 
-console.log(
-  `Minimum palindrome partitions ---> ${findMPPCuts('cdpdd')}`);
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('cdpdd')}`);
 // Output: 2
 // Explanation: Palindrome pieces are "c", "d", "dpd".
 
-console.log(
-  `Minimum palindrome partitions ---> ${findMPPCuts('pqr')}`);
+console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pqr')}`);
 // Output: 2
 // Explanation: Palindrome pieces are "p", "q", "r".
 
@@ -4064,17 +4220,21 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
 // Output: 0
 // Explanation: We do not need to cut, as "pp" is a palindrome.
 ```
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The <b>space complexity</b>  is `O(n)`, which will be used to store the <i>recursion stack</i>.
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
+- The <b>space complexity</b> is `O(n)`, which will be used to store the <i>recursion stack</i>.
+
 ### Top-down Dynamic Programming with Memoization
-We can <i>memoize</i>both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indexes; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
+
+We can <i>memoize</i>both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indices; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
 
 Here is the code:
+
 ```js
 function findMPPCuts(str) {
   const dp = [];
   const dpIsPalindrome = [];
-  
+
   function findMPPCutsRecursive(str, startIndex, endIndex) {
     //base case: we don't need to cut the str if it is a palindrom
     if (startIndex >= endIndex || isPalindrome(str, startIndex, endIndex))
@@ -4138,14 +4298,17 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
 // Output: 0
 // Explanation: We do not need to cut, as "pp" is a palindrome.
 ```
+
 ### Bottom-up Dynamic Programming
+
 The above solution tells us that we need to build two tables, one for the `isPalindrome()` and one for `findMPPCuts()`.
 
-If you remember, we built a table in the <b>[Longest Palindromic Substring (LPS)](#longest-palindromic-subsequence)</b> chapter that can tell us what <i>substrings</i> (of the input <i>string</i>) are <i>palindrome</i>. We will use the same approach here to build the table required for `isPalindrome()`. 
+If you remember, we built a table in the <b>[Longest Palindromic Substring (LPS)](#longest-palindromic-subsequence)</b> chapter that can tell us what <i>substrings</i> (of the input <i>string</i>) are <i>palindrome</i>. We will use the same approach here to build the table required for `isPalindrome()`.
 
 To build the second table for finding the minimum cuts, we can iterate through the first table built for `isPalindrome()`. At any step, if we get a <i>palindrome</i>, we can cut the <i>string</i> there. Which means minimum cuts will be one plus the cuts needed for the <i>remaining string</i>.
 
 Here is the code for the <b>bottom-up approach</b>:
+
 ```js
 function findMPPCuts(str) {
   // isPalindrome[i][j] will be 'true' if the string from index 'i' to index 'j' is a palindrome
@@ -4223,6 +4386,7 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 - The <b>time and space complexity</b> of the above algorithm is `O(n²)`, where `n` is the length of the input string.
 
 # Pattern 5: Longest Common Substring
+
 ## Problem Set
 
 1. [Longest Common Substring](#longest-common-substring)
@@ -4239,26 +4403,32 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('madam')}`);
 12. [🔎 Edit Distance](#🔎-edit-distance)
 13. [🔎 Strings Interleaving](#🔎-strings-interleaving)
 
-
 ## Longest Common Substring
+
 https://www.geeksforgeeks.org/longest-common-substring-dp-29/
+
 > Given two strings `str1` and `str2`, find the length of the longest <b>substring</b> which is common in both the strings.
 
 #### Example 1:
+
 ```js
 Input: str1 = "abdca"
        str2 = "cbda"
 Output: 2
 Explanation: The longest common substring is "bd".
 ```
+
 #### Example 2:
+
 ```js
 Input: str1 = "passport"
        str2 = "ppsspt"
 Output: 3
 Explanation: The longest common substring is "ssp".
 ```
+
 ### Brute-Force Solution
+
 A basic <b>brute-force solution</b> could be to try all substrings of `str1` and `str2` to find the longest common one. We can start matching both the strings one character at a time, so we have two options at any step:
 
 1. If the strings have a matching character, we can <i>recursively</i> match for the remaining lengths and keep a track of the current matching length.
@@ -4267,6 +4437,7 @@ A basic <b>brute-force solution</b> could be to try all substrings of `str1` and
 The length of the <b>Longest Common Substring (LCS)</b> will be the maximum number returned by the three <i>recurse calls</i> in the above two options.
 
 Here is the code:
+
 ```js
 function findLCSLength(str1, str2) {
   function findLCSLengthRecursive(str1, str2, index1, index2, count) {
@@ -4319,14 +4490,16 @@ console.log(
 // Explanation: The longest common substring is "ssp".
 ```
 
-- Because of the three <i>recursive calls</i>, the <b>time complexity</b> of the above algorithm is exponential `O(3ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the two input strings. The <b>space complexity</b> is `O(m+n)`, this <b>space</b>  will be used to store the <i>recursion stack</i>.
+- Because of the three <i>recursive calls</i>, the <b>time complexity</b> of the above algorithm is exponential `O(3ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the two input strings. The <b>space complexity</b> is `O(m+n)`, this <b>space</b> will be used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use an array to store the already solved <i>subproblems</i>.
 
-The three changing values to our <i>recursive function</i> are the two indexes (`index1` and `index2`) and the `count`. Therefore, we can store the results of all <i>subproblems</i>in a <i>three-dimensional array</i>. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`index1` + `“|”` `index2` + `“|”` + `count`)).
+The three changing values to our <i>recursive function</i> are the two indices (`index1` and `index2`) and the `count`. Therefore, we can store the results of all <i>subproblems</i>in a <i>three-dimensional array</i>. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`index1` + `“|”` `index2` + `“|”` + `count`)).
 
 Here is the code:
+
 ```js
 function findLCSLength(str1, str2) {
   const maxLength = Math.min(str1.length, str2.length);
@@ -4392,22 +4565,25 @@ console.log(
 // Explanation: The longest common substring is "ssp".
 ```
 
-### Bottom-up Dynamic Programming 
+### Bottom-up Dynamic Programming
+
 Since we want to match all the <i>substrings</i> of the given two <i>strings</i>, we can use a two-dimensional array to store our results. The lengths of the two <i>strings</i> will define the size of the two dimensions of the array. So for every index `index1` in string `str1` and `index2` in string `str2`, we have two options:
 
-1. If the character at `str1[index1]` matches `str2[index2]`, the length of the <i>common substring</i> would be one plus the length of the <i>common substring</i> until `index1-1` and `index2-1` indexes in the two <i>strings</i>.
+1. If the character at `str1[index1]` matches `str2[index2]`, the length of the <i>common substring</i> would be one plus the length of the <i>common substring</i> until `index1-1` and `index2-1` indices in the two <i>strings</i>.
 2. If the character at the `str1[index1]` does not match `str2[index2]`, we don’t have any <i>common substring</i>.
-So our <i>recursive formula</i> would be:
+   So our <i>recursive formula</i> would be:
 
 ```js
-if str1[index1] == str2[index2] 
+if str1[index1] == str2[index2]
   dp[index1][index2] = 1 + dp[index1-1][index2-1]
-else 
-  dp[index1][index2] = 0 
+else
+  dp[index1][index2] = 0
 ```
-we can clearly see that the <b>longest common substring</b> is of length `2`-- as shown by `dp[3][3]`. 
+
+we can clearly see that the <b>longest common substring</b> is of length `2`-- as shown by `dp[3][3]`.
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findLCSLength(str1, str2) {
   const dp = Array(str1.length + 1)
@@ -4446,9 +4622,11 @@ console.log(
 - The <b>time and space complexity</b> of the above algorithm is `O(m∗n)`, where `m` and `n` are the lengths of the two input <i>strings</i>.
 
 ### Challenge
+
 Can we further improve our <b>bottom-up DP</b> solution? Can you find an algorithm that has `O(n)` <b>space complexity</b>
 
 ## 🔎 Longest Common Subsequence
+
 https://leetcode.com/problems/longest-common-subsequence/
 
 > Given two strings `str1` and `str2`, find the length of the <i>longest subsequence</i> which is common in both the strings.
@@ -4456,13 +4634,16 @@ https://leetcode.com/problems/longest-common-subsequence/
 A <b>subsequence</b> is a <i>sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements</i>.
 
 #### Example :
+
 ```js
 Input: str1 = "abdca"
        str2 = "cbda"
 Output: 3
 Explanation: The longest common subsequence is "bda".
 ```
+
 #### Example 2:
+
 ```js
 Input: str1 = "passport"
        str2 = "ppsspt"
@@ -4471,12 +4652,14 @@ Explanation: The longest common subsequence is "psspt".
 ```
 
 ### Basic Brute-Force Solution
+
 A <b>basic brute-force solution</b> could be to try all <i>subsequences</i> of `str1` and `str2` to find the longest one. We can match both the strings one character at a time. So for every index `index1` in `str1` and `index2` in `str2` we must choose between:
 
 1. If the character `str1[index1]` matches `str2[index2`, we can <i>recursively</i> match for the remaining lengths.
 2. If the character `str1[index1]` does not match `str2[index2]`, we will start two new <i>recursive calls</i> by skipping one character separately from each string.
 
 Here is the code:
+
 ```js
 function findLCSLength(str1, str2) {
   function findLCSLengthRecursive(str1, str2, index1, index2) {
@@ -4519,15 +4702,17 @@ console.log(
 // Explanation: The longest common subsequence is "psspt".
 ```
 
-- The <b>time complexity</b> of the above algorithm is exponential `O(2ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the two input strings. 
-- The <b>space complexity</b> is `O(m+n)`, this <b>space</b>  will be used to store the <i>recursion stack</i>.
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the two input strings.
+- The <b>space complexity</b> is `O(m+n)`, this <b>space</b> will be used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use an array to store the already solved <i>subproblems</i>.
 
-The two changing values to our <i>recursive function</i> are the two indexes, `index1` and `index2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a <i>string</i> (`index1` + `“|”` + `index2`)).
+The two changing values to our <i>recursive function</i> are the two indices, `index1` and `index2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a <i>string</i> (`index1` + `“|”` + `index2`)).
 
 Here is the code:
+
 ```js
 function findLCSLength(str1, str2) {
   const dp = [];
@@ -4578,29 +4763,32 @@ console.log(
 // Output: 5
 // Explanation: The longest common subsequence is "psspt".
 ```
+
 ### Bottom-up Dynamic Programming
+
 Since we want to match all the <b>subsequences</b> of the given two strings, we can use a two-dimensional array to store our results. The lengths of the two strings will define the size of the array’s two dimensions. So for every index `index1` in string `str1` and `index2` in string `str2`, we will choose one of the following two options:
 
-1. If the character `str1[index1]` matches `str2[index2]`, the length of the <b>common subsequence</b> would be one plus the length of the <b>common subsequence</b> until the `index1-1` and `index2-1` indexes in the two respective strings.
+1. If the character `str1[index1]` matches `str2[index2]`, the length of the <b>common subsequence</b> would be one plus the length of the <b>common subsequence</b> until the `index1-1` and `index2-1` indices in the two respective strings.
 2. If the character `str1[index1]`does not match `str2[index2]`, we will take the <i>longest subsequence</i> by either skipping `[index1]th` or `[index2]th` character from the respective strings.
 
 So our <b>recursive formula</b> would be:
+
 ```js
-if str1[index1] == str2[index2] 
+if str1[index1] == str2[index2]
   dp[index1][index2] = 1 + dp[index1-1][index2-1]
-else 
+else
   dp[index1][index2] = Math.max(dp[index1-1][index2], dp[index1][index2-1])
 ```
 
 From the above visualization, we can clearly see that the <b>longest common subsequence</b> is of length `3` – as shown by `dp[4][5]`.
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findLCSLength(str1, str2) {
   const dp = Array(str1.length + 1)
     .fill(0)
-    .map(() => Array(str2.length + 1)
-    .fill(0));
+    .map(() => Array(str2.length + 1).fill(0));
 
   let maxLength = 0;
 
@@ -4623,12 +4811,17 @@ function findLCSLength(str1, str2) {
 }
 
 console.log(
-  `Length of Longest Common Subsequence: ---> ${findLCSLength('abdca', 'cbda')}`);
+  `Length of Longest Common Subsequence: ---> ${findLCSLength('abdca', 'cbda')}`
+);
 // Output: 3
 // Explanation: The longest common subsequence is "bda".
 
 console.log(
-  `Length of Longest Common Subsequence: ---> ${findLCSLength('passport', 'ppsspt')}`);
+  `Length of Longest Common Subsequence: ---> ${findLCSLength(
+    'passport',
+    'ppsspt'
+  )}`
+);
 // Output: 5
 // Explanation: The longest common subsequence is "psspt".
 ```
@@ -4636,28 +4829,35 @@ console.log(
 - The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the two input strings.
 
 ### Challenge
+
 Can we further improve our <b>bottom-up DP solution</b>? Can you find an algorithm that has `O(n)` <b>space complexity</b>?
 
 ## Minimum Deletions & Insertions to Transform a String into another
+
 https://practice.geeksforgeeks.org/problems/minimum-number-of-deletions-and-insertions0209/1/
 
 > Given strings `str1` and `str2`, we need to transform `str1` into `str2` by deleting and inserting characters. Write a function to calculate the count of the minimum number of deletion and insertion operations.
 
 ### Example 1:
+
 ```js
 Input: str1 = "abc"
        str2 = "fbc"
 Output: 1 deletion and 1 insertion.
 Explanation: We need to delete {'a'} and insert {'f'} to str1 to transform it into str2.
 ```
+
 ### Example 2:
+
 ```js
 Input: str1 = "abdca"
        str2 = "cbda"
 Output: 2 deletions and 1 insertion.
 Explanation: We need to delete {'a', 'c'} and insert {'c'} to str1 to transform it into str2.
 ```
+
 ### Example 3:
+
 ```js
 Input: str1 = "passport"
        str2 = "ppsspt"
@@ -4673,6 +4873,7 @@ This problem can easily be converted to the <b>[Longest Common Subsequence (LCS)
 4. Similarly, we need to insert everything in `str1` which is present in `str2` but not part of <b>LCS</b>, so minimum insertions we need to perform in `str1` => `length2 - c1`
 
 ### Bottom-up Dynamic Programming Solution
+
 Let’s jump directly to the <b>bottom-up dynamic programming solution</b>:
 
 ```js
@@ -4701,7 +4902,10 @@ function findMDI(str1, str2) {
   }
 
   console.log(
-    `We need ${str1.length - c1} deletions and ${str2.length - c1} insertions to transform "${str1}" into "${str2}"`);
+    `We need ${str1.length - c1} deletions and ${
+      str2.length - c1
+    } insertions to transform "${str1}" into "${str2}"`
+  );
 }
 
 findMDI('abc', 'fbc');
@@ -4716,20 +4920,25 @@ findMDI('passport', 'ppsspt');
 // Output: 3 deletions and 1 insertion
 // Explanation: We need to delete {'a', 'o', 'r'} and insert {'p'} to s1 to transform it into s2.
 ```
+
 - The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the two input strings.
 
 ## 👩🏽‍🦯 🔎 Longest Increasing Subsequence
+
 https://leetcode.com/problems/longest-increasing-subsequence/
 
 > Given a number `sequence`, find the length of its <b>Longest Increasing Subsequence (LIS)</b>. In an <b>increasing subsequence</b>, <i>all the elements are in increasing order (from lowest to highest)</i>.
 
 ### Example 1:
+
 ```js
 Input: {4,2,3,6,10,1,12}
 Output: 5
 Explanation: The LIS is {2,3,6,10,12}.
 ```
+
 ### Example 2:
+
 ```js
 Input: {-4,10,3,7,15}
 Output: 4
@@ -4737,6 +4946,7 @@ Explanation: The LIS is {-4,3,7,15}.
 ```
 
 ### Basic Brute-Force Solution
+
 A <b>basic brute-force solution</b> could be to try all the <i>subsequences</i> of the given number sequence. We can process one number at a time, so we have two options at any step:
 
 1. If the current number is greater than the previous number that we included, we can <i>increment our count</i> and make a <i>recursive call</i> for the remaining array.
@@ -4745,6 +4955,7 @@ A <b>basic brute-force solution</b> could be to try all the <i>subsequences</i> 
 The length of the <b>longest increasing subsequence</b> will be the maximum number returned by the two recurse calls from the above two options.
 
 Here is the code:
+
 ```js
 function findLISLength(nums) {
   function findLISLengthRecursive(nums, currIndex, prevIndex) {
@@ -4766,20 +4977,27 @@ function findLISLength(nums) {
 }
 
 console.log(
-  `Length of Longest Increasing Subsequence: ---> ${findLISLength([4, 2, 3, 6, 10, 1, 12,])}`);
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([
+    4, 2, 3, 6, 10, 1, 12,
+  ])}`
+);
 // Output: 5
 // Explanation: The LIS is {2,3,6,10,12}.
 
 console.log(
-  `Length of Longest Increasing Subsequence: ---> ${findLISLength([-4, 10, 3, 7, 15,])}`);
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([
+    -4, 10, 3, 7, 15,
+  ])}`
+);
 // Output: 4
 // Explanation: The LIS is {-4,3,7,15}.
-
 ```
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array. 
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array.
 - The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 To overcome the <i>overlapping subproblems</i>, we can use an array to store the already solved <i>subproblems</i>.
 
 The two changing values for our <i>recursive function</i> are the `currIndex` and the `prevIndex`. Therefore, we can store the results of all <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`currIndex` + `“|”` + `prevIndex`)).
@@ -4813,12 +5031,18 @@ function findLISLength(nums) {
 }
 
 console.log(
-  `Length of Longest Increasing Subsequence: ---> ${findLISLength([4, 2, 3, 6, 10, 1, 12,])}`);
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([
+    4, 2, 3, 6, 10, 1, 12,
+  ])}`
+);
 // Output: 5
 // Explanation: The LIS is {2,3,6,10,12}.
 
 console.log(
-  `Length of Longest Increasing Subsequence: ---> ${findLISLength([-4, 10, 3, 7, 15,])}`);
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([
+    -4, 10, 3, 7, 15,
+  ])}`
+);
 // Output: 4
 // Explanation: The LIS is {-4,3,7,15}.
 ```
@@ -4827,17 +5051,21 @@ console.log(
 - The above algorithm will be using `O(N²)` <b>space</b> for the <i>memoization array</i>. Other than that we will use `O(N)` <b>space</b> for the <i>recursion call-stack</i>. So the total <b>space complexity</b> will be `O(N² + N)`, which is <i>asymptotically</i> equivalent to `O(N²)`.
 
 ### Bottom-up Dynamic Programming
+
 The above algorithm tells us two things:
 
 1. If the number at the `currIndex` is bigger than the number at the `prevIndex`, we increment the count for <b>LIS</b> up to the `currIndex`.
 2. But if there is a bigger <b>LIS</b> without including the number at the `currIndex`, we take that.
-So we need to find all the <i>increasing subsequences</i> for the number at index `i`, from all the previous numbers (i.e. number until index `i-1`), to eventually find the <i>longest increasing subsequence.</i>
+   So we need to find all the <i>increasing subsequences</i> for the number at index `i`, from all the previous numbers (i.e. number until index `i-1`), to eventually find the <i>longest increasing subsequence.</i>
 
 If `i` represents the `currIndex` and `j` represents the `prevIndex`, our <i>recursive formula</i> would look like:
+
 ```js
     if num[i] > num[j] => dp[i] = dp[j] + 1 if there is no bigger LIS for 'i'
 ```
+
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findLISLength(nums) {
   const dp = [1];
@@ -4858,29 +5086,41 @@ function findLISLength(nums) {
 }
 
 console.log(
-  `Length of Longest Increasing Subsequence: ---> ${findLISLength([ 4, 2, 3, 6, 10, 1, 12,])}`);
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([
+    4, 2, 3, 6, 10, 1, 12,
+  ])}`
+);
 // Output: 5
 // Explanation: The LIS is {2,3,6,10,12}.
 
 console.log(
-  `Length of Longest Increasing Subsequence: ---> ${findLISLength([-4, 10, 3, 7, 15,])}`);
+  `Length of Longest Increasing Subsequence: ---> ${findLISLength([
+    -4, 10, 3, 7, 15,
+  ])}`
+);
 // Output: 4
 // Explanation: The LIS is {-4,3,7,15}.
 ```
+
 - The <b>time complexity</b> of the above algorithm is `O(N²)` and the <b>space complexity</b> is `O(n)`.
+
 ## Maximum Sum Increasing Subsequence
+
 https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
 
 > Given a number sequence, find the increasing subsequence with the highest `sum`. Write a method that returns the highest `sum`.
 
 #### Example 1:
+
 ```js
 Input: {4,1,2,6,10,1,12}
 Output: 32
-Explanation: The increaseing sequence is {4,6,10,12}. 
+Explanation: The increaseing sequence is {4,6,10,12}.
 Please note the difference, as the LIS is {1,2,6,10,12} which has a sum of '31'.
 ```
+
 #### Example 2:
+
 ```js
 Input: {-4,10,3,7,15}
 Output: 25
@@ -4888,6 +5128,7 @@ Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
 ```
 
 ### Basic Brute Force Solution
+
 The problem is quite similar to the <b>[Longest Increasing Subsequence](#👩🏽‍🦯-🔎-longest-increasing-subsequence)</b>. The only difference is that, instead of finding the increasing subsequence with the maximum length, we need to find an increasing sequence with the maximum `sum`.
 
 A <b>basic brute-force solution</b> could be to try all the <i>subsequences</i> of the given array. We can process one number at a time, so we have two options at any step:
@@ -4898,6 +5139,7 @@ A <b>basic brute-force solution</b> could be to try all the <i>subsequences</i> 
 The highest `sum` of any <i>increasing subsequence</i> would be the max value returned by the two <i>recurse calls</i> from the above two options.
 
 Here is the code:
+
 ```js
 function findMSIS(nums) {
   function findMSISRecursive(nums, currIndex, prevIndex, sum) {
@@ -4943,15 +5185,18 @@ console.log(
 // Output: 25
 // Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
 ```
-- The <b>time complexity</b>  of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array. 
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array.
 - The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 We can use <b>memoization</b> to overcome the <i>overlapping subproblems</i>.
 
 The three changing values for our <i>recursive function</i> are the `currIndex`, the `prevIndex`, and the `sum`. An efficient way of storing the results of the <i>subproblems</i> could be a <i>hash-table</i> whose <i>key</i> would be a string (`currIndex` + `“|”` + `prevIndex` + `“|”` + `sum`).
 
 Here is the code:
+
 ```js
 function findMSIS(nums) {
   const dp = [];
@@ -4990,23 +5235,24 @@ function findMSIS(nums) {
   return findMSISRecursive(nums, 0, -1, 0);
 }
 
-
-
 console.log(
   `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([
-    4, 1, 2, 6, 10, 1, 12,])}`);
+    4, 1, 2, 6, 10, 1, 12,
+  ])}`
+);
 // Output: 32
 // Explanation: The increaseing sequence is {4,6,10,12}.
 // Please note the difference, as the LIS is {1,2,6,10,12} which has a sum of '31'.
 
 console.log(
-  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([-4, 10, 3, 7, 15])}`);
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([-4, 10, 3, 7, 15])}`
+);
 // Output: 25
 // Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
-
 ```
 
 ### Bottom-up Dynamic Programming
+
 The above algorithm tells us two things:
 
 1. If the number at the `currIndex` is bigger than the number at the `prevIndex`, we include that number in the `sum` for an increasing sequence up to the `currIndex`.
@@ -5021,6 +5267,7 @@ If `i` represents the `currIndex` and `j` represents the `prevIndex`, our <i>rec
 ```
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
+
 ```js
 function findMSIS(nums) {
   const dp = [nums[0]];
@@ -5041,13 +5288,16 @@ function findMSIS(nums) {
 
 console.log(
   `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([
-    4, 1, 2, 6, 10, 1, 12,])}`);
+    4, 1, 2, 6, 10, 1, 12,
+  ])}`
+);
 // Output: 32
 // Explanation: The increaseing sequence is {4,6,10,12}.
 // Please note the difference, as the LIS is {1,2,6,10,12} which has a sum of '31'.
 
 console.log(
-  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([-4, 10, 3, 7, 15])}`);
+  `Maximum Sum Increasing Subsequence is: ---> ${findMSIS([-4, 10, 3, 7, 15])}`
+);
 // Output: 25
 // Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
 
@@ -5057,33 +5307,41 @@ console.log(
 );
 ```
 
-- The  <b>time complexity</b>  of the above algorithm is is `O(n²)` and the <b>space complexity</b> is `O(n)`.
+- The <b>time complexity</b> of the above algorithm is is `O(n²)` and the <b>space complexity</b> is `O(n)`.
 
 ## Shortest Common Super-sequence
+
 https://leetcode.com/problems/shortest-common-supersequence/
 
 > Given two <b>sequences</b> `s1` and `s2`, write a method to find the length of the shortest sequence which has `s1` and `s2` as <b>subsequences</b>.
 
 #### Example 1:
+
 ```js
-Input: s1: "abcf" s2:"bdcf" 
+Input: s1: "abcf" s2:"bdcf"
 Output: 5
-Explanation: The shortest common super-sequence (SCS) is "abdcf". 
+Explanation: The shortest common super-sequence (SCS) is "abdcf".
 ```
+
 #### Example 2:
+
 ```js
-Input: s1: "dynamic" s2:"programming" 
+Input: s1: "dynamic" s2:"programming"
 Output: 15
-Explanation: The SCS is "dynprogrammicng". 
+Explanation: The SCS is "dynprogrammicng".
 ```
+
 ### Basic Brute-Force Solution
+
 The problem is quite similar to the <b>[Longest Common Subsequence](#🔎-longest-common-subsequence)</b>.
 
 A <b>basic brute-force solution</b> could be to try all the <b>super-sequences</b> of the given <b>sequences</b>. We can process both of the <b>sequences</b> one character at a time, so at any step, we must choose between:
+
 1. If the <b>sequences</b> have a matching character, we can skip one character from both the <b>sequences</b> and make a <i>recursive call</i> for the remaining lengths to get <b>SCS</b>.
 2. If the strings don’t match, we start two new <i>recursive calls</i> by skipping one character separately from each string. The minimum of these two <i>recursive calls</i> will have our answer.
 
 Here is the code:
+
 ```js
 function findSCSLength(s1, s2) {
   // **MY THOUGHT PROCESS**
@@ -5092,26 +5350,27 @@ function findSCSLength(s1, s2) {
   //3 => then check s1[i] against s2[j] push entire length of common char onto output(A)n
   //4 => if one is longer push longer length onto output(MM)
   //5 => if next char is not shared, find next common shared char and push whateve was not shared onto output(step 1 & 2 again)
-  //6 => when we reach end of either string push whatever is left from the longer string to output and 
+  //6 => when we reach end of either string push whatever is left from the longer string to output and
   //7 => return output
 
   function findSCSLengthRecursive(s1, s2, index1, index2) {
     //if we have reached the end of a string
     //return the remaining length of the other string
     //as in this case we have to take all of the remaining other string
-    if(index1 === s1.length) return s2.length-index2
-    if(index2 === s2.length) return s1.length-index1
-    
-    if(s1[index1] === s2[index2]) return 1 + findSCSLengthRecursive(s1, s2, index1+1, index2+1) 
-    
-    let length1 = 1 + findSCSLengthRecursive(s1, s2, index1, index2+1) 
-    let length2 = 1 + findSCSLengthRecursive(s1, s2, index1+1, index2) 
-    
-    return Math.min(length1, length2)
+    if (index1 === s1.length) return s2.length - index2;
+    if (index2 === s2.length) return s1.length - index1;
+
+    if (s1[index1] === s2[index2])
+      return 1 + findSCSLengthRecursive(s1, s2, index1 + 1, index2 + 1);
+
+    let length1 = 1 + findSCSLengthRecursive(s1, s2, index1, index2 + 1);
+    let length2 = 1 + findSCSLengthRecursive(s1, s2, index1 + 1, index2);
+
+    return Math.min(length1, length2);
   }
-  
-  return findSCSLengthRecursive(s1, s2, 0, 0) ;
-};
+
+  return findSCSLengthRecursive(s1, s2, 0, 0);
+}
 
 console.log(
   `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength(
@@ -5120,27 +5379,33 @@ console.log(
   )}`
 );
 //Output: 15
-// Explanation: The SCS is "dynprogrammicng". 
+// Explanation: The SCS is "dynprogrammicng".
 // 'dyn AMI c',
 // 'progr AMMI ng'
 
 console.log(
-  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength('abcf', 'bdcf')}`
+  `Length of Shortest Common Subsequence: Substring: ---> ${findSCSLength(
+    'abcf',
+    'bdcf'
+  )}`
 );
 // Output: 5
-// Explanation: The shortest common super-sequence (SCS) is "abdcf". 
+// Explanation: The shortest common super-sequence (SCS) is "abdcf".
 // aBCF
 // 'BdCF'
 ```
-- The <b>time complexity</b> of the above algorithm is exponential `O(2ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the input <b>sequences</b>. 
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the input <b>sequences</b>.
 - The <b>space complexity</b> is `O(m+n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 Let's use <b>memoization</b> to overcome the <i>overlapping subproblems</i>.
 
-The two changing values to our <b>recursive function</b> are the two indexes, `i1` and `i2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`i1` + `|` + `i2`)).
+The two changing values to our <b>recursive function</b> are the two indices, `i1` and `i2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`i1` + `|` + `i2`)).
 
 Here is the code:
+
 ```js
 function findSCSLength(s1, s2) {
   const dp = [];
@@ -5191,23 +5456,26 @@ console.log(
 ```
 
 ### Bottom-up Dynamic Programming
+
 Since we want to match all the <b>subsequences</b> of the given <b>sequences</b>, we can use a two-dimensional array to store our results. The lengths of the two strings will define the size of the array’s dimensions. So for every index `i` in sequence `s1` and `j` in sequence `s2`, we will choose one of the following two options:
 
-1. If the character `s1[i]` matches `s2[j]`, the length of the <b>SCS</b> would be the one plus the length of the <b>SCS</b> until `i-1` and `j-1` indexes in the two strings.
-2. If the character `s1[i]` does not match `s2[j]`, we will consider two <b>SCS</b>: 
-  - one without `s1[i]` and one without `s2[j]`. 
-  - Our required <b>SCS</b> length will be the shortest of these two super-sequences plus one.
+1. If the character `s1[i]` matches `s2[j]`, the length of the <b>SCS</b> would be the one plus the length of the <b>SCS</b> until `i-1` and `j-1` indices in the two strings.
+2. If the character `s1[i]` does not match `s2[j]`, we will consider two <b>SCS</b>:
+
+- one without `s1[i]` and one without `s2[j]`.
+- Our required <b>SCS</b> length will be the shortest of these two super-sequences plus one.
 
 So our <b>recursive formula</b> would be:
 
 ```js
-if s1[i] == s2[j] 
+if s1[i] == s2[j]
   dp[i][j] = 1 + dp[i-1][j-1]
-else 
-  dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1]) 
+else
+  dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1])
 ```
 
 Here is the code for our <b>bottom-up dynamic programming</b> approach:
+
 ```js
 function findSCSLength(s1, s2) {
   const dp = Array(s1.length + 1)
@@ -5256,33 +5524,42 @@ console.log(
 // Output: 5
 // Explanation: The shortest common super-sequence (SCS) is "abdcf".
 ```
+
 - The time and space complexity of the above algorithm is `O(n*m)`.
 
 ## Minimum Deletions to Make a Sequence Sorted
+
 https://www.geeksforgeeks.org/minimum-number-deletions-make-sorted-sequence/
 
 > Given a number <b>sequence</b>, find the minimum number of elements that should be deleted to make the remaining <b>sequence</b> sorted.
 
 #### Example 1:
+
 ```js
 Input: {4,2,3,6,10,1,12}
 Output: 2
 Explanation: We need to delete {4,1} to make the remaing sequence sorted {2,3,6,10,12}.
 ```
+
 #### Example 2:
+
 ```js
 Input: {-4,10,3,7,15}
 Output: 1
 Explanation: We need to delete {10} to make the remaing sequence sorted {-4,3,7,15}.
 ```
+
 #### Example 3:
+
 ```js
 Input: {3,2,1,0}
 Output: 3
-Explanation: Since the elements are in reverse order, we have to delete all except one to get a 
+Explanation: Since the elements are in reverse order, we have to delete all except one to get a
 sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
 ```
+
 ### Basic Brute-force Solution
+
 A <b>basic brute-force solution</b> could be to try deleting all combinations of elements, one by one, and checking if that makes the <b>subsequence</b> sorted.
 
 Alternately, we can convert this problem into a <b>[Longest Increasing Subsequence (LIS)](#👩🏽‍🦯-🔎-longest-increasing-subsequence)</b> problem. As we know that <b>LIS</b> will give us the length of the <b>longest increasing subsequence</b> (in the sorted order!), which means that the elements which are not part of the <b>LIS</b> should be removed to make the <b>sequence</b> sorted. This is exactly what we need. So we’ll get our solution by subtracting the length of <b>LIS</b> from the length of the input array: `Length-of-input-array - LIS()`
@@ -5290,16 +5567,20 @@ Alternately, we can convert this problem into a <b>[Longest Increasing Subsequen
 Let’s jump directly to the <b>bottom-up dynamic programming<b> solution.
 
 ### Bottom-up Dynamic Programming
-Here is the code for our <b>bottom-up dynamic programming<b> approach:
+
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
 
 ```js
 function findMinimumDeletions(nums) {
-  /* Given a number sequence, find the minimum number of elements that should be deleted to make the remaining sequence sorted. */
+  /* Given a number sequence, find the minimum number of elements
+   that should be deleted to make the remaining sequence sorted. */
 
   /*MY THOUGHT PROCESS*/
   // check currIndex and prevIndex,
   // case 1 => if currIndex and prevIndex are sorted increase currIndex and prevIndex and try to extend subsequence
-  // case 2 => if currIndex and prevIndex are  not sorted, SKIP currIndex and check prevIndex is sorted in comparison to currIndex + 1, increment deletions counter
+  // case 2 => if currIndex and prevIndex are  not sorted,
+  // SKIP currIndex and check prevIndex is sorted in comparison to currIndex + 1, increment deletions counter
+  /**/
 
   // substracting the length of the LIS from the length of the input array to
   // get the minimum number of deletions
@@ -5328,44 +5609,258 @@ function findMinimumDeletions(nums) {
 }
 
 console.log(
-  `Minimum deletion needed: ---> ${findMinimumDeletions(
-    [4, 2, 3, 6, 10, 1, 12])}`
+  `Minimum deletion needed: ---> ${findMinimumDeletions([
+    4, 2, 3, 6, 10, 1, 12,
+  ])}`
 );
 // Output: 2
 // Explanation: We need to delete {4,1} to make the remaing sequence sorted {2,3,6,10,12}.
 
 console.log(
-  `Minimum deletion needed: ---> ${findMinimumDeletions(
-    [-4, 10, 3, 7, 15])}`
+  `Minimum deletion needed: ---> ${findMinimumDeletions([-4, 10, 3, 7, 15])}`
 );
 // Output: 1
 // Explanation: We need to delete {10} to make the remaing sequence sorted {-4,3,7,15}.
 
 console.log(
-  `Minimum deletion needed: ---> ${findMinimumDeletions(
-    [3, 2, 1, 0])}`
+  `Minimum deletion needed: ---> ${findMinimumDeletions([3, 2, 1, 0])}`
 );
 // Output: 3
 // Explanation: Since the elements are in reverse order, we have to delete all except one to get a sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
 ```
 
-- The  <b>time complexity</b>  of the above algorithm is is `O(n²)` and the <b>space complexity</b> is `O(n)`.
-
+- The <b>time complexity</b> of the above algorithm is is `O(n²)` and the <b>space complexity</b> is `O(n)`.
 
 ## Longest Repeating Subsequence
+
 https://www.geeksforgeeks.org/longest-repeating-subsequence/
 
+> Given a <b>sequence</b>, find the length of its <b>longest repeating subsequence (LRS)</b>. A <b>repeating subsequence</b> will be <i>the one that appears at least twice in the original <b>sequence</b> and is not overlapping (i.e. none of the corresponding characters in the repeating subsequences have the same index)</i>.
+
+### Example 1:
+
+```js
+Input: “t o m o r r o w”
+Output: 2
+Explanation: The longest repeating subsequence is “or” {tomorrow}.
+```
+
+### Example 2:
+
+```js
+Input: “a a b d b c e c”
+Output: 3
+Explanation: The longest repeating subsequence is “a b c” {a a b d b c e c}.
+```
+
+### Example 3:
+
+```js
+Input: “f m f f”
+Output: 2
+Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}. Please note the second last character is shared in LRS.
+```
+
+### Basic Brute-Force Solution
+
+The problem is quite similar to the <b>[Longest Common Subsequence (LCS)](#🔎-longest-common-subsequence)</b>, with two differences:
+
+1. In <b>LCS</b>, we were trying to find the <b>longest common subsequence</b> between the <i>two strings</i>, whereas in <b>LRS</b> we are trying to find the <b>two longest common subsequences</b> within <i>one string</i>.
+2. In <b>LRS</b>, every corresponding character in the <b>subsequences</b> should not have the same <i>index</i>.
+
+A <b>basic brute-force solution</b> could be to try all <b>subsequences</b> of the given <b>sequence</b> to find <i>the longest repeating one</i>, but the problem is how to ensure that the <b>LRS</b>’s characters do not have the <i>same index</i>. For this, we can start with two <i>indices</i> in the given <b>sequence</b>, so at any step we have two choices:
+
+1. If the <i>two indices</i> are not the same and the characters at both the <i>indices</i> are same, we can <b>recursively</b> match for the remaining length (i.e. by incrementing both the <i>indices</i>).
+2. If the characters at both the <i>indicies</i> don’t match, we start two new <b>recursive calls</b> by incrementing each <i>index</i> separately. The <b>LRS</b> would be the one with the highest length from the two <b>recursive calls</b>.
+
+Here is the code:
+
+```js
+function findLRSLength(str) {
+  /*Given a sequence, find the length of its longest repeating subsequence (LRS). A repeating subsequence will be the one that appears at least twice in the original sequence and is not overlapping (i.e. none of the corresponding characters in the repeating subsequences have the same index). */
+
+  /*MY THOUGHT PROCESS*/
+  // 1 => start with initial index, go through string and check if that char repeats
+  // 2 => if it does repeat it could potentially be part of the LRS
+  // 3 => repeat step one for each char
+  /**/
+
+  function findLRSLengthRecursive(str, index1, index2) {
+    //base case => 0 length or end of str
+    if (index1 === str.length || index2 === str.length) return 0;
+
+    if (index1 !== index2 && str[index1] === str[index2])
+      return 1 + findLRSLengthRecursive(str, index1 + 1, index2 + 1);
+
+    const call1 = findLRSLengthRecursive(str, index1 + 1, index2);
+    const call2 = findLRSLengthRecursive(str, index1, index2 + 1);
+
+    return Math.max(call1, call2);
+  }
+
+  return findLRSLengthRecursive(str, 0, 0);
+}
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('tomorrow')}`
+);
+// Output: 2
+// Explanation: The longest repeating subsequence is “or” {tomorrow}.
+// tOmORROw
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('aabdbcec')}`
+);
+// Output: 3
+// Explanation: The longest repeating subsequence is “a b c” {a a b d b c e c}.
+// A A B d B C e C
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('fmff')}`
+);
+// Output: 2
+// Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}. Please note the second last character is shared in LRS.
+// FmFF
+```
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input <b>sequence</b>.
+- The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+
+We can use an array to store the already solved <b>subproblems</b>.
+
+The two changing values to our <b>recursive<b> function are the two <i>indices</i>, `index1` and `index2`. Therefore, we can store the results of all the <b>subproblems</b> in a two-dimensional array. (Another alternative could be to use a <b>hash-tabl</b>e whose key would be a string (`index1` + `“|”` + `index2`)).
+
+Here is the code:
+
+```js
+function findLRSLength(str) {
+  const dp = [];
+
+  function findLRSLengthRecursive(str, index1, index2) {
+    //base case => 0 length or end of str
+    if (index1 === str.length || index2 === str.length) return 0;
+
+    dp[index1] = dp[index1] || [];
+
+    if (index1 !== index2 && str[index1] === str[index2])
+      dp[index1][index2] =
+        1 + findLRSLengthRecursive(str, index1 + 1, index2 + 1);
+    else {
+      let call1 = findLRSLengthRecursive(str, index1 + 1, index2);
+      let call2 = findLRSLengthRecursive(str, index1, index2 + 1);
+      dp[index1][index2] = Math.max(call1, call2);
+    }
+
+    return dp[index1][index2];
+  }
+  return findLRSLengthRecursive(str, 0, 0);
+}
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('tomorrow')}`
+);
+// Output: 2
+// Explanation: The longest repeating subsequence is “or” {tomorrow}.
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('aabdbcec')}`
+);
+// Output: 3
+// Explanation: The longest repeating subsequence is “a b c” {a a b d b c e c}.
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('fmff')}`
+);
+// Output: 2
+// Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}. Please note the second last character is shared in LRS.
+```
+
+### Bottom-up Dynamic Programming
+
+Since we want to match all the <b>subsequences</b> of the given string, we can use a two-dimensional array to store our results. As mentioned above, we will be tracking two <i>indices</i> to overcome the overlapping problem. So for each of the two <i>indices</i>, `index1` and `index2`, we will choose one of the following options:
+
+1. If `index1` and `index2` are different and the character `str[index1]` matches the character `str[i2]`, then the length of the <b>LRS</b> would be one plus the length of <b>LRS</b> up to `index1-1` and `index2-1` <i>indices</i>.
+2. If the character at `str[index1]` does not match `str[index2]`, we will take the <b>LRS</b> by either skipping `index1`th or `index2`th character.
+
+So our <b>recursive formula</b> would be:
+
+```js
+if index1 != index2 && str[index1] == str[index2]
+  dp[index1][index2] = 1 + dp[index1-1][index2-1]
+else
+  dp[index1][index2] = max(dp[index1-1][index2], dp[index1][index2-1])
+```
+
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
+
+```js
+function findLRSLength(str) {
+  const dp = Array(str.length + 1)
+    .fill(0)
+    .map(() => Array(str.length + 1).fill(0));
+
+  let maxLength = 0;
+
+  // dp[index1][index2] will be storing the LRS up to str[0... index1-1][0... index2-1]
+  // this also means that subsequences of length 0(first row and column of dp[][])
+  // will always have a LRS of size 0
+
+  for (let index1 = 1; index1 <= str.length; index1++) {
+    for (let index2 = 1; index2 <= str.length; index2++) {
+      if (index1 !== index2 && str[index1 - 1] === str[index2 - 1]) {
+        dp[index1][index2] = 1 + dp[index1 - 1][index2 - 1];
+      } else {
+        dp[index1][index2] = Math.max(
+          dp[index1 - 1][index2],
+          dp[index1][index2 - 1]
+        );
+      }
+      maxLength = Math.max(maxLength, dp[index1][index2]);
+    }
+  }
+
+  return maxLength;
+}
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('tomorrow')}`
+);
+// Output: 2
+// Explanation: The longest repeating subsequence is “or” {tomorrow}.
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('aabdbcec')}`
+);
+// Output: 3
+// Explanation: The longest repeating subsequence is “a b c” {a a b d b c e c}.
+
+console.log(
+  `Length of Longest Repeating Subsequence: ---> ${findLRSLength('fmff')}`
+);
+// Output: 2
+// Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}. Please note the second last character is shared in LRS.
+```
+
+- The <b>time complexity and space complexity</b> of the above algorithm is is `O(n²)`.
+
 ## Subsequence Pattern Matching
+
 https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/
 
 ## Longest Bitonic Subsequence
+
 https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/
 
 ## Longest Alternating Subsequence
+
 https://www.geeksforgeeks.org/longest-alternating-subsequence/
 
 ## 🔎 Edit Distance
+
 https://leetcode.com/problems/edit-distance/
 
 ## 🔎 Strings Interleaving
+
 https://leetcode.com/problems/interleaving-string/
