@@ -158,7 +158,7 @@ function removeElement(arr, key) {
 }
 
 removeElement([3, 2, 3, 6, 3, 10, 9, 3], 3)//4, The first four elements after removing every 'Key' will be [2, 6, 10, 9].
-removeElement([2, 11, 2, 2, 1], 2)//2, The first four elements after removing every 'Key' will be [2, 6, 10, 9].
+removeElement([2, 11, 2, 2, 1], 2)//2, The first two elements after removing every 'Key' will be [11, 1].
 ````
 - The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
 - The algorithm runs in constant space `O(1)`.
