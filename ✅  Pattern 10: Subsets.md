@@ -110,7 +110,7 @@ function subsetsWithDupe(nums) {
     end = subsets.length - 1
     
     for(let j = start; j < end + 1; j++) {
-      //create a new suset from the existing subset and add the
+      //create a new subset from the existing subset and add the
       //current element to it
       subsets.push([...subsets[j], nums[i]])
     }
