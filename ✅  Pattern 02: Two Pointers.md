@@ -221,21 +221,6 @@ Another difference from [Pair with Target Sum](#🌴-pair-with-target-sum-aka-"t
 
 ````js
 function searchTriplets(arr) {
-  arr.sort((a, b) => a-b)
-  const triplets = [];
-  
-  for(i = 0; i< arr.length;i++) {
-    
-    if(i>0 && arr[i] === arr[i -1]){
-      //skip the same element to avoid dupes
-      continue
-    }
-    searchPair(arr, -arr[i], i+1, triplets)
-  }
-  return triplets;
-};
-
-function searchTriplets(arr) {
   arr.sort((a, b) => a -b)
   const triplets = []
   
