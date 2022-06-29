@@ -163,7 +163,7 @@ This shows that `Banana + Melon` is the best combination as it gives us the `max
 ### Basic Brute Force Soultion
 
 A basic <b>brute-force solution</b> could be to try all combinations of the given items (as we did above), allowing us to choose the one with `maximum profit` and a weight that doesn’t exceed `C`. Take the example of four items `A, B, C, and D`, as shown in the diagram below. To try all the combinations, our algorithm will look like:
-![](./images/./images/./images/knapsack.png)
+![](./images/knapsack.png)
 
 All <b>green boxes</b> have a total weight that is less than or equal to the capacity `7`, and all the <b>red ones</b> have a weight that is more than `7`. The best solution we have is with items `[B, D]` having a total profit of `22` and a total weight of `7`.
 
@@ -230,7 +230,7 @@ console.log(
 ### Overlapping Sub-problems
 
 Let’s visually draw the recursive calls to see if there are any overlapping sub-problems. As we can see, in each recursive call, `profits` and `weights` arrays remain constant, and only `capacity` and `currIndex` change. For simplicity, let’s denote capacity with `c` and `currIndex` with `i`:
-![](./images/./images/./images/subproblems.png)
+![](./images/subproblems.png)
 We can clearly see that `c:4, i=3` has been called twice. Hence we have an <b>overlapping sub-problems pattern</b>. We can use <b>[Memoization](https://en.wikipedia.org/wiki/Memoization)</b> to solve <b>overlapping sub-problems</b> efficiently.
 
 ### Top-down Dynamic Programming with Memoization
@@ -394,7 +394,7 @@ As we know, the final profit is at the bottom-right corner. Therefore, we will s
 As you remember, at every step, we had two options: include an item or skip it. If we skip an item, we take the profit from the remaining items (i.e., from the cell right above it); if we include the item, then we jump to the remaining profit to find more items.
 
 Let’s understand this from the above example:
-![](./images/./images/./images/dpselected.png)
+![](./images/dpselected.png)
 
 1. `22` did not come from the top cell (which is `17`); hence we must include the item at index `3` (which is item `D`).
 2. Subtract the profit of item `D` from `22` to get the remaining profit `6`. We then jump to profit `6` on the same row.
@@ -5994,7 +5994,7 @@ if str[strIndex] == pat[patIndex] {
 dp[strIndex][patIndex] += dp[strIndex-1][patIndex]
 ```
 
-Here is the code for our </b>bottom-up dynamic programming</b> approach:
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
 ```js
 function findSPMCount(str, pattern) {
   //every empty pattern has one match
@@ -6129,6 +6129,169 @@ console.log(
 
 - The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array.
 - The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+To overcome the <b>overlapping subproblems</b>, we can use an array to store the already solved <b>subproblems</b>.
+
+We need to <b>memoize</b> the <i>recursive functions</i> that calculate the <b>longest decreasing subsequence<b>. The two changing values for our <i>recursive function</i> are the `current` and the `previous` index. Therefore, we can store the results of all <b>subproblems</b> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`currIndex` + `“|”` + `prevIndex`)).
+
+Here is the code:
+
+````js
+function findLBSLength(nums) {
+  const lds = [];
+  const ldsReversed = [];
+
+  function findLDSLength(nums, currIndex, prevIndex) {
+    //find the longest decreasing subsequence from
+    //currIndex to the end of the array
+    if (currIndex === nums.length) return 0;
+
+    lds[currIndex] = lds[currIndex] || [];
+
+    if (typeof lds[currIndex][prevIndex + 1] === 'undefined') {
+      //include nums[currIndex] if it is smaller than the previous Number
+
+      let checkWithCurrIndex = 0;
+
+      if (prevIndex === -1 || nums[currIndex] < nums[prevIndex]) {
+        checkWithCurrIndex = 1 + findLDSLength(nums, currIndex + 1, currIndex);
+      }
+      //excluding the number at currIndex
+      let checkExcludingCurrIndex = findLDSLength(
+        nums,
+        currIndex + 1,
+        prevIndex
+      );
+
+      lds[currIndex][prevIndex + 1] = Math.max(
+        checkWithCurrIndex,
+        checkExcludingCurrIndex
+      );
+    }
+    return lds[currIndex][prevIndex + 1];
+  }
+
+  function findLDSLengthReverse(nums, currIndex, prevIndex) {
+    //find the longest decreasing subsequence from
+    //currIndex to the beginning of the array
+    if (currIndex < 0) return 0;
+
+    ldsReversed[currIndex] = ldsReversed[currIndex] || [];
+
+    if (ldsReversed[currIndex][prevIndex + 1] == null) {
+      // include nums[currIndex] if it is smaller than the prev number
+      let checkWithCurrIndex = 0;
+
+      if (prevIndex == -1 || nums[currIndex] < nums[prevIndex]) {
+        checkWithCurrIndex =
+          1 + findLDSLengthReverse(nums, currIndex - 1, currIndex);
+      }
+
+      //excluding the number at currIndex
+      let checkExcludingCurrIndex = findLDSLengthReverse(
+        nums,
+        currIndex - 1,
+        prevIndex
+      );
+
+      ldsReversed[currIndex][prevIndex + 1] = Math.max(
+        checkWithCurrIndex,
+        checkExcludingCurrIndex
+      );
+    }
+
+    return ldsReversed[currIndex][prevIndex + 1];
+  }
+  let maxLength = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    const checkIndexToEnd = findLDSLength(nums, i, -1);
+    const checkIndexToStart = findLDSLengthReverse(nums, i, -1);
+    maxLength = Math.max(maxLength, checkIndexToEnd + checkIndexToStart - 1);
+  }
+
+  return maxLength;
+}
+
+console.log(
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([
+    4, 2, 3, 6, 10, 1, 12,
+  ])}`
+);
+// Output: 5
+// Explanation: The LBS is {2,3,6,10,1}.
+
+console.log(
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([
+    4, 2, 5, 9, 7, 6, 10, 3, 1,
+  ])}`
+);
+// Output: 7
+// Explanation: The LBS is {4,5,9,7,6,3,1}.
+````
+
+### Bottom-up Dynamic Programming
+The above algorithm shows us a clear <b>bottom-up approach</b>. We can separately calculate <b>LDS</b> for every index i.e., from the beginning to the end of the array and vice versa. The required length of <b>LBS</b> would be the one that has the maximum sum of <b>LDS</b> for a given index (from both ends).
+
+Here is the code for our <b>bottom-up dynamic programming approach</b>:
+````js
+function findLBSLength(nums) {
+  const lds = Array(nums.length).fill(0);
+  const ldsReversed = Array(nums.length).fill(0);
+
+  //find the longest decreasing subsequence from
+  //currIndex to the end of the array
+  for (let i = 0; i < nums.length; i++) {
+    //initially set every element of LDS to a length of 1
+    lds[i] = 1;
+
+    for (let j = i - 1; j >= 0; j--) {
+      if (nums[j] < nums[i]) {
+        lds[i] = Math.max(lds[i], lds[j] + 1);
+      }
+    }
+  }
+
+  //find the longest decreasing subsequence from
+  //currIndex to the beginning of the array
+  for (let i = nums.length - 1; i >= 0; i--) {
+    //initially set every element of LDS to a length of 1
+    ldsReversed[i] = 1;
+
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[j] < nums[i]) {
+        ldsReversed[i] = Math.max(ldsReversed[i], ldsReversed[j] + 1);
+      }
+    }
+  }
+
+  let maxLength = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    maxLength = Math.max(maxLength, ldsReversed[i] + ldsReversed[i] - 1);
+  }
+
+  return maxLength;
+}
+
+console.log(
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([
+    4, 2, 3, 6, 10, 1, 12,
+  ])}`
+);
+// Output: 5
+// Explanation: The LBS is {2,3,6,10,1}.
+
+console.log(
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([
+    4, 2, 5, 9, 7, 6, 10, 3, 1,
+  ])}`
+);
+// Output: 7
+// Explanation: The LBS is {4,5,9,7,6,3,1}.
+````
+- The <b>time omplexity</b> of the above algorithm is `O(n²)` and the <b>space complexity</b> is `O(n)`.
 
 ## Longest Alternating Subsequence
 
