@@ -5871,7 +5871,7 @@ A <b>basic brute-force solution</b> could be to try all the <b>subsequences</b> 
 1. If the `pattern` has a matching character with the `string`, we can <b>recursively</b> match for the remaining lengths of the `pattern` and the `string`.
 2. At every step, we can always skip a character from the `string` to try to match the remaining `string` with the `pattern`. So we can start a <b>recursive call</b> by skipping one character from the `string`.
 
-Our total count will be the sum of the counts returned by the above two options.
+Our total `count` will be the sum of the `count`s returned by the above two options.
 
 Here is the code:
 ```js
@@ -6037,8 +6037,98 @@ console.log(
 - The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the `string` and the `pattern` respectively.
 
 ## Longest Bitonic Subsequence
-
 https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/
+
+> Given a number sequence, find the length of its <b>Longest Bitonic Subsequence (LBS)</b>. <i>A <b>subsequence</b> is considered <b>bitonic</b> if it is monotonically increasing and then monotonically decreasing</i>.
+
+#### Example 1:
+````js
+Input: {4,2,3,6,10,1,12}
+Output: 5
+Explanation: The LBS is {2,3,6,10,1}.
+````
+#### Example 2:
+````js
+Input: {4,2,5,9,7,6,10,3,1}
+Output: 7
+Explanation: The LBS is {4,5,9,7,6,3,1}.
+````
+
+### Basic Solution
+A <b>basic brute-force solution</b> could be to try finding the <b>Longest Decreasing Subsequences (LDS)</b>, starting from every number in both directions. So for every index `i` in the given array, we will do two things:
+1. Find <b>LDS</b> starting from `i` to the end of the array.
+2. Find <b>LDS</b> starting from `i` to the beginning of the array.
+
+<b>Longest Bitonic Subsequence (LBS)</b> would be the maximum sum of the above two <i>subsequences</i>.
+
+Here is the code:
+````js
+function findLBSLength(nums) {
+  let maxLength = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    const checkIndexToEnd = findLDSLength(nums, i, -1);
+    const checkIndexToStart = findLDSLengthReverse(nums, i, -1);
+    // console.log(checkIndexToEnd, checkIndexToStart, checkIndexToEnd + checkIndexToStart - 1)
+    maxLength = Math.max(maxLength, checkIndexToEnd + checkIndexToStart - 1);
+  }
+  return maxLength;
+}
+
+function findLDSLength(nums, currIndex, prevIndex) {
+  //find the longest decreasing subsequence from
+  //currIndex to the end of the array
+  if (currIndex === nums.length) return 0;
+
+  //include nums[currIndex] if it is smaller than previous number
+  let checkWithCurrIndex = 0;
+
+  if (prevIndex == -1 || nums[currIndex] < nums[prevIndex]) {
+    checkWithCurrIndex = 1 + findLDSLength(nums, currIndex + 1, currIndex);
+  }
+
+  //excluding the number at currIndex
+  let checkExcludingCurrIndex =
+    findLDSLength(nums, currIndex + 1, prevIndex);
+
+  return Math.max(checkWithCurrIndex, checkExcludingCurrIndex);
+}
+
+function findLDSLengthReverse(nums, currIndex, prevIndex) {
+  //find the longest decreasing subsequence from
+  //currIndex to the beginning of the array
+  if (currIndex < 0) return 0;
+
+  // include nums[currIndex] if it is smaller than the prev number
+  let checkWithCurrIndex = 0;
+
+  if (prevIndex == -1 || nums[currIndex] < nums[prevIndex]) {
+    checkWithCurrIndex =
+      1 + findLDSLengthReverse(nums, currIndex - 1, currIndex);
+  }
+
+  //excluding the number at currIndex
+  let checkExcludingCurrIndex =
+    findLDSLengthReverse(nums, currIndex - 1, prevIndex);
+
+  return Math.max(checkWithCurrIndex, checkExcludingCurrIndex);
+}
+
+console.log(
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([4, 2, 3, 6, 10, 1, 12])}`
+);
+// Output: 5
+// Explanation: The LBS is {2,3,6,10,1}.
+
+console.log(
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([4, 2, 5, 9, 7, 6, 10, 3, 1])}`
+);
+// Output: 7
+// Explanation: The LBS is {4,5,9,7,6,3,1}.
+````
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array.
+- The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ## Longest Alternating Subsequence
 

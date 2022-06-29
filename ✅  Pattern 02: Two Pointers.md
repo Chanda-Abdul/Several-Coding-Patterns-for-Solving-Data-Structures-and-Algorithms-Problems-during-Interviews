@@ -4,7 +4,7 @@ In problems where we deal with sorted arrays (or <b>LinkedList</b>s) and need to
 
 > Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.
 
-To solve this problem, we can consider each element one by one (pointed out by the first pointer) and iterate through the remaining elements (pointed out by the second pointer) to find a pair with the given sum. The time complexity of this algorithm will be `O(N^2)` where `N` is the number of elements in the input array.
+To solve this problem, we can consider each element one by one (pointed out by the first pointer) and iterate through the remaining elements (pointed out by the second pointer) to find a pair with the given sum. The <b>time complexity</b> of this algorithm will be `O(N^2)` where `N` is the number of elements in the input array.
 
 Given that the input array is sorted, an efficient way would be to start with one pointer in the beginning and another pointer at the end. At every step, we will see if the numbers pointed by the <b>two pointers</b> add up to the target sum. If they do not, we will do one of two things:
 1. If the sum of the two numbers pointed by the <b>two pointers</b> is greater than the target sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
@@ -16,14 +16,14 @@ https://leetcode.com/problems/two-sum/
 
 Write a function to return the indices of the two numbers (i.e. the pair) such that they add up to the given `target`.
 
-Since the given array is sorted, a brute-force solution could be to iterate through the array, taking one number at a time and searching for the second number through <b>Binary Search</b>. The time complexity of this algorithm will be `O(N*logN)`. Can we do better than this?
+Since the given array is sorted, a brute-force solution could be to iterate through the array, taking one number at a time and searching for the second number through <b>Binary Search</b>. The <b>time complexity</b> of this algorithm will be `O(N*logN)`. Can we do better than this?
 
 We can follow the <b>Two Pointers</b> approach. We will start with one pointer pointing to the beginning of the array and another pointing at the end. At every step, we will see if the numbers pointed by the <b>two pointers</b> add up to the `target` sum. If they do, we have found our pair; otherwise, we will do one of two things:
 1. If the sum of the two numbers pointed by the <b>two pointers</b> is greater than the `target` sum, this means that we need a pair with a smaller sum. So, to try more pairs, we can decrement the end-pointer.
 2. If the sum of the two numbers pointed by the <b>two pointers</b> is smaller than the `target` sum, this means that we need a pair with a larger sum. So, to try more pairs, we can increment the start-pointer.
 ### Brute Force Solution
 ````js
-function pair_with_targetsum(nums, target) {
+function pairWithTargetSum(nums, target) {
   for (let i = 0; i < nums.length; i++) {
     for(let j = 1; j < nums.length; j++) {
       if((nums[i] + nums[j]) === target) {
@@ -37,7 +37,7 @@ function pair_with_targetsum(nums, target) {
 }
 ````
 ### Two pointer Solution
-* Assume the input is sorted
+Assume the input is sorted
 ````js
 function pairWithTargetSum(arr, target) {
   let start = 0
@@ -59,10 +59,13 @@ function pairWithTargetSum(arr, target) {
   return 0  
 }
 
-pairWithTargetSum([1, 2, 3, 4, 6], 6)//[1,3]
-pairWithTargetSum([2, 5, 9, 11], 11)//[0,2]
+pairWithTargetSum([1, 2, 3, 4, 6], 6)
+//[1,3]
+
+pairWithTargetSum([2, 5, 9, 11], 11)
+//[0,2]
 ````
-- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
+- The <b>time complexity</b> of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
 - The algorithm runs in constant space `O(1)`.
 
 ### ❗ Hash Table Solution 
@@ -71,7 +74,7 @@ Instead of using a two-pointer or a binary search approach, we can utilize a <b>
 1. Search for `Y` (which is equivalent to `“Target - X”`) in the HashTable. If it is there, we have found the required pair.
 2. Otherwise, insert `“X”` in the HashTable, so that we can search it for the later numbers.
 ````js
-function pair_with_targetsum(nums, target) {
+function pairWithTargetSum(nums, target) {
   //Instead of using a two-pointer or a binary search approach, 
   //we can utilize a HashTable to search for the required pair. 
   //We can iterate through the array one number at a time. 
@@ -94,15 +97,15 @@ function pair_with_targetsum(nums, target) {
   return [-1, -1]
 }
 
-pair_with_targetsum([1, 2, 3, 4, 6], 6)//[1, 3]
-pair_with_targetsum([2, 5, 9, 11], 11)//[0, 2]
-pair_with_targetsum([2, 7, 11, 15], 9)//[0, 1]
-pair_with_targetsum([3, 2, 4], 6)//[1, 2]
-pair_with_targetsum([3, 3], 6)//[0, 1]
+pairWithTargetSum([1, 2, 3, 4, 6], 6)//[1, 3]
+pairWithTargetSum([2, 5, 9, 11], 11)//[0, 2]
+pairWithTargetSum([2, 7, 11, 15], 9)//[0, 1]
+pairWithTargetSum([3, 2, 4], 6)//[1, 2]
+pairWithTargetSum([3, 3], 6)//[0, 1]
 ````
 
-- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
-- The space complexity will also be `O(N)`, as, in the worst case, we will be pushing `N` numbers in the HashTable.
+- The <b>time complexity</b> of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
+- The <b>space complexity</b> will also be `O(N)`, as, in the worst case, we will be pushing `N` numbers in the HashTable.
 ## Remove Duplicates (easy)
 https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 
@@ -110,10 +113,10 @@ https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 
 In this problem, we need to remove the duplicates </i>in-place</i> such that the resultant length of the array remains sorted. As the input array is sorted, therefore, one way to do this is to shift the elements left whenever we encounter duplicates. In other words, we will keep one pointer for iterating the array and one pointer for placing the next non-duplicate number. So our algorithm will be to iterate the array and whenever we see a non-duplicate number we move it next to the last non-duplicate number we’ve seen.
 
-* Assume the input is sorted
+<b>Assume the input is sorted</b>
+
 ````js
 function removeDuplicates(arr) {
-
   //shift the elements left when we encounter duplicates
   
   //one pointer for iterating
@@ -132,10 +135,13 @@ function removeDuplicates(arr) {
   return nextNonDupe  
 }
 
-removeDuplicates([2, 3, 3, 3, 6, 9, 9])//4, The first four elements after removing the duplicates will be [2, 3, 6, 9].
-removeDuplicates([2, 2, 2, 11])//2, The first two elements after removing the duplicates will be [2, 11].
+removeDuplicates([2, 3, 3, 3, 6, 9, 9])
+//4, The first four elements after removing the duplicates will be [2, 3, 6, 9].
+
+removeDuplicates([2, 2, 2, 11])
+//2, The first two elements after removing the duplicates will be [2, 11].
 ````
-- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
+- The <b>time complexity</b> of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
 - The algorithm runs in constant space `O(1)`.
 
 ### Remove Element
@@ -146,21 +152,26 @@ https://leetcode.com/problems/remove-element/
 ````js
 function removeElement(arr, key) {
   //pointed for index of the next element which is not the key
-  let nextElement = 0
-  
-  for(i = 0; i < arr.length; i++) {
-    if(arr[i] !== key) {
-      arr[nextElement] = arr[i]
-      nextElement++
+  let nextElement = 0;
+
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i] !== key) {
+      arr[nextElement] = arr[i];
+      nextElement++;
     }
   }
-  return nextElement
+  return nextElement;
 }
 
-removeElement([3, 2, 3, 6, 3, 10, 9, 3], 3)//4, The first four elements after removing every 'Key' will be [2, 6, 10, 9].
-removeElement([2, 11, 2, 2, 1], 2)//2, The first four elements after removing every 'Key' will be [2, 6, 10, 9].
+removeElement([3, 2, 3, 6, 3, 10, 9, 3], 3);
+//4
+// The array, [2, 6, 10, 9], will have a length of after removing every 'key'.
+
+removeElement([2, 11, 2, 2, 1], 2);
+// 2
+// The array, [11, 1], will have a length of 2 after removing every 'key'.
 ````
-- The time complexity of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
+- The <b>time complexity</b> of the above algorithm will be `O(N)`, where `N` is the total number of elements in the given array.
 - The algorithm runs in constant space `O(1)`.
 
 ## Squaring a Sorted Array (easy)
@@ -202,11 +213,14 @@ function makeSquares(arr) {
   return squares
 }
 
-makeSquares([-2, -1, 0, 2, 3])//[0, 1, 4, 4, 9]
-makeSquares([-3, -1, 0, 1, 2])//[0, 1, 1, 4, 9]
+makeSquares([-2, -1, 0, 2, 3])
+//[0, 1, 4, 4, 9]
+
+makeSquares([-3, -1, 0, 1, 2])
+//[0, 1, 1, 4, 9]
 ````
-- The above algorithm’s time complexity will be `O(N)` as we are iterating the input array only once.
-- The above algorithm’s space complexity will also be `O(N)`; this space will be used for the output array.
+- The above algorithm’s <b>time complexity</b> will be `O(N)` as we are iterating the input array only once.
+- The above algorithm’s <b>space complexity</b> will also be `O(N)`; this space will be used for the output array.
 
 ## 🌟 Triplet Sum to Zero (medium)
 https://leetcode.com/problems/3sum/
@@ -217,70 +231,59 @@ This problem follows the <b>Two Pointers</b> pattern and shares similarities wit
 
 To follow a similar approach, first, we will sort the array and then iterate through it taking one number at a time. Let’s say during our iteration we are at number `X`, so we need to find `Y` and `Z` such that `X + Y + Z == 0`. At this stage, our problem translates into finding a pair whose sum is equal to `-X` (as from the above equation `Y + Z == -X`).
 
-Another difference from [Pair with Target Sum](#🌴-pair-with-target-sum-aka-"two-sum"-easy) is that we need to find all the unique triplets. To handle this, we have to skip any duplicate number. Since we will be sorting the array, so all the duplicate numbers will be next to each other and are easier to skip.
+Another difference from <b>[Pair with Target Sum](#🌴-pair-with-target-sum-aka-"two-sum"-easy)</b> is that we need to find all the unique triplets. To handle this, we have to skip any duplicate number. Since we will be sorting the array, so all the duplicate numbers will be next to each other and are easier to skip.
 
 ````js
 function searchTriplets(arr) {
-  arr.sort((a, b) => a-b)
+  arr.sort((a, b) => a - b);
   const triplets = [];
-  
-  for(i = 0; i< arr.length;i++) {
-    
-    if(i>0 && arr[i] === arr[i -1]){
+
+  for (i = 0; i < arr.length; i++) {
+    if (i > 0 && arr[i] === arr[i - 1]) {
       //skip the same element to avoid dupes
-      continue
+      continue;
     }
-    searchPair(arr, -arr[i], i+1, triplets)
+    searchPair(arr, -arr[i], i + 1, triplets);
   }
   return triplets;
-};
-
-function searchTriplets(arr) {
-  arr.sort((a, b) => a -b)
-  const triplets = []
-  
-  for(i = 0; i < arr.length; i++) {
-    if(i > 0 && arr[i] === arr[i -1]){
-      //skip same element to avoid duplicates
-      continue
-    }
-    searchPair(arr, -arr[i], i + 1, triplets)
-  }
-  return triplets
-};
+}
 
 function searchPair(arr, targetSum, start, triplets) {
-  let end = arr.length -1
-  while(start < end) {
-    const currentSum = arr[start] + arr[end]
-    if(currentSum === targetSum) {
+  let end = arr.length - 1;
+
+  while (start < end) {
+    const currentSum = arr[start] + arr[end];
+    if (currentSum === targetSum) {
       //found the triplet
-      triplets.push([-targetSum, arr[start], arr[end]])
-      start++
-      end--
-      while(start < end && arr[start] === arr[start-1]) {
+      triplets.push([-targetSum, arr[start], arr[end]]);
+      start++;
+      end--;
+      while (start < end && arr[start] === arr[start - 1]) {
         //skip same element to avoid duplicates
-        start++
+        start++;
       }
-      while(start < end && arr[end] === arr[end + 1]) {
+      while (start < end && arr[end] === arr[end + 1]) {
         //skip same element to avoid duplicates
-        end--
+        end--;
       }
-    } else if(targetSum > currentSum) {
+    } else if (targetSum > currentSum) {
       //we need a pair with a bigger sum
-      start++
+      start++;
     } else {
       //we need a pair with a smaller sum
-      end--
+      end--;
     }
   }
 }
 
-searchTriplets([-3, 0, 1, 2, -1, 1, -2]) //[[-3, 1, 2], [-2, 0, 2], [-2, 1, 1], [-1, 0, 1]]
-searchTriplets([-5, 2, -1, -2, 3]) //[[-5, 2, 3], [-2, -1, 3]]
+searchTriplets([-3, 0, 1, 2, -1, 1, -2]); 
+//[[-3, 1, 2], [-2, 0, 2], [-2, 1, 1], [-1, 0, 1]]
+
+searchTriplets([-5, 2, -1, -2, 3]); 
+//[[-5, 2, 3], [-2, -1, 3]]
 ````
 - Sorting the array will take `O(N * logN)`. The `searchPair()` function will take `O(N)`. As we are calling `searchPair()` for every number in the input array, this means that overall `searchTriplets()` will take `O(N * logN + N^2)`, which is asymptotically equivalent to `O(N^2)`.
-- Ignoring the space required for the output array, the space complexity of the above algorithm will be `O(N)` which is required for sorting.
+- Ignoring the space required for the output array, the <b>space complexity</b> of the above algorithm will be `O(N)` which is required for sorting.
 
 ## Triplet Sum Close to Target (medium)
 https://leetcode.com/problems/3sum-closest/
@@ -339,7 +342,7 @@ tripletSumCloseToTarget([1, 0, 1, 1], 100)//3, The triplet [1, 1, 1] has the clo
 tripletSumCloseToTarget([-1,2,1,-4], 1)//2, The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 ````
 - Sorting the array will take `O(N* logN)`. Overall, the function will take `O(N * logN + N^2)`, which is asymptotically equivalent to `O(N^2)`
-- The above algorithm’s space complexity will be `O(N)`, which is required for sorting.
+- The above algorithm’s <b>space complexity</b> will be `O(N)`, which is required for sorting.
 ## Triplets with Smaller Sum (medium)
 https://leetcode.com/problems/3sum-smaller/
 
@@ -388,9 +391,9 @@ tripletWithSmallerSum ([], 0)//0
 tripletWithSmallerSum ([0], 0)//0
 ````
 - Sorting the array will take `O(N * logN)`. The `searchPair()` will take `O(N)`. So, overall `searchTriplets()` will take `O(N * logN + N^2)`, which is asymptotically equivalent to `O(N^2)`.
-- The space complexity of the above algorithm will be `O(N)` which is required for sorting if we are not using an </i>in-place</i> sorting algorithm.
+- The <b>space complexity</b> of the above algorithm will be `O(N)` which is required for sorting if we are not using an </i>in-place</i> sorting algorithm.
 
-> Write a function to return the list of all such triplets instead of the count. How will the time complexity change in this case?
+> Write a function to return the list of all such triplets instead of the count. How will the <b>time complexity</b> change in this case?
 
 ````js
 function tripletWithSmallerSum (arr, target) {
@@ -425,7 +428,7 @@ function searchPair(arr, targetSum, first, triplets){
 }
 ````
 - Sorting the array will take `O(N * logN)`. The `searchPair()`, in this case, will take `O(N^2)`; the main while loop will run in `O(N)` but the nested for loop can also take `O(N)` - this will happen when the target sum is bigger than every triplet in the array.  So, overall `searchTriplets()` will take `O(N * logN + N^3)`, which is asymptotically equivalent to `O(N^3)`.
-- Ignoring the space required for the output array, the space complexity of the above algorithm will be `O(N)` which is required for sorting.
+- Ignoring the space required for the output array, the <b>space complexity</b> of the above algorithm will be `O(N)` which is required for sorting.
 ## 🌟 Subarrays with Product Less than a Target (medium)
 https://leetcode.com/problems/subarray-product-less-than-k/
 
@@ -517,7 +520,7 @@ function dutchFlagSort(arr) {
 console.log(dutchFlagSort([1, 0, 2, 1, 0]))//[0 0 1 1 2]
 console.log(dutchFlagSort([2, 2, 0, 1, 2, 0]))//[0 0 1 2 2 2 ]
 ````
-- The time complexity of the above algorithm will be `O(N)` as we are iterating the input array only once.
+- The <b>time complexity</b> of the above algorithm will be `O(N)` as we are iterating the input array only once.
 - The algorithm runs in constant space `O(1)`.
 
 ## 🌟 Quadruple Sum to Target (medium)
@@ -584,7 +587,7 @@ searchQuads([4,1,2,-1,1,-3], 1)//-3, -1, 1, 4], [-3, 1, 1, 2]
 searchQuads([2,0,-1,1,-2,2], 2)//[-2, 0, 2, 2], [-1, 0, 1, 2]
 ````
 - Sorting the array will take `O(N*logN)`. Overall `searchQuads()` will take `O(N * logN + N³)`, which is asymptotically equivalent to `O(N³)`.
-- The space complexity of the above algorithm will be `O(N)` which is required for sorting.
+- The <b>space complexity</b> of the above algorithm will be `O(N)` which is required for sorting.
 ## 🌟 Comparing Strings containing Backspaces (medium)
 https://leetcode.com/problems/backspace-string-compare/
 >Given two strings containing backspaces (identified by the character `#`), check if the two strings are equal.
@@ -643,7 +646,7 @@ backspaceCompare("xy#z", "xyz#")//false, After applying backspaces the strings b
 backspaceCompare("xp#", "xyz##")//true, After applying backspaces the strings become "x" and "x" respectively.  In "xyz##", the first '#' removes the character 'z' and the second '#' removes the character 'y'.
 backspaceCompare("xywrrmp", "xywrrmu#p")//true, After applying backspaces the strings become "xywrrmp" and "xywrrmp" respectively.
 ````
-- The time complexity of the above algorithm will be `O(M+N)` where `M` and `N` are the lengths of the two input strings respectively.
+- The <b>time complexity</b> of the above algorithm will be `O(M+N)` where `M` and `N` are the lengths of the two input strings respectively.
 - The algorithm runs in constant space `O(1)`.
 
 ## 🌟 Minimum Window Sort (medium)
@@ -710,10 +713,17 @@ function shortestWindowSort(arr) {
   return high - low + 1
 }
 
-shortestWindowSort([1,2,5,3,7,10,9,12])//5, We need to sort only the subarray [5, 3, 7, 10, 9] to make the whole array sorted
-shortestWindowSort([1,3,2,0,-1,7,10])//5, We need to sort only the subarray [1, 3, 2, 0, -1] to make the whole array sorted
-shortestWindowSort([1,2,3])//0, The array is already sorted
-shortestWindowSort([3,2,1])// 3, The whole array needs to be sorted.
+shortestWindowSort([1,2,5,3,7,10,9,12])
+//5, We need to sort only the subarray [5, 3, 7, 10, 9] to make the whole array sorted
+
+shortestWindowSort([1,3,2,0,-1,7,10])
+//5, We need to sort only the subarray [1, 3, 2, 0, -1] to make the whole array sorted
+
+shortestWindowSort([1,2,3])
+//0, The array is already sorted
+
+shortestWindowSort([3,2,1])
+// 3, The whole array needs to be sorted.
 ````
-- The time complexity of the above algorithm will be `O(N)`.
+- The <b>time complexity</b> of the above algorithm will be `O(N)`.
 - The algorithm runs in constant space `O(1)`.

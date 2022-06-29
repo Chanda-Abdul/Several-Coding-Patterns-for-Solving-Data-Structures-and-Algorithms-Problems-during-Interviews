@@ -103,8 +103,8 @@ function maxSubarrayOfSizeK(arr, k) {
   return maxSum
 }
 
-max_sub_array_of_size_k(3, [2, 1, 5, 1, 3, 2])//9
-max_sub_array_of_size_k(2, [2, 3, 4, 1, 5])//7
+maxSubarrayOfSizeK(3, [2, 1, 5, 1, 3, 2])//9
+maxSubarrayOfSizeK(2, [2, 3, 4, 1, 5])//7
 ````
 - Time complexity will be `O(N*K)`, where `N` is the total number of elements in the given array
 
@@ -313,10 +313,17 @@ function totalFruit (fruits) {
   return windowMax   
 };
 
-totalFruit ([3,3,3,1,2,1,1,2,3,3,4])//5
-totalFruit ([1,2,1])//3,We can pick from all 3 trees.
-totalFruit ([0,1,2,2])//3,We can pick from trees [1,2,2].If we had started at the first tree, we would only pick from trees [0,1].
-totalFruit ([1,2,3,2,2])//4,We can pick from trees [2,3,2,2]. If we had started at the first tree, we would only pick from trees [1,2].
+totalFruit ([3,3,3,1,2,1,1,2,3,3,4])
+//5
+
+totalFruit ([1,2,1])
+//3,We can pick from all 3 trees.
+
+totalFruit ([0,1,2,2])
+//3,We can pick from trees [1,2,2].If we had started at the first tree, we would only pick from trees [0,1].
+
+totalFruit ([1,2,3,2,2])
+//4,We can pick from trees [2,3,2,2]. If we had started at the first tree, we would only pick from trees [1,2].
 ````
 ### Map Object Solution
 ````js
