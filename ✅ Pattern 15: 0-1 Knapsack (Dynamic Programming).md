@@ -225,7 +225,7 @@ console.log(
 #### Time & Space Complexity
 
 - The above algorithm’s <b>time complexity</b> is exponential `O(2ⁿ)`, where `n` represents the total number of items. This can also be confirmed from the above recursion tree. As we can see, we will have a total of `31` 😲 recursive calls – calculated through `(2ⁿ) + (2ⁿ) - 1`, which is <i>asymptotically</i> equivalent to `O(2ⁿ)`.
-- The <b>space complexity</b> is `O(n)`. This space will be used to store the recursion stack. Since the recursive algorithm works in a depth-first fashion, which means that we can’t have more than `n` recursive calls on the call stack at any time.
+- The <b>space complexity</b> is `O(n)`. This space will be used to store the <i>recursion stack</i>. Since the recursive algorithm works in a depth-first fashion, which means that we can’t have more than `n` recursive calls on the call stack at any time.
 
 ### Overlapping Sub-problems
 
@@ -1034,7 +1034,7 @@ console.log(`Can partitioning be done: ---> ${canPartition([1, 3, 100, 4])}`);
 ```
 
 - Because of the two recursive calls, the <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
+- The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -1230,7 +1230,7 @@ console.log(`Count of subset sum is: ---> ${countSubsets([1, 2, 7, 1, 5], 9)}`);
 ```
 
 - The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` represents the total number.
-- The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
+- The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -1623,7 +1623,7 @@ console.log(
 ```
 
 - The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ⁺ᶜ)`, where `N` represents the total number of items.
-- The <b>space complexity</b> will be `O(N+C)` to store the recursion stack.
+- The <b>space complexity</b> will be `O(N+C)` to store the <i>recursion stack</i>.
 
 Let’s try to find a better solution.
 
@@ -2541,7 +2541,7 @@ console.log(`6th Fibonacci is ---> ${calculateFibonacci(6)}`);
 console.log(`7th Fibonacci is ---> ${calculateFibonacci(7)}`);
 ```
 
-The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ)` as we are making two recursive calls in the same function. The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
+The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ)` as we are making two recursive calls in the same function. The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 Let’s visually draw the recursion for `CalculateFibonacci(4)` to see the overlapping subproblems:
 
@@ -5402,7 +5402,7 @@ console.log(
 
 Let's use <b>memoization</b> to overcome the <i>overlapping subproblems</i>.
 
-The two changing values to our <b>recursive function</b> are the two indices, `i1` and `i2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`i1` + `|` + `i2`)).
+The two changing values to our <b>recursive function</b> are the two indices, `index1` and `index2`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`index1` + `|` + `index2`)).
 
 Here is the code:
 
@@ -5782,7 +5782,7 @@ console.log(
 
 Since we want to match all the <b>subsequences</b> of the given string, we can use a two-dimensional array to store our results. As mentioned above, we will be tracking two <i>indices</i> to overcome the overlapping problem. So for each of the two <i>indices</i>, `index1` and `index2`, we will choose one of the following options:
 
-1. If `index1` and `index2` are different and the character `str[index1]` matches the character `str[i2]`, then the length of the <b>LRS</b> would be one plus the length of <b>LRS</b> up to `index1-1` and `index2-1` <i>indices</i>.
+1. If `index1` and `index2` are different and the character `str[index1]` matches the character `str[index2]`, then the length of the <b>LRS</b> would be one plus the length of <b>LRS</b> up to `index1-1` and `index2-1` <i>indices</i>.
 2. If the character at `str[index1]` does not match `str[index2]`, we will take the <b>LRS</b> by either skipping `index1`th or `index2`th character.
 
 So our <b>recursive formula</b> would be:
@@ -6424,8 +6424,8 @@ ${findLASLength([1, 3, 2, 4])}`);
 // Explanation: The LAS is {1,3,2,4}.
 ```
 
-- The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ)`, where `n` is the lengths of the input array.
-- The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ)`, where `n` is the lengths' of the input array.
+- The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
 
@@ -6514,7 +6514,7 @@ ${findLASLength([1, 3, 2, 4])}`);
 // Explanation: The LAS is {1,3,2,4}.
 ```
 
-### Bottom-up Dynamic Programming#
+### Bottom-up Dynamic Programming
 
 The above algorithm tells us three things:
 
@@ -6593,9 +6593,471 @@ ${findLASLength([1, 3, 2, 4])}`);
 - The <b>time complexity</b> of the above algorithm is `O(n²)` and the <b>space complexity</b> is `O(n)`.
 
 ## 🔎 Edit Distance
-
 https://leetcode.com/problems/edit-distance/
+> Given strings `s1` and `s2`, we need to transform `s1` into `s2` by <i>deleting</i>, <i>inserting</i>, or <i>replacing</i> characters. Write a function to calculate the count of the minimum number of edit operations.
+
+#### Example 1:
+
+```js
+Input: s1 = "bat"
+       s2 = "but"
+Output: 1
+Explanation: We just need to replace 'a' with 'u' to transform s1 to s2.
+```
+
+#### Example 2:
+
+```js
+Input: s1 = "abdca"
+       s2 = "cbda"
+Output: 2
+Explanation: We can replace first 'a' with 'c' and delete second 'c'.
+```
+
+#### Example 3:
+
+```js
+Input: s1 = "passpot"
+       s2 = "ppsspqrt"
+Output: 3 
+Explanation: Replace 'a' with 'p', 'o' with 'q', and insert 'r'.
+```
+
+### Basic Solution
+
+A <b>basic brute-force solution</b> could be to try all operations (one by one) on each character of `s1`. We can iterate through `s1` and `s2` together. Let’s assume `index1` and `index2` point to the current indexes of `s1` and `s2` respectively, so we have two options at every step:
+
+1. If the strings have a matching character, we can recursively match for the remaining lengths.
+2. If the strings don’t match, we start three new recursive calls representing the three edit operations. Whichever recursive call returns the minimum count of operations will be our answer.
+
+Here is the recursive implementation:
+
+```js
+function findMinOperations(s1, s2) {
+  function findMinOperationsRecursive(s1, s2, index1, index2) {
+    // if we have reached the end of s1, then we have to insert all the remaining characters of s2
+    if (index1 == s1.length) return s2.length - index2;
+
+    // if we have reached the end of s2, then we have to delete all the remaining characters of s1
+    if (index2 == s2.length) return s1.length - index1;
+
+    // If the strings have a matching character, we can recursively match for the remaining lengths.
+    if (s1.charAt(index1) == s2.charAt(index2)) {
+      return findMinOperationsRecursive(s1, s2, index1 + 1, index2 + 1);
+    }
+    //perform deletion
+    let onDeletion = 1 + findMinOperationsRecursive(s1, s2, index1 + 1, index2);
+    //perform insertion
+    let onInsertion =
+      1 + findMinOperationsRecursive(s1, s2, index1, index2 + 1);
+    // perform replacement
+    let onReplacement =
+      1 + findMinOperationsRecursive(s1, s2, index1 + 1, index2 + 1);
+
+    return Math.min(onDeletion, Math.min(onInsertion, onReplacement));
+  }
+  return findMinOperationsRecursive(s1, s2, 0, 0);
+}
+
+console.log(`Minimum Edit Distance: ---> ${findMinOperations('bat', 'but')}`);
+// Output: 1
+// Explanation: We just need to replace 'a' with 'u' to transform s1 to s2.
+
+console.log(
+  `Minimum Edit Distance: ---> ${findMinOperations('abdca', 'cbda')}`
+);
+// Output: 2
+// Explanation: We can replace first 'a' with 'c' and delete second 'c'.
+
+console.log(
+  `Minimum Edit Distance: ---> ${findMinOperations('passpot', 'ppsspqrt')}`
+);
+// Output: 3
+// Explanation: Replace 'a' with 'p', 'o' with 'q', and insert 'r'.
+```
+
+- Because of the three recursive calls, the  <b>time complexity</b> of the above algorithm is exponential `O(3ᵐ⁺ⁿ)`, where `m` and `n` are the lengths of the two input strings. 
+- The <b>space complexity</b> is `O(m+n)` which is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+
+We can use an array to store the already solved <b>subproblems</b>.
+
+The two changing values in our recursive function are the two indexes, `index1` and `index2`. Therefore, we can store the results of all the subproblems in a two-dimensional array. (Another alternative could be to use a hash-table whose key would be a string (`index1` + `“|”` + `index2`)).
+
+Here is the code for the <b>Top-down Dynamic Programming</b>approach:
+
+```js
+function findMinOperations(s1, s2) {
+  const dp = [];
+
+  function findMinOperationsRecursive(s1, s2, index1, index2) {
+    dp[index1] = dp[index1] || [];
+    if (typeof dp[index1][index2] === 'undefined') {
+      // if we have reached the end of s1, then we have to insert all the remaining characters of s2
+      if (index1 === s1.length) dp[index1][index2] = s2.length - index2;
+      // if we have reached the end of s2, then we have to delete all the remaining characters of s1
+      else if (index2 == s2.length) dp[index1][index2] = s1.length - index1;
+      // If the strings have a matching character, we can recursively match for the remaining lengths.
+      else if (s1[index1] === s2[index2])
+        dp[index1][index2] = findMinOperationsRecursive(
+          s1,
+          s2,
+          index1 + 1,
+          index2 + 1
+        );
+      else {
+        //perform deletion
+        const onDeletion = findMinOperationsRecursive(
+          s1,
+          s2,
+          index1 + 1,
+          index2
+        );
+        //perform insertion
+        const onInsertion = findMinOperationsRecursive(
+          s1,
+          s2,
+          index1,
+          index2 + 1
+        );
+        // perform replacement
+        const onReplacement = findMinOperationsRecursive(
+          s1,
+          s2,
+          index1 + 1,
+          index2 + 1
+        );
+        dp[index1][index2] =
+          1 + Math.min(onDeletion, Math.min(onInsertion, onReplacement));
+      }
+    }
+
+    return dp[index1][index2];
+  }
+  return findMinOperationsRecursive(s1, s2, 0, 0);
+}
+
+console.log(`Minimum Edit Distance: ---> ${findMinOperations('bat', 'but')}`);
+// Output: 1
+// Explanation: We just need to replace 'a' with 'u' to transform s1 to s2.
+
+console.log(
+  `Minimum Edit Distance: ---> ${findMinOperations('abdca', 'cbda')}`
+);
+// Output: 2
+// Explanation: We can replace first 'a' with 'c' and delete second 'c'.
+
+console.log(
+  `Minimum Edit Distance: ---> ${findMinOperations('passpot', 'ppsspqrt')}`
+);
+// Output: 3
+// Explanation: Replace 'a' with 'p', 'o' with 'q', and insert 'r'.
+```
+- Since our <i>memoization</i> array `dp[s1.length()][s2.length()]` stores the results for all the <b>subproblems</b>, we can conclude that we will not have more than `m*n` <b>subproblems</b> (where `m` and `n` are the lengths of the two input strings.). This means that our <b>time complexity</b> will be `O(m*n)`.
+- The above algorithm will be using `O(m*n)`space for the<i> memoization</i> array. Other than that we will use `O(m+n)`space for the <b>recursion call-stack</b>. So the total <b>space complexity</b> will be `O(m*n + (m+n))`, which is asymptotically equivalent to `O(m*n)`.
+
+### Bottom-up Dynamic Programming
+
+Since we want to match all the characters of the given two strings, we can use a two-dimensional array to store our results. The lengths of the two strings will define the size of the two dimensions of the array. So for every index `index1` in string `s1` and `index2` in string `s2`, we will choose one of the following options:
+
+1. If the character `s1[index1]` matches `s2[index2]`, the count of the edit operations will be equal to the count of the edit operations for the remaining strings.
+2. If the character `s1[index1]` does not match `s2[index2]`, we will take the minimum count from the remaining strings after performing any of the three edit operations.
+
+So our <b>recursive formula</b> would be:
+
+```js
+if s1[index1] == s2[index2] 
+  dp[index1][index2] = dp[index1-1][index2-1]
+else 
+  dp[index1][index2] = 1 + min(dp[index1-1][index2], // delete
+                       dp[index1][index2-1], // insert 
+                       dp[index1-1][index2-1]) // replace
+```
+
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
+
+```js
+function findMinOperations(s1, s2) {
+  const dp = Array(s1.length + 1)
+    .fill(0)
+    .map(() => Array(s2.length + 1).fill(0));
+
+  // if s2 is empty, we can remove all the characters of s1 to make it empty too
+  for (let index1 = 0; index1 <= s1.length; index1++) dp[index1][0] = index1;
+
+  // if s1 is empty, we have to insert all the characters of s2
+  for (let index2 = 0; index2 <= s2.length; index2++) dp[0][index2] = index2;
+
+  for (let index1 = 1; index1 <= s1.length; index1++) {
+    for (let index2 = 1; index2 <= s2.length; index2++) {
+      // If the strings have a matching character, we can recursively match for the remaining lengths
+      if (s1[index1 - 1] === s2[index2 - 1]) {
+        dp[index1][index2] = dp[index1 - 1][index2 - 1];
+      } else {
+        dp[index1][index2] =
+          1 +
+          Math.min(
+            dp[index1 - 1][index2],
+            Math.min(dp[index1][index2 - 1], dp[index1 - 1][index2 - 1])
+          );
+      }
+    }
+  }
+
+  return dp[s1.length][s2.length];
+}
+
+console.log(`Minimum Edit Distance: ---> ${findMinOperations('bat', 'but')}`);
+// Output: 1
+// Explanation: We just need to replace 'a' with 'u' to transform s1 to s2.
+
+console.log(
+  `Minimum Edit Distance: ---> ${findMinOperations('abdca', 'cbda')}`
+);
+// Output: 2
+// Explanation: We can replace first 'a' with 'c' and delete second 'c'.
+
+console.log(
+  `Minimum Edit Distance: ---> ${findMinOperations('passpot', 'ppsspqrt')}`
+);
+// Output: 3
+// Explanation: Replace 'a' with 'p', 'o' with 'q', and insert 'r'.
+```
+
+- The <b>time complexity and space complexity</b> of the above algorithm is `O(n*m)`, where `m` and `n` are the lengths of the two input strings.
 
 ## 🔎 Strings Interleaving
-
 https://leetcode.com/problems/interleaving-string/
+> Given three strings `m`, `n`, and `p`, write a method to find out if `p` has been formed by interleaving `m` and `n`. `p` would be considered interleaving `m` and `n` if it contains all the letters from `m` and `n` and the order of letters is preserved too.
+
+#### Example 1:
+
+```js
+Input: m="abd", n="cef", p="abcdef"
+Output: true
+Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too. 
+```
+
+#### Example 2:
+
+```js
+Input: m="abd", n="cef", p="adcbef"
+Output: false
+Explanation: 'p' contains all the letters from 'm' and 'n' but does not preserve the order. 
+```
+
+#### Example 3:
+
+```js
+Input: m="abc", n="def", p="abdccf"
+Output: false
+Explanation: 'p' does not contain all the letters from 'm' and 'n'. 
+```
+
+#### Example 3:
+
+```js
+Input: m="abcdef", n="mnop", p="mnaobcdepf"
+Output: true
+Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too. 
+```
+
+### Basic Solution
+
+The problem follows the <b>[Longest Common Subsequence (LCS) pattern](#pattern-5-longest-common-substring)</b> and has some similarities with <b>[Subsequence Pattern Matching](#subsequence-pattern-matching)</b>.
+
+A <b>basic brute-force solution</b>could be to try matching `m` and `n` with `p` one letter at a time. Let’s assume `mIndex`, `nIndex`, and `pIndex` represent the current indexes of `m`, `n`, and `p` strings respectively. Therefore, we have two options at any step:
+
+1. If the letter at `mIndex` matches with the letter at `pIndex`, we can recursively match for the remaining lengths of `m` and `p`.
+2. If the letter at `nIndex` matches with the letter at `pIndex`, we can recursively match for the remaining lengths of `n` and `p`.
+
+<b>LAS</b> would be the maximum of the above three subsequences.
+
+Here is the code:
+
+```js
+function findSI(m, n, p) {
+  function findSIRecursive(m, n, p, mIndex, nIndex, pIndex) {
+    // if we have reached the end of the all the strings
+    if (mIndex === m.length && nIndex === n.length && pIndex === p.length)
+      return true;
+
+    // if we have reached the end of 'p' but 'm' or 'n' still have some characters left
+    if (pIndex === p.length) return false;
+
+    let mMatchesP = false;
+    let nMatchesP = false;
+    
+    if (mIndex < m.length && m[mIndex] === p[pIndex])
+      mMatchesP = findSIRecursive(m, n, p, mIndex + 1, nIndex, pIndex + 1);
+
+    if (nIndex < n.length && n[nIndex] === p[pIndex])
+      nMatchesP = findSIRecursive(m, n, p, mIndex, nIndex + 1, pIndex + 1);
+
+    return mMatchesP || nMatchesP;
+  }
+  return findSIRecursive(m, n, p, 0, 0, 0);
+}
+
+console.log(`String leterleaving: ---> ${findSI('abd', 'cef', 'abcdef')}`);
+// Output: true
+// Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too.
+
+console.log(`String leterleaving: ---> ${findSI('abd', 'cef', 'adcbef')}`);
+// Output: false
+// Explanation: 'p' contains all the letters from 'm' and 'n' but does not preserve the order.
+
+console.log(`String leterleaving: ---> ${findSI('abc', 'def', 'abdccf')}`);
+// Output: false
+// Explanation: 'p' does not contain all the letters from 'm' and 'n'.
+
+console.log(
+  `String leterleaving: ---> ${findSI('abcdef', 'mnop', 'mnaobcdepf')}`
+);
+// Output: true
+// Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too.
+```
+
+- The <b>time complexity</b>of the above algorithm is exponential `O(2ᵐ⁺ⁿ)`
+, where `m` and `n` are the lengths of the two interleaving strings. 
+- The <b>space complexity</b> is `O(m+n)`, the value that is used to store the <i>recursion stack</i>.
+
+### Top-down Dynamic Programming with Memoization
+
+This problem can have <b>overlapping subproblems</b> only when there are some common letters between `m` and `n` at the same index. Because whenever we hit such a scenario, we get an option to match with any one of them.
+
+The three changing values in our recursive function are the three indexes `mIndex`, `nIndex`, and `pIndex`. Therefore, we can store the results of all the <b>subproblems</b> in a three-dimensional array. Alternately, we can use a hash-table whose key would be a string (`mIndex` + `“|”` +`nIndex` + `“|”` + `pIndex`).
+
+Here is the code:
+
+```js
+function findSI(m, n, p) {
+  const dp = [];
+
+  function findSIRecursive(m, n, p, mIndex, nIndex, pIndex) {
+    // if we have reached the end of the all the strings
+    if (mIndex === m.length && nIndex === n.length && pIndex === p.length)
+      return true;
+
+    // if we have reached the end of 'p' but 'm' or 'n' still have some characters left
+    if (pIndex === p.length) return false;
+
+    let subProblemKey = `${mIndex}-${nIndex}-${pIndex}`;
+    if (typeof dp[subProblemKey] === 'undefined') {
+      let mMatchesP = false;
+      let nMatchesP = false;
+
+      if (mIndex < m.length && m[mIndex] === p[pIndex])
+        mMatchesP = findSIRecursive(m, n, p, mIndex + 1, nIndex, pIndex + 1);
+
+      if (nIndex < n.length && n[nIndex] === p[pIndex])
+        nMatchesP = findSIRecursive(m, n, p, mIndex, nIndex + 1, pIndex + 1);
+
+      dp[subProblemKey] = mMatchesP || nMatchesP;
+    }
+    return dp[subProblemKey];
+  }
+  return findSIRecursive(m, n, p, 0, 0, 0);
+}
+
+console.log(`String leterleaving: ---> ${findSI('abd', 'cef', 'abcdef')}`);
+// Output: true
+// Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too.
+
+console.log(`String leterleaving: ---> ${findSI('abd', 'cef', 'adcbef')}`);
+// Output: false
+// Explanation: 'p' contains all the letters from 'm' and 'n' but does not preserve the order.
+
+console.log(`String leterleaving: ---> ${findSI('abc', 'def', 'abdccf')}`);
+// Output: false
+// Explanation: 'p' does not contain all the letters from 'm' and 'n'.
+
+console.log(
+  `String leterleaving: ---> ${findSI('abcdef', 'mnop', 'mnaobcdepf')}`
+);
+// Output: true
+// Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too.
+```
+
+### Bottom-up Dynamic Programming
+
+Since we want to completely match `m` and `n` (the two interleaving strings) with `p`, we can use a two-dimensional array to store our results. The lengths of `m` and `n` will define the dimensions of the result array.
+
+As mentioned above, we will be tracking separate indexes for `m`, `n` and `p`, so we will have the following options for every value of `mIndex`, `nIndex`, and `pIndex`:
+
+1. If the character `m[mIndex]` matches the character `p[pIndex]`, we will take the matching result up to `mIndex-1` and `nIndex`.
+2. If the character `n[nIndex]` matches the character `p[pIndex]`, we will take the matching result up to `mIndex` and `nIndex-1`.
+
+String `p` will be interleaving strings `m` and `n` if any of the above two options is `true`. This is also required as there could be some common letters between `m` and `n`.
+
+So our recursive formula would look like:
+```js
+dp[mIndex][nIndex] = false
+if m[mIndex] == p[pIndex] 
+  dp[mIndex][nIndex] = dp[mIndex-1][nIndex]
+if n[nIndex] == p[pIndex] 
+ dp[mIndex][nIndex] |= dp[mIndex][nIndex-1]
+```
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
+```js
+function findSI(m, n, p) {
+  // dp[mIndex][nIndex] will be storing the result of string leterleaving
+  // up to p[0..mIndex+nIndex-1]
+  const dp = Array(m.length + 1)
+    .fill(false)
+    .map(() => Array(n.length + 1).fill(false));
+
+  // make sure if lengths of the strings add up
+  if (m.length + n.length != p.length) return false;
+
+  for (let mIndex = 0; mIndex <= m.length; mIndex++) {
+    for (let nIndex = 0; nIndex <= n.length; nIndex++) {
+      // if 'm' and 'n' are empty, then 'p' must have been empty too.
+      if (mIndex === 0 && nIndex === 0) {
+        dp[mIndex][nIndex] = true;
+      }
+      // if 'm' is empty, we need to check the leterleaving with 'n' only
+      else if (mIndex === 0 && n[nIndex - 1] === p[mIndex + nIndex - 1]) {
+        dp[mIndex][nIndex] = dp[mIndex][nIndex - 1];
+      }
+      // if 'n' is empty, we need to check the leterleaving with 'm' only
+      else if (nIndex === 0 && m[mIndex - 1] === p[mIndex + nIndex - 1]) {
+        dp[mIndex][nIndex] = dp[mIndex - 1][nIndex];
+      } else {
+        // if the letter of 'm' and 'p' match, we take whatever is matched till mIndex-1
+        if (mIndex > 0 && m[mIndex - 1] === p[mIndex + nIndex - 1]) {
+          dp[mIndex][nIndex] = dp[mIndex - 1][nIndex];
+        }
+        // if the letter of 'n' and 'p' match, we take whatever is matched till nIndex-1 too
+        // note the '||', this is required when we have common letters
+        if (nIndex > 0 && n[nIndex - 1] === p[mIndex + nIndex - 1]) {
+          dp[mIndex][nIndex] = dp[mIndex][nIndex] || dp[mIndex][nIndex - 1];
+        }
+      }
+    }
+  }
+  return dp[m.length][n.length];
+}
+
+
+console.log(`String leterleaving: ---> ${findSI('abd', 'cef', 'abcdef')}`);
+// Output: true
+// Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too.
+
+console.log(`String leterleaving: ---> ${findSI('abd', 'cef', 'adcbef')}`);
+// Output: false
+// Explanation: 'p' contains all the letters from 'm' and 'n' but does not preserve the order.
+
+console.log(`String leterleaving: ---> ${findSI('abc', 'def', 'abdccf')}`);
+// Output: false
+// Explanation: 'p' does not contain all the letters from 'm' and 'n'.
+
+console.log(
+  `String leterleaving: ---> ${findSI('abcdef', 'mnop', 'mnaobcdepf')}`
+);
+// Output: true
+// Explanation: 'p' contains all the letters from 'm' and 'n' and preserves their order too.
+```
+
+- The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the two interleaving strings.
