@@ -4226,7 +4226,7 @@ console.log(`Minimum palindrome partitions ---> ${findMPPCuts('pp')}`);
 
 ### Top-down Dynamic Programming with Memoization
 
-We can <i>memoize</i>both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indices; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
+We can <i>memoize</i> both functions `findMPPCutsRecursive()` and `isPalindrome()`. The two changing values in both these functions are the two indices; therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (alternatively, we can use a <i>hash-table</i>).
 
 Here is the code:
 
@@ -5658,7 +5658,7 @@ Explanation: The longest repeating subsequence is “a b c” {a a b d b c e c}.
 ```js
 Input: “f m f f”
 Output: 2
-Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}. 
+Explanation: The longest repeating subsequence is “f f” {f m f f, f m f f}.
 Please note the second last character is shared in LRS.
 ```
 
@@ -5847,17 +5847,21 @@ console.log(
 - The <b>time complexity and space complexity</b> of the above algorithm is is `O(n²)`.
 
 ## Subsequence Pattern Matching
+
 https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/
 
 > Given a `string` and a `pattern`, write a method to count the number of times the `pattern` appears in the `string` as a <b>subsequence</b>.
 
-#### Example 1: 
+#### Example 1:
+
 ```js
 Input: string: “baxmx”, pattern: “ax”
 Output: 2
 Explanation: {baxmx, baxmx}.
 ```
+
 #### Example 2:
+
 ```js
 Input: string: “tomorrow”, pattern: “tor”
 Output: 4
@@ -5865,15 +5869,18 @@ Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, t
 ```
 
 ### Basic Brute-force Solution
+
 This problem follows the <b>[Longest Common Subsequence (LCS) pattern](#pattern-5-longest-common-substring)</b> and is quite similar to the <b>[Longest Repeating Subsequence](#longest-repeating-subsequence)</b>; the difference is that we need to count the total occurrences of the <b>subsequence</b>.
 
 A <b>basic brute-force solution</b> could be to try all the <b>subsequences</b> of the given `string` to count all that match the given `pattern`. We can match the pattern with the given `string` one character at a time, so we can do two things at any step:
+
 1. If the `pattern` has a matching character with the `string`, we can <b>recursively</b> match for the remaining lengths of the `pattern` and the `string`.
 2. At every step, we can always skip a character from the `string` to try to match the remaining `string` with the `pattern`. So we can start a <b>recursive call</b> by skipping one character from the `string`.
 
 Our total `count` will be the sum of the `count`s returned by the above two options.
 
 Here is the code:
+
 ```js
 function findSPMCount(str, pattern) {
   function findSPMCountRecursive(str, pattern, strIndex, patternIndex) {
@@ -5929,6 +5936,7 @@ We can use an array to store the already solved <i>subproblems</i>.
 The two changing values to our <b>recursive function</b> are the two <i>indices</i> `strIndex` and `patternIndex`. Therefore, we can store the results of all the <i>subproblems</i> in a two-dimensional array. (Another alternative could be to use a <b>hash-table</b> whose key would be a `string` (`strIndex` + `“|”` + `patternIndex`)).
 
 Here is the code:
+
 ```js
 function findSPMCount(str, pattern) {
   const dp = [];
@@ -5979,7 +5987,8 @@ console.log(
 // Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, tomorrow}.
 ```
 
-### Bottom-up Dynamic Programming 
+### Bottom-up Dynamic Programming
+
 Since we want to match all the <b>subsequences</b> of the given `string`, we can use a two-dimensional array to store our results. As mentioned above, we will be tracking separate <i>indices</i> for the `string` and the `pattern`, so we will be doing two things for every value of `strIndex` and `patternIndex`:
 
 1. If the character at the `strIndex` (in the `string`) matches the character at `patIndex` (in the `pattern`), the count of the <b>SPM</b> would be equal to the count of <b>SPM</b> up to `strIndex-1` and `patternIndex-1`.
@@ -5995,6 +6004,7 @@ dp[strIndex][patIndex] += dp[strIndex-1][patIndex]
 ```
 
 Here is the code for our <b>bottom-up dynamic programming</b> approach:
+
 ```js
 function findSPMCount(str, pattern) {
   //every empty pattern has one match
@@ -6034,35 +6044,43 @@ console.log(
 // Output: 4
 // Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, tomorrow}.
 ```
+
 - The <b>time and space complexity</b> of the above algorithm is `O(m*n)`, where `m` and `n` are the lengths of the `string` and the `pattern` respectively.
 
 ## Longest Bitonic Subsequence
+
 https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/
 
 > Given a number sequence, find the length of its <b>Longest Bitonic Subsequence (LBS)</b>. <i>A <b>subsequence</b> is considered <b>bitonic</b> if it is monotonically increasing and then monotonically decreasing</i>.
 
 #### Example 1:
-````js
+
+```js
 Input: {4,2,3,6,10,1,12}
 Output: 5
 Explanation: The LBS is {2,3,6,10,1}.
-````
+```
+
 #### Example 2:
-````js
+
+```js
 Input: {4,2,5,9,7,6,10,3,1}
 Output: 7
 Explanation: The LBS is {4,5,9,7,6,3,1}.
-````
+```
 
 ### Basic Solution
+
 A <b>basic brute-force solution</b> could be to try finding the <b>Longest Decreasing Subsequences (LDS)</b>, starting from every number in both directions. So for every index `i` in the given array, we will do two things:
+
 1. Find <b>LDS</b> starting from `i` to the end of the array.
 2. Find <b>LDS</b> starting from `i` to the beginning of the array.
 
 <b>Longest Bitonic Subsequence (LBS)</b> would be the maximum sum of the above two <i>subsequences</i>.
 
 Here is the code:
-````js
+
+```js
 function findLBSLength(nums) {
   let maxLength = 0;
 
@@ -6088,8 +6106,7 @@ function findLDSLength(nums, currIndex, prevIndex) {
   }
 
   //excluding the number at currIndex
-  let checkExcludingCurrIndex =
-    findLDSLength(nums, currIndex + 1, prevIndex);
+  let checkExcludingCurrIndex = findLDSLength(nums, currIndex + 1, prevIndex);
 
   return Math.max(checkWithCurrIndex, checkExcludingCurrIndex);
 }
@@ -6108,36 +6125,44 @@ function findLDSLengthReverse(nums, currIndex, prevIndex) {
   }
 
   //excluding the number at currIndex
-  let checkExcludingCurrIndex =
-    findLDSLengthReverse(nums, currIndex - 1, prevIndex);
+  let checkExcludingCurrIndex = findLDSLengthReverse(
+    nums,
+    currIndex - 1,
+    prevIndex
+  );
 
   return Math.max(checkWithCurrIndex, checkExcludingCurrIndex);
 }
 
 console.log(
-  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([4, 2, 3, 6, 10, 1, 12])}`
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([
+    4, 2, 3, 6, 10, 1, 12,
+  ])}`
 );
 // Output: 5
 // Explanation: The LBS is {2,3,6,10,1}.
 
 console.log(
-  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([4, 2, 5, 9, 7, 6, 10, 3, 1])}`
+  `Length of Longest Bitonic Subsequence: ---> ${findLBSLength([
+    4, 2, 5, 9, 7, 6, 10, 3, 1,
+  ])}`
 );
 // Output: 7
 // Explanation: The LBS is {4,5,9,7,6,3,1}.
-````
+```
 
 - The <b>time complexity</b> of the above algorithm is exponential `O(2ⁿ)`, where `n` is the lengths of the input array.
 - The <b>space complexity</b> is `O(n)` which is used to store the <i>recursion stack</i>.
 
 ### Top-down Dynamic Programming with Memoization
+
 To overcome the <b>overlapping subproblems</b>, we can use an array to store the already solved <b>subproblems</b>.
 
-We need to <b>memoize</b> the <i>recursive functions</i> that calculate the <b>longest decreasing subsequence<b>. The two changing values for our <i>recursive function</i> are the `current` and the `previous` index. Therefore, we can store the results of all <b>subproblems</b> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`currIndex` + `“|”` + `prevIndex`)).
+We need to <b>memoize</b> the <i>recursive functions</i> that calculate the <b>longest decreasing subsequence</b>. The two changing values for our <i>recursive function</i> are the `current` and the `previous` index. Therefore, we can store the results of all <b>subproblems</b> in a two-dimensional array. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`currIndex` + `“|”` + `prevIndex`)).
 
 Here is the code:
 
-````js
+```js
 function findLBSLength(nums) {
   const lds = [];
   const ldsReversed = [];
@@ -6229,13 +6254,15 @@ console.log(
 );
 // Output: 7
 // Explanation: The LBS is {4,5,9,7,6,3,1}.
-````
+```
 
 ### Bottom-up Dynamic Programming
+
 The above algorithm shows us a clear <b>bottom-up approach</b>. We can separately calculate <b>LDS</b> for every index i.e., from the beginning to the end of the array and vice versa. The required length of <b>LBS</b> would be the one that has the maximum sum of <b>LDS</b> for a given index (from both ends).
 
 Here is the code for our <b>bottom-up dynamic programming approach</b>:
-````js
+
+```js
 function findLBSLength(nums) {
   const lds = Array(nums.length).fill(0);
   const ldsReversed = Array(nums.length).fill(0);
@@ -6290,12 +6317,280 @@ console.log(
 );
 // Output: 7
 // Explanation: The LBS is {4,5,9,7,6,3,1}.
-````
+```
+
 - The <b>time omplexity</b> of the above algorithm is `O(n²)` and the <b>space complexity</b> is `O(n)`.
 
 ## Longest Alternating Subsequence
 
 https://www.geeksforgeeks.org/longest-alternating-subsequence/
+
+> Given a number sequence, find the length of its <b>Longest Alternating Subsequence (LAS)</b>. A <b>subsequence</b> is considered <b>alternating</b> if its elements are in <b>alternating</b> order.
+
+A three element sequence (`a1, a2, a3`) will be an <b>alternating sequence</b> if its elements hold one of the following conditions:
+
+`{a1 > a2 < a3 }` or `{ a1 < a2 > a3}`.
+
+#### Example 1:
+
+```js
+Input: {1,2,3,4}
+Output: 2
+Explanation: There are many LAS: {1,2}, {3,4}, {1,3}, {1,4}
+```
+
+#### Example 2:
+
+```js
+Input: {3,2,1,4}
+Output: 3
+Explanation: The LAS are {3,2,4} and {2,1,4}.
+```
+
+#### Example 3:
+
+```js
+Input: {1,3,2,4}
+Output: 4
+Explanation: The LAS is {1,3,2,4}.
+```
+
+### Basic Solution
+
+A <b>basic brute-force solution</b> could be to try finding the <b>LAS</b> starting from every number in both <i>ascending</i> and <i>descending</i> order. So for every index `i` in the given array, we will have three options:
+
+1. If the element at `i` is bigger than the last element we considered, we include the element at `i` and recursively process the remaining array to find the next element in <i>descending</i> order.
+2. If the element at `i` is smaller than the last element we considered, we include the element at `i` and recursively process the remaining array to find the next element in <i>ascending</i> order.
+3. In addition to the above two cases, we can always skip the element `i` to recurse for the remaining array. This will ensure that we try all subsequences.
+
+<b>LAS</b> would be the maximum of the above three subsequences.
+
+Here is the code:
+
+```js
+function findLASLength(nums) {
+  function findLASLengthRecursive(nums, prevIndex, currIndex, isAscending) {
+    if (currIndex === nums.length) return 0;
+
+    let condition1 = 0;
+    //if ascending, the next element should be bigger
+    if (isAscending) {
+      if (prevIndex === -1 || nums[prevIndex] < nums[currIndex]) {
+        condition1 =
+          1 +
+          findLASLengthRecursive(nums, currIndex, currIndex + 1, !isAscending);
+      }
+    } else {
+      //if descending, the next element should be smaller
+      if (prevIndex === -1 || nums[prevIndex] > nums[currIndex]) {
+        condition1 =
+          1 +
+          findLASLengthRecursive(nums, currIndex, currIndex + 1, !isAscending);
+      }
+    }
+
+    //OR skip the current element
+    let condition2 = findLASLengthRecursive(
+      nums,
+      prevIndex,
+      currIndex + 1,
+      isAscending
+    );
+    return Math.max(condition1, condition2);
+  }
+
+  //we start with two recursive calls,
+  //one where we will consider that the first elemnt is bigger than the second element
+  //and one where the first element is smaller than the second element
+  return Math.max(
+    findLASLengthRecursive(nums, -1, 0, true),
+    findLASLengthRecursive(nums, -1, 0, false)
+  );
+}
+
+console.log(`Length of Longest Alternating Subsequence: --->
+${findLASLength([1, 2, 3, 4])}`);
+//Output: 2
+// Explanation: There are many LAS: {1,2}, {3,4}, {1,3}, {1,4}
+
+console.log(`Length of Longest Alternating Subsequence: ---> 
+${findLASLength([3, 2, 1, 4])}`);
+//Output: 3
+// Explanation: The LAS are {3,2,4} and {2,1,4}.
+
+console.log(`Length of Longest Alternating Subsequence: ---> 
+${findLASLength([1, 3, 2, 4])}`);
+//Output: 4
+// Explanation: The LAS is {1,3,2,4}.
+```
+
+- The <b>time complexity</b> of the above algorithm is exponential `O(2ᴺ)`, where `n` is the lengths of the input array.
+- The <b>space complexity</b> is `O(n)` which is used to store the recursion stack.
+
+### Top-down Dynamic Programming with Memoization
+
+To overcome the <b>overlapping subproblems</b>, we can use an array to store the already solved <b>subproblems</b>.
+
+The three changing values for our <i>recursive function</i> are the `currIndex` and `prevIndex` and the `isAscending` flag. Therefore, we can store the results of all <b>subproblems</b> in a three-dimensional array, where the third dimension will be of size two, to store the <i>boolean</i> flag `isAscending`. (Another alternative could be to use a <i>hash-table</i> whose key would be a string (`currIndex` + `“|”` + `prevIndex`+ `“|”` + `isAscending`)).
+
+Here is the code:
+
+```js
+function findLASLength(nums) {
+  const dp = [];
+  function findLASLengthRecursive(nums, prevIndex, currIndex, isAscending) {
+    if (currIndex === nums.length) return 0;
+
+    dp[prevIndex + 1] = dp[prevIndex + 1] || [];
+    dp[prevIndex + 1][currIndex] = dp[prevIndex + 1][currIndex] || [];
+
+    if (
+      typeof dp[prevIndex + 1][currIndex][isAscending ? 1 : 0] === 'undefined'
+    ) {
+      let condition1 = 0;
+      //if ascending, the next element should be bigger
+      if (isAscending) {
+        if (prevIndex === -1 || nums[prevIndex] < nums[currIndex]) {
+          condition1 =
+            1 +
+            findLASLengthRecursive(
+              nums,
+              currIndex,
+              currIndex + 1,
+              !isAscending
+            );
+        }
+      } else {
+        //if descending, the next element should be smaller
+        if (prevIndex === -1 || nums[prevIndex] > nums[currIndex]) {
+          condition1 =
+            1 +
+            findLASLengthRecursive(
+              nums,
+              currIndex,
+              currIndex + 1,
+              !isAscending
+            );
+        }
+      }
+      //OR skip the current element
+      const condition2 = findLASLengthRecursive(
+        nums,
+        prevIndex,
+        currIndex + 1,
+        isAscending
+      );
+      dp[prevIndex + 1][currIndex][isAscending ? 1 : 0] = Math.max(
+        condition1,
+        condition2
+      );
+    }
+
+    return dp[prevIndex + 1][currIndex][isAscending ? 1 : 0];
+  }
+
+  //we start with two recursive calls,
+  //one where we will consider that the first elemnt is bigger than the second element
+  //and one where the first element is smaller than the second element
+  return Math.max(
+    findLASLengthRecursive(nums, -1, 0, true),
+    findLASLengthRecursive(nums, -1, 0, false)
+  );
+}
+
+console.log(`Length of Longest Alternating Subsequence: --->
+${findLASLength([1, 2, 3, 4])}`);
+// Output: 2
+// Explanation: There are many LAS: {1,2}, {3,4}, {1,3}, {1,4}
+
+console.log(`Length of Longest Alternating Subsequence: ---> 
+${findLASLength([3, 2, 1, 4])}`);
+// Output: 3
+// Explanation: The LAS are {3,2,4} and {2,1,4}.
+
+console.log(`Length of Longest Alternating Subsequence: ---> 
+${findLASLength([1, 3, 2, 4])}`);
+// Output: 4
+// Explanation: The LAS is {1,3,2,4}.
+```
+
+### Bottom-up Dynamic Programming#
+
+The above algorithm tells us three things:
+
+1. We need to find an <i>ascending</i> and <i>descending</i> <i>subsequence</i> at every index.
+2. While finding the next element in the <i>ascending</i> order, if the number at the `currIndex` is bigger than the number at the `prevIndex`, we increment the count for a <b>LAS</b> up to the `currIndex`. But if there is a bigger <b>LAS</b> without including the number at the `currIndex`, we take that.
+3. Similarly for the <i>descending</i> order, if the number at the `currIndex` is smaller than the number at the `prevndex`, we increment the count for a <b>LAS</b> up to the `currIndex`. But if there is a bigger <b>LAS</b> without including the number at the `currIndex`, we take that.
+
+To find the largest <b>LAS</b>, we need to find all of the <b>LAS</b> for a number at index `i` from all the previous numbers (i.e. number until index `i-1`).
+
+We can use two arrays to store the length of <b>LAS</b>, one for <i>ascending</i> order and one for <i>descending</i> order. (Actually, we will use a two-dimensional array, where the second dimension will be of size two).
+
+If `i` represents the `currIndex` and `j` represents the `prevIndex`, our recursive formula would look like:
+
+- If `nums[i]` is bigger than `nums[j]` then we will consider the <b>LAS</b> ending at `j` where the last two elements were in <i>descending</i> order =>
+
+```js
+if num[i] > num[j] => dp[i][0] = 1 + dp[j][1], if there is no bigger LAS for 'i'
+```
+
+- If `nums[i]` is smaller than `nums[j]` then we will consider the <b>LAS</b> ending at `j` where the last two elements were in <i>ascending</i> order =>
+
+```js
+if num[i] < num[j] => dp[i][1] = 1 + dp[j][0], if there is no bigger LAS for 'i'
+```
+
+Here is the code for our <b>bottom-up dynamic programming</b> approach:
+
+```js
+function findLASLength(nums) {
+  if (nums.length == 0) return 0;
+  // dp[i][0] = stores the LAS ending at 'i' such that the last two elements are in ascending order
+  // dp[i][1] = stores the LAS ending at 'i' such that the last two elements are in descending order
+
+  const dp = Array(nums.length)
+    .fill(0)
+    .map(() => Array(2).fill(0));
+
+  let maxLength = 1;
+  for (let i = 0; i < nums.length; i++) {
+    // every single element can be considered as a LAS of length 1
+    dp[i][0] = dp[i][1] = 1;
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j]) {
+        // if nums[i] is BIGGER than nums[j] then we will consider the LAS ending at 'j' where the
+        // last two elements were in DESCENDING order
+        dp[i][0] = Math.max(dp[i][0], 1 + dp[j][1]);
+        maxLength = Math.max(maxLength, dp[i][0]);
+      } else if (nums[i] !== nums[j]) {
+        // if the numbers are equal, don't do anything
+        // if nums[i] is SMALLER than nums[j] then we will consider the LAS ending at 'j' where the
+        // last two elements were in ASCENDING order
+        dp[i][1] = Math.max(dp[i][1], 1 + dp[j][0]);
+        maxLength = Math.max(maxLength, dp[i][1]);
+      }
+    }
+  }
+  return maxLength;
+}
+
+console.log(`Length of Longest Alternating Subsequence: --->
+${findLASLength([1, 2, 3, 4])}`);
+// Output: 2
+// Explanation: There are many LAS: {1,2}, {3,4}, {1,3}, {1,4}
+
+console.log(`Length of Longest Alternating Subsequence: ---> 
+${findLASLength([3, 2, 1, 4])}`);
+// Output: 3
+// Explanation: The LAS are {3,2,4} and {2,1,4}.
+
+console.log(`Length of Longest Alternating Subsequence: ---> 
+${findLASLength([1, 3, 2, 4])}`);
+// Output: 4
+// Explanation: The LAS is {1,3,2,4}.
+```
+
+- The <b>time complexity</b> of the above algorithm is `O(n²)` and the <b>space complexity</b> is `O(n)`.
 
 ## 🔎 Edit Distance
 
