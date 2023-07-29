@@ -333,7 +333,7 @@ function fruitsInBaskets(fruits) {
   let fruitFrequency = {};
   
   //try to extend the range
-  for(let windowEnd = 0; windowEnd < fruits.length; window++) {
+  for(let windowEnd = 0; windowEnd < fruits.length; windowEnd++) {
     const endFruit = fruits[windowEnd]
     if(!(endFruit in fruitFrequency)) {
       fruitFrequency[endFruit] = 0
