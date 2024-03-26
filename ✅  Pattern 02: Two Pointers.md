@@ -417,7 +417,7 @@ function searchPair(arr, targetSum, first, triplets){
       //since arr[end] >= arr[start], therefore, we can replace arr[end]
       //by any number between start and end to get a sum less than the targetSum
       for(let i = end; i > start; i--){
-        triplets.push(arr[first], arr[start], arr[end])
+        triplets.push(arr[first], arr[start], arr[i])
       }
       start++
     } else {
