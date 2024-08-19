@@ -277,7 +277,8 @@ console.log(`Nodes of reversed LinkedList are: ${reverseEveryKElements(head, 3).
 
 The problem follows the <b></i>in-place</i> Reversal of a LinkedList</b> pattern and is quite similar to <b>Reverse every K-element Sub-list</b>. The only difference is that we have to skip `K` alternating elements. We can follow a similar approach, and in each iteration after reversing `K` elements, we will skip the next `K` elements.
 
-````class Node {
+````js
+class Node {
   constructor(value, next = null) {
     this.value = value
     this.next = next
