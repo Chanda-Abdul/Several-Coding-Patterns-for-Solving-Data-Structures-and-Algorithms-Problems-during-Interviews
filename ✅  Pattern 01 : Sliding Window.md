@@ -679,7 +679,7 @@ function findStringAnagrams(str, pattern){
     if(windowEnd >= pattern.length -1) {
       const startChar = str[windowStart]
       windowStart++
-      if(endChar in charFreq) {
+      if(startChar in charFreq) {
         if(charFreq[startChar] === 0) {
           //before putting the character back
           //decrement the matched count
