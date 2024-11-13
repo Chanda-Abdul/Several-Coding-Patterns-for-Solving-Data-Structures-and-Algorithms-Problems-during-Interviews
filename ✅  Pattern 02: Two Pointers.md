@@ -569,7 +569,7 @@ function searchPairs(arr, targetSum, first, second, quads) {
         //skip the same element to avoid duplicate quadruplets
         start++
       }
-      while(start < end && arr[end] === arr[end -1]){
+      while(start < end && arr[end] === arr[end +1]){
         //skip the same element to avoid duplicate quadruplets
         end--
       }
