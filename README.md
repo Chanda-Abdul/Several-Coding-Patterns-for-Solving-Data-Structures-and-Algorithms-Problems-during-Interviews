@@ -26,6 +26,7 @@ for your desktop
 - [Pramp](https://www.pramp.com/) - for mock interviews
 - [FreeCodeCamp's Algorithms](https://www.freecodecamp.org/learn/coding-interview-prep/#algorithms) - Extra practice, esp. the <b>Sort Algorithms</b> section.
 - [Build 15 JavaScript Projects - Vanilla JavaScript Course](https://www.youtube.com/watch?v=3PHXvlpOkf4) - for extra <b>Vanilla JavaScript/DOM Manipulation</b> practice.
+- [InterviewLegend](https://interviewlegend.com) - company-specific coding and system design interview prep, from first-hand reports
 # 
 #### 🌟 Challenge Questions
 
