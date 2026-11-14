@@ -1,6 +1,6 @@
 # Pattern 15: 0-1 Knapsack (Dynamic Programming)
 
-from this [course](https://www.educative.io/courses/grokking-dynamic-programming-patterns-for-coding-interviews)
+from this [course](https://www.designgurus.io/course/grokking-dynamic-programming)
 | |
 | --------------------------------------------------------------------------------- |
 | <b>[Pattern 1: 0/1 Knapsack](#pattern-1-01-knapsack)</b> |
